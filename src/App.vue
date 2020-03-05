@@ -28,6 +28,7 @@
   import Users from './components/Users';
   import Blogs from './components/Blogs';
   import AppNavigation from './components/AppNavigation';
+  import videos from './components/videos';
   export default {
     name: 'app',
     components: {
@@ -37,6 +38,7 @@
       Users,
       Blogs,
       AppNavigation,
+      videos,
 
     },
     data() {

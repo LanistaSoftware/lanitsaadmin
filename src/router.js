@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Users from './components/Users.vue'
 import blogs from './components/Blogs.vue'
 import slide from './components/Slider.vue'
+import video from './components/videos.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -31,6 +32,10 @@ export const router = new VueRouter({
       {
         path:'/sliders',
         component:slide
+      },
+      {
+        path:'/videos',
+        component:video
       }
 ],
     mode:"history"

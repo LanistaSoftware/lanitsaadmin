@@ -1,34 +1,34 @@
 <template>
-<nav :style="heights">
+  <nav :style="heights">
     <ul :style="heights" class="nav flex-column">
-     
-        <router-link to='/users' tag='li' class="nav-item">
-             <span><i class="fas fa-users float-left"></i></span> <a class="nav-link active" href="#">Kullanıcılar</a>
-        </router-link>
-       <router-link to='/blogs' tag='li' class="nav-item">
-         <span><i class="fas fa-book-open float-left"></i></span>  <a class="nav-link" href="#">Makaleler  </a>
-          </router-link>
-        <router-link to='/sliders' tag='li' class="nav-item">
-          <span><i class="fas fa-photo-video float-left"></i></span><a class="nav-link" href="#">Slaytlar </a>
-       </router-link>
-         <li class="nav-item">
-         <span><i class="fas fa-video float-left"></i></span> <a class="nav-link" href="#">Videolar</a>
-        </li>
-        <li class="nav-item">
-          <span><i class="fas fa-asterisk float-left"></i> </span><a class="nav-link" href="#">Referanslar </a>
-        </li>
-         <li class="nav-item">
-         <span><i class="fab fa-product-hunt float-left"></i></span> <a class="nav-link" href="#">Ürünler </a>
-        </li>
-        <li class="nav-item">
-         <span><i class="fas fa-address-card float-left"></i></span> <a class="nav-link" href="#">Hakkımızda </a>
-        </li>
-        <li class="nav-item">
-          <span><i class="fas fa-cogs float-left"></i></span><a class="nav-link" href="#">Ayarlar <br></a>
-        </li>
+
+      <router-link to='/users' tag='li' class="nav-item">
+        <span><i class="fas fa-users float-left"></i></span> <a class="nav-link active" href="#">Kullanıcılar</a>
+      </router-link>
+      <router-link to='/blogs' tag='li' class="nav-item">
+        <span><i class="fas fa-book-open float-left"></i></span> <a class="nav-link" href="#">Makaleler </a>
+      </router-link>
+      <router-link to='/sliders' tag='li' class="nav-item">
+        <span><i class="fas fa-photo-video float-left"></i></span><a class="nav-link" href="#">Slaytlar </a>
+      </router-link>
+      <router-link to='/videos' tag='li' class="nav-item">
+        <span><i class="fas fa-video float-left"></i></span> <a class="nav-link" href="#">Videolar</a>
+      </router-link>
+      <li class="nav-item">
+        <span><i class="fas fa-asterisk float-left"></i> </span><a class="nav-link" href="#">Referanslar </a>
+      </li>
+      <li class="nav-item">
+        <span><i class="fab fa-product-hunt float-left"></i></span> <a class="nav-link" href="#">Ürünler </a>
+      </li>
+      <li class="nav-item">
+        <span><i class="fas fa-address-card float-left"></i></span> <a class="nav-link" href="#">Hakkımızda </a>
+      </li>
+      <li class="nav-item">
+        <span><i class="fas fa-cogs float-left"></i></span><a class="nav-link" href="#">Ayarlar <br></a>
+      </li>
 
     </ul>
-    </nav>
+  </nav>
 </template>
 
 <script>

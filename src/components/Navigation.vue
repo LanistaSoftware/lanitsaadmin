@@ -2,16 +2,16 @@
   <nav :style="heights">
     <ul :style="heights" class="nav flex-column">
 
-      <router-link to='/users' tag='li' class="nav-item">
+      <router-link to='/users' tag='li' class="nav-item"  active-class="act">
         <span><i class="fas fa-users float-left"></i></span> <a class="nav-link active" href="#">Kullanıcılar</a>
       </router-link>
-      <router-link to='/blogs' tag='li' class="nav-item">
+      <router-link to='/blogs' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-book-open float-left"></i></span> <a class="nav-link" href="#">Makaleler </a>
       </router-link>
-      <router-link to='/sliders' tag='li' class="nav-item">
+      <router-link to='/sliders' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-photo-video float-left"></i></span><a class="nav-link" href="#">Slaytlar </a>
       </router-link>
-      <router-link to='/videos' tag='li' class="nav-item">
+      <router-link to='/videos' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-video float-left"></i></span> <a class="nav-link" href="#">Videolar</a>
       </router-link>
       <li class="nav-item">
@@ -76,6 +76,13 @@ i{
 i:hover{
  
   color: @redcolor;
+}
+.act{
+  a,i{
+  color: @redcolor;
+  
+  }
+ 
 }
 
 </style>

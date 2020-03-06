@@ -20,8 +20,9 @@
           <td scope="col"><input type="text"></td>
           <td scope="col"><input type="email"></td>
           <td scope="col"><input type="phone"></td>
-          <td scope="col"><button class="btn btn-sm btn-success">Save</button></td>
-
+          <td scope="col"><button class="btn btn-sm btn-success">Save</button>
+          <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel </button>
+          </td>
         </tr>
         <tr v-for="(item,index) in Users" :key="item.id">
           <th scope="row">1</th>

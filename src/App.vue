@@ -5,12 +5,12 @@
     </div>
     <div class="row">
 
-      <AppNavigation class="appnavigation"></AppNavigation>
+      <AppNavigation v-bind="tabs" class="appnavigation"></AppNavigation>
       <section class="navborder sidecontent">
         <Navigation></Navigation>
       </section>
       <div class="row content">
-        <router-view></router-view>
+        <router-view  @tab="tabs($event)" ></router-view>
         <!-- <Users></Users> -->
       </div>
     </div>
@@ -29,6 +29,7 @@
   import Blogs from './components/Blogs';
   import AppNavigation from './components/AppNavigation';
   import videos from './components/videos';
+
   export default {
     name: 'app',
     components: {
@@ -43,10 +44,21 @@
     },
     data() {
       return {
-
+        menus:null
       
       }
-    }
+    },
+    created(){
+    
+    },
+    methods:{
+      tabs(e){
+        this.$emit('tabs',e)
+      },
+    },
+     
+    
+
   }
 </script>
 
@@ -169,5 +181,7 @@ Red : #e33 = @redcolor
     padding: 0;
 
   }
-
+ .image-style-side{
+   float: right;
+  }
 </style>

@@ -2,7 +2,7 @@
 <div>
 <div class="box  a"><p></p></div>
 <div class="box  b">
-  <Tabs></Tabs>
+  <Tabs :tabs="dynamicTabs"></Tabs>
 </div>
 <div class="box  c"><Search></Search></div>
 </div>
@@ -19,7 +19,11 @@ export default {
   },
   data () {
     return {
-     
+      dynamicTabs:[
+          {link:'/blogs',label:'Blogs' },
+          {link:'/users',label:'Users' },
+          {link:'/users',label:'Users' },
+          ]
     }
   }
 }

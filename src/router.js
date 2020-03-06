@@ -6,7 +6,7 @@ import video from './components/videos.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
-
+const language =  window.navigator.language;
 export const router = new VueRouter({
     routes:[
         {

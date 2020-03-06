@@ -1,7 +1,7 @@
 <template>
 
   <ul class="nav nav-tabs" >
-    <router-link :to="tab.link" tag="li" class="nav-item" v-for="tab in tabsitem" :key="tab.id">
+    <router-link :to="tab.link" tag="li" class="nav-item" v-for="tab in tabs" :key="tab.id">
       <a class="nav-link" href="#">{{tab.label}}</a>
     </router-link>
   </ul>
@@ -11,15 +11,10 @@
 <script>
   export default {
     name: 'Tabs',
- 
+     props:['tabs'],
     data() {
       return {
-      
-        tabsitem: [
-          {link:'/blogs',label:'Blogs' },
-          {link:'/users',label:'Users' },
-          {link:'/users',label:'Users' },
-          ]
+        tabs:[],
 
       }
     }

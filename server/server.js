@@ -7,8 +7,15 @@ var session = require('express-session')
 const cookieparser = require('cookie-parser');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const connectstr = 'mongodb://localhost:27017/gladioadmin';
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+// const iplocation = require("iplocation").default;
+// iplocation('92.45.194.68', [], (error, res) => {
+ 
+//     console.log(res.ip)
+ 
+// });
 //Middleware
+
 app.use(bodyParser.urlencoded({
   extended: false
 }));

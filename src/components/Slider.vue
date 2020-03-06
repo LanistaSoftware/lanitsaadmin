@@ -16,9 +16,17 @@
     },
     data() {
       return {
-        msg: 'Lanista Gladio Blog Slide'
+           tab:[ 
+          {link:'/blogs',label:'Slaytlar' },
+          {link:'/addblog',label:'Slayt Ekle' },
+          {link:'/addblog',label:'Slayt Sil'}],
+        
+        
       }
-    }
+    },
+     created(){
+      this.$emit('tab',this.tab)
+    },
   }
 </script>
 <style lang="less" scoped>

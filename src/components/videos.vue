@@ -16,10 +16,17 @@
     },
     data() {
       return {
+          tab:[ 
+          {link:'/blogs',label:'Videolar' },
+          {link:'/addblog',label:'Video Ekle' },
+          {link:'/addblog',label:'Video Sil'}],
         msg: 'Lanista Gladio Blog Slide',
         url:['o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk']
       }
-    }
+    },
+     created(){
+      this.$emit('tab',this.tab)
+    },
   }
 </script>
 <style lang="less" scoped>

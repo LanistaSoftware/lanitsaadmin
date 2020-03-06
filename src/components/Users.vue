@@ -54,6 +54,9 @@
   export default {
     data() {
       return {
+         tab:[ 
+          {link:'/blogs',label:'Kullanıcılar' },
+          {link:'/addblog',label:'Kullanıcı Ekle' }],
         selectedItem: null,
         isEdit:false,
         isDelete:false,
@@ -93,7 +96,10 @@
           this.Users.splice(index,1);
           console.log(this.Users)
       }
-    }   
+    },
+     created(){
+      this.$emit('tab',this.tab)
+    },   
   }
 </script>
 <style lang="less" scoped>

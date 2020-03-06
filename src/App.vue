@@ -5,7 +5,7 @@
     </div>
     <div class="row">
 
-      <AppNavigation v-bind="tabs" class="appnavigation"></AppNavigation>
+      <AppNavigation :menus="menus" class="appnavigation"></AppNavigation>
       <section class="navborder sidecontent">
         <Navigation></Navigation>
       </section>
@@ -53,7 +53,7 @@
     },
     methods:{
       tabs(e){
-        this.$emit('tabs',e)
+        this.menus=e;
       },
     },
      

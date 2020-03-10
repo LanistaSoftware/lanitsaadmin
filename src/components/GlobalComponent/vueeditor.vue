@@ -1,11 +1,9 @@
 <template>
-<vuescroll>
-  <div id="app">
-  <div v-html="content" class="quill-container">  </div>
+<!-- <vuescroll> -->
+  <div class="editor">
     <vue-editor :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="content"> </vue-editor>
-
   </div>
-</vuescroll>
+<!-- </vuescroll> -->
 </template>
  
 <script>
@@ -33,6 +31,22 @@ export default {
         }
       }
     };
+  },
+  watch:{
+     content(){
+       this.$emit('con',this.content)
+     }
   }
 };
 </script>
+<style lang="less" scoped>
+  @nbfcolor: #303030;
+  @bgcolor: #ffffff;
+  @incolor: #B5B5B5;
+  @redcolor: #e33;
+  @pagebgcolor: #E5E5E5;
+  @btntextcolor: #eee;
+  @headingfont: 'Kanit', sans-serif;
+  @contentfont: 'Exo', sans-serif;
+
+</style>

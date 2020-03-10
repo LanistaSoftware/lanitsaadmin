@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="cardhead ">
-
+  
       <p class="headcard-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       <button @click="$emit('editdata',false)" class="btn  btn-danger btn-sm"><i
           class="fas fa-window-close"></i></button>

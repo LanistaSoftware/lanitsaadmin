@@ -10,7 +10,7 @@
         <Navigation></Navigation>
       </section>
       <div class="row content">
-        <router-view  @tab="tabs($event)" ></router-view>
+        <router-view  @tab="tabs($event)"  class="container-v"></router-view>
         <!-- <Users></Users> -->
       </div>
     </div>
@@ -100,6 +100,10 @@ Red : #e33 = @redcolor
     width: 70%;
     margin: 0;
     //padding:3.5rem 3.5rem;
+  }
+  .container-v{
+    width: 85%;
+    margin: 1rem;
   }
 
   .sidecontent {

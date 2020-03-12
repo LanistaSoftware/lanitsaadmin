@@ -1,6 +1,6 @@
 <template>
-  <div class="float-right ml-2 mt-2">
-     <button class="btn btn-sm btn-success ">Ekle <i class="fas fa-plus-square"></i></button>
+ 
+     
   <div class="blogs">
    
     <router-view></router-view>
@@ -12,7 +12,7 @@
     @close="deger($event)"></Card>
    
   </div>
-  </div>
+
 </template>
 
 
@@ -55,7 +55,6 @@
 <style lang="less" scoped>
   .blogs {
     width: 100%;
-    float: left;
     text-align: center;
   }
   

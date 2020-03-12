@@ -4,7 +4,10 @@ import blogs from './components/Blogs.vue'
 import slide from './components/Slider.vue'
 import video from './components/videos.vue'
 import addblog from './components/addblog.vue'
-import reference from './components/reference.vue'
+import references from './components/reference.vue'
+import products from './components/products.vue'
+import addreference from './components/GlobalComponent/addreference.vue'
+import sectors from './components/Sectors.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -45,7 +48,19 @@ export const router = new VueRouter({
       },
       {
         path:'/reference',
-        component:reference
+        component:references
+      },
+      {
+        path:'/addreference',
+        component:addreference
+      },
+      {
+        path:'/products',
+        component:products
+      },
+      {
+        path:'/sectors',
+        component:sectors
       }
 
 ],

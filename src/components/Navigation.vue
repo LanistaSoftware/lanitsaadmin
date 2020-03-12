@@ -16,13 +16,13 @@
       </router-link>
      <router-link to='/reference' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-asterisk float-left"></i> </span><a class="nav-link" href="#">Referanslar </a>
-     </router-link>
-      <li class="nav-item">
+     </router-link >
+      <router-link to='/products' tag='li' class="nav-item" active-class="act">
         <span><i class="fab fa-product-hunt float-left"></i></span> <a class="nav-link" href="#">Ürünler </a>
-      </li>
-       <li class="nav-item">
+      </router-link>
+       <router-link to='/sectors' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-bezier-curve float-left"></i></span> <a class="nav-link" href="#">Sektörler </a>
-      </li>
+       </router-link>
        <li class="nav-item">
         <span><i class="fas fa-users float-left"></i></span> <a class="nav-link" href="#">Ekibimiz </a>
       </li>

@@ -2,8 +2,6 @@
  
      
   <div class="blogs">
-   
-    <router-view></router-view>
      <editblog v-show="editdata" @editdata="edit($event)"></editblog>
     <CardPreview v-show="close"  @close="deger($event)"></CardPreview>
     <Card 
@@ -56,6 +54,7 @@
   .blogs {
     width: 100%;
     text-align: center;
+
   }
   
 </style>

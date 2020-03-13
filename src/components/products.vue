@@ -1,6 +1,6 @@
 <template>
   <div class="products">
-      <table class="table table-hover table-dark ">
+      <table class="table table-hover ">
           <thead>
               <tr>
                   <th scope="col">#</th>
@@ -110,17 +110,8 @@
   }
 </script>
 <style lang="less" scoped>
-.products{
+table{
+  background-color: #fafafa;
   width: 100%;
- 
 }
-  table {
-    width: 100%;
-    margin-top: 3rem;
-  }
-
-  .color {
-    color: red;
-  }
-
-  </style>
+</style>

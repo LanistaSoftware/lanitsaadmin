@@ -1,7 +1,8 @@
 <template>
 <!-- <vuescroll> -->
   <div class="editor">
-    <vue-editor :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="content"> </vue-editor>
+    <vue-editor v-if="!show" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="contentin"> </vue-editor>
+    <vue-editor v-else :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="aboutcontent" > </vue-editor>
   </div>
 <!-- </vuescroll> -->
 </template>
@@ -20,9 +21,13 @@ export default {
     VueEditor,
     vuescroll:VueScrollbar
   },
+  props:['aboutcontent','show'],
+
   data() {
     return {
-      content: "",
+      contentin: "",
+      contentout:'',
+      aboutcontent:'',
       customModulesForEditor: [{ alias: "imageDrop", module: ImageDrop }, { alias: "imageResize", module: ImageResize }],
       editorSettings: {
         modules: {
@@ -33,9 +38,9 @@ export default {
     };
   },
   watch:{
-     content(){
-       this.$emit('con',this.content)
-     }
+     contentin(){
+       this.$emit('con',this.contentin)
+     },
   }
 };
 </script>

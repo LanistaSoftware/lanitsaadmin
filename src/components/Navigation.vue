@@ -1,6 +1,6 @@
 <template>
   <nav :style="heights">
-    <ul :style="heights" class="nav flex-column">
+    <ul :style="heights" class="flex-column">
 
       <router-link to='/users' tag='li' class="nav-item"  active-class="act">
         <span><i class="fas fa-users float-left"></i></span> <a class="nav-link active" href="#">Kullanıcılar</a>
@@ -23,14 +23,14 @@
        <router-link to='/sectors' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-bezier-curve float-left"></i></span> <a class="nav-link" href="#">Sektörler </a>
        </router-link>
-       <li class="nav-item">
+     <router-link to='/aboutus' tag='li' class="nav-item" active-class="act">
+        <span><i class="fas fa-address-card float-left"></i></span> <a class="nav-link" href="#">Hakkımızda </a>
+    </router-link>
+       <router-link to='/employe' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-users float-left"></i></span> <a class="nav-link" href="#">Ekibimiz </a>
-      </li>
+     </router-link> 
        <li class="nav-item">
         <span><i class="fas fa-server float-left"></i></span> <a class="nav-link" href="#">Hizmetlerimiz </a>
-      </li>
-      <li class="nav-item">
-        <span><i class="fas fa-address-card float-left"></i></span> <a class="nav-link" href="#">Hakkımızda </a>
       </li>
       <li class="nav-item">
         <span><i class="fas fa-cogs float-left"></i></span><a class="nav-link" href="#">Ayarlar <br></a>
@@ -91,7 +91,9 @@ i:hover{
   color: @redcolor;
   
   }
- 
+}
+li{
+  margin-bottom: 1rem;
 }
 
 </style>

@@ -2,12 +2,15 @@ import Vue from 'vue'
 import Users from './components/Users.vue'
 import blogs from './components/Blogs.vue'
 import slide from './components/Slider.vue'
+import addslide from './components/SlideComponents/addslider.vue'
 import video from './components/videos.vue'
 import addblog from './components/addblog.vue'
 import references from './components/reference.vue'
 import products from './components/products.vue'
 import addreference from './components/GlobalComponent/addreference.vue'
 import sectors from './components/Sectors.vue'
+import about from './components/AboutUs.vue'
+import employe from './components/Employe.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -39,6 +42,10 @@ export const router = new VueRouter({
         component:slide
       },
       {
+        path:'/addslider',
+        component:addslide
+      },
+      {
         path:'/videos',
         component:video
       },
@@ -61,6 +68,14 @@ export const router = new VueRouter({
       {
         path:'/sectors',
         component:sectors
+      },
+      {
+        path:'/aboutus',
+        component:about
+      },
+      {
+        path:'/employe',
+        component:employe
       }
 
 ],

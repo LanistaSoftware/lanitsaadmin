@@ -1,10 +1,10 @@
 <template>
-    <div class="row reference">
-    <div class="card col-3"  v-for="cards in 10" :key="cards">
+    <div class="reference justify-content">
+    <div class="card"  v-for="cards in 10" :key="cards">
   <img class="card-img-top" src="https://seeklogo.com/images/H/H_and_M-logo-9C22DB457C-seeklogo.com.png" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>  
-    <a href="https://www2.hm.com/tr_tr/index.html" blank="_target" class="btn btn-primary">Go somewhere</a>
+    <a href="https://www2.hm.com/tr_tr/index.html" blank="_target" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
           <button @click="$emit('editdata',true)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
       <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
   </div>
@@ -42,13 +42,11 @@
 
 </script>
 <style lang="less" scoped>
-.reference{
-    width: 100%;
-}
-  .card {
-    width: 20%;
-    margin: 3rem ;
+.card {
+    width: 22%;
+    margin:0 2rem 0.5rem 0.5rem; 
     text-align: center;
+    display: inline-block;
 
   }
 

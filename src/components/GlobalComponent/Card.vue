@@ -23,8 +23,8 @@
 </script>
 <style lang="less" scoped>
   .card {
-    width: 25%;
-    margin: 2rem ;
+    width: 29%;
+    margin: 0 2rem 2rem 2rem ;
     display: inline-block;
 
   }

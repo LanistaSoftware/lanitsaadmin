@@ -1,6 +1,6 @@
 <template>
   <div class="users">
-    <table class="table">
+    <table class="table table-hover ">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -103,17 +103,19 @@
   }
 </script>
 <style lang="less" scoped>
-.users{
-  width: 100%;
- 
-}
+@nbfcolor:#303030;
+@bgcolor:#ffffff;
+@incolor:#B5B5B5;
+@redcolor:#e33;
+@pagebgcolor:#E5E5E5;
+@btntextcolor:#eee;
+@headingfont:'Kanit', sans-serif;
+@contentfont:'Exo', sans-serif;
+
   table {
     width: 100%;
-    margin-top: 3rem;
+    background-color:  #fafafa ;
   }
 
-  .color {
-    color: red;
-  }
 
   </style>

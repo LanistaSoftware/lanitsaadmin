@@ -1,17 +1,16 @@
 <template>
 
   <div class="products">
-
     <button @click="isAdd=true" class="btn btn-sm btn-info"> Ekle <i class="fas fa-user-plus"></i></button>
     <div v-if="isAdd" class="card m-3">
       <div class="row no-gutters">
         <div class="col-md-4">
-          <img :src="imagePreview" class="card-img p-2" alt=".">
+          <img  :src="imagePreview"  class="card-img p-2 " alt="">
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <div class="card-title"><input type="text" class="form-control"></div>
-            <div class="card-title"><textarea  class="form-control"></textarea></div>
+            <div class="card-title"><textarea  class="form-control" rows="10"></textarea></div>
           </div>
         </div>
         <div class="custom-file col-md-4 m-2">
@@ -22,7 +21,7 @@
         <div class="group col">
           <button class="btn btn-sm btn-success"> Save
           </button>
-          <button class="btn btn-sm btn-warning " @click="isAdd=false"> Cancel </button>
+          <button class="btn btn-sm btn-warning " @click="imagePreview='http://via.placeholder.com/700x400',isAdd=false;"> Cancel </button>
         </div>
 
       </div>
@@ -30,9 +29,12 @@
     <div class="card m-3" v-for="(item,index) in Sectors" :key="item.id">
       <div class="row no-gutters">
         <div class="col-md-4">
-          <img v-if="selectedItem==item.id "  v-bind:src="imagePreview" class="card-img p-2"
-            alt=".">
-          <img  :src="item.Sectorimage" class="card-img p-2" alt=".">
+          <img  v-if="selectedItem==item.id & showPreview"  :src="imagePreview" class="card-img p-2 ">
+          <span v-if="selectedItem==item.id & showPreview"  class="img-text">
+            Old İmage
+          </span>
+          <img   :src="item.Sectorimage" class="card-img p-2" :class="prewimg">
+    
         </div>
         <div class="col-md-8">
           <div class="card-body">
@@ -40,8 +42,8 @@
             <p v-if="selectedItem==item.id ? isEdit=false : isEdit=true" class="card-text">{{item.Sectordesc}}</p>
             <div v-if="selectedItem==item.id ? isEdit=true : isEdit=false" class="card-title"><input type="text"
                 v-model="item.Sectortitle" class="form-control"></div>
-            <div v-if="selectedItem==item.id ? isEdit=true : isEdit=false" class="card-title"><input type="text"
-                class="form-control" v-model="item.Sectordesc"></div>
+            <div v-if="selectedItem==item.id ? isEdit=true : isEdit=false" class="card-title"><textarea 
+                class="form-control" v-model="item.Sectordesc" rows="7"></textarea></div> 
           </div>
         </div>
       </div>
@@ -52,14 +54,14 @@
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
         <div class="group">
-          <button v-if="selectedItem==item.id ? isEdit=false : isEdit=true" @click="selectedItem=item.id"
+          <button v-if="selectedItem==item.id ? isEdit=false : isEdit=true" @click="Edit(item.id)"
             class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
           <button v-if="selectedItem==item.id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success"> Save
           </button>
           <button @click="deleteUser(index)" class="btn btn-sm btn-danger"> Delete <i
               class="fas fa-user-minus"></i></button>
           <button v-if="selectedItem==item.id ? isEdit=true : isEdit=false"
-            @click="selectedItem=null,imagePreview='',showPreview=false" class="btn btn-sm btn-warning"> Cancel
+            @click="cancel" class="btn btn-sm btn-warning"> Cancel
           </button>
         </div>
       </div>
@@ -72,11 +74,12 @@ export default {
     return {
       selectedItem: null,
       isEdit: false,
+      prewimg:null,
       isDelete: false,
       isAdd: false,
       file: '',
       showPreview: false,
-      imagePreview: '',
+      imagePreview: "http://via.placeholder.com/700x400",
       tab: [{
         link: '/sectors',
         label: 'Sektörler'
@@ -110,16 +113,24 @@ export default {
     this.$emit('tab', this.tab)
   },
   methods: {
-    deger(e) {
-      this.close = e;
-    },
-    edit(e) {
-      this.editdata = e;
+
+    Edit(e) {
+    this.selectedItem=e;
+    this.showPreview=false;
+    this.prewimg='prew-img'
+
     },
     deleteUser(index) {
       this.Sectors.splice(index, 1);
     
 
+    },
+    cancel(){
+   
+     this.prewimg=null
+     this.selectedItem=null ,
+     this.showPreview=false
+     this.isEdit=false
     },
    handleFileUpload(){
     /*
@@ -171,17 +182,29 @@ export default {
 </script>
 <style lang="less" scoped>
 .products{
-  width: 100%;
- 
+  text-align: center;
 }
-.add{
-  float: right;
-  text-align: right;
+.card{
+  text-align: justify;
+  .btn{
+    margin: 1rem;
+  }
 }
-
+.prew-img{
+  filter: blur(3px);
+}
   .group{
     text-align: right;
     float: right;
+  }
+  .img-text{
+    position: absolute  ;
+    z-index: 200;
+    left: 11rem;
+    bottom: 10rem;
+    font-size: 2rem;
+    color:#bd2130;
+    transform: rotate(40deg);
   }
 
   </style>

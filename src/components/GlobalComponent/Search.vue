@@ -31,6 +31,7 @@ export default {
 #search-social {
  padding: 1rem;
  border-bottom: 1px solid #dee2e6;
+
   
 
   i,
@@ -44,8 +45,8 @@ export default {
 
 
 .social {
-  width: 2.2rem;
-  height: 2.5rem;
+  margin-right:1rem;
+  
   background-color: @redcolor;
   border: none;
 
@@ -61,13 +62,13 @@ export default {
 
 #search-icon {
   display: inline-block;
+  width: 2.2rem;
+  height: 2.5rem;
 }
 
 .form-inline {
   input {
     border-radius: 0;
-    width: 20rem;
-    height: 1rem;
     padding: 1.2rem;
   }
 }

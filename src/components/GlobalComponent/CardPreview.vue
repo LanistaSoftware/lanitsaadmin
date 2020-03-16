@@ -43,6 +43,7 @@
   .card {
     width: 60%;
     margin: 1rem;
+    top: 20%;
     position: fixed;
     z-index: 500;
     border: 1px solid black;

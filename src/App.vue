@@ -75,6 +75,7 @@ Red : #e33 = @redcolor
 
   #app {
     background-color: @bgcolor;
+    width: 100%;
 
   }
 

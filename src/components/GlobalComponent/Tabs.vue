@@ -1,8 +1,8 @@
 <template>
 
   <ul class="nav nav-tabs" >
-    <router-link :to="tab.link" tag="li" class="nav-item active" active-class="active" exact v-for="tab in tabs" :key="tab.id">
-      <a class="nav-link" href="#">{{tab.label}}</a>
+    <router-link :to="tab.link" tag="a"  class="nav-link" v-for="tab in tabs" :key="tab.id" active-class="active">
+      {{tab.label}}
     </router-link>
   </ul>
 
@@ -14,8 +14,7 @@
      props:['tabs'],
     data() {
       return {
-        
-
+   
       }
     }
   }
@@ -32,4 +31,6 @@
 a{
   color:@nbfcolor;
 }
+
+
 </style>

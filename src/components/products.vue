@@ -113,5 +113,6 @@
 table{
   background-color: #fafafa;
   width: 100%;
+  border:1px solid #dee2e6 ;
 }
 </style>

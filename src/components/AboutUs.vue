@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div class="about-text">
+        <div class="about-text clearfix">
             <vueeditor v-if="showEdit" :aboutcontent="aboutcontent" :show="true" ></vueeditor>
             <div v-if="!showEdit">
                  {{aboutcontent}}
             </div>
             <button v-if="showEdit" class="btn btn-sm btn-success float-right"><i class="fas fa-save"></i> Save</button>
-             <button  v-if="!showEdit" class="btn btn-sm btn-primary float-left" @click="Edit"><i class="fas fa-edit"></i> Edit</button>
+             <button  v-if="!showEdit" class="btn btn-sm btn-primary float-right" @click="Edit"><i class="fas fa-edit"></i> Edit</button>
               <button  v-if="showEdit" class="btn btn-sm btn-danger float-left" @click="showEdit=false"><i class="fas fa-arrow-left"></i> Cancel</button>
         </div>
-        <div class="about-image">
+        <div class="about-image clearfix">
             <img v-if="!showPreview" src="http://via.placeholder.com/400x200" class="rounded mx-auto d-block" alt="...">
             <img v-if="showPreview" :src="imagePreview" class="rounded mx-auto d-block" alt="..." width="400" height="200">
             <div class="input-group " v-if="showEdit">

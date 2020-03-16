@@ -5,16 +5,13 @@
            <img v-bind:src="imagePreview" v-show="showPreview"/>
         </div>
         <div class="card-body">
-          <div class="input-group">
-            <input  v-model="title" type="text" class="form-control" placeholder="TİTLE" >
-           <input  v-model="title" type="text" class="form-control ml-1" placeholder="URL" >
-          </div>
-          <div class="custom-file mt-2 ">
+          
+          <input  v-model="title" type="text" class="form-control" placeholder="TİTLE" >
+           <div class="custom-file mt-2 ">
           <input type="file" class="custom-file-input" ref="file" accept="image/*" id="file"
             v-on:change="handleFileUpload()" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
-         
           <div class="card-body">
             <button class="btn btn-sm btn-warning" @click="reset"><i class="fas fa-trash-restore" ></i> Reset</button>
            <button class="btn btn-sm btn-success"><i class="fas fa-save"></i> Save</button>
@@ -30,10 +27,16 @@ export default {
     file: '',
     showPreview: false,
     imagePreview: '',
-      tab:[ 
-          {link:'/reference',label:'Referanslar' },
-          {link:'/addreference',label:'Referans Ekle' }]
-  }
+    tab: [{
+                    link: '/employe',
+                    label: 'Ekibimiz'
+                },
+                {
+                    link: '/addemploye',
+                    label: 'Çalışan Ekle'
+                }
+            ]
+      }
 },
 methods: {
   /*
@@ -90,9 +93,9 @@ methods: {
 </script>
 <style lang="less" scoped>
  .card{
- 
+   
      text-align: center;
- 
+
  }
 
 </style>

@@ -29,12 +29,12 @@
        <router-link to='/employe' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-users float-left"></i></span> <a class="nav-link" href="#">Ekibimiz </a>
      </router-link> 
-       <li class="nav-item">
+       <!-- <li class="nav-item">
         <span><i class="fas fa-server float-left"></i></span> <a class="nav-link" href="#">Hizmetlerimiz </a>
-      </li>
-      <li class="nav-item">
+      </li> -->
+      <router-link to='/options' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-cogs float-left"></i></span><a class="nav-link" href="#">Ayarlar <br></a>
-      </li>
+     </router-link> 
 
     </ul>
   </nav>

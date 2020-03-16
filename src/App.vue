@@ -143,14 +143,12 @@ Red : #e33 = @redcolor
 
 
   .navborder {
-
     border-left: 1px solid #ddd;
-    
+  
   }
 
   .content {
     border-left: 1px solid #ddd;
-    height: 100%; 
     width: 85%;
   }
 
@@ -192,5 +190,23 @@ Red : #e33 = @redcolor
   }
  .image-style-side{
    float: right;
+  }
+  .prew-html{
+    .ql-align-center{
+      text-align: center;
+    }
+    .ql-align-right{
+      text-align: right;
+    }
+    .ql-indent-1{
+      margin-left:3rem;
+    }
+    ul,li{
+      list-style-type: inherit;
+    }
+    h1{
+      font-size: 1.5rem;
+    }
+
   }
 </style>

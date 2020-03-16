@@ -11,6 +11,8 @@ import addreference from './components/GlobalComponent/addreference.vue'
 import sectors from './components/Sectors.vue'
 import about from './components/AboutUs.vue'
 import employe from './components/Employe.vue'
+import addemploye from './components/addemploye.vue'
+import options from './components/options.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -76,6 +78,14 @@ export const router = new VueRouter({
       {
         path:'/employe',
         component:employe
+      },
+      {
+        path:'/addemploye',
+        component:addemploye
+      },
+      {
+        path:'/options',
+        component:options
       }
 
 ],

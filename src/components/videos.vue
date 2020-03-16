@@ -1,7 +1,7 @@
 <template>
 
 <div class="videos">
-    <videoset v-for="video in url" :key="video.id"></videoset>
+    <videoset></videoset>
 </div>
 
 </template>
@@ -17,11 +17,9 @@
     data() {
       return {
           tab:[ 
-          {link:'/blogs',label:'Videolar' },
-          {link:'/addblog',label:'Video Ekle' },
-          {link:'/addblog',label:'Video Sil'}],
+          {link:'/videos',label:'Videolar' }],
         msg: 'Lanista Gladio Blog Slide',
-        url:['o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk','o0bSRbBk8hk']
+       
       }
     },
      created(){

@@ -39,6 +39,8 @@ app.use(cors({
 
 const makalerouter = require('./api/controller/blog')
 app.use('/api',makalerouter);
+const userrouter = require('./api/controller/usercontroller')
+app.use('/api/user',userrouter);
 
 const port = process.env.PORT || 3000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true }); 

@@ -31,9 +31,10 @@ export default {
 @contentfont: 'Exo', sans-serif;
 
 footer {
-    position: relative;;
+    display: flex;
     bottom: 0;
     margin-top: 1rem;
+    height: auto;
   .footer-text,
   .footer-img {
     width: 50%;

@@ -1,9 +1,10 @@
 <template>
    <div class="addBlog">
         <CardPreview v-show="close"  @close="deger($event)" :content="content"></CardPreview>
-        <vueeditor @con="addcontent($event)" class="m-5 editor"></vueeditor>
-        <button @click="close=true" class="btn btn-sm btn-info ml-5"><i class="fas fa-eye"></i></button>
-         <button  class="btn btn-sm btn-success float-right mr-5"><i class="fas fa-save"></i> Save</button>
+        <vueeditor @con="addcontent($event)" class=" editor"></vueeditor>
+        <button @click="close=true" class="btn btn-sm btn-info ml-1"><i class="fas fa-eye"></i></button>
+         <button  class="btn btn-sm btn-success float-right mr-1"><i class="fas fa-save"></i> Save</button>
+
     </div>
 </template>
 
@@ -43,7 +44,10 @@
              deger(e) {
                 this.close = e;
             }
-        }
+        },
+        created(){
+      this.$emit('tab',this.tab)
+    },
 }
 </script>
     <style lang="less" scoped>
@@ -56,7 +60,8 @@
     @headingfont: 'Kanit', sans-serif;
     @contentfont: 'Exo', sans-serif;
 
-.addBlog{
-    width: 100%;
+
+.btn{
+    margin-top: 1rem;
 }
-    </style>
+</style>

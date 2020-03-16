@@ -1,30 +1,27 @@
 <template>
-        
-        <div class="video mt-3">
-            <youtube :video-id="videoId" :player-width="400" @ready="ready" @playing="playing" ></youtube>
+        <div class="video ">
+            <youtube :video-id="videoId" :player-width="1200" :player-height="600" @ready="ready" @playing="playing"></youtube>
             <!-- <iframe :width="560" height="315" src="https://www.youtube.com/embed/o0bSRbBk8hk" frameborder="0" 
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" class="p-5" allowfullscreen>
             </iframe> -->
-            <strong>Video ID:</strong>
-            <button class="btn btn-sm btn-info mt-3" @click="show=!show"><i class="fas fa-exchange-alt"></i></button>
-            <p v-if="!show"><span>{{videoId}}</span></p>
-            <div style="width:100%">
-            <div class="inputid">
-            <input class="form-control" type="text" v-if="show" placeholder="VideoID" v-model="videoId">
-            </div>
-            <div class="savebutton">
+           
+            <div class="input-group">
+                 <label class="label-head" for="videoId">Video ID:</label>
+                <button class="btn btn-sm btn-info input-group-text"  @click="show=!show"><i class="fas fa-exchange-alt"></i></button>
+                <input type="text" class="form-control" id="videoId" placeholder="Username"
+                    aria-describedby="inputGroupPrepend3" v-model="videoId" :disabled="!show">
                 <button v-show="show" class="btn btn-sm btn-success ">Save</button>
             </div>
-            </div> 
+
         </div>
 </template>
 <script>
     export default {
         data() {
             return {
-                videoId: "eWAHgwBBLoU",
+                videoId: "vsl3gBVO2k4",
                 show: false,
-                width:'75%'
+                
             }
         },
         methods: {
@@ -52,20 +49,28 @@
 </script>
 <style lang="less">
     .video {
-    width: 25%;
-    margin-top:2rem ;
-    display: inline-block;
+    text-align: center;
+    input{
+        display: inline-block;
+        width: 20rem;
+        margin: auto;
+    }
+    }
 
-    }
-    .inputid{
-        width: 80%;
-        padding: 1rem;
-        float: left;
-    }
     .savebutton{
-        width: 20%;
-        float: left;
         padding: 1rem;
     }
 
+    .label-head{
+     padding-right: 1rem;
+     padding-top: 0.5rem;
+
+    }
+    .input-group{
+        width: 50%;
+        display: flex;
+        text-align: center;
+        margin-left: 27rem;
+        
+    }
 </style>

@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const blogschema = mongoose.Schema({
   user: {
     type: String,
-    required: false
+    required: true
+    
   },
   title: {
     type: String,

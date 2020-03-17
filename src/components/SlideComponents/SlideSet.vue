@@ -1,5 +1,5 @@
 <template>
-     <div class="sliderall">
+     <div class="sliderset">
       <div v-for="item in 3 " :key="item.id" class="card">
         <div class="image-file m-1">
           <img src="https://i.picsum.photos/id/188/200/130.jpg" class="img-thumbnail">
@@ -14,11 +14,11 @@
           <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği"></textarea>
         </div>
       </div>
-      <div class="group">
+     
       <button class="btn btn-sm btn-primary   col-md-2">Ekle</button>
       <button class="btn btn-sm btn-danger col-md-2">Sil</button>
       <button class="btn btn-sm btn-info col-md-2">Düzenle</button>
-      </div>
+  
     </div>
 </template>
 <script>
@@ -42,20 +42,21 @@
   @btntextcolor: #eee;
   @headingfont: 'Kanit', sans-serif;
   @contentfont: 'Exo', sans-serif;
-
-  .sliderall {
+  .sliderset{
     width: 100%;
     text-align: center;
   
   }
   .card{
+    text-align: center;
     width: 32%;
-    margin: 0.5rem;
+    margin:0 0.3%;
     float: left;
     padding: 1rem;
   }
-  .group{
-    margin: 0.5rem;
-    text-align: center;
+  .btn{
+    margin:1rem;
+    width: 4rem;
   }
+
 </style>

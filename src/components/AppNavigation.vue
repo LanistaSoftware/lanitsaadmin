@@ -35,16 +35,19 @@ export default {
 @pagebgcolor:#E5E5E5;
 @btntextcolor:#eee;
 @headingfont:'Kanit', sans-serif;
-@contentfont:'Exo', sans-serif;
+@contentfont: 'Exo', sans-serif;
 
-.box{
+.box {
   float: left;
   width: 33%;
   position: relative;
 }
-.a{
-  width: 15%;}
-.b{
+
+.a {
+  width: 15%;
+}
+
+.b {
   width: 65%;
   margin-top: 1rem;
   }

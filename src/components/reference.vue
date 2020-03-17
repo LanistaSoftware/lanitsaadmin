@@ -43,11 +43,12 @@
 </script>
 <style lang="less" scoped>
 .card {
-    width: 22%;
-    margin:0 2rem 0.5rem 0.5rem; 
-    text-align: center;
-    display: inline-block;
 
+      width:31.3%;
+      text-align: center;
+      display: inline-block;
+     margin-right: 1%;
+      margin-left: 1%;
   }
 
 

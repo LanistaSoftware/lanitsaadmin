@@ -2,15 +2,16 @@
    <div class="addBlog">
         <CardPreview v-show="close"  @close="deger($event)" :content="content"></CardPreview>
         <vueeditor @con="addcontent($event)" class=" editor"></vueeditor>
-        <button @click="close=true" class="btn btn-sm btn-info ml-1"><i class="fas fa-eye"></i></button>
-         <button  class="btn btn-sm btn-success float-right mr-1"><i class="fas fa-save"></i> Save</button>
-
+         <button @click="close=true" class="btn btn-sm btn-info ml-1"><i class="fas fa-eye"></i></button>
+         <button @click="addBlog" class="btn btn-sm btn-success float-right mr-1"><i class="fas fa-save"></i> Save</button>
+        <p v-html="html"></p>
     </div>
 </template>
 
 <script>
  import vueeditor from '../components/GlobalComponent/vueeditor'
  import CardPreview from '../components/GlobalComponent/CardPreview'
+import Axios from 'axios'
   
   export default {
     name: 'Slider',
@@ -21,7 +22,8 @@
         data() {
             return {
                 close:false,
-                content: '',
+                content: [],
+                html:[],
                 tab: [{
                         link: '/blogs',
                         label: 'Makaleler'
@@ -40,9 +42,30 @@
         methods: {
             addcontent(e) {
                 this.content = e
+                
             },
              deger(e) {
                 this.close = e;
+            },
+            addBlog(){
+                Axios.post('http://localhost:3000/api/blog',[this.content]).then(res=>{
+                    console.log(res)
+                    alert(res.statusText)
+                }).catch(err=>{
+                    alert(err)
+                    
+                })
+            },
+            getBlog(){
+                Axios.get('http://localhost:3000/api/blog').then(res=>{
+                    console.log(res)
+                    this.html = res.data.blogs.content
+                    console.log(res.data)
+                    alert(res.statusText)
+                }).catch(err=>{
+                    alert(err)
+                    
+                })
             }
         },
         created(){

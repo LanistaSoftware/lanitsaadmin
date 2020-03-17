@@ -1,13 +1,14 @@
 const exprees = require('express');
 const router = exprees.Router();
-const User = require('../models/usermodel');
+const Blog = require('../models/makaleschema');
+const mlt = require('../middleware/multer')
 
 
 router.get('/', async (req, res) => {
     try {
-        const users = await User.find({});
+        const blogs = await Blog.findOne({_id:'5e70bd4c9bdb655664255d79'});
         res.status(200).json({
-            users
+            blogs
         });
     } catch (error) {
         res.json({
@@ -17,11 +18,11 @@ router.get('/', async (req, res) => {
 })
 router.delete('/:id', async (req, res) => {
     try {
-        const users = await User.deleteOne({
+        const blogs = await Blog.deleteOne({
             _id: req.params.id
         })
         res.json({
-            users
+            blogs
         });
     } catch (error) {
         res.json({
@@ -29,19 +30,16 @@ router.delete('/:id', async (req, res) => {
         })
     }
 })
-router.post('/', async (req, res) => {
+router.post('/'  ,async (req, res) => {
     console.log(req.body)
-    const user = await new User({
-        Name: req.body.name,
-        LastName: req.body.surname,
-        email: req.body.email,
-        Phone: req.body.phone,
-        isAdmin: req.body.isAdmin
+    const blog = await new Blog({
+       
+        content: req.body[0],
     })
     try {
-        const useradd = await user.save();
+        const blogadd = await blog.save();
         res.status(201).json({
-            useradd
+            blogadd
         })
     } catch (error) {
         res.status(400).json({
@@ -51,19 +49,17 @@ router.post('/', async (req, res) => {
 })
 router.put('/:id', async (req, res) => {
     try {
-        const users = await User.updateOne({
+        const blog = await Blog.updateOne({
             _id: req.params.id
         }, {
             $set: {
-                Name: req.body.Name,
-                LastName: req.body.LastName,
-                email: req.body.email,
-                Phone: req.body.Phone,
-                isAdmin: req.body.isAdmin
+                title: req.body.title,
+                contnent: req.body.contnent,
+                image: req.body.image,
             }
         })
         res.json({
-            users
+            blog
         });
     } catch (error) {
         res.json({

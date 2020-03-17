@@ -27,7 +27,6 @@ export default {
     return {
       contentin: "",
       contentout:'',
-      aboutcontent:'',
       customModulesForEditor: [{ alias: "imageDrop", module: ImageDrop }, { alias: "imageResize", module: ImageResize }],
       editorSettings: {
         modules: {

@@ -20,30 +20,39 @@
           <td scope="col"><input type="text" v-model="user.surname"></td>
           <td scope="col"><input type="email" v-model="user.email"></td>
           <td scope="col"><input type="phone" v-model="user.phone"></td>
-          <td scope="col"><input type="checkbox"  v-model="user.isAdmin"></td>
+          <td scope="col"><select class="custom-select" v-model="user.isAdmin">
+  <option value="0">Web Master</option>
+  <option value="1">Admin</option>
+  <option value="2">User</option>
+</select></td>
           <td scope="col"><button  @click="addUser" class="btn btn-sm btn-success">Save</button>
           <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel </button>
           </td>
         </tr>
-        <tr v-for="(item,index) in Users" :key="item.id">
-          <th scope="row">1</th>
-          <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.name}}</td>
-          <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.surname}}</td>
-          <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.email}}</td>
-          <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.phone}}</td>
-          <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.isAdmin}}</td>
-          <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text" v-model="item.name"></td>
-          <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text" v-model="item.surname"></td>
-          <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text" v-model="item.email"></td>
-          <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text" v-model="item.phone"></td>
-          <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="checkbox" v-model="item.isAdmin"></td>
+        <tr v-for="(item,index) in Users" :key="item._id">
+          <th scope="row">{{index+1}}</th>
+          <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true" >{{item.Name}}</td>
+          <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.LastName}}</td>
+          <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.email}}</td>
+          <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.Phone}}</td>
+          <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{adminSelect(item.isAdmin)}}</td>
+          <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.Name"></td>
+          <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.LastName"></td>
+          <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.email"></td>
+          <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.Phone"></td>
+          <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><select class="custom-select" v-model="item.isAdmin">
+           <option selected></option>
+           <option value="0">Web Master</option>
+           <option value="1">Admin</option>
+           <option value="2">User</option>
+  </select></td>
           <td>
-            <button v-if="selectedItem==item.id ? isEdit=false : isEdit=true" @click="selectedItem=item.id"
+            <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="selectedItem=item._id"
               class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
-            <button v-if="selectedItem==item.id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success"> Save
+            <button @click="updateUser(item._id,item)" v-if="selectedItem==item._id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success"> Save
             </button>
-            <button @click="deleteUser(index)" class="btn btn-sm btn-danger"> Delete <i class="fas fa-user-minus"></i></button>
-            <button v-if="selectedItem==item.id ? isEdit=true : isEdit=false" @click="selectedItem=null"
+            <button @click="deleteUser(index,item._id)" class="btn btn-sm btn-danger"> Delete <i class="fas fa-user-minus"></i></button>
+            <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" @click="selectedItem=null"
               class="btn btn-sm btn-warning"> Cancel </button>
           </td>
         </tr>
@@ -53,7 +62,6 @@
 </template>
 <script>
   import axios from 'axios'
-  import Axios from 'axios';
   export default {
 
     data() {
@@ -72,51 +80,55 @@
           email: '',
           phone: '',
           isAdmin: null,
-
         },
-        Users: [{
-            id: 0,
-            name: "Bayhan",
-            surname: "Bayramoğlu",
-            email: "bayhanbayramoglu@gmail.com",
-            phone: "0 506 215 07 00",
-            password: "123456",
-            isAdmin: true
-          },
-          {
-            id: 1,
-            name: "Ömer",
-            surname: "Erdemir",
-            email: "ömer@gmail.com",
-            phone: "0 506 215 07 00",
-            password: "123456",
-            isAdmin: true
-          },
-          {
-            id: 2,
-            name: "Cihan ",
-            surname: "Bozkurt",
-            email: "cihan@gmail.com",
-            phone: "0 506 215 07 00",
-            password: "123456",
-            isAdmin: true
-          },
-        ]
+       
+        Users: []
       }
     },
     methods: {
-      deleteUser(index) {
+      deleteUser(index,id) {
         this.Users.splice(index, 1);
-        console.log(this.Users)
+        axios.delete('http://localhost:3000/api/user/'+id).then(res=>{
+          console.log(res)
+        })
       },
+   
       addUser() {
         axios.post('http://localhost:3000/api/user', this.user).then((res) => {
+          this.isAdd=false
+          this.getUser()
           console.log(res)
           alert(res.statusText)
         }).catch(err => {
           console.log(err.message)
           alert(err.message)
         })
+      },
+      updateUser(id,edit) {
+        axios.put('http://localhost:3000/api/user/'+id,edit).then(res=>{
+          this.selectedItem=null
+          console.log(res)
+        }).catch(err=>{
+          console.log(err)
+        })
+      },
+      
+      getUser(){
+          axios.get('http://localhost:3000/api/user').then(res=>{
+       this.Users=res.data.users
+       console.log(res)
+     }).catch(err=>{
+       console.log(err)
+     })
+      },
+        adminSelect(auth){
+        if (auth == 0) {
+          return 'Web Master'
+        } else if (auth == 1) {
+          return 'Admin'
+        } else {
+          return 'User'
+        }
 
       },
       checkForm: function (e) {
@@ -141,10 +153,11 @@
       var re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
       return re.test(email);
     }
-    
     },
     created() {
       this.$emit('tab', this.tab)
+       this.getUser()
+   
     },
   }
 </script>

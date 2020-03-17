@@ -28,7 +28,7 @@ const userschema = mongoose.Schema({
     
   },
   isAdmin:{
-      type:Boolean,
+      type:Number,
       required:true
   },
   creationdate: {

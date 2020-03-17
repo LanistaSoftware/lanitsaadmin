@@ -9,7 +9,10 @@ Vue.use(VueYouTubeEmbed)
 Vue.use(VueYouTubeEmbed, { global: false })
 // if you want to install the component globally with a different name
 Vue.use(VueYouTubeEmbed, { global: true, componentId: "youtube-media" });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 925d607bccd5557bd5d19946fe23342e2c75c6f2
 
 
 

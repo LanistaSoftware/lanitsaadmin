@@ -23,8 +23,8 @@
 </script>
 <style lang="less" scoped>
   .card {
-    width: 20%;
-    margin: 3rem 1rem;
+    width: 29%;
+    margin: 0 2rem 2rem 2rem ;
     display: inline-block;
 
   }
@@ -43,7 +43,7 @@
   }
 
   .btn {
-    margin: 1rem;
+    margin:0.5rem;
   }
 
 </style>

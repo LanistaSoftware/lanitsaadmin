@@ -5,12 +5,12 @@
     </div>
     <div class="row">
 
-      <AppNavigation class="appnavigation"></AppNavigation>
+      <AppNavigation :menus="menus" class="appnavigation"></AppNavigation>
       <section class="navborder sidecontent">
         <Navigation></Navigation>
       </section>
-      <div class="row content">
-        <router-view></router-view>
+      <div class="row content  ">
+        <router-view  @tab="tabs($event)"  class="container-v"></router-view>
         <!-- <Users></Users> -->
       </div>
     </div>
@@ -29,6 +29,7 @@
   import Blogs from './components/Blogs';
   import AppNavigation from './components/AppNavigation';
   import videos from './components/videos';
+
   export default {
     name: 'app',
     components: {
@@ -43,10 +44,21 @@
     },
     data() {
       return {
-
+        menus:null
       
       }
-    }
+    },
+    created(){
+    
+    },
+    methods:{
+      tabs(e){
+        this.menus=e;
+      },
+    },
+     
+    
+
   }
 </script>
 
@@ -90,6 +102,15 @@ Red : #e33 = @redcolor
     margin: 0;
     //padding:3.5rem 3.5rem;
   }
+  .container-v{
+    width: 95%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top:3rem ;
+
+  }
 
   .sidecontent {
 
@@ -123,14 +144,12 @@ Red : #e33 = @redcolor
 
 
   .navborder {
-
     border-left: 1px solid #ddd;
-    
+  
   }
 
   .content {
     border-left: 1px solid #ddd;
-    height: 100%; 
     width: 85%;
   }
 
@@ -170,5 +189,25 @@ Red : #e33 = @redcolor
     padding: 0;
 
   }
+ .image-style-side{
+   float: right;
+  }
+  .prew-html{
+    .ql-align-center{
+      text-align: center;
+    }
+    .ql-align-right{
+      text-align: right;
+    }
+    .ql-indent-1{
+      margin-left:3rem;
+    }
+    ul,li{
+      list-style-type: inherit;
+    }
+    h1{
+      font-size: 1.5rem;
+    }
 
+  }
 </style>

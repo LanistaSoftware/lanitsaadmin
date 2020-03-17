@@ -1,25 +1,24 @@
 <template>
-
-<div class="videos">
-    <videoset></videoset>
-</div>
-
+  <div>
+    <Dropdown class="sliderall"></Dropdown>
+    <SlideSet></SlideSet>
+   </div>
 </template>
 
 <script>
-  import Dropdown from './GlobalComponent/Dropdown'
-  import videoset from './SlideComponents/videoset'
+  import Dropdown from '../GlobalComponent/Dropdown'
+  import SlideSet from './SlideSet'
   export default {
     name: 'Slider',
     components: {
-      videoset,
+      Dropdown,
+      SlideSet,
     },
     data() {
       return {
-          tab:[ 
-          {link:'/videos',label:'Videolar' }],
-        msg: 'Lanista Gladio Blog Slide',
-       
+           tab:[ 
+          {link:'/sliders',label:'Slaytlar ' },
+          {link:'/addslider',label:'Slayt Ekle/Sil/Düzenle' }],
       }
     },
      created(){
@@ -37,10 +36,9 @@
   @headingfont: 'Kanit', sans-serif;
   @contentfont: 'Exo', sans-serif;
 
-  .videos{
-    width: 100%;
-    float: left;
+  .sliderall {
+   
     text-align: center;
+    margin: 2rem
   }
-
 </style>

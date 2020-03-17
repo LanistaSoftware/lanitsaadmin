@@ -1,7 +1,7 @@
 <template>
+ 
+     
   <div class="blogs">
-    
-    <router-view></router-view>
      <editblog v-show="editdata" @editdata="edit($event)"></editblog>
     <CardPreview v-show="close"  @close="deger($event)"></CardPreview>
     <Card 
@@ -10,6 +10,7 @@
     @close="deger($event)"></Card>
    
   </div>
+
 </template>
 
 
@@ -23,12 +24,19 @@
       CardPreview,  
       editblog,
     },
+
     data() {
       return {
         close:false,
-        editdata:false
+        editdata:false,
+        tab:[ 
+          {link:'/blogs',label:'Makaleler' },
+          {link:'/addblog',label:'Makale Ekle' }]
       }
 
+    },
+    created(){
+      this.$emit('tab',this.tab)
     },
     methods:{
       deger(e){
@@ -45,8 +53,8 @@
 <style lang="less" scoped>
   .blogs {
     width: 100%;
-    float: left;
     text-align: center;
+
   }
   
 </style>

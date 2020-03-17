@@ -2,9 +2,9 @@
 <div>
 <div class="box  a"><p></p></div>
 <div class="box  b">
-  <Tabs></Tabs>
+  <Tabs :tabs="menus"></Tabs>
 </div>
-<div class="box  c"><Search></Search></div>
+<div class="box  c"><p></p></div>
 </div>
 </template>
 
@@ -19,9 +19,11 @@ export default {
   },
   data () {
     return {
-     
+      
     }
-  }
+  },
+  props:['menus'],
+  
 }
 </script>
 
@@ -47,13 +49,13 @@ export default {
 
 .b {
   width: 65%;
-  top: 2rem;
-}
-
-.c {
-
+  margin-top: 1rem;
+  }
+.c{
+ height: 100%;
   width: 20%;
-
+  border-bottom: 1px solid #dee2e6;
+ 
 }
 
 </style>

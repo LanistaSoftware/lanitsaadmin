@@ -1,31 +1,40 @@
 <template>
   <nav :style="heights">
-    <ul :style="heights" class="nav flex-column">
+    <ul :style="heights" class="flex-column">
 
-      <router-link to='/users' tag='li' class="nav-item">
+      <router-link to='/users' tag='li' class="nav-item"  active-class="act">
         <span><i class="fas fa-users float-left"></i></span> <a class="nav-link active" href="#">Kullanıcılar</a>
       </router-link>
-      <router-link to='/blogs' tag='li' class="nav-item">
+      <router-link to='/blogs' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-book-open float-left"></i></span> <a class="nav-link" href="#">Makaleler </a>
       </router-link>
-      <router-link to='/sliders' tag='li' class="nav-item">
+      <router-link to='/sliders' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-photo-video float-left"></i></span><a class="nav-link" href="#">Slaytlar </a>
       </router-link>
-      <router-link to='/videos' tag='li' class="nav-item">
+      <router-link to='/videos' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-video float-left"></i></span> <a class="nav-link" href="#">Videolar</a>
       </router-link>
-      <li class="nav-item">
+     <router-link to='/reference' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-asterisk float-left"></i> </span><a class="nav-link" href="#">Referanslar </a>
-      </li>
-      <li class="nav-item">
+     </router-link >
+      <router-link to='/products' tag='li' class="nav-item" active-class="act">
         <span><i class="fab fa-product-hunt float-left"></i></span> <a class="nav-link" href="#">Ürünler </a>
-      </li>
-      <li class="nav-item">
+      </router-link>
+       <router-link to='/sectors' tag='li' class="nav-item" active-class="act">
+        <span><i class="fas fa-bezier-curve float-left"></i></span> <a class="nav-link" href="#">Sektörler </a>
+       </router-link>
+     <router-link to='/aboutus' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-address-card float-left"></i></span> <a class="nav-link" href="#">Hakkımızda </a>
-      </li>
-      <li class="nav-item">
+    </router-link>
+       <router-link to='/employe' tag='li' class="nav-item" active-class="act">
+        <span><i class="fas fa-users float-left"></i></span> <a class="nav-link" href="#">Ekibimiz </a>
+     </router-link> 
+       <!-- <li class="nav-item">
+        <span><i class="fas fa-server float-left"></i></span> <a class="nav-link" href="#">Hizmetlerimiz </a>
+      </li> -->
+      <router-link to='/options' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-cogs float-left"></i></span><a class="nav-link" href="#">Ayarlar <br></a>
-      </li>
+     </router-link> 
 
     </ul>
   </nav>
@@ -76,6 +85,15 @@ i{
 i:hover{
  
   color: @redcolor;
+}
+.act{
+  a,i{
+  color: @redcolor;
+  
+  }
+}
+li{
+  margin-bottom: 1rem;
 }
 
 </style>

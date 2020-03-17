@@ -7,7 +7,7 @@
         </router-link>
 </div>
   <div class="header">
-    <h1>Admin Panel & Site Control Systems</h1>
+    <h3>Admin Panel & Site Control Systems</h3>
   </div>
   </header>
 </template>
@@ -47,7 +47,7 @@ textarea:focus, input:focus{
 .header{
 
   text-align: right;
-  h1{
+  h3{
     
     padding-top: 4rem;
     padding-right: 1rem;

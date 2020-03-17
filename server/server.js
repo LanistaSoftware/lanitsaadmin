@@ -7,8 +7,15 @@ var session = require('express-session')
 const cookieparser = require('cookie-parser');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const connectstr = 'mongodb://localhost:27017/gladioadmin';
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+// const iplocation = require("iplocation").default;
+// iplocation('92.45.194.68', [], (error, res) => {
+ 
+//     console.log(res.ip)
+ 
+// });
 //Middleware
+
 app.use(bodyParser.urlencoded({
   extended: false
 }));
@@ -32,6 +39,8 @@ app.use(cors({
 
 const makalerouter = require('./api/controller/blog')
 app.use('/api',makalerouter);
+const userrouter = require('./api/controller/usercontroller')
+app.use('/api/user',userrouter);
 
 const port = process.env.PORT || 3000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true }); 

@@ -1,37 +1,24 @@
 <template>
-     <div class="row justify-content-md-center">
-      <div class="col col-lg-4">
-        <div class="image-file">
+     <div class="sliderall">
+      <div v-for="item in 3 " :key="item.id" class="card">
+        <div class="image-file m-1">
           <img src="https://i.picsum.photos/id/188/200/130.jpg" class="img-thumbnail">
-          <input type="file" name="" id="">
+       <div class="custom-file ">
+          <input type="file" class="custom-file-input" ref="file" accept="image/*" id="file"
+            v-on:change="handleFileUpload()" />
+          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
         </div>
         <div class="content-title mt-3">
           <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı">
           <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği"></textarea>
         </div>
       </div>
-      <div class="col-md-auto col-lg-4">
-        <div class="image-file">
-          <img src="https://i.picsum.photos/id/188/200/130.jpg" class="img-thumbnail">
-          <input type="file" name="" id="">
-        </div>
-        <div class="content-title mt-3">
-          <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı">
-          <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği"></textarea>
-        </div>
+      <div class="group">
+      <button class="btn btn-sm btn-primary   col-md-2">Ekle</button>
+      <button class="btn btn-sm btn-danger col-md-2">Sil</button>
+      <button class="btn btn-sm btn-info col-md-2">Düzenle</button>
       </div>
-      <div class="col col-lg-4 ">
-
-        <div class="image-file">
-          <img src="https://i.picsum.photos/id/188/200/130.jpg" class="img-thumbnail">
-          <input type="file" name="" id="">
-        </div>
-        <div class="content-title mt-3">
-          <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı">
-          <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği"></textarea>
-        </div>
-      </div>
-      <button class="btn btn-primary mt-3 mb-3">Ekle</button>
     </div>
 </template>
 <script>
@@ -59,6 +46,16 @@
   .sliderall {
     width: 100%;
     text-align: center;
-    margin: 2rem
+  
+  }
+  .card{
+    width: 32%;
+    margin: 0.5rem;
+    float: left;
+    padding: 1rem;
+  }
+  .group{
+    margin: 0.5rem;
+    text-align: center;
   }
 </style>

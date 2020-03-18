@@ -46,6 +46,7 @@ export default {
   data () {
     return {
              heights:'height:'+(screen.availHeight-(screen.availHeight*15/100))+'px;',
+             
     }
   }
 }

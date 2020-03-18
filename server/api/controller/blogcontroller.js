@@ -6,7 +6,7 @@ const mlt = require('../middleware/multer')
 
 router.get('/', async (req, res) => {
     try {
-        const blogs = await Blog.findOne({_id:'5e70c6b3b357f13f24d867c6'});
+        const blogs = await Blog.find({});
         res.status(200).json({
             blogs
         });

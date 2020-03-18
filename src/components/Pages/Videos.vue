@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import Dropdown from './GlobalComponent/Dropdown'
-  import videoset from './SlideComponents/videoset'
+  import videoset from '../SlideComponents/videoset'
+    import {mapActions} from 'vuex'
   export default {
     name: 'Slider',
     components: {
@@ -23,8 +23,13 @@
       }
     },
      created(){
-      this.$emit('tab',this.tab)
+          this.addtab(this.tab)
     },
+      methods:{
+         ...mapActions({
+           addtab:"addTabs",
+         })
+        }
   }
 </script>
 <style lang="less" scoped>

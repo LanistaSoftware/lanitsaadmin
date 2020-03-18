@@ -61,6 +61,7 @@
   </div>
 </template>
 <script>
+import {mapActions} from 'vuex'
   export default {
     data() {
       return {
@@ -102,10 +103,13 @@
       deleteUser(index){
           this.Users.splice(index,1);
           console.log(this.Users)
-      }
+      },
+       ...mapActions({
+           addtab:"addTabs",
+         })
     },
      created(){
-      this.$emit('tab',this.tab)
+        this.addtab(this.tab)
     },   
   }
 </script>

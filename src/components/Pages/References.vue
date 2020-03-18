@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
   export default {
       data() {
           return {
@@ -36,8 +37,14 @@
           }
       },
       created() {
-          this.$emit('tab', this.tab)
+            this.addtab(this.tab)
       },
+      
+    methods:{
+         ...mapActions({
+           addtab:"addTabs",
+         }),
+         }
   }
 
 </script>

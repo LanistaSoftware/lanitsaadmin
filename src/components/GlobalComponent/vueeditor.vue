@@ -18,7 +18,7 @@ import VueScrollbar from 'vue-scrollbar-simple'
  
 export default {
   components: {
-    VueEditor,
+    'vue-editor':VueEditor,
     vuescroll:VueScrollbar
   },
   props:['aboutcontent','show'],

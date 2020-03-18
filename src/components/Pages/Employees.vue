@@ -26,7 +26,9 @@
 </template>
 
 <script>
+ import {mapActions} from 'vuex'
 export default {
+   
     data(){
         return{
               isEdit:false,
@@ -63,16 +65,18 @@ export default {
           }
     },
      created(){
-      this.$emit('tab',this.tab)
+         this.addtab(this.tab)
     },
+    methods:{
+           ...mapActions({
+           addtab:"addTabs",
+         }),
+    }
   
 }
 </script>
 
 <style lang="less" scoped>
-.employe{
-   
-}
 .card{
     width: 30%;
     display: inline-block;

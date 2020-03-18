@@ -69,7 +69,9 @@
   </div>
 </template>
 <script>
+  import {mapActions} from 'vuex'
 export default {
+  
   data() {
     return {
       selectedItem: null,
@@ -110,9 +112,12 @@ export default {
     }
   },
   created() {
-    this.$emit('tab', this.tab)
+      this.addtab(this.tab)
   },
   methods: {
+     ...mapActions({
+           addtab:"addTabs",
+         }),
 
     Edit(e) {
     this.selectedItem=e;

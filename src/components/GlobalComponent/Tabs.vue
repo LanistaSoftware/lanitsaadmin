@@ -5,17 +5,25 @@
       {{tab.label}}
     </router-link>
   </ul>
-
 </template>
 
 <script>
+ import {mapGetters} from 'vuex'
   export default {
     name: 'Tabs',
-     props:['tabs'],
-    data() {
-      return {
    
+    data() {
+      return {   
+
       }
+    },
+    computed:{
+      ...mapGetters({
+        tabs:'getTabs'
+      })
+      // tabs(){
+      //   return this.$store.getters.getTabs;
+      // }
     }
   }
 </script>

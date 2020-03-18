@@ -18,7 +18,7 @@
         </div> -->
       <div v-html="as" class="justify-content clearfix"></div>
       </div>
-      <Ckeditor @editorData="a($event)"></Ckeditor>
+      <vueeditor @editorData="a($event)" ></vueeditor>
       <button class="btn btn-sm btn-primary  ">Save</button>
     </div>
   </div>
@@ -26,10 +26,10 @@
 </template>
 
 <script>
-  import Ckeditor from '../GlobalComponent/vueeditor'
+  import vueeditor from './vueeditor'
   export default {
     components: {
-        Ckeditor,
+        vueeditor,
       },
 
       data() {

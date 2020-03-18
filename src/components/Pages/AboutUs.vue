@@ -26,7 +26,8 @@
     </div>
 </template>
 <script>
-import vueeditor from './GlobalComponent/vueeditor'
+import vueeditor from '../GlobalComponent/vueeditor'
+import {mapActions} from 'vuex'
 export default {
     components: {
         vueeditor
@@ -48,10 +49,13 @@ export default {
 
 
     created() {
-        this.$emit('tab', this.tab)
+          this.addtab(this.tab)
 
     },
     methods: {
+        ...mapActions({
+           addtab:"addTabs",
+         }),
         handleFileUpload() {
             /*
               Set the local file variable to what the user has selected.

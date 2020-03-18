@@ -11,8 +11,8 @@
 </template>
 
 <script>
- import vueeditor from '../components/GlobalComponent/vueeditor'
- import CardPreview from '../components/GlobalComponent/CardPreview'
+ import vueeditor from './vueeditor'
+ import CardPreview from './CardPreview'
 import Axios from 'axios'
   
   export default {
@@ -64,11 +64,7 @@ import Axios from 'axios'
             },
             getBlog(){
                 Axios.get('http://localhost:3000/api/blog').then(res=>{
-<<<<<<< HEAD
-                
-=======
                    
->>>>>>> 838116911acedcad161a7289814bcd6e5a1c15fa
                     this.html = res.data.blogs.content
                    
                 }).catch(err=>{

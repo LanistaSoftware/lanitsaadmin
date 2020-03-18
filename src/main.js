@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import {router} from './router'
+import {store} from './store/store'
 
 
 import VueYouTubeEmbed from 'vue-youtube-embed'
@@ -15,5 +16,6 @@ Vue.use(VueYouTubeEmbed, { global: true, componentId: "youtube-media" });
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })

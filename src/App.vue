@@ -5,14 +5,11 @@
     </div>
     <div class="row">
 
-      <AppNavigation :menus="menus" class="appnavigation"></AppNavigation>
+      <AppNavigation class="appnavigation"></AppNavigation>
       <section class="navborder sidecontent">
         <Navigation></Navigation>
       </section>
-      <div class="row content  ">
-        <router-view  @tab="tabs($event)"  class="container-v"></router-view>
-        <!-- <Users></Users> -->
-      </div>
+     <Content></Content>
     </div>
     <div class="row">
       <Footer></Footer>
@@ -25,10 +22,8 @@
   import Header from './components/Header';
   import Navigation from './components/Navigation';
   import Footer from './components/Footer';
-  import Users from './components/Users';
-  import Blogs from './components/Blogs';
   import AppNavigation from './components/AppNavigation';
-  import videos from './components/videos';
+  import Content from './components/Content'
 
   export default {
     name: 'app',
@@ -36,29 +31,10 @@
       Header,
       Navigation,
       Footer,
-      Users,
-      Blogs,
       AppNavigation,
-      videos,
+      Content
 
     },
-    data() {
-      return {
-        menus:null
-      
-      }
-    },
-    created(){
-    
-    },
-    methods:{
-      tabs(e){
-        this.menus=e;
-      },
-    },
-     
-    
-
   }
 </script>
 
@@ -146,11 +122,6 @@ Red : #e33 = @redcolor
   .navborder {
     border-left: 1px solid #ddd;
   
-  }
-
-  .content {
-    border-left: 1px solid #ddd;
-    width: 85%;
   }
 
   h1,

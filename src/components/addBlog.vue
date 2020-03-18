@@ -4,7 +4,9 @@
         <vueeditor @con="addcontent($event)" class=" editor"></vueeditor>
          <button @click="close=true" class="btn btn-sm btn-info ml-1"><i class="fas fa-eye"></i></button>
          <button @click="addBlog" class="btn btn-sm btn-success float-right mr-1"><i class="fas fa-save"></i> Save</button>
-        <p v-html="html"></p>
+        
+        <div v-html="content"></div>
+        {{content}}
     </div>
 </template>
 
@@ -19,7 +21,7 @@ import Axios from 'axios'
             vueeditor,
             CardPreview
         },
-        data() {
+        data() { 
             return {
                 close:false,
                 content: [],
@@ -42,6 +44,8 @@ import Axios from 'axios'
         methods: {
             addcontent(e) {
                 this.content = e
+                var res = e.split("img");
+                console.log(res[1])
                 
             },
              deger(e) {
@@ -49,7 +53,7 @@ import Axios from 'axios'
             },
             addBlog(){
                 Axios.post('http://localhost:3000/api/blog',[this.content]).then(res=>{
-                    console.log(res)
+                   
                     alert(res.statusText)
                 }).catch(err=>{
                     alert(err)
@@ -58,7 +62,7 @@ import Axios from 'axios'
             },
             getBlog(){
                 Axios.get('http://localhost:3000/api/blog').then(res=>{
-                    console.log(res)
+                   
                     this.html = res.data.blogs.content
                     console.log(res.data)
                     alert(res.statusText)

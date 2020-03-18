@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import App from './App.vue'
 import Users from './components/Users.vue'
 import blogs from './components/Blogs.vue'
 import slide from './components/Slider.vue'
@@ -13,10 +14,11 @@ import about from './components/AboutUs.vue'
 import employe from './components/Employe.vue'
 import addemploye from './components/addemploye.vue'
 import options from './components/options.vue'
+import Login from './components/Login.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
-const language =  window.navigator.language;
+
 export const router = new VueRouter({
     routes:[
         {
@@ -87,7 +89,6 @@ export const router = new VueRouter({
         path:'/options',
         component:options
       }
-
 ],
     mode:"history"
 })

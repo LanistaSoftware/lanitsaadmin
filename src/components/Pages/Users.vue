@@ -29,7 +29,7 @@
           <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel </button>
           </td>
         </tr>
-        <tr v-for="(item,index) in getUser" :key="item._id">
+        <tr v-for="(item,index) in Users" :key="item._id">
           <th scope="row">{{index+1}}</th>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true" >{{item.Name}}</td>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.LastName}}</td>
@@ -62,7 +62,8 @@
 </template>
 <script>
   import axios from 'axios'
-  import {mapActions} from 'vuex'
+  import {mapActions,mapGetters,mapState} from 'vuex'
+  import router from 'vue-router'
   export default {
 
     data() {
@@ -82,30 +83,27 @@
           phone: '',
           isAdmin: null,
         },
-       
-        Users: []
+        // Users : []
       }
     },
     methods: {
-      deleteUser(index,id) {
-        this.Users.splice(index, 1);
-        axios.delete('http://localhost:3000/api/user/'+id).then(res=>{
-          console.log(res)
-        })
-      },
          ...mapActions({
            addtab:"addTabs",
+           getUsersaction : "getUser",
+           deleteUserAction:"deleteUser",
+           addUserAction:"addUser"
          }),
       addUser() {
-        axios.post('http://localhost:3000/api/user', this.user).then((res) => {
-          this.isAdd=false
-          this.getUser()
-          console.log(res)
-          alert(res.statusText)
-        }).catch(err => {
-          console.log(err.message)
-          alert(err.message)
-        })
+       this.addUserAction(this.user)
+       console.log(this.user)
+        if (true) {
+          this.Users += this.user
+        }
+       this.isAdd=false
+      },
+      deleteUser(index,id){
+       this.deleteUserAction(id)
+        this.Users.splice(index,1)
       },
       updateUser(id,edit) {
         axios.put('http://localhost:3000/api/user/'+id,edit).then(res=>{
@@ -115,10 +113,7 @@
           console.log(err)
         })
       },
-      
-      getUser(){
-         return this.$store.state.Users 
-      },
+   
         adminSelect(auth){
         if (auth == 0) {
           return 'Web Master'
@@ -152,10 +147,12 @@
       return re.test(email);
     }
     },
-    created() {
+    computed:{
+      ...mapState(['Users'])},
+      
+    mounted() {
        this.addtab(this.tab)
-       this.getUser()
-   
+       this.getUsersaction()
     },
   }
 </script>

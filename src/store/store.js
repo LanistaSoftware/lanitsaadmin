@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
         Users:[],
     },
     mutations,
-    actions,
     getters,
+    actions,
+   
 })

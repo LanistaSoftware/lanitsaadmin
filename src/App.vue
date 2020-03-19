@@ -15,7 +15,6 @@
     <div v-if="isLoginned" class="row">
       <Footer></Footer>
     </div>
-
   </div>
 </template>
 
@@ -39,7 +38,7 @@
     },
     data(){
       return{
-        isLoginned:false
+        isLoginned:true
       }
     }
   }

@@ -3,7 +3,6 @@ import App from './App.vue'
 import {router} from './router'
 import {store} from './store/store'
 
-
 import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
 // if you don't want install the component globally

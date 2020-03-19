@@ -29,7 +29,7 @@
           <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel </button>
           </td>
         </tr>
-        <tr v-for="(item,index) in Users" :key="item._id">
+        <tr v-for="(item,index) in getUser" :key="item._id">
           <th scope="row">{{index+1}}</th>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true" >{{item.Name}}</td>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.LastName}}</td>
@@ -73,87 +73,96 @@
           label: 'Kullanıcılar'
         }, ],
         selectedItem: null,
-        isEdit: false,
-        isDelete: false,
-        isAdd: false,
-        user: {
-          name: '',
-          surname: '',
-          email: '',
-          phone: '',
-          isAdmin: null,
+          isEdit: false,
+          isDelete: false,
+          isAdd: false,
+          user: {
+            name: '',
+            surname: '',
+            email: '',
+            phone: '',
+            isAdmin: null,
+          },
+          // Users : []
+        }
         },
-        // Users : []
-      }
-    },
-    methods: {
-         ...mapActions({
-           addtab:"addTabs",
-           getUsersaction : "getUser",
-           deleteUserAction:"deleteUser",
-           addUserAction:"addUser"
-         }),
-      addUser() {
-       this.addUserAction(this.user)
-       console.log(this.user)
-        if (true) {
-          this.Users += this.user
-        }
-       this.isAdd=false
-      },
-      deleteUser(index,id){
-       this.deleteUserAction(id)
-        this.Users.splice(index,1)
-      },
-      updateUser(id,edit) {
-        axios.put('http://localhost:3000/api/user/'+id,edit).then(res=>{
-          this.selectedItem=null
-          console.log(res)
-        }).catch(err=>{
-          console.log(err)
-        })
-      },
-   
-        adminSelect(auth){
-        if (auth == 0) {
-          return 'Web Master'
-        } else if (auth == 1) {
-          return 'Admin'
-        } else {
-          return 'User'
-        }
+        methods: {
+            ...mapActions({
+              addtab: "addTabs",
+              getUsersaction: "getUser",
+              deleteUserAction: "deleteUser",
+              addUserAction: "addUser",
+              updateUserAction:"updateUser"
+            }),
+            addUser() {
+              this.addUserAction(this.user).then(() => {
+                this.getUsersaction().then(() => {
+                  this.isAdd = false
+                }).catch(err => {
+                  console.log(err)
+                })
+              }).catch(err => {
+                console.log(err)
+              })
+            },
+            deleteUser(index, id) {
+              this.deleteUserAction(id).then(()=>{
+                this.getUsersaction()
+              }).catch(err=>{
+                console.log(err)
+              })
+            },
+            updateUser(id, edit) {
+              console.log(edit)
+             this.updateUserAction({'id':id,'edit':edit}).then(() => {
+                this.selectedItem = null
+                this.getUsersaction()
+              }).catch(err => {
+                console.log(err)
+              })
+            },
+            adminSelect(auth) {
+              if (auth == 0) {
+                return 'Web Master'
+              } else if (auth == 1) {
+                return 'Admin'
+              } else {
+                return 'User'
+              }
+            },
+            checkForm: function (e) {
+              this.errors = [];
 
-      },
-      checkForm: function (e) {
-      this.errors = [];
+              if (!this.name) {
+                this.errors.push("Name required.");
+              }
+              if (!this.email) {
+                this.errors.push('Email required.');
+              } else if (!this.validEmail(this.email)) {
+                this.errors.push('Valid email required.');
+              }
 
-      if (!this.name) {
-        this.errors.push("Name required.");
-      }
-      if (!this.email) {
-        this.errors.push('Email required.');
-      } else if (!this.validEmail(this.email)) {
-        this.errors.push('Valid email required.');
-      }
+              if (!this.errors.length) {
+                return true;
+              }
 
-      if (!this.errors.length) {
-        return true;
-      }
+              e.preventDefault();
+            },
+            validEmail: function (email) {
+              var re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+              return re.test(email);
+            }
+          },
+          computed: {
+            ...mapGetters([
+              'getUser'
+            ])
+          },
 
-      e.preventDefault();
-    },
-    validEmail :function (email) {
-      var re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
-      return re.test(email);
-    }
-    },
-    computed:{
-      ...mapState(['Users'])},
-      
-    mounted() {
-       this.addtab(this.tab)
-       this.getUsersaction()
-    },
+          mounted() {
+            this.addtab(this.tab)
+            this.getUsersaction()
+          },
   }
 </script>
 <style lang="less" scoped>

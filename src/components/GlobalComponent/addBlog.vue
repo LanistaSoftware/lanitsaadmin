@@ -47,8 +47,7 @@ import Axios from 'axios'
             }),
             addcontent(e) {
                 this.content = e
-                var res = e.split("img");
-                console.log(res[1])
+              
                 
             },
              deger(e) {

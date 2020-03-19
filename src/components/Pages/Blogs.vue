@@ -4,10 +4,7 @@
   <div class="blogs">
      <editblog v-show="editdata" @editdata="edit($event)"></editblog>
     <CardPreview v-show="close"  @close="deger($event)"></CardPreview>
-    <Card 
-    v-for="card in 10" :key="card"
-    @editdata="edit($event)" 
-    @close="deger($event)"></Card>
+    <Card @editdata="edit($event)" @close="deger($event)"></Card>
    
   </div>
 

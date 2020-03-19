@@ -1,24 +1,81 @@
 <template>
-  <div class="card">
-    <div class="imgcontainer">
-      <img src="https://picsum.photos/400/300" alt="Blog Image">
+  <div>
+
+  
+  <div class="card"  v-for="item in getBlogs" :key="item._id" >
+    <div class="imgcontainer " v-html="getContent(item.content)" >
+      {{ item.content | getContent }}
+      <!-- <img src="https://picsum.photos/400/300" alt="Blog Image"> -->
     </div>
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
+      <h5 class="card-title" ></h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
         content. Some quick example text to build on the card title and make up the bulk of the card's
         content.</p>
-      <button @click="$emit('close',true)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
-      <button @click="$emit('editdata',true)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+      <button @click="$emit('close',true),getContentAction(item.content)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+      <button @click="$emit('editdata',true),getContentAction(item.content)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
       <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
     </div>
+  </div>
   </div>
 </template>
 
 <script>
+ import {mapActions,mapGetters,mapState} from 'vuex'
   export default {
-
+    data() {
+        return {}
+      },
+      methods: {
+        ...mapActions({
+          getBlogaction: "getBlog"
+        }),
+             getContent(item) {
+          var a = item.search('<img')
+          var b = item.search('">')
+        
+          var sonuc; 
+          sonuc= item.slice(a,b+2)
+        
+           return sonuc
+           },
+           ...mapActions({
+             getContentAction:"getContentAction"
+           })
+      },
+      filters: {
+           getContent(item) {
+          var a = item.search('<img')
+          var b = item.search('">')
+        
+          var sonuc; 
+          sonuc= item.slice(a,b+2)
+         
+           return sonuc
   }
+},
+      mounted() {
+        this.getBlogaction().then(()=>{
+       
+          var a = this.getBlogs[3].content.search('<img')
+          var b = this.getBlogs[3].content.search('">')
+          var c = this.getBlogs;
+          var sonuc; 
+  
+            sonuc= c[3].content.slice(a,b+2)
+            console.log(sonuc);
+    
+          
+        })
+      
+      },
+      computed: {
+        ...mapGetters([
+          'getBlogs'
+        ]),
+  
+      },
+    }
 
 </script>
 <style lang="less" scoped>
@@ -36,8 +93,8 @@
     overflow: hidden;
 
     img {
-      width: 80%;
-      height: auto;
+      width: 10%;
+      height: 50%;
 
     }
   }

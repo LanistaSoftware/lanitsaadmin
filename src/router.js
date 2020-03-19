@@ -14,6 +14,7 @@ import about from './components/Pages/AboutUs.vue'
 import employe from './components/Pages/Employees.vue'
 import addemploye from './components/GlobalComponent/addemploye.vue'
 import options from './components/Pages/Settings.vue'
+import Welcome from './components/Pages/Welcome.vue'
 import Login from './components/Login.vue'
 import VueRouter from 'vue-router'
 
@@ -24,20 +25,8 @@ export const router = new VueRouter({
         {
       path:'/users',
       component:Users,
-      // children: [
-      //   {
-       
-      //     path: 'profile',
-      //     component: UserProfile
-      //   },
-      //   {
-
-      //     path: 'posts',
-      //     component: UserPosts
-      //   }
-      // ]
-    },
-    {
+      },
+      {
         path:'/blogs',
         component:blogs
       },
@@ -88,6 +77,10 @@ export const router = new VueRouter({
       {
         path:'/options',
         component:options
+      },
+      {
+        path:'/',
+        component:Welcome
       }
 ],
     mode:"history"

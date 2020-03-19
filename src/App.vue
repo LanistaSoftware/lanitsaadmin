@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <div class="row">
+    <Login class="login" v-if="!isLoginned" ></Login>
+    <div v-if="isLoginned" class="row">
       <Header></Header>
     </div>
-    <div class="row">
+    <div v-if="isLoginned" class="row">
 
       <AppNavigation class="appnavigation"></AppNavigation>
       <section class="navborder sidecontent">
@@ -11,7 +12,7 @@
       </section>
      <Content></Content>
     </div>
-    <div class="row">
+    <div v-if="isLoginned" class="row">
       <Footer></Footer>
     </div>
 
@@ -24,6 +25,7 @@
   import Footer from './components/Footer';
   import AppNavigation from './components/AppNavigation';
   import Content from './components/Content'
+  import Login from './components/Login'
 
   export default {
     name: 'app',
@@ -32,9 +34,14 @@
       Navigation,
       Footer,
       AppNavigation,
-      Content
-
+      Content,
+      Login
     },
+    data(){
+      return{
+        isLoginned:false
+      }
+    }
   }
 </script>
 
@@ -65,6 +72,10 @@ Red : #e33 = @redcolor
     background-color: @bgcolor;
     width: 100%;
 
+  }
+  .login{
+    width: 100%;
+    height: 96vh;
   }
 
 

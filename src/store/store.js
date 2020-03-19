@@ -8,7 +8,10 @@ Vue.use(Vuex)
 // {link:'/addblog',label:'Makale Ekle' }
 export const store = new Vuex.Store({
     state : {
-        tabs :[],
+        tabs :[{
+            link: '/',
+            label: 'Welcome'
+          }, ],
         Users:[],
     },
     mutations,

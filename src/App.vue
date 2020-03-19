@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Login v-if="!isLoginned" ></Login>
+    <Login class="login" v-if="!isLoginned" ></Login>
     <div v-if="isLoginned" class="row">
       <Header></Header>
     </div>
@@ -39,7 +39,7 @@
     },
     data(){
       return{
-        isLoginned:true
+        isLoginned:false
       }
     }
   }
@@ -72,6 +72,10 @@ Red : #e33 = @redcolor
     background-color: @bgcolor;
     width: 100%;
 
+  }
+  .login{
+    width: 100%;
+    height: 96vh;
   }
 
 

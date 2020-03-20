@@ -61,9 +61,9 @@
   </div>
 </template>
 <script>
-  import axios from 'axios'
-  import {mapActions,mapGetters,mapState} from 'vuex'
-  import router from 'vue-router'
+  //import axios from 'axios'
+  import {mapActions,mapGetters} from 'vuex'
+  //import router from 'vue-router'
   export default {
 
     data() {
@@ -99,26 +99,26 @@
                 this.getUsersaction().then(() => {
                   this.isAdd = false
                 }).catch(err => {
-                  console.log(err)
+                  alert(err)
                 })
               }).catch(err => {
-                console.log(err)
+                alert(err)
               })
             },
             deleteUser(index, id) {
               this.deleteUserAction(id).then(()=>{
                 this.getUsersaction()
               }).catch(err=>{
-                console.log(err)
+                alert(err)
               })
             },
             updateUser(id, edit) {
-              console.log(edit)
+              alert(edit)
              this.updateUserAction({'id':id,'edit':edit}).then(() => {
                 this.selectedItem = null
                 this.getUsersaction()
               }).catch(err => {
-                console.log(err)
+                alert(err)
               })
             },
             adminSelect(auth) {
@@ -148,10 +148,10 @@
 
               e.preventDefault();
             },
-            validEmail: function (email) {
-              var re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
-              return re.test(email);
-            }
+            // validEmail: function (email) {
+            //   var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$;
+            //   return re.test(email);
+            // }
           },
           computed: {
             ...mapGetters([

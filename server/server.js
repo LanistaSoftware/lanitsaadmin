@@ -32,10 +32,6 @@ const storage = multer.diskStorage({
   }
 })
 app.use(multer({storage:storage}).single('img'));
-var store = new MongoDBStore({
- 
-  collection: 'mySessions'
-});
 
 app.use(cookieparser());
 app.use(session({

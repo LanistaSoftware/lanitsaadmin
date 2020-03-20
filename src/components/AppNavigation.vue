@@ -9,12 +9,10 @@
 </template>
 
 <script>
-import Search from './GlobalComponent/Search';
 import Tabs from './GlobalComponent/Tabs'
 export default {
   name: 'AppNavigation',
   components:{
-      Search,
       Tabs
   },
   data () {

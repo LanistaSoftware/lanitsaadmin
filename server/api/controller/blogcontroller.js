@@ -1,7 +1,7 @@
 const exprees = require('express');
 const router = exprees.Router();
 const Blog = require('../models/makaleschema');
-const mlt = require('../middleware/multer')
+
 
 
 router.get('/', async (req, res) => {

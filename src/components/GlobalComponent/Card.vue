@@ -19,7 +19,7 @@
 </template>
 
 <script>
- import {mapActions,mapGetters,mapState} from 'vuex'
+ import {mapActions,mapGetters} from 'vuex'
   export default {
     data() {
         return {}
@@ -54,7 +54,6 @@
           var b = item.search('">')
           var sonuc; 
           sonuc= item.slice(a,b+2)
-          console.log(sonuc)
            return sonuc
   }
 },

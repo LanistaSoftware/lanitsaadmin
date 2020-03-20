@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style lang="less"scoped>
+<style lang="less" scoped>
 @nbfcolor: #303030;
 @bgcolor: #ffffff;
 @incolor: #B5B5B5;

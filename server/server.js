@@ -18,7 +18,6 @@ var corsOptions = {
   origin: 'http://localhost:8081',
   optionsSuccessStatus: 200
 }
-
 app.use(bodyParser.urlencoded({
   extended: false, 
 }));

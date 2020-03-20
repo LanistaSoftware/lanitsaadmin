@@ -2,7 +2,7 @@
   <div>
   <div class="card"  v-for="item in getBlogs" :key="item._id" >
     <div class="imgcontainer " v-html="getContent(item.content)" >
-      {{ item.content | getContent }}
+      {{ item.content | getİmg }}
       <!-- <img src="https://picsum.photos/400/300" alt="Blog Image"> -->
     </div>
     <div class="card-body">
@@ -49,7 +49,7 @@
            })
       },
       filters: {
-           getContent(item) {
+           getİmg(item) {
           var a = item.search('<img')
           var b = item.search('">')
           var sonuc; 
@@ -67,7 +67,6 @@
         ]),
       },
     }
-
 </script>
 <style lang="less" scoped>
   .card {

@@ -1,25 +1,29 @@
 <template>
-<!-- <vuescroll> -->
   <div class="editor">
-    <vue-editor v-if="!show" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="contentin"> </vue-editor>
-    <vue-editor v-else :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="aboutcontent" > </vue-editor>
-  </div>
-<!-- </vuescroll> -->
-</template>
  
+    <vue-editor v-if="show " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="aboutcontent" > </vue-editor>
+    <vue-editor v-if="getContent ? data=true : data =false" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="getContent"> </vue-editor>
+    <vue-editor v-if="!show && !data " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="contentin"> </vue-editor>
+  </div>
+</template>
 <script>
 import { VueEditor,Quill } from 'vue2-editor'
  import {mapActions,mapGetters,mapState} from 'vuex'
 import ImageResize from 'quill-image-resize-vue';
 import { ImageDrop } from 'quill-image-drop-module';
-import VueScrollbar from 'vue-scrollbar-simple'
+
 // Quill.register("modules/imageDrop", ImageDrop);
 // Quill.register("modules/imageResize", ImageResize);
  
 export default {
+  data(){
+    return{
+      data:null
+    }
+  },
   components: {
     'vue-editor':VueEditor,
-    vuescroll:VueScrollbar
+
   },
   props:['aboutcontent','show'],
 
@@ -37,14 +41,22 @@ export default {
     };
   },
   methods:{
-      ...mapActions({
-             getContentAction:"getContentAction"
-           })
+     ...mapActions({
+      getUpdateContent:"getUpdateContent"
+    })
   },
   watch:{
      contentin(){
        this.$emit('con',this.contentin)
      },
+  },
+  computed:{
+    ...mapGetters([
+      "getContent"
+    ]),
+  },
+  mounted(){
+    this.getUpdateContent(this.getContent)
   }
 };
 </script>

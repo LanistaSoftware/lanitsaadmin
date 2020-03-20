@@ -58,13 +58,6 @@ import Axios from 'axios'
                 this.addBlogAction([this.content]).then(()=>{
                     this.content =   []
                 })
-                // Axios.post('http://localhost:3000/api/blog',[this.content]).then(res=>{
-                   
-                //     alert(res.statusText)
-                // }).catch(err=>{
-                //     alert(err)
-                    
-                // })
             },
             getBlog(){
                 Axios.get('http://localhost:3000/api/blog').then(res=>{

@@ -1,7 +1,5 @@
 <template>
   <div>
-
-  
   <div class="card"  v-for="item in getBlogs" :key="item._id" >
     <div class="imgcontainer " v-html="getContent(item.content)" >
       {{ item.content | getContent }}
@@ -14,7 +12,7 @@
         content.</p>
       <button @click="$emit('close',true),getContentAction(item.content)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
       <button @click="$emit('editdata',true),getContentAction(item.content)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
-      <button class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
+      <button @click="deletBlog(item._id)" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
     </div>
   </div>
   </div>
@@ -28,8 +26,15 @@
       },
       methods: {
         ...mapActions({
-          getBlogaction: "getBlog"
+          getBlogaction: "getBlog",
+          deleteBlogAction:"deleteBlog",
         }),
+        deletBlog(id)
+        {
+          this.deleteBlogAction(id).then(()=>{
+            this.getBlogaction()
+          })
+        },
              getContent(item) {
           var a = item.search('<img')
           var b = item.search('">')
@@ -47,33 +52,20 @@
            getContent(item) {
           var a = item.search('<img')
           var b = item.search('">')
-        
           var sonuc; 
           sonuc= item.slice(a,b+2)
-         
+          console.log(sonuc)
            return sonuc
   }
 },
       mounted() {
-        this.getBlogaction().then(()=>{
-       
-          var a = this.getBlogs[3].content.search('<img')
-          var b = this.getBlogs[3].content.search('">')
-          var c = this.getBlogs;
-          var sonuc; 
-  
-            sonuc= c[3].content.slice(a,b+2)
-            console.log(sonuc);
-    
-          
-        })
-      
+        this.getBlogaction()
+
       },
       computed: {
         ...mapGetters([
           'getBlogs'
         ]),
-  
       },
     }
 

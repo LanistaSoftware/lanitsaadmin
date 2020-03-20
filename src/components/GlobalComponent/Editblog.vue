@@ -7,9 +7,9 @@
           class="fas fa-window-close"></i></button>
     </div>
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
+      <h5 class="card-title"></h5>
       <div class="img">
-      <div v-html="as" class="justify-content clearfix"></div>
+      <div  class="justify-content clearfix"></div>
       </div>
       <vueeditor></vueeditor>
       <button class="btn btn-sm btn-primary  ">Save</button>
@@ -30,8 +30,7 @@
         return {
 
           image: 'https://picsum.photos/400/400',
-          as:'',
-
+        
         }
 
       },

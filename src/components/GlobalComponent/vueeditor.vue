@@ -9,7 +9,7 @@
  
 <script>
 import { VueEditor,Quill } from 'vue2-editor'
-
+ import {mapActions,mapGetters,mapState} from 'vuex'
 import ImageResize from 'quill-image-resize-vue';
 import { ImageDrop } from 'quill-image-drop-module';
 import VueScrollbar from 'vue-scrollbar-simple'
@@ -35,6 +35,11 @@ export default {
         }
       }
     };
+  },
+  methods:{
+      ...mapActions({
+             getContentAction:"getContentAction"
+           })
   },
   watch:{
      contentin(){

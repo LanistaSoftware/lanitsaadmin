@@ -6,7 +6,7 @@ const path = require('path');
 var session = require('express-session')
 const cookieparser = require('cookie-parser');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const connectstr = 'mongodb+srv://lanista:cUEBUURxZYAxLgx9@lanistateam-tq8uo.mongodb.net/node-application?retryWrites=true&w=majority';
+const connectstr = 'mongodb+srv://lanista:lanista2020@lanistateam-tq8uo.mongodb.net/node-application?retryWrites=true&w=majority';
 const mongoose = require('mongoose');
 const multer = require('multer')
 const userrouter = require('./api/controller/usercontroller')    
@@ -14,7 +14,10 @@ const blogcontroller = require('./api/controller/blogcontroller')
 const morgan = require('morgan')
 
 app.use(morgan('dev'))
-
+var corsOptions = {
+  origin: 'http://localhost:8081',
+  optionsSuccessStatus: 200
+}
 
 app.use(bodyParser.urlencoded({
   extended: false, 
@@ -51,8 +54,7 @@ var store = new MongoDBStore({
   collection: 'mySessions'
 });
 app.use(bodyParser.json());
-app.use(cors({
-}));
+app.use(cors(corsOptions));
 
 
 

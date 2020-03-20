@@ -4,11 +4,10 @@
       <p class="headcard-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       <button @click="$emit('close',false)" class="btn btn-danger btn-sm"><i class="fas fa-window-close"></i></button>
     </div>
+    <div class="card-body prew-html" v-html="content"></div>
     <div class="card-body prew-html" v-html="set">
-        <br>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -17,6 +16,7 @@
       props:['content'],
       data(){
           return{
+            lp:[]
           }
       },
       methods:{
@@ -28,7 +28,6 @@
         ...mapGetters({
           set:"getContent"
         })
-      
       },
       
       

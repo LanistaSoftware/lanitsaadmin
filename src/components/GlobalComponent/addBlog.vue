@@ -43,12 +43,13 @@ import Axios from 'axios'
     
         methods: {
             ...mapActions({
-                addBlogAction:"addBlog"
+                addBlogAction:"addBlog",
+                 getContentAction:"getContentAction"
             }),
             addcontent(e) {
                 this.content = e
               
-                
+
             },
              deger(e) {
                 this.close = e;
@@ -77,6 +78,7 @@ import Axios from 'axios'
         },
         created(){
       this.$emit('tab',this.tab)
+      this.getContentAction('')
     },
 }
 </script>

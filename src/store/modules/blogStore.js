@@ -40,6 +40,11 @@ const actions = {
             console.log(err)
         })
     },
+    deleteBlog({},id){
+        return api().delete('blog/'+id).then(res=>{
+            console.log(res)
+        }).catch(err=>{console.log(err)})
+    },
     getContentAction({commit},content){
         console.log(content)
       return  commit("setContent",content)

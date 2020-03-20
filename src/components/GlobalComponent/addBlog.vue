@@ -48,14 +48,13 @@ import Axios from 'axios'
             }),
             addcontent(e) {
                 this.content = e
-              
-
             },
              deger(e) {
                 this.close = e;
             },
             addBlog(){
                 this.addBlogAction([this.content]).then(()=>{
+                    
                     this.content =   []
                 })
             },

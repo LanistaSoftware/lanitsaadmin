@@ -11,7 +11,7 @@
         content. Some quick example text to build on the card title and make up the bulk of the card's
         content.</p>
       <button @click="$emit('close',true),getContentAction(item.content)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
-      <button @click="$emit('editdata',true),getContentAction(item.content)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+      <button @click="$emit('editdata',true),getContentAction(item.content),getUpdateId(item._id)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
       <button @click="deletBlog(item._id)" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
     </div>
   </div>
@@ -45,16 +45,22 @@
            return sonuc
            },
            ...mapActions({
-             getContentAction:"getContentAction"
+             getContentAction:"getContentAction",
+             getUpdateId:"getUpdateId"
            })
       },
       filters: {
            getİmg(item) {
+          if(item==null){
+            return ''
+          }else{
           var a = item.search('<img')
           var b = item.search('">')
           var sonuc; 
           sonuc= item.slice(a,b+2)
            return sonuc
+          }
+      
   }
 },
       mounted() {

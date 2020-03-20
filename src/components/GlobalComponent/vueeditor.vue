@@ -2,7 +2,7 @@
   <div class="editor">
  
     <vue-editor v-if="show " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="aboutcontent" > </vue-editor>
-    <vue-editor v-if="getContent ? data=true : data =false" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="getContent"> </vue-editor>
+    <vue-editor v-if="getContent ? data=true : data =false" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="content"> </vue-editor>
     <vue-editor v-if="!show && !data " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="contentin"> </vue-editor>
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       data:null,
+      content:[],
       contentin: "",
       contentout:'',
       customModulesForEditor: [{ alias: "imageDrop", module: ImageDrop }, { alias: "imageResize", module: ImageResize }],
@@ -38,21 +39,29 @@ export default {
   },
   methods:{
      ...mapActions({
-      getUpdateContent:"getUpdateContent"
-    })
+      getUpdateContent2:"getUpdateContent2"
+    }),
+    getC(){
+      this.content = this.getContent
+    }
   },
   watch:{
      contentin(){
        this.$emit('con',this.contentin)
      },
+     content(){
+         this.getUpdateContent2(this.content)
+       }
   },
   computed:{
     ...mapGetters([
       "getContent"
     ]),
+    
   },
   mounted(){
-    this.getUpdateContent(this.getContent)
+ this.getC()
+
   }
 };
 </script>

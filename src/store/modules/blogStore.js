@@ -34,7 +34,7 @@ const mutations = {
 }
 //Actions
 const actions = {
-    addBlog({}, content) {
+    addBlog(content) {
         return api().post('blog', content).then(res => {
             console.log(res.statusText);
 
@@ -54,14 +54,14 @@ const actions = {
             console.log(err)
         })
     },
-    deleteBlog({}, id) {
+    deleteBlog(id) {
         return api().delete('blog/' + id).then(res => {
             console.log(res)
         }).catch(err => {
             console.log(err)
         })
     },
-    updateBlog({}, id, content) {
+    updateBlog(id, content) {
         return api().put('blog/' + id, content).then(res => {
             console.log(res)
         }).catch(err => {
@@ -73,7 +73,7 @@ const actions = {
         return commit("setContent", content)
     },
     getUpdateContent({commit},updatecon){
-        return commit("setContent", updatecon),commit("setUpdateId", id)
+        return commit("setContent", updatecon),commit("setUpdateId")
     },
     getUpdateId({commit},id){
         return commit("setUpdateId", id)

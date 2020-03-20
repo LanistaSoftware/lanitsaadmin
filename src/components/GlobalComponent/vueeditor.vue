@@ -7,8 +7,8 @@
   </div>
 </template>
 <script>
-import { VueEditor,Quill } from 'vue2-editor'
- import {mapActions,mapGetters,mapState} from 'vuex'
+import { VueEditor } from 'vue2-editor'
+ import {mapActions,mapGetters} from 'vuex'
 import ImageResize from 'quill-image-resize-vue';
 import { ImageDrop } from 'quill-image-drop-module';
 
@@ -16,11 +16,6 @@ import { ImageDrop } from 'quill-image-drop-module';
 // Quill.register("modules/imageResize", ImageResize);
  
 export default {
-  data(){
-    return{
-      data:null
-    }
-  },
   components: {
     'vue-editor':VueEditor,
 
@@ -29,6 +24,7 @@ export default {
 
   data() {
     return {
+      data:null,
       contentin: "",
       contentout:'',
       customModulesForEditor: [{ alias: "imageDrop", module: ImageDrop }, { alias: "imageResize", module: ImageResize }],

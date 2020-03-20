@@ -11,7 +11,7 @@
  import vueeditor from './vueeditor'
  import CardPreview from './CardPreview'
 import Axios from 'axios'
- import {mapActions,mapGetters,mapState} from 'vuex'
+ import {mapActions} from 'vuex'
   
   export default {
     name: 'Slider',

@@ -53,9 +53,9 @@ router.put('/:id', async (req, res) => {
             _id: req.params.id
         }, {
             $set: {
-                title: req.body.title,
-                contnent: req.body.contnent,
-                image: req.body.image,
+                
+                content: req.body.content,
+               
             }
         })
         res.json({

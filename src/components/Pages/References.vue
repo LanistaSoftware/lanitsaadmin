@@ -51,11 +51,12 @@ import {mapActions} from 'vuex'
 <style lang="less" scoped>
 .card {
 
-      width:31.3%;
+      width:23%;
       text-align: center;
       display: inline-block;
-     margin-right: 1%;
+      margin-right: 1%;
       margin-left: 1%;
+      margin-bottom: 1%;
   }
 
 

@@ -28,10 +28,8 @@ import { mapActions, mapGetters } from 'vuex'
       },
 
       data() {
-        return {
-       
+        return {       
           image: 'https://picsum.photos/400/400',
-        
         }
 
       },

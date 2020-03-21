@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 <template>
   <div class="editor">
  
@@ -7,7 +8,8 @@
   </div>
 </template>
 <script>
-import { VueEditor } from 'vue2-editor'
+// eslint-disable-next-line no-unused-vars
+import { VueEditor,Quill  } from 'vue2-editor'
  import {mapActions,mapGetters} from 'vuex'
 import ImageResize from 'quill-image-resize-vue';
 import { ImageDrop } from 'quill-image-drop-module';
@@ -57,10 +59,9 @@ export default {
     ...mapGetters([
       "getContent"
     ]),
-    
   },
   mounted(){
- this.getC()
+this.content = this.getContent
 
   }
 };

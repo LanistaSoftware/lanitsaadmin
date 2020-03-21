@@ -1,7 +1,7 @@
 <template>
   <div>
-  <div class="card"  v-for="item in getBlogs" :key="item._id" >
-    <div class="imgcontainer " v-html="getContent(item.content)" >
+  <div class="card"  v-for="(item, index) in contentHtml" :key="index" >
+    <div class="imgcontainer " v-html="imgUrl[index]" >
       <!-- <img src="https://picsum.photos/400/300" alt="Blog Image"> -->
     </div>
     <div class="card-body">
@@ -18,24 +18,32 @@
  import {mapActions,mapGetters} from 'vuex'
   export default {
     data() {
-        return {}
+        return {
+          imgUrl:[],
+          contentHtml:''
+
+          
+        }
       },
       methods: {
         ...mapActions({
           getBlogaction: "getBlog",
           deleteBlogAction: "deleteBlog",
+          getContentAction: "getContentAction",
+          getUpdateId: "getUpdateId"
         }),
         deletBlog(id) {
           this.deleteBlogAction(id).then(() => {
             this.getBlogaction()
           })
         },
-        getContent(item) {
-          var a = item.search('<img','">')
-          var b = item.search('">')
-          var sonuc;
-          sonuc = item.slice(a, b+2)
-          return sonuc
+        getImgUrl(item) {
+          var startIndex = item.search('<img')
+          var lastIndex = item.search('">')
+          var imgUrl;
+          imgUrl = item.slice(startIndex, lastIndex+2)
+          return imgUrl
+          
         },
         getDesc(item){
            if (item == null) {
@@ -63,10 +71,6 @@
           }
 
         },
-        ...mapActions({
-          getContentAction: "getContentAction",
-          getUpdateId: "getUpdateId"
-        })
       },
       filters: {
         getİmg(item) {
@@ -95,7 +99,13 @@
         
       },
       mounted() {
-        this.getBlogaction()
+        this.getBlogaction().then(() => {
+          this.getBlogs.forEach(element => {
+            this.imgUrl.push(this.getImgUrl(element.content));
+          });
+        }).then(() => {
+          this.contentHtml = this.getBlogs
+        });
 
       },
       computed: {

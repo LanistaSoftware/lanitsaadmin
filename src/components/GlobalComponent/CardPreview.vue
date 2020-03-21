@@ -53,7 +53,7 @@
     z-index: 500;
     border: 1px solid black;
 
-    background-color:@pagebgcolor ;
+    background-color:#FAFAFA ;
 
   }
     .btn {

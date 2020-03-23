@@ -108,8 +108,12 @@
 <style lang="less" scoped>
   .card {
     width: 29%;
-    margin: 0 2rem 2rem 2rem ;
-    display: inline-block;
+    height: 35rem;
+    margin: 0 2rem 2rem 2rem;
+    float: left;
+    background-color: #FAFAFA;
+
+
 
   }
 

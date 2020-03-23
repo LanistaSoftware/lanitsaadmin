@@ -144,5 +144,10 @@
     margin:1rem;
     width: 4rem;
   }
+  img{
+    width: 20rem;
+    height: auto;
+    margin-bottom: 2rem;
+  }
 
 </style>

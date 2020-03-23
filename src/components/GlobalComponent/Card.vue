@@ -7,6 +7,8 @@
     <div class="card-body">
       <h5 class="card-title" v-html="getTitle(item.content)" ></h5>
       <p class="card-text" v-html="getDesc(item.content)"></p>
+    </div>
+    <div class="btn-container">
       <button @click="$emit('close',true),getContentAction(item.content)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
       <button @click="$emit('editdata',true),getContentAction(item.content),getUpdateId(item._id)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
       <button @click="deletBlog(item._id)" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
@@ -123,9 +125,14 @@
 
     }
   }
+  .btn-container{
+    width: 100%;
+  }
 
   .btn {
+
     margin:0.5rem;
+    width: 2rem;
   }
 
 </style>

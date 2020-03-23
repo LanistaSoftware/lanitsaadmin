@@ -45,7 +45,7 @@
 </script>
 
 <style lang="less">
-  /*
+/*
 Page Bg color #E5E5E5 =@pagebgcolor 
 Navbar/Footer Background #303030 = @nbfcolor
 Body bg : #ffffff =@bgcolor
@@ -55,6 +55,7 @@ Red : #e33 = @redcolor
 1. font-family: 'Kanit', sans-serif; @headingfont
 2. font-family: 'Exo', sans-serif;  @contentfont
 */
+@import url("./assets/styles/media.css");
 
   @nbfcolor: #303030;
   @bgcolor: #ffffff;
@@ -126,14 +127,10 @@ Red : #e33 = @redcolor
       color: @nbfcolor;
     }
   }
-
-
-
   .navborder {
     border-left: 1px solid #ddd;
   
   }
-
   h1,
   h2,
   h3,

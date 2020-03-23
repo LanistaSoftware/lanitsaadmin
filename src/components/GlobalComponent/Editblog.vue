@@ -16,16 +16,14 @@
     </div>
   </div>
 </template>
-
 <script>
-  import vueeditor from './vueeditor'
+import vueeditor from './vueeditor'
 import { mapActions, mapGetters } from 'vuex'
 
   export default {
     components: {
         vueeditor,
       },
-
       data() {
         return {
        

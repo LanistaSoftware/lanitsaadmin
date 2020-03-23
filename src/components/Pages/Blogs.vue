@@ -2,12 +2,10 @@
  
      
   <div class="blogs">
-     <editblog v-show="editdata" @editdata="edit($event)"></editblog>
+    <editblog v-show="editdata" @editdata="edit($event)"></editblog>
     <CardPreview v-show="close"  @close="deger($event)"></CardPreview>
     <Card @editdata="edit($event)" @close="deger($event)"></Card>
-   
   </div>
-
 </template>
 
 

@@ -4,7 +4,7 @@
  
     <vue-editor v-if="show " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="aboutcontent" > </vue-editor>
     <vue-editor v-if="getContent ? data=true : data =false" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="getContent"> </vue-editor>
-    <vue-editor v-if="!show && !data " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="contentin"> </vue-editor>
+    <vue-editor v-if="!show && !data " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="addBlogContent"> </vue-editor>
   </div>
 </template>
 <script>
@@ -43,9 +43,7 @@ export default {
      ...mapActions({
       getUpdateContent2:"getUpdateContent2"
     }),
-    getC(){
-      this.content = this.getContent
-    }
+  
   },
   watch:{
      contentin(){
@@ -62,6 +60,14 @@ export default {
     },
     set (value) {
       this.$store.commit('setContent', value)
+    }
+  },
+   addBlogContent : {
+    get () {
+    return this.$store.getters.getAddBlogContent
+    },
+    set (value) {
+      this.$store.commit('setAddBlogContent', value)
     }
   }
   },  

@@ -50,13 +50,14 @@ import {mapActions} from 'vuex'
 </script>
 <style lang="less" scoped>
 .card {
-
-      width:23%;
-      text-align: center;
-      display: inline-block;
-      margin-right: 1%;
-      margin-left: 1%;
-      margin-bottom: 1%;
+    width:20%;
+    text-align: center;
+    margin: 0 2rem 2rem 2rem;
+    float: left;
+    background-color: #FAFAFA;
+    img{
+      padding: 1rem;
+    }
   }
 
 

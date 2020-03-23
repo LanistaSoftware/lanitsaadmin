@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const multer = require('multer')
 const userrouter = require('./api/controller/usercontroller')    
 const blogcontroller = require('./api/controller/blogcontroller')
+const slidecontroller = require('./api/controller/slidersController')
 const morgan = require('morgan')
 
 app.use(morgan('dev'))
@@ -55,7 +56,7 @@ app.use(cors(corsOptions));
 
 app.use('/api/user',userrouter);
 app.use('/api/blog',blogcontroller);
-
+app.use('/apl/slide',slidecontroller)
 const port = process.env.PORT || 3000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true }); 
 const db = mongoose.connection;

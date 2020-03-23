@@ -39,27 +39,23 @@ const actions = {
             alert(err)
         })
     },
-    addUser(item) {
-        return api().post('http://localhost:3000/api/user', item).then((res) => {
+    addUser({},item) {
+        return api().post('/user', item).then((res) => {
             alert(res.statusText)
-            alert(item)
+    
         }).catch(err => {
             alert(err.message)
             alert(err.message)
         })
     },
-    updateUser( {
-        id,
-        edit
-    }) {
-        return api().put('http://localhost:3000/api/user/' + id, edit).then((res) => {
-            alert(res.statusText)
+    updateUser({},{id,edit}) {
+        return api().put('/user/' + id, edit).then((res) => {
+            console.log(res.statusText)
         }).catch(err => {
-            alert(err.message)
-            alert(err.message)
+            console.log(err.message)    
         })
     },
-    deleteUser(id) {
+    deleteUser({},id) {
         return api().delete('/user/' + id).then(res => {
             alert(res.statusText)
 

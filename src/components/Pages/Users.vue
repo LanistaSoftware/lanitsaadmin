@@ -114,7 +114,7 @@
               })
             },
             updateUser(id, edit) {
-              alert(edit)
+     
              this.updateUserAction({'id':id,'edit':edit}).then(() => {
                 this.selectedItem = null
                 this.getUsersaction()

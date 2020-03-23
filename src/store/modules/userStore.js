@@ -36,7 +36,7 @@ const actions = {
 
             commit("setUser", users)
         }).catch(err => {
-            console.log(err)
+            alert(err)
         })
     },
     addUser({},item) {
@@ -44,23 +44,23 @@ const actions = {
             alert(res.statusText)
     
         }).catch(err => {
-            console.log(err.message)
-            console.log(err.message)
+            alert(err.message)
+            alert(err.message)
         })
     },
     updateUser({},{id,edit}) {
         return api().put('/user/' + id, edit).then((res) => {
-            console.log(res.statusText)
+            alert(res.statusText)
         }).catch(err => {
-            console.log(err.message)    
+            alert(err.message)    
         })
     },
     deleteUser({},id) {
         return api().delete('/user/' + id).then(res => {
-            console.log(res.statusText)
+            alert(res.statusText)
 
         }).catch(err => {
-            console.log(err.message)
+            alert(err.message)
         })
     }
 }

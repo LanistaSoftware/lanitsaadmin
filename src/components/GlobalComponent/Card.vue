@@ -57,9 +57,7 @@
             var a = item.search('<h')
             var b = item.search('</')
             var sonuc;
-
             sonuc = item.slice(a,b+5)
-             console.log(sonuc)
             return sonuc
           }
 

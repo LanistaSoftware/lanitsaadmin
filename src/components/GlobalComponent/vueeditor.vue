@@ -10,7 +10,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import { VueEditor,Quill  } from 'vue2-editor'
- import {mapActions,mapGetters} from 'vuex'
+ import {mapGetters} from 'vuex'
 import ImageResize from 'quill-image-resize-vue';
 import { ImageDrop } from 'quill-image-drop-module';
 
@@ -40,12 +40,6 @@ export default {
     };
   },
   methods:{
-     ...mapActions({
-      getUpdateContent2:"getUpdateContent2"
-    }),
-    getC(){
-      this.content = this.getContent
-    }
   },
   watch:{
      contentin(){

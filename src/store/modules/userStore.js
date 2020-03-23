@@ -36,16 +36,16 @@ const actions = {
 
             commit("setUser", users)
         }).catch(err => {
-            console.log(err)
+            alert(err)
         })
     },
     addUser(item) {
         return api().post('http://localhost:3000/api/user', item).then((res) => {
-            console.log(res.statusText)
-            console.log(item)
+            alert(res.statusText)
+            alert(item)
         }).catch(err => {
-            console.log(err.message)
-            console.log(err.message)
+            alert(err.message)
+            alert(err.message)
         })
     },
     updateUser( {
@@ -53,18 +53,18 @@ const actions = {
         edit
     }) {
         return api().put('http://localhost:3000/api/user/' + id, edit).then((res) => {
-            console.log(res.statusText)
+            alert(res.statusText)
         }).catch(err => {
-            console.log(err.message)
-            console.log(err.message)
+            alert(err.message)
+            alert(err.message)
         })
     },
     deleteUser(id) {
         return api().delete('/user/' + id).then(res => {
-            console.log(res.statusText)
+            alert(res.statusText)
 
         }).catch(err => {
-            console.log(err.message)
+            alert(err.message)
         })
     }
 }

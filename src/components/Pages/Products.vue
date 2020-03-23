@@ -102,7 +102,6 @@ import {mapActions} from 'vuex'
     methods:{
       deleteUser(index){
           this.Users.splice(index,1);
-          console.log(this.Users)
       },
        ...mapActions({
            addtab:"addTabs",

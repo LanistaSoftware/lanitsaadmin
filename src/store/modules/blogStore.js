@@ -49,7 +49,7 @@ const actions = {
         return api().post('blog', content).then((res) => {
             alert(res.statusText)
         }).catch(err => {
-            console.log(err)
+            alert(err)
         })
     },
     getBlog({
@@ -60,21 +60,21 @@ const actions = {
 
             commit("setBlogs", blogs)
         }).catch(err => {
-            console.log(err)
+            alert(err)
         })
     },
     deleteBlog({},id) {
         return api().delete('blog/' + id).then(res => {
             alert(res.statusText)
         }).catch(err => {
-            console.log(err)
+            alert(err)
         })
     },
     updateBlog({},{id,content}) {
         return api().put('blog/'+id,{content}).then((res) => {
             alert(res.statusText)
         }).catch(err => {
-            console.log(err)
+            alert(err)
         })
     },
     getContentAction({ commit}, content) {

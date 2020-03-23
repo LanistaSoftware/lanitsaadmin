@@ -3,7 +3,7 @@
   <div class="editor">
  
     <vue-editor v-if="show " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="aboutcontent" > </vue-editor>
-    <vue-editor v-if="getContent ? data=true : data =false" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="content"> </vue-editor>
+    <vue-editor v-if="getContent ? data=true : data =false" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="getContent"> </vue-editor>
     <vue-editor v-if="!show && !data " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="contentin"> </vue-editor>
   </div>
 </template>
@@ -51,8 +51,9 @@ export default {
      contentin(){
        this.$emit('con',this.contentin)
      },
-     content(){
-         this.getUpdateContent2(this.content)
+     getContent(){
+       console.log(this.getContent)
+         this.getUpdateContent2(this.getContent)
        }
   },
   computed:{

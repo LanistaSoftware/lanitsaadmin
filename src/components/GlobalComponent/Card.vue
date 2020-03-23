@@ -18,7 +18,9 @@
  import {mapActions,mapGetters} from 'vuex'
   export default {
     data() {
-        return {}
+        return {
+
+        }
       },
       methods: {
         ...mapActions({
@@ -31,10 +33,10 @@
           })
         },
         getContent(item) {
-          var a = item.search('<img','">')
+          var a = item.search('<img src="')
           var b = item.search('">')
           var sonuc;
-          sonuc = item.slice(a, b+2)
+          sonuc = item.substring(a, b+2)
           return sonuc
         },
         getDesc(item){
@@ -42,12 +44,10 @@
             return ''
           } else {
             var a = item.search('<p>')
-            // var b = item.search('')
             var sonuc;
             sonuc = item.slice(a,150)
             return sonuc
           }
-
         },
         getTitle(item){
            if (item == null) {
@@ -56,7 +56,7 @@
             var a = item.search('<h')
             var b = item.search('</')
             var sonuc;
-           
+
             sonuc = item.slice(a,b+5)
              console.log(sonuc)
             return sonuc
@@ -92,7 +92,6 @@
           }
 
         },
-        
       },
       mounted() {
         this.getBlogaction()

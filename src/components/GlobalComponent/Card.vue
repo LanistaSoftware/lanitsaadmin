@@ -89,7 +89,7 @@
             // var b = item.search('')
             var sonuc;
             sonuc = item.slice(a,10)
-            return sonuc
+            return sonuc 
           }
 
         },

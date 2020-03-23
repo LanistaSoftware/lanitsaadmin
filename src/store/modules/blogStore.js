@@ -1,9 +1,11 @@
+/* eslint-disable no-empty-pattern */
 import api from '../api'
 const state = {
     blogs: [],
     content: '',
     updateContent:'',
-    updateId:''
+    updateId:'',
+    addBlogContent:''
 }
 //Getters
 const getters = {
@@ -15,6 +17,12 @@ const getters = {
     },
     getUpdateContent(state) {
         return state.updateContent
+    },
+    getUpdateId(state){
+        return state.updateId
+    },
+    getAddBlogContent(state){
+        return state.addBlogContent
     }
 }
 //Mutations
@@ -30,23 +38,24 @@ const mutations = {
     },
     setUpdateId(state,id){
         return state.updateId=id
+    },
+    setAddBlogContent(state,content){
+        return state.addBlogContent=content
     }
 }
 //Actions
 const actions = {
-    addBlog(content) {
-        return api().post('blog', content).then(res => {
-            console.log(res.statusText);
-
+    addBlog({},content) {
+        return api().post('blog', content).then((res) => {
+            alert(res.statusText)
         }).catch(err => {
             console.log(err)
         })
     },
     getBlog({
         commit
-    }) {
+    }) {  
         return api().get('blog').then(res => {
-            console.log(res.statusText);
             let blogs = res.data.blogs
 
             commit("setBlogs", blogs)
@@ -54,26 +63,25 @@ const actions = {
             console.log(err)
         })
     },
-    deleteBlog(id) {
+    deleteBlog({},id) {
         return api().delete('blog/' + id).then(res => {
-            console.log(res)
+            alert(res.statusText)
         }).catch(err => {
             console.log(err)
         })
     },
-    updateBlog(id, content) {
-        return api().put('blog/' + id, content).then(res => {
-            console.log(res)
+    updateBlog({},{id,content}) {
+        return api().put('blog/'+id,{content}).then((res) => {
+            alert(res.statusText)
         }).catch(err => {
             console.log(err)
         })
     },
     getContentAction({ commit}, content) {
-        console.log(content)
         return commit("setContent", content)
     },
-    getUpdateContent({commit},updatecon){
-        return commit("setContent", updatecon),commit("setUpdateId")
+    getUpdateContent2({commit},updatecon){
+        return commit("setUpdateContent", updatecon)
     },
     getUpdateId({commit},id){
         return commit("setUpdateId", id)

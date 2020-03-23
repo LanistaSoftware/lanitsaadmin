@@ -15,9 +15,9 @@ const morgan = require('morgan')
 
 app.use(morgan('dev'))
 var corsOptions = {
-  origin: 'http://localhost:8080',
-  optionsSuccessStatus: 200
-}
+  origin: 'http://localhost:8081',
+  optionsSuccessStatus: 200,
+  }
 app.use(bodyParser.urlencoded({
   extended: false, 
 }));
@@ -64,9 +64,9 @@ db.once("open", () => console.log("connection to db established"));
 
 app.set('view engine', ['css','icon']);
 
-app.set('views','../assets/css');
+app.set('views','../src/assets');
 
-app.use(express.static(path.join(__dirname, '../assets/css/')));
+app.use(express.static(path.join(__dirname, '../src/assets/css/')));
 
 app.listen(port, () => {
   console.log(`server started on port ${port}`)

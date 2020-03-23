@@ -49,6 +49,7 @@ router.post('/'  ,async (req, res) => {
 })
 router.put('/:id', async (req, res) => {
     try {
+       
         const blog = await Blog.updateOne({
             _id: req.params.id
         }, {

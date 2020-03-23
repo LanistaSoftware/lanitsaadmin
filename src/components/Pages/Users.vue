@@ -96,6 +96,7 @@
             }),
             addUser() {
               this.addUserAction(this.user).then(() => {
+                this.user={}
                 this.getUsersaction().then(() => {
                   this.isAdd = false
                 }).catch(err => {

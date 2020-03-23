@@ -6,20 +6,17 @@
          <button @click="addBlog" class="btn btn-sm btn-success float-right mr-1"><i class="fas fa-save"></i> Save</button> 
     </div>
 </template>
-
 <script>
  import vueeditor from './vueeditor'
  import CardPreview from './CardPreview'
 import Axios from 'axios'
- import {mapActions} from 'vuex'
+ import {mapActions,mapGetters} from 'vuex'
   
   export default {
     name: 'Slider',
     components: {
             vueeditor,
             CardPreview
-
-
         },
         data() { 
             return {
@@ -37,10 +34,12 @@ import Axios from 'axios'
                 ],
 
             }
-
-
         },
-    
+        computed:{
+            ...mapGetters([
+                "getAddBlogContent"
+            ])
+        },
         methods: {
             ...mapActions({
                 addBlogAction:"addBlog",
@@ -48,16 +47,14 @@ import Axios from 'axios'
             }),
             addcontent(e) {
                 this.content = e
-              
-
             },
              deger(e) {
                 this.close = e;
             },
             addBlog(){
-                this.addBlogAction([this.content]).then(()=>{
-                    this.content =   []
-                })
+                this.addBlogAction([this.getAddBlogContent]).then(()=>{
+                  this.$store.commit('setAddBlogContent', '')
+                })  
             },
             getBlog(){
                 Axios.get('http://localhost:3000/api/blog').then(res=>{

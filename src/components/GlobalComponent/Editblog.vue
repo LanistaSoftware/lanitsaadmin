@@ -12,21 +12,18 @@
       <div  class="justify-content clearfix"></div>
       </div>
       <vueeditor></vueeditor>
-      <button class="btn btn-sm btn-primary " @click="updateBlog(updateContent)">Save</button>
+      <button class="btn btn-sm btn-primary " @click="updateBlog()">Save</button>
     </div>
   </div>
-
 </template>
-
 <script>
-  import vueeditor from './vueeditor'
+import vueeditor from './vueeditor'
 import { mapActions, mapGetters } from 'vuex'
 
   export default {
     components: {
         vueeditor,
       },
-
       data() {
         return {       
           image: 'https://picsum.photos/400/400',
@@ -35,13 +32,21 @@ import { mapActions, mapGetters } from 'vuex'
       },
       computed:{
         ...mapGetters([
-          "updateContent"
+          "getUpdateContent",
+          "getUpdateId",
+         
         ])
       },
       methods: {
         ...mapActions({
-          updateBlog:"updateBlog"
-        })
+          updateBlogAction:"updateBlog",
+          getBlogAction:"getBlog"
+        }),
+        updateBlog(){
+          this.updateBlogAction({'id':this.getUpdateId,'content':this.getUpdateContent}).then(()=>{
+            this.getBlogAction()
+          })
+        }
       }
 }
 

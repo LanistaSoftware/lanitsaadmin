@@ -2,18 +2,17 @@
   <div class="card ozel-scrollbar">
     <div class="cardhead clearfix  ">
       <p class="headcard-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      <button @click="$emit('close',false)" class="btn btn-danger btn-sm"><i class="fas fa-window-close"></i></button>
+      <button @click="setClose(false)" class="btn btn-danger btn-sm"><i class="fas fa-window-close"></i></button>
+        <button @click="setData(true),setClose(false)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
     </div>
-    <div class="card-body prew-html" v-html="content"></div>
     <div class="card-body prew-html" v-html="set">
     </div>
   </div>
 </template>
 
 <script>
- import {mapGetters} from 'vuex'
+ import {mapGetters,mapMutations} from 'vuex'
   export default {
-      props:['content'],
       data(){
           return{
             lp:[]
@@ -22,18 +21,19 @@
       methods:{
         cli(e){
           this.lp=e
-        }
+        },
+        ...mapMutations({
+          setData:"setData",
+          setClose:"setClose"
+        })
       },
       computed:{
         ...mapGetters({
           set:"getContent"
-        })
+        }),
+      
       },
-      
-      
   }
-
-
 </script>
 <style lang="less" scoped>
 @nbfcolor:#303030;

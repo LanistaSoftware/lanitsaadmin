@@ -3,8 +3,9 @@
     <div class="cardhead ">
   
       <p class="headcard-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      <button @click="$emit('editdata',false)" class="btn  btn-danger btn-sm"><i
+      <button @click="edit(false)" class="btn  btn-danger btn-sm"><i
           class="fas fa-window-close"></i></button>
+        <button @click="setClose(true)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
     </div>
     <div class="card-body">
       <h5 class="card-title"></h5>
@@ -18,7 +19,7 @@
 </template>
 <script>
 import vueeditor from './vueeditor'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters ,mapMutations} from 'vuex'
 
   export default {
     components: {
@@ -28,7 +29,6 @@ import { mapActions, mapGetters } from 'vuex'
         return {       
           image: 'https://picsum.photos/400/400',
         }
-
       },
       computed:{
         ...mapGetters([
@@ -41,6 +41,10 @@ import { mapActions, mapGetters } from 'vuex'
         ...mapActions({
           updateBlogAction:"updateBlog",
           getBlogAction:"getBlog"
+        }),
+        ...mapMutations({
+          edit:"setData",
+          setClose:"setClose"
         }),
         updateBlog(){
           this.updateBlogAction({'id':this.getUpdateId,'content':this.getUpdateContent}).then(()=>{

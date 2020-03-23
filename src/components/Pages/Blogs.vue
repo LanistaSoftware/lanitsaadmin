@@ -1,10 +1,9 @@
 <template>
- 
-     
   <div class="blogs">
-    <editblog v-show="editdata" @editdata="edit($event)"></editblog>
-    <CardPreview v-show="close"  @close="deger($event)"></CardPreview>
-    <Card @editdata="edit($event)" @close="deger($event)"></Card>
+    <Card ></Card>
+    <editblog v-show="data" ></editblog>
+    <CardPreview v-show="close"></CardPreview>
+    
   </div>
 </template>
 
@@ -13,7 +12,7 @@
   import Card from '../GlobalComponent/Card.vue';
   import CardPreview from '../GlobalComponent/CardPreview.vue'
   import editblog from '../GlobalComponent/Editblog.vue' 
-  import {mapActions} from 'vuex'
+  import {mapActions,mapGetters} from 'vuex'
   export default {
     components: {
       Card,
@@ -23,8 +22,7 @@
 
     data() {
       return {
-        close:false,
-        editdata:false,
+     
         tab:[ 
           {link:'/blogs',label:'Makaleler' },
           {link:'/addblog',label:'Makale Ekle' }]
@@ -38,14 +36,22 @@
     methods:{
          ...mapActions({
            addtab:"addTabs",
-         }),
-      deger(e){
-        this.close=e;
-      },
-      edit(e){
-        this.editdata=e;
-      }
+         })
+    },
+    computed:{
+     ...mapGetters({
+        data:"data"
+     }),
+    close:{
+    get () {
+    return this.$store.getters.close
+    },
+    set (value) {
+      this.$store.commit('setClose', value)
     }
+    }
+    },
+    
   }
 
 </script>

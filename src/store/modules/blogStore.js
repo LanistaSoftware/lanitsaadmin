@@ -5,7 +5,9 @@ const state = {
     content: '',
     updateContent:'',
     updateId:'',
-    addBlogContent:''
+    addBlogContent:'',
+    close:false,
+    edit:false,
 }
 //Getters
 const getters = {
@@ -23,6 +25,12 @@ const getters = {
     },
     getAddBlogContent(state){
         return state.addBlogContent
+    },
+    close(state){
+        return state.close
+    },
+    data(state){
+        return state.edit
     }
 }
 //Mutations
@@ -41,6 +49,12 @@ const mutations = {
     },
     setAddBlogContent(state,content){
         return state.addBlogContent=content
+    },
+    setClose(state,value){
+        return state.close=value
+    },
+    setData(state,value){
+        return state.edit=value
     }
 }
 //Actions

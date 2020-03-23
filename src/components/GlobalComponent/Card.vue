@@ -105,9 +105,20 @@
       },
       computed: {
         ...mapGetters([
-          'getBlogs'
+          'getBlogs',
+          'getUpdatePage'
         ]),
       },
+      watch:{
+        getUpdatePage(){
+          if(this.getUpdatePage){
+          alert(this.getUpdatePage)
+          this.getBlogaction();
+          } else {
+          this.$store.commit('setUpdatePage', false)
+          }
+        }
+      }
     }
 </script>
 <style lang="less" scoped>

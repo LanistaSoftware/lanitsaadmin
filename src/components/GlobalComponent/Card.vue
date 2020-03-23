@@ -22,7 +22,11 @@
           imgUrl:[],
           contentHtml:''
 
+<<<<<<< HEAD
           
+=======
+        
+>>>>>>> cb51564760aa6f79f34479f150d5320f5b9df018
         }
       },
       methods: {

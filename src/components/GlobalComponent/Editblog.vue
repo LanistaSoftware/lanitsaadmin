@@ -12,7 +12,7 @@
       <div  class="justify-content clearfix"></div>
       </div>
       <vueeditor></vueeditor>
-      <button class="btn btn-sm btn-primary " @click="updateBlog({'id':getUpdateId,'content':getUpdateContent})">Save</button>
+      <button class="btn btn-sm btn-primary " @click="updateBlog()">Save</button>
     </div>
   </div>
 </template>
@@ -35,13 +35,20 @@ import { mapActions, mapGetters } from 'vuex'
       computed:{
         ...mapGetters([
           "getUpdateContent",
-          "getUpdateId"
+          "getUpdateId",
+         
         ])
       },
       methods: {
         ...mapActions({
-          updateBlog:"updateBlog"
-        })
+          updateBlogAction:"updateBlog",
+          getBlogAction:"getBlog"
+        }),
+        updateBlog(){
+          this.updateBlogAction({'id':this.getUpdateId,'content':this.getUpdateContent}).then(()=>{
+            this.getBlogAction()
+          })
+        }
       }
 }
 

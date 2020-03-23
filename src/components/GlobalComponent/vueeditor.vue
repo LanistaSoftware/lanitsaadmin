@@ -4,13 +4,13 @@
  
     <vue-editor v-if="show " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="aboutcontent" > </vue-editor>
     <vue-editor v-if="getContent ? data=true : data =false" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="getContent"> </vue-editor>
-    <vue-editor v-if="!show && !data " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="contentin"> </vue-editor>
+    <vue-editor v-if="!show && !data " :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="addBlogContent"> </vue-editor>
   </div>
 </template>
 <script>
 // eslint-disable-next-line no-unused-vars
 import { VueEditor,Quill  } from 'vue2-editor'
- import {mapGetters} from 'vuex'
+ import {mapActions} from 'vuex'
 import ImageResize from 'quill-image-resize-vue';
 import { ImageDrop } from 'quill-image-drop-module';
 
@@ -40,25 +40,37 @@ export default {
     };
   },
   methods:{
+     ...mapActions({
+      getUpdateContent2:"getUpdateContent2"
+    }),
+  
   },
   watch:{
      contentin(){
        this.$emit('con',this.contentin)
      },
      getContent(){
-       console.log(this.getContent)
          this.getUpdateContent2(this.getContent)
        }
   },
   computed:{
-    ...mapGetters([
-      "getContent"
-    ]),
+    getContent : {
+    get () {
+    return this.$store.getters.getContent
+    },
+    set (value) {
+      this.$store.commit('setContent', value)
+    }
   },
-  mounted(){
-this.content = this.getContent
-
+   addBlogContent : {
+    get () {
+    return this.$store.getters.getAddBlogContent
+    },
+    set (value) {
+      this.$store.commit('setAddBlogContent', value)
+    }
   }
+  },  
 };
 </script>
 <style lang="less" scoped>

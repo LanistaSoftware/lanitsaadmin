@@ -112,11 +112,7 @@
     margin: 0 2rem 2rem 2rem;
     float: left;
     background-color: #FAFAFA;
-
-
-
   }
-
   .imgcontainer {
     width: 100%;
     height: 10rem;

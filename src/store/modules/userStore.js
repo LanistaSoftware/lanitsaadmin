@@ -50,9 +50,9 @@ const actions = {
     },
     updateUser({},{id,edit}) {
         return api().put('/user/' + id, edit).then((res) => {
-            console.log(res.statusText)
+            alert(res.statusText)
         }).catch(err => {
-            console.log(err.message)    
+            alert(err.message)    
         })
     },
     deleteUser({},id) {

@@ -50,12 +50,10 @@
             return ''
           } else {
             var a = item.search('<p>')
-            // var b = item.search('')
             var sonuc;
             sonuc = item.slice(a,150)
             return sonuc
           }
-
         },
         getTitle(item){
            if (item == null) {
@@ -64,7 +62,7 @@
             var a = item.search('<h')
             var b = item.search('</')
             var sonuc;
-           
+
             sonuc = item.slice(a,b+5)
              console.log(sonuc)
             return sonuc
@@ -96,7 +94,6 @@
           }
 
         },
-        
       },
       mounted() {
         this.getBlogaction().then(() => {

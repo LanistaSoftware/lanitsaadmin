@@ -28,7 +28,7 @@
             ready(event) {
                 this.player = event.target
             },
-            playing(event) {
+            playing() {
                 // The player is playing a video.
             },
             change() {

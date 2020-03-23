@@ -39,7 +39,7 @@ const actions = {
             console.log(err)
         })
     },
-    addUser({}, item) {
+    addUser(item) {
         return api().post('http://localhost:3000/api/user', item).then((res) => {
             console.log(res.statusText)
             console.log(item)
@@ -48,7 +48,7 @@ const actions = {
             console.log(err.message)
         })
     },
-    updateUser({}, {
+    updateUser( {
         id,
         edit
     }) {
@@ -59,7 +59,7 @@ const actions = {
             console.log(err.message)
         })
     },
-    deleteUser({}, id) {
+    deleteUser(id) {
         return api().delete('/user/' + id).then(res => {
             console.log(res.statusText)
 

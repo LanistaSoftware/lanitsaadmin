@@ -33,7 +33,7 @@ const actions = {
     },
     getAllSlide({commit}) {  
         return api().get('slide').then(res => {
-            console.log(res.data)
+         
             let slide = res.data.sliders
             commit("setAllslide", slide)
         }).catch(err => {
@@ -42,11 +42,18 @@ const actions = {
     getSlide({commit},id) {  
         return api().get('slide/' + id).then(res => {
             let slide = res.data.sliders
-            console.log(slide)
+           
             commit("setslide", slide)
         }).catch(err => {
             alert(err)
-        })},
+        })},    
+        updateSlide({},{id,slideset}) {
+            return api().put('slide/'+id,slideset).then(res => {
+                alert(res.statusText)
+            }).catch(err => {
+                alert(err)
+            })
+        },
     deleteSlide({},id) {
         return api().delete('slide/' + id).then(res => {
             alert(res.statusText)

@@ -49,8 +49,8 @@
         </div>
       </div>
       <button class="btn btn-sm btn-primary col-md-2" @click="addSlide">Ekle</button>
-      <button v-if="show" class="btn btn-sm btn-danger col-md-2">Sil</button>
-      <button v-if="show" class="btn btn-sm btn-info col-md-2">Düzenle</button>
+      <button v-if="show" class="btn btn-sm btn-danger col-md-2" @click="deleteSlide">Sil</button>
+      <button v-if="show" class="btn btn-sm btn-info col-md-2" @click="updateSlider">Düzenle</button>
     </div>
 </template>
 <script>
@@ -60,6 +60,7 @@ import { mapActions, mapGetters } from 'vuex';
     data() {
       return {
         show:false,
+        selectId:'',
         image: {
           size: '',
           height: '',
@@ -93,13 +94,17 @@ import { mapActions, mapGetters } from 'vuex';
     methods: {
       ...mapActions({
         addSlideAction:"addSlide",
+        updateSliderAction:"updateSlide",
         getAllSlideAction:"getAllSlide",
-        getOneSlide:"getSlide"
+        getOneSlide:"getSlide",
+        deleteSliderAction:"deleteSlide"
+        
       }),
       changeSlide(slide){
         let id = slide.target.value
+        this.selectId = id
         this.getOneSlide(id).then(()=>{
-           this.show=true
+            this.show=true
             this.Slider.SliderOne =this.getASlider.SliderOne
             this.Slider.SliderTwo =this.getASlider.SliderTwo
             this.Slider.SliderThree =this.getASlider.SliderThree   
@@ -115,6 +120,23 @@ import { mapActions, mapGetters } from 'vuex';
           this.imagePreviewtwo="http://via.placeholder.com/1300x800"
           this.imagePreviewthree="http://via.placeholder.com/1300x800"
         }).then(()=>{
+          this.getAllSlideAction()
+        })
+      },
+      updateSlider(){
+        console.log(this.Slider)
+      this.updateSliderAction({'id':this.selectId,'slideset':this.Slider}).then(()=>{
+          this.Slider.SliderOne=""
+          this.Slider.SliderTwo=""
+          this.Slider.SliderThree=""
+           this.getAllSlideAction()
+      })
+      },
+      deleteSlide(){
+        this.deleteSliderAction(this.selectId).then(()=>{
+            this.Slider.SliderOne=""
+          this.Slider.SliderTwo=""
+          this.Slider.SliderThree=""
           this.getAllSlideAction()
         })
       },

@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const sliders = await slider.deleteOne({
-            _id: sliders
+            _id: req.params.id
         })
         res.json({
             sliders
@@ -43,7 +43,7 @@ router.delete('/:id', async (req, res) => {
     }
 })
 router.post('/', async (req, res) => {
-    console.log(req.body)
+
     const sliders = await new slider({
         SliderOne:{
             imageurlOne:req.body.SliderOne.imageurlOne,
@@ -74,24 +74,25 @@ router.post('/', async (req, res) => {
 })
 router.put('/:id', async (req, res) => {
     try {
+
         const sliders = await slider.updateOne({
             _id: req.params.id
         }, {
             $set: {
-                sliderOne:{
-                    imageurl:req.body.imageurlOne,
-                    title:req.body.titleOne,
-                    description:req.body.descriptionOne
+                SliderOne:{
+                    imageurlOne:req.body.SliderOne.imageurlOne,
+                    titleOne:req.body.SliderOne.titleOne,
+                    descriptionOne:req.body.SliderOne.descriptionOne
                 },
-                sliderTwo:{
-                    imageurl:req.body.imageurlTwo,
-                    title:req.body.titleTwo,
-                    description:req.body.descriptionTwo
+                SliderTwo:{
+                    imageurlTwo:req.body.SliderTwo.imageurlTwo,
+                    titleTwo:req.body.SliderTwo.titleTwo,
+                    descriptionTwo:req.body.SliderTwo.descriptionTwo
                 },
-                sliderThree:{
-                    imageurl:req.body.imageurlThree,
-                    title:req.body.titleThree,
-                    description:req.body.descriptionThree
+                SliderThree:{
+                    imageurlThree:req.body.SliderThree.imageurlThree,
+                    titleThree:req.body.SliderThree.titleThree,
+                    descriptionThree:req.body.SliderThree.descriptionThree
                 },
             }
         })

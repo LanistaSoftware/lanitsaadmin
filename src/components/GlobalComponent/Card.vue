@@ -58,9 +58,12 @@
              item = item.slice(firstIndex)
             lastIndex = item.search('/h')
             headerTag = item.slice(firstIndex, lastIndex+4)
+            
             if (lastIndex === -1 || firstIndex === -1) {
+              
               return headerTag = '<h2>Bu makalede başlık bulunamadı.</h2>'
             } else {
+              
               return headerTag
             }
         },

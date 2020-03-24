@@ -30,25 +30,26 @@ router.delete('/:id', async (req, res) => {
     }
 })
 router.post('/', async (req, res) => {
-    const slider = await new slider({
-        sliderOne:{
-            imageurl:req.body.imageurlOne,
-            title:req.body.titleOne,
-            description:req.body.descriptionOne
+    console.log(req.body)
+    const sliders = await new slider({
+        SliderOne:{
+            imageurl:req.body.SliderOne.imageurlOne,
+            title:req.body.SliderOne.titleOne,
+            description:req.body.SliderOne.descriptionOne
         },
-        sliderTwo:{
-            imageurl:req.body.imageurlTwo,
-            title:req.body.titleTwo,
-            description:req.body.descriptionTwo
+        SliderTwo:{
+            imageurl:req.body.SliderTwo.imageurlTwo,
+            title:req.body.SliderTwo.titleTwo,
+            description:req.body.SliderTwo.descriptionTwo
         },
-        sliderThree:{
-            imageurl:req.body.imageurlThree,
-            title:req.body.titleThree,
-            description:req.body.descriptionThree
+        SliderThree:{
+            imageurl:req.body.SliderThree.imageurlThree,
+            title:req.body.SliderThree.titleThree,
+            description:req.body.SliderThree.descriptionThree
         },
     })
     try {
-        const slideradd = await slider.save();
+        const slideradd = await sliders.save();
         res.status(201).json({
             slideradd
         })

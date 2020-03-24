@@ -6,15 +6,15 @@
     <div class="preview-card-header" v-html="getHeader(item.content)">
     </div>
     <div class="btn-container">
-      <button @click="$emit('close',true),getContentAction(item.content)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
-      <button @click="$emit('editdata',true),getContentAction(item.content),getUpdateId(item._id)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+      <button @click="setClose(true),getContentAction(item.content)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+      <button @click="setData(true),getContentAction(item.content),getUpdateId(item._id)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
       <button @click="deletBlog(item._id)" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
     </div>
   </div>
   </div>
 </template>
 <script>
- import {mapActions,mapGetters} from 'vuex'
+ import {mapActions,mapGetters,mapMutations} from 'vuex'
   export default {
     data() {
         return {
@@ -26,6 +26,10 @@
         ...mapActions({
           getBlogaction: "getBlog",
           deleteBlogAction: "deleteBlog",
+        }),
+        ...mapMutations({
+          setData:"setData",
+          setClose:"setClose"
         }),
         deletBlog(id) {
           this.deleteBlogAction(id).then(() => {
@@ -72,7 +76,9 @@
       },
       computed: {
         ...mapGetters([
-          'getBlogs'
+          'getBlogs',
+          'data',
+          'close'
         ]),
       },
     }

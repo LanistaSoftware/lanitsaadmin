@@ -1,9 +1,9 @@
 <template>
   <div>
-  <div class="card preview-card"  v-for="item in getBlogs" :key="item._id" >
+  <div class="card preview-card"  v-for="(item, index) in getBlogs" :key="index" >
     <div class="imgcontainer " v-html="getImage(item.content)">
     </div>
-    <div class="preview-card-header" v-html="getHeader(item.content)">
+    <div class="preview-card-header" v-html="getHeader(item.content,index)">
     </div>
     <div class="btn-container">
       <button @click="setClose(true),getContentAction(item.content)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
@@ -19,7 +19,7 @@
     data() {
         return {
 
-        
+
         }
       },
       methods: {
@@ -28,8 +28,8 @@
           deleteBlogAction: "deleteBlog",
         }),
         ...mapMutations({
-          setData:"setData",
-          setClose:"setClose"
+          setData: "setData",
+          setClose: "setClose"
         }),
         deletBlog(id) {
           this.deleteBlogAction(id).then(() => {
@@ -37,32 +37,41 @@
           })
         },
         getImage(item) {
-            let imgUrl = ''
-            let firstIndex = null
-            let lastIndex = null
-            firstIndex = item.search('<img ')
-            item = item.slice(firstIndex)
-            lastIndex = item.search('">')
-            imgUrl = item.slice(0, lastIndex + 2)
-            if (lastIndex === -1 || firstIndex === -1) {
-              return imgUrl = '<img src="https://via.placeholder.com/300x200" alt="Tanımsız blog fotoğrafı."><br><small>Bu makalede fotoğraf bulunamadı</small>'
-            } else {
-              return imgUrl
-            }
+          let imgUrl = ''
+          let firstIndex = null
+          let lastIndex = null
+          firstIndex = item.search('<img ')
+          item = item.slice(firstIndex)
+          lastIndex = item.search('">')
+          imgUrl = item.slice(0, lastIndex + 2)
+          if (lastIndex === -1 || firstIndex === -1) {
+            
+            return imgUrl, imgUrl = '<img src="https://via.placeholder.com/300x200" alt="Tanımsız blog fotoğrafı."><br><small>Bu makalede fotoğraf bulunamadı</small>'
+          } else {
+            return imgUrl
+          }
         },
-        getHeader(item) {
-            let headerTag = ''
-            let firstIndex = null
-            let lastIndex = null      
-            firstIndex = item.search('<h')
-             item = item.slice(firstIndex)
-            lastIndex = item.search('/h')
-            headerTag = item.slice(firstIndex, lastIndex+4)
-            if (lastIndex === -1 || firstIndex === -1) {
-              return headerTag = '<h2>Bu makalede başlık bulunamadı.</h2>'
-            } else {
-              return headerTag
-            }
+        getHeader(item, index) {
+          let headerTag = ''
+          let firstIndex = null
+          let lastIndex = null
+          firstIndex = item.search('<h')
+          item = item.slice(firstIndex)
+          lastIndex = item.search('</'+item.slice(firstIndex+1,3)+'>')+5      
+          headerTag = item.slice(firstIndex, lastIndex)
+          console.log(item,firstIndex,lastIndex,headerTag)
+          if(headerTag.search('<img')!=-1){            
+            alert(index+1+ ' Nolu Makale içindeki fotoğraf başlık etiketleri (<h1> vb..) ile etiketlenmiştir. Lütfen düzeltin...!!')
+            return headerTag = '<h2>Bu makalede başlık bulunamadı.</h2>'
+          } else {
+                if (lastIndex === -1 || firstIndex === -1) {
+                  alert('Başlık bulunamadı.')
+            return headerTag = '<h2>Bu makalede başlık bulunamadı.</h2>'
+          } else {
+            return headerTag
+          }
+          }
+
         },
         ...mapActions({
           getContentAction: "getContentAction",

@@ -4,7 +4,7 @@
         <div class="sliderDropdown">
      <label for="exampleFormControlSelect1">Slayt Seti Seçiniz</label>
     <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)" >
-        <option  v-for="item in slideAll" :key="item._id">{{item._id}}</option>
+        <option  v-for="(item,index) in slideAll" :key="index">{{index+1 +' Burası birazcık açıklama istiyor '+ 'ID NO '+item._id}}</option>
     </select>
   </div>
       <div  class="card">
@@ -101,6 +101,7 @@ import { mapActions, mapGetters } from 'vuex';
         
       }),
       changeSlide(slide){
+        console.log(slide)
         let id = slide.target.value
         this.selectId = id
         this.getOneSlide(id).then(()=>{
@@ -142,9 +143,9 @@ import { mapActions, mapGetters } from 'vuex';
       },
       selectedFile(slide) {
         this.imageError = '';
-        const MAX_SIZE = 100000;
-        const MAX_WIDTH = 1000;
-        const MAX_HEIGHT = 3000;
+        const MAX_SIZE = 10000000;
+        // const MAX_WIDTH = 1000;
+        // const MAX_HEIGHT = 3000;
         var file=''
         if (slide=='slideOne') { file = this.$refs.slideOne.files[0]}
         if (slide=='slideTwo') { file = this.$refs.slideTwo.files[0]}
@@ -165,17 +166,22 @@ import { mapActions, mapGetters } from 'vuex';
           img.onload = () => {
             this.image.width = img.width;
             this.image.height = img.height;
-           
-            if (this.image.width > MAX_WIDTH) {
-              this.imageError = `The image width (${this.image.width}) is too much (max is ${MAX_WIDTH}).`;
-              alert(this.imageError)
-              return;
-            }
-            if (this.image.height > MAX_HEIGHT) {
-              this.imageError = `The image height (${this.image.height}) is too much (max is ${MAX_HEIGHT}).`;
-              alert(this.imageError)
-              return;
-            }
+            let avarage = this.image.width/this.image.height
+           if(avarage<1.4 || avarage > 1.6){
+             this.imageError = `Fotoğrafın en boy oranı ortalama 1.5 olmalıdır Örneğin 90*60 gibi.Şu anki oran = ${(avarage.toFixed(2))}`;
+             alert(this.imageError)
+             return;
+           }
+            // if (this.image.width > MAX_WIDTH) {
+            //   this.imageError = `The image width (${this.image.width}) is too much (max is ${MAX_WIDTH}).`;
+            //   alert(this.imageError)
+            //   return;
+            // }
+            // if (this.image.height > MAX_HEIGHT) {
+            //   this.imageError = `The image height (${this.image.height}) is too much (max is ${MAX_HEIGHT}).`;
+            //   alert(this.imageError)
+            //   return;
+            // }
           }
           img.src = evt.target.result;
         if (slide=='slideOne') {
@@ -242,8 +248,8 @@ import { mapActions, mapGetters } from 'vuex';
     width: 4rem;
   }
   img{
-    width: 20rem;
-    height: 7rem;
+    width: 15rem;
+    height: 10rem;
     margin-bottom: 2rem;
   }
   .sliderDropdown{

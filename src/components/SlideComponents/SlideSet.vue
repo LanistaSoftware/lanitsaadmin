@@ -11,7 +11,7 @@
         <div class="image-file m-1">
           <img  :src="Slider.SliderOne.imageurlOne" class="rounded mx-auto d-block" >
        <div class="custom-file ">
-         <input  type="file" ref="slideOne" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" v-on:change="selectedFile('slideOne')" />
+         <input  type="file" ref="slideOne" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" @change="selectedFile('slideOne')" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
         </div>

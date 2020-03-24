@@ -1,12 +1,9 @@
 <template>
   <div>
-  <div class="card"  v-for="item in getBlogs" :key="item._id" >
-    <div class="imgcontainer " v-html="getContent(item.content)" >
-      <!-- <img src="https://picsum.photos/400/300" alt="Blog Image"> -->
+  <div class="card preview-card"  v-for="item in getBlogs" :key="item._id" >
+    <div class="imgcontainer " v-html="getImage(item.content)">
     </div>
-    <div class="card-body">
-      <h5 class="card-title" v-html="getTitle(item.content)" ></h5>
-      <p class="card-text" v-html="getDesc(item.content)"></p>
+    <div class="preview-card-header" v-html="getHeader(item.content)">
     </div>
     <div class="btn-container">
       <button @click="setClose(true),getContentAction(item.content)" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
@@ -39,65 +36,40 @@
             this.getBlogaction()
           })
         },
-        getContent(item) {
-          var a = item.search('<img src="')
-          var b = item.search('">')
-          var sonuc;
-          sonuc = item.substring(a, b+2)
-          return sonuc
+        getImage(item) {
+            let imgUrl = ''
+            let firstIndex = null
+            let lastIndex = null
+            firstIndex = item.search('<img ')
+            item = item.slice(firstIndex)
+            lastIndex = item.search('">')
+            imgUrl = item.slice(0, lastIndex + 2)
+            if (lastIndex === -1 || firstIndex === -1) {
+              return imgUrl = '<img src="https://via.placeholder.com/300x200" alt="Tanımsız blog fotoğrafı."><br><small>Bu makalede fotoğraf bulunamadı</small>'
+            } else {
+              return imgUrl
+            }
         },
-        getDesc(item){
-           if (item == null) {
-            return ''
-          } else {
-            var a = item.search('<p>')
-            var sonuc;
-            sonuc = item.slice(a,150)
-            return sonuc
-          }
-        },
-        getTitle(item){
-           if (item == null) {
-            return ''
-          } else {
-            var a = item.search('<h')
-            var b = item.search('</')
-            var sonuc;
-            sonuc = item.slice(a,b+5)
-            return sonuc
-          }
-
+        getHeader(item) {
+            let headerTag = ''
+            let firstIndex = null
+            let lastIndex = null      
+            firstIndex = item.search('<h')
+             item = item.slice(firstIndex)
+            lastIndex = item.search('/h')
+            headerTag = item.slice(firstIndex, lastIndex+4)
+            if (lastIndex === -1 || firstIndex === -1) {
+              return headerTag = '<h2>Bu makalede başlık bulunamadı.</h2>'
+            } else {
+              return headerTag
+            }
         },
         ...mapActions({
           getContentAction: "getContentAction",
           getUpdateId: "getUpdateId"
         })
       },
-      filters: {
-        getİmg(item) {
-          if (item == null) {
-            return ''
-          } else {
-            var a = item.search('<img')
-            var b = item.search('">')
-            var sonuc;
-            sonuc = item.slice(a, b + 2)
-            return sonuc
-          }
-        },
-        getDesc(item){
-           if (item == null) {
-            return ''
-          } else {
-            var a = item.search('<p>')
-            // var b = item.search('')
-            var sonuc;
-            sonuc = item.slice(a,10)
-            return sonuc 
-          }
 
-        },
-      },
       mounted() {
         this.getBlogaction()
 
@@ -111,34 +83,42 @@
       },
     }
 </script>
-<style lang="less" scoped>
-  .card {
+<style lang="less">
+  .preview-card {
     width: 29%;
     height: 35rem;
     margin: 0 2rem 2rem 2rem;
     float: left;
     background-color: #FAFAFA;
-  }
-  .imgcontainer {
-    width: 100%;
-    height: 10rem;
+      .imgcontainer {
+   width: 100%;
+    height: 100%;
     padding: 1rem;
-    overflow: hidden;
 
     img {
-      width: 10%;
-      height: 50%;
+     width: 100%;
+      height: auto;
 
     }
   }
-  .btn-container{
+    .btn-container{
     width: 100%;
-  }
-
-  .btn {
+      .btn {
 
     margin:0.5rem;
     width: 2rem;
   }
+  }
+  }
+
+  .preview-card-header{
+    h1,h2,h3,h4,h5,h6{
+      font-size: 2rem;
+      font-style: normal;
+    }
+  }
+
+
+
 
 </style>

@@ -1,11 +1,15 @@
 <template>
     <div>
-     <h2>Lanista Admin Panel</h2>   
-     <p>Hoşgeldiniz.</p>
+
+     <h1>Hoşgeldiniz.</h1>
+     <p>Think. Create. Develop.</p>
     </div>
 </template>
 <style lang="less" scoped>
    div{
        text-align: center;
+       h1{
+           color:#e33;
+       }
    } 
 </style>

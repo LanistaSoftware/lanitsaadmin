@@ -4,7 +4,7 @@
         <div class="image-file m-1">
           <img  :src="imagePreview" class="rounded mx-auto d-block" >
        <div class="custom-file ">
-         <input  type="file" ref="file" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" v-on:change="handleFileUpload()" />
+         <input  type="file" ref="file" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" @change="handleFileUpload()" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
         </div>

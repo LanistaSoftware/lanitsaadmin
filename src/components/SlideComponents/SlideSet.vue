@@ -1,9 +1,15 @@
 /* eslint-disable no-undef */
 <template>
      <div class="sliderset">
+        <div class="sliderDropdown">
+     <label for="exampleFormControlSelect1">Slayt Seti Seçiniz</label>
+    <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)" >
+        <option  v-for="item in slideAll" :key="item._id">{{item._id}}</option>
+    </select>
+  </div>
       <div  class="card">
         <div class="image-file m-1">
-          <img  :src="imagePreviewone" class="rounded mx-auto d-block" >
+          <img  :src="Slider.SliderOne.imageurlOne" class="rounded mx-auto d-block" >
        <div class="custom-file ">
          <input  type="file" ref="slideOne" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" v-on:change="selectedFile('slideOne')" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
@@ -16,7 +22,7 @@
       </div>
       <div  class="card">
         <div class=" m-1">
-         <img  :src="imagePreviewtwo" class="rounded mx-auto d-block" >
+         <img  :src="Slider.SliderTwo.imageurlTwo" class="rounded mx-auto d-block" >
        <div class="custom-file ">
           <input type="file" class="custom-file-input" ref="slideTwo" accept="image/*" id="file"
             v-on:change="selectedFile('slideTwo')" />
@@ -30,7 +36,7 @@
       </div>
       <div  class="card">
         <div class=" m-1">
-       <img  :src="imagePreviewthree" class="rounded mx-auto d-block" >
+       <img  :src="Slider.SliderThree.imageurlThree" class="rounded mx-auto d-block" >
        <div class="custom-file ">
           <input type="file" class="custom-file-input" ref="slideThree" accept="image/*" id="file"
             v-on:change="selectedFile('slideThree')" />
@@ -39,20 +45,21 @@
         </div>
         <div class="content-title mt-3">
           <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı" v-model="Slider.SliderThree.titleThree">
-          <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği" v-model="Slider.SliderThree.descriptioThree"></textarea>
+          <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği" v-model="Slider.SliderThree.descriptionThree"></textarea>
         </div>
       </div>
       <button class="btn btn-sm btn-primary col-md-2" @click="addSlide">Ekle</button>
-      <button class="btn btn-sm btn-danger col-md-2">Sil</button>
-      <button class="btn btn-sm btn-info col-md-2">Düzenle</button>
+      <button v-if="show" class="btn btn-sm btn-danger col-md-2">Sil</button>
+      <button v-if="show" class="btn btn-sm btn-info col-md-2">Düzenle</button>
     </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
   export default {
 
     data() {
       return {
+        show:false,
         image: {
           size: '',
           height: '',
@@ -63,9 +70,7 @@ import { mapActions } from 'vuex';
         file: '',
         showPreview: false,
         imageLoaded: false,
-        imagePreviewone:'http://via.placeholder.com/1300x800',
-        imagePreviewtwo: 'http://via.placeholder.com/1300x800',
-        imagePreviewthree:'http://via.placeholder.com/1300x800',
+   
         Slider: {
           SliderOne: {
             titleOne: '',
@@ -87,8 +92,20 @@ import { mapActions } from 'vuex';
     },
     methods: {
       ...mapActions({
-        addSlideAction:"addSlide"
+        addSlideAction:"addSlide",
+        getAllSlideAction:"getAllSlide",
+        getOneSlide:"getSlide"
       }),
+      changeSlide(slide){
+        let id = slide.target.value
+        this.getOneSlide(id).then(()=>{
+           this.show=true
+            this.Slider.SliderOne =this.getASlider.SliderOne
+            this.Slider.SliderTwo =this.getASlider.SliderTwo
+            this.Slider.SliderThree =this.getASlider.SliderThree   
+           console.log(this.Slider.SliderTwo)
+        })
+        },
       addSlide(){
         this.addSlideAction(this.Slider).then(()=>{
           this.Slider.SliderOne=""
@@ -97,7 +114,8 @@ import { mapActions } from 'vuex';
           this.imagePreviewone="http://via.placeholder.com/1300x800"
           this.imagePreviewtwo="http://via.placeholder.com/1300x800"
           this.imagePreviewthree="http://via.placeholder.com/1300x800"
-
+        }).then(()=>{
+          this.getAllSlideAction()
         })
       },
       selectedFile(slide) {
@@ -137,7 +155,6 @@ import { mapActions } from 'vuex';
               return;
             }
           }
-       
           img.src = evt.target.result;
         if (slide=='slideOne') {
           this.imagePreviewone = event.target.result
@@ -157,6 +174,23 @@ import { mapActions } from 'vuex';
           console.error(evt);
         }
       }
+    },
+    computed:{
+      ...mapGetters({
+        slideAll:"getAllSlide",
+        getASlide:"getASlide"
+      }),
+      getASlider:{
+        get(){
+          return this.getASlide
+        },
+        set(value){
+          return this.$store.commit("setslide",value)
+        }
+      }      
+    },
+    mounted(){
+      this.getAllSlideAction()
     }
   }
 </script>
@@ -190,5 +224,8 @@ import { mapActions } from 'vuex';
     height: 7rem;
     margin-bottom: 2rem;
   }
-
+  .sliderDropdown{
+    margin-bottom: 1rem;
+    width: 97%;
+  }
 </style>

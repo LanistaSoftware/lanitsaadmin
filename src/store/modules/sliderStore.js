@@ -1,15 +1,26 @@
 /* eslint-disable no-empty-pattern */
 import api from '../api'
 const state = {
-    
+    slide:'',
+    sliders:'',
 }
 //Getters
 const getters = {
-   
+   getASlide(state){
+       return state.slide
+   },
+   getAllSlide(state){
+    return state.sliders
+}
 }
 //Mutations
 const mutations = {
-  
+  setslide(state,slide){
+    return state.slide = slide 
+  },
+  setAllslide(state,sliders){
+    return state.sliders = sliders 
+  }
 }
 //Actions
 const actions = {
@@ -20,40 +31,29 @@ const actions = {
             alert(err)
         })
     },
-    getBlog({
-        commit
-    }) {  
-        return api().get('blog').then(res => {
-            let blogs = res.data.blogs
-
-            commit("setBlogs", blogs)
+    getAllSlide({commit}) {  
+        return api().get('slide').then(res => {
+            console.log(res.data)
+            let slide = res.data.sliders
+            commit("setAllslide", slide)
         }).catch(err => {
             alert(err)
-        })
-    },
-    deleteBlog({},id) {
-        return api().delete('blog/' + id).then(res => {
+        })},
+    getSlide({commit},id) {  
+        return api().get('slide/' + id).then(res => {
+            let slide = res.data.sliders
+            console.log(slide)
+            commit("setslide", slide)
+        }).catch(err => {
+            alert(err)
+        })},
+    deleteSlide({},id) {
+        return api().delete('slide/' + id).then(res => {
             alert(res.statusText)
         }).catch(err => {
             alert(err)
         })
     },
-    updateBlog({},{id,content}) {
-        return api().put('blog/'+id,{content}).then((res) => {
-            alert(res.statusText)
-        }).catch(err => {
-            alert(err)
-        })
-    },
-    getContentAction({ commit}, content) {
-        return commit("setContent", content)
-    },
-    getUpdateContent2({commit},updatecon){
-        return commit("setUpdateContent", updatecon)
-    },
-    getUpdateId({commit},id){
-        return commit("setUpdateId", id)
-    }
 }
 export default {
     state,

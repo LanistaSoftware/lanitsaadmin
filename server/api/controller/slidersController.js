@@ -15,6 +15,19 @@ router.get('/', async (req, res) => {
         })
     }
 })
+router.get('/:id', async (req, res) => {
+    try {
+        const sliders = await slider.findOne({_id:req.params.id});
+
+        res.status(200).json({
+            sliders
+        });
+    } catch (error) {
+        res.json({
+            message: error.message
+        })
+    }
+})
 router.delete('/:id', async (req, res) => {
     try {
         const sliders = await slider.deleteOne({
@@ -33,19 +46,19 @@ router.post('/', async (req, res) => {
     console.log(req.body)
     const sliders = await new slider({
         SliderOne:{
-            imageurl:req.body.SliderOne.imageurlOne,
-            title:req.body.SliderOne.titleOne,
-            description:req.body.SliderOne.descriptionOne
+            imageurlOne:req.body.SliderOne.imageurlOne,
+            titleOne:req.body.SliderOne.titleOne,
+            descriptionOne:req.body.SliderOne.descriptionOne
         },
         SliderTwo:{
-            imageurl:req.body.SliderTwo.imageurlTwo,
-            title:req.body.SliderTwo.titleTwo,
-            description:req.body.SliderTwo.descriptionTwo
+            imageurlTwo:req.body.SliderTwo.imageurlTwo,
+            titleTwo:req.body.SliderTwo.titleTwo,
+            descriptionTwo:req.body.SliderTwo.descriptionTwo
         },
         SliderThree:{
-            imageurl:req.body.SliderThree.imageurlThree,
-            title:req.body.SliderThree.titleThree,
-            description:req.body.SliderThree.descriptionThree
+            imageurlThree:req.body.SliderThree.imageurlThree,
+            titleThree:req.body.SliderThree.titleThree,
+            descriptionThree:req.body.SliderThree.descriptionThree
         },
     })
     try {

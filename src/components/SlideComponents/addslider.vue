@@ -1,17 +1,16 @@
 <template>
   <div>
-    <Dropdown class="sliderall"></Dropdown>
     <SlideSet></SlideSet>
    </div>
 </template>
 
 <script>
-  import Dropdown from '../GlobalComponent/Dropdown'
+
   import SlideSet from './SlideSet'
   export default {
     name: 'Slider',
     components: {
-      Dropdown,
+     
       SlideSet,
     },
     data() {
@@ -36,9 +35,4 @@
   @headingfont: 'Kanit', sans-serif;
   @contentfont: 'Exo', sans-serif;
 
-  .sliderall {
-    margin-bottom: 1rem;
-    text-align: center;
-
-  }
 </style>

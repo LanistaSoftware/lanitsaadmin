@@ -44,7 +44,6 @@ app.use(session({
   store: store
 }))
 
-
 var store = new MongoDBStore({
   uri: connectstr,
   collection: 'mySessions'
@@ -52,11 +51,9 @@ var store = new MongoDBStore({
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
-
-
 app.use('/api/user',userrouter);
 app.use('/api/blog',blogcontroller);
-app.use('/apl/slide',slidecontroller)
+app.use('/api/slide',slidecontroller)
 const port = process.env.PORT || 3000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true }); 
 const db = mongoose.connection;

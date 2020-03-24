@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 <template>
      <div class="sliderset">
       <div  class="card">
         <div class="image-file m-1">
-          <img  :src="imagePreview" class="rounded mx-auto d-block" >
+          <img  :src="imagePreviewone" class="rounded mx-auto d-block" >
        <div class="custom-file ">
-         <input  type="file" ref="file" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" v-on:change="handleFileUpload()" />
+         <input  type="file" ref="slideOne" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" v-on:change="selectedFile('slideOne')" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
         </div>
@@ -15,10 +16,10 @@
       </div>
       <div  class="card">
         <div class=" m-1">
-          <img src="https://i.picsum.photos/id/188/200/130.jpg" class="img-thumbnail">
+         <img  :src="imagePreviewtwo" class="rounded mx-auto d-block" >
        <div class="custom-file ">
-          <input type="file" class="custom-file-input" ref="" accept="image/*" id="file"
-            v-on:change="handleFileUpload()" />
+          <input type="file" class="custom-file-input" ref="slideTwo" accept="image/*" id="file"
+            v-on:change="selectedFile('slideTwo')" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
         </div>
@@ -29,10 +30,10 @@
       </div>
       <div  class="card">
         <div class=" m-1">
-          <img src="https://i.picsum.photos/id/188/200/130.jpg" class="img-thumbnail">
+       <img  :src="imagePreviewthree" class="rounded mx-auto d-block" >
        <div class="custom-file ">
-          <input type="file" class="custom-file-input" ref="" accept="image/*" id="file"
-            v-on:change="handleFileUpload()" />
+          <input type="file" class="custom-file-input" ref="slideThree" accept="image/*" id="file"
+            v-on:change="selectedFile('slideThree')" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
         </div>
@@ -41,83 +42,123 @@
           <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği" v-model="Slider.SliderThree.descriptioThree"></textarea>
         </div>
       </div>
-      <button class="btn btn-sm btn-primary col-md-2">Ekle</button>
+      <button class="btn btn-sm btn-primary col-md-2" @click="addSlide">Ekle</button>
       <button class="btn btn-sm btn-danger col-md-2">Sil</button>
       <button class="btn btn-sm btn-info col-md-2">Düzenle</button>
-  
     </div>
 </template>
 <script>
-
+import { mapActions } from 'vuex';
   export default {
-  
+
     data() {
       return {
-     title:'',
-      file: '',
-    showPreview: false,
-    imagePreview: '',
-        Slider:{
-          SliderOne:{
-            titleOne:'',
-            imageurlOne:'',
-            descriptionOne:'',
+        image: {
+          size: '',
+          height: '',
+          width: ''
+        },
+        imageError: '',
+        title: '',
+        file: '',
+        showPreview: false,
+        imageLoaded: false,
+        imagePreviewone:'http://via.placeholder.com/1300x800',
+        imagePreviewtwo: 'http://via.placeholder.com/1300x800',
+        imagePreviewthree:'http://via.placeholder.com/1300x800',
+        Slider: {
+          SliderOne: {
+            titleOne: '',
+            imageurlOne: '',
+            descriptionOne: '',
           },
-          SliderTwo:{
-            titleTwo:'',
-            imageurlTwo:'',
-            descriptionTwo:'',
+          SliderTwo: {
+            titleTwo: '',
+            imageurlTwo: '',
+            descriptionTwo: '',
           },
-          SliderThree:{
-            titleThree:'',
-            imageurlThree:'',
-            descriptioThree:'',
+          SliderThree: {
+            titleThree: '',
+            imageurlThree: '',
+            descriptioThree: '',
           }
         }
       }
     },
-    methods:{
-      
-             handleFileUpload() {
-            /*
-              Set the local file variable to what the user has selected.
-            */
-           console.log(this.$refs.file.files)
-            this.file = this.$refs.file.files[0];
-            /*
-              Initialize a File Reader object
-            */
-            let reader = new FileReader();
+    methods: {
+      ...mapActions({
+        addSlideAction:"addSlide"
+      }),
+      addSlide(){
+        this.addSlideAction(this.Slider).then(()=>{
+          this.Slider.SliderOne=""
+          this.Slider.SliderTwo=""
+          this.Slider.SliderThree=""
+          this.imagePreviewone="http://via.placeholder.com/1300x800"
+          this.imagePreviewtwo="http://via.placeholder.com/1300x800"
+          this.imagePreviewthree="http://via.placeholder.com/1300x800"
 
-            /*
-              Add an event listener to the reader that when the file
-              has been loaded, we flag the show preview as true and set the
-              image to be what was read from the reader.
-            */
-            reader.addEventListener("load", function () {
-                this.imagePreview = reader.result;
-            }.bind(this), false);
+        })
+      },
+      selectedFile(slide) {
+        this.imageError = '';
+        const MAX_SIZE = 100000;
+        const MAX_WIDTH = 1000;
+        const MAX_HEIGHT = 3000;
+        var file=''
+        if (slide=='slideOne') { file = this.$refs.slideOne.files[0]}
+        if (slide=='slideTwo') { file = this.$refs.slideTwo.files[0]}
+        if (slide=='slideThree') {file = this.$refs.slideThree.files[0]}
 
-            /*
-              Check to see if the file is not empty.
-            */
-            if (this.file) {
-                /*
-                  Ensure the file is an image file.
-                */
-                if (/\.(jpe?g|png|gif)$/i.test(this.file.name)) {
-                    /*
-                      Fire the readAsDataURL method which will read the file in and
-                      upon completion fire a 'load' event which we will listen to and
-                      display the image in the preview.
-                    */
-                    reader.readAsDataURL(this.file);
-                }
+        if (!file || file.type.indexOf('image/') !== 0) return;
+        this.image.size = file.size;
+        if (this.image.size > MAX_SIZE) {
+          this.imageError = `The image size (${this.image.size}) is too much (max is ${MAX_SIZE}).`;
+          alert(this.imageError)
+          return;
+        }
+
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = evt => {
+          let img = new Image();
+          img.onload = () => {
+            this.image.width = img.width;
+            this.image.height = img.height;
+           
+            if (this.image.width > MAX_WIDTH) {
+              this.imageError = `The image width (${this.image.width}) is too much (max is ${MAX_WIDTH}).`;
+              alert(this.imageError)
+              return;
             }
-        },
-     
+            if (this.image.height > MAX_HEIGHT) {
+              this.imageError = `The image height (${this.image.height}) is too much (max is ${MAX_HEIGHT}).`;
+              alert(this.imageError)
+              return;
+            }
+          }
+       
+          img.src = evt.target.result;
+        if (slide=='slideOne') {
+          this.imagePreviewone = event.target.result
+          this.Slider.SliderOne.imageurlOne = this.imagePreviewone
+          }
+        if (slide=='slideTwo') { 
+          this.imagePreviewtwo = event.target.result
+           this.Slider.SliderTwo.imageurlTwo = this.imagePreviewtwo
+          }
+        if (slide=='slideThree') { 
+          this.imagePreviewthree = event.target.result
+           this.Slider.SliderThree.imageurlThree = this.imagePreviewthree
+        }
+        console.log(this.Slider)
+        }
+        reader.onerror = evt => {
+          console.error(evt);
+        }
+      }
+    }
   }
-}
 </script>
 <style lang="less" scoped>
   @nbfcolor: #303030;
@@ -146,7 +187,7 @@
   }
   img{
     width: 20rem;
-    height: auto;
+    height: 7rem;
     margin-bottom: 2rem;
   }
 

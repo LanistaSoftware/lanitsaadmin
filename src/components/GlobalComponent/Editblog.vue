@@ -19,39 +19,46 @@
 </template>
 <script>
 import vueeditor from './vueeditor'
-import { mapActions, mapGetters ,mapMutations} from 'vuex'
+import {
+  mapActions,
+  mapGetters,
+  mapMutations
+} from 'vuex'
 
-  export default {
-    components: {
-        vueeditor,
-      },
-      data() {
-        return {       
-          image: 'https://picsum.photos/400/400',
-        }
-      },
-      computed:{
-        ...mapGetters([
-          "getUpdateContent",
-          "getUpdateId",
-         
-        ])
-      },
-      methods: {
-        ...mapActions({
-          updateBlogAction:"updateBlog",
-          getBlogAction:"getBlog"
-        }),
-        ...mapMutations({
-          edit:"setData",
-          setClose:"setClose"
-        }),
-        updateBlog(){
-          this.updateBlogAction({'id':this.getUpdateId,'content':this.getUpdateContent}).then(()=>{
-            this.getBlogAction()
-          })
-        }
-      }
+export default {
+  components: {
+    vueeditor,
+  },
+  data() {
+    return {
+      image: 'https://picsum.photos/400/400',
+    }
+  },
+  computed: {
+    ...mapGetters([
+      "getUpdateContent",
+      "getUpdateId",
+
+    ])
+  },
+  methods: {
+    ...mapActions({
+      updateBlogAction: "updateBlog",
+      getBlogAction: "getBlog"
+    }),
+    ...mapMutations({
+      edit: "setData",
+      setClose: "setClose"
+    }),
+    updateBlog() {
+      this.updateBlogAction({
+        'id': this.getUpdateId,
+        'content': this.getUpdateContent
+      }).then(() => {
+        this.getBlogAction()
+      })
+    }
+  }
 }
 
 </script>

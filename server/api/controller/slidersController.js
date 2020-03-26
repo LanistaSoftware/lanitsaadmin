@@ -1,7 +1,7 @@
 const exprees = require('express');
 const router = exprees.Router();
 const slider = require('../models/slidersSchema');
-
+const multer =require('../middleware/multer')
 
 router.get('/', async (req, res) => {
     try {
@@ -18,7 +18,6 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const sliders = await slider.findOne({_id:req.params.id});
-
         res.status(200).json({
             sliders
         });
@@ -30,6 +29,7 @@ router.get('/:id', async (req, res) => {
 })
 router.delete('/:id', async (req, res) => {
     try {
+      
         const sliders = await slider.deleteOne({
             _id: req.params.id
         })
@@ -42,9 +42,9 @@ router.delete('/:id', async (req, res) => {
         })
     }
 })
-router.post('/', async (req, res) => {
-
+router.post('/', multer.saveToUploads,async (req, res) => {
     const sliders = await new slider({
+        sliderName:req.body.sliderName,
         SliderOne:{
             imageurlOne:req.body.SliderOne.imageurlOne,
             titleOne:req.body.SliderOne.titleOne,
@@ -72,13 +72,21 @@ router.post('/', async (req, res) => {
         })
     }
 })
+router.post('/image',multer.saveToUploads,async(req,res)=>{
+    try{
+        res.status(200).json({res})
+    }
+    catch(error){
+        res.json({error})
+    }
+})
 router.put('/:id', async (req, res) => {
     try {
-
         const sliders = await slider.updateOne({
             _id: req.params.id
         }, {
             $set: {
+                sliderName:req.body.sliderName,
                 SliderOne:{
                     imageurlOne:req.body.SliderOne.imageurlOne,
                     titleOne:req.body.SliderOne.titleOne,

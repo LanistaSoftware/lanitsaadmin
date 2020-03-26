@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const sliderschema = mongoose.Schema({
+  sliderName:{
+    type:String,
+    required:false
+  },
   SliderOne: {
    type:Object,
    required:true

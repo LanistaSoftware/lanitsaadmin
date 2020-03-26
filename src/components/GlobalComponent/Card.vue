@@ -58,7 +58,7 @@
           firstIndex = item.search('<h')
           console.log(firstIndex)
           item = item.slice(firstIndex)
-          firstIndex=0;
+          firstIndex=0
           lastIndex = item.search('</'+item.slice(firstIndex+1,3)+'>')+5      
           headerTag = item.slice(firstIndex, lastIndex)
           console.log(item,firstIndex,lastIndex,headerTag)

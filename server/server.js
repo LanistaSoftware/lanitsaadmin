@@ -6,9 +6,8 @@ const path = require('path');
 var session = require('express-session')
 const cookieparser = require('cookie-parser');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const connectstr = 'mongodb+srv://lanista:lanista2020@lanistateam-tq8uo.mongodb.net/node-application?retryWrites=true&w=majority';
+const connectstr = 'mongodb+srv://lanista:lanista2020@lanistateam-tq8uo.mongodb.net/gochem-app?retryWrites=true&w=majority';
 const mongoose = require('mongoose');
-const multer = require('multer')
 const userrouter = require('./api/controller/usercontroller')    
 const blogcontroller = require('./api/controller/blogcontroller')
 const slidecontroller = require('./api/controller/slidersController')
@@ -16,22 +15,14 @@ const morgan = require('morgan')
 
 app.use(morgan('dev'))
 var corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: 'http://localhost:8081',
   optionsSuccessStatus: 200,
   }
 app.use(bodyParser.urlencoded({
   extended: false, 
 }));
 app.use(bodyParser({limit: '500mb'}));
-const storage = multer.diskStorage({
-  destination:function(req,file,cb){
-      cb(null,'./public/img');
-  },
-  filename:function (req,file,cb) {
-      cb(null,file.fieldname +'-'+Date.now()+path.extname(file.originalname));
-  }
-})
-app.use(multer({storage:storage}).single('img'));
+
 
 app.use(cookieparser());
 app.use(session({
@@ -64,7 +55,7 @@ app.set('view engine', ['css','icon']);
 
 app.set('views','../src/assets');
 
-app.use(express.static(path.join(__dirname, '../src/assets/css/')));
+app.use(express.static(path.join(__dirname, '../src/assets/upload')));
 
 app.listen(port, () => {
   console.log(`server started on port ${port}`)

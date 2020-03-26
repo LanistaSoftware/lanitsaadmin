@@ -1,31 +1,17 @@
-const multer = require("multer");
-const fs = require('fs-extra')
-
-const storage = multer.diskStorage({
-  destination: async function(req, file, cb) {
-    const dir = `./uploads/${req.body._id}`;
-    await fs.removeSync(dir);
-    await fs.ensureDir(dir);
-    cb(null, dir);
-  },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  }
+const multer  = require('multer');
+const path = require('path')
+const diskStorageToUploads = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null,path.join(__dirname, '../../../src/assets/upload'))
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+        console.log(file)
+    }
 });
 
-const fileFilter = (req, file, cb) => {
-  //reject a file
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
+const saveToUploads = multer({storage: diskStorageToUploads});
 
-module.exports = multer({
-  limits: {
-    fileSize: 1024 * 1024 * 5
-  },
-  fileFilter: fileFilter,
-  storage: storage,
-});          
+module.exports = {
+    saveToUploads: saveToUploads.array('file')
+}

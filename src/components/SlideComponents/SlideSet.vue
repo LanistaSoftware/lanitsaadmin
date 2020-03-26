@@ -61,215 +61,215 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
+export default {
 
-  export default {
+  data() {
+    return {
+      show: false,
+      editone: false,
+      edittwo: false,
+      editthree: false,
+      imagePreviewone: 'http://via.placeholder.com/1300x800',
+      imagePreviewtwo: 'http://via.placeholder.com/1300x800',
+      imagePreviewthree: 'http://via.placeholder.com/1300x800',
+      selectId: '',
 
-    data() {
-      return {
-        show:false,
-        editone:false,
-        edittwo:false,
-        editthree:false,
-        imagePreviewone:'http://via.placeholder.com/1300x800',
-        imagePreviewtwo:'http://via.placeholder.com/1300x800',
-        imagePreviewthree:'http://via.placeholder.com/1300x800',
-        selectId:'',
+      avarage: '',
+      image: {
+        size: '',
+        height: '',
+        width: ''
+      },
+      imageError: '',
+      title: '',
+      file: '',
+      showPreview: false,
+      imageLoaded: false,
 
-        avarage:'',
-        image: {
-          size: '',
-          height: '',
-          width: ''
+      Slider: {
+        formData: new FormData(),
+        sliderName: '',
+        SliderOne: {
+          titleOne: '',
+          imageurlOne: '',
+          descriptionOne: '',
         },
-        imageError: '',
-        title: '',
-        file: '',
-        showPreview: false,
-        imageLoaded: false,
-   
-        Slider: {
-          formData :new FormData(),
-          sliderName:'',
-          SliderOne: {
-            titleOne: '',
-            imageurlOne: '',
-            descriptionOne: '',
-          },
-          SliderTwo: {
-            titleTwo: '',
-            imageurlTwo: '',
-            descriptionTwo: '',
-          },
-          SliderThree: {
-            titleThree: '',
-            imageurlThree: '',
-            descriptioThree: '',
-          }
+        SliderTwo: {
+          titleTwo: '',
+          imageurlTwo: '',
+          descriptionTwo: '',
+        },
+        SliderThree: {
+          titleThree: '',
+          imageurlThree: '',
+          descriptioThree: '',
         }
       }
+    }
+  },
+  methods: {
+    ...mapActions({
+      addSlideAction: "addSlide",
+      updateSliderAction: "updateSlide",
+      getAllSlideAction: "getAllSlide",
+      getOneSlide: "getSlide",
+      deleteSliderAction: "deleteSlide",
+      addİmage: "addSlideimage",
+
+    }),
+    // getImage(path) {
+    //   return path ? require(`@/assets/upload/${path}`) : ''
+    // },
+    changeSlide(slide) {
+      console.log(slide.target.value)
+      let value = slide.target.value
+      let index = value.search('id:')
+      let id;
+      id = value.slice(index + 3, value.lenght)
+      console.log(id)
+      this.selectId = id
+      this.getOneSlide(id).then(() => {
+        this.show = true
+        this.imagePreviewone = this.getASlider.SliderOne.imageurlOne
+        this.imagePreviewtwo = this.getASlider.SliderTwo.imageurlTwo
+        this.imagePreviewthree = this.getASlider.SliderThree.imageurlThree
+        this.Slider.SliderOne = this.getASlider.SliderOne
+        this.Slider.SliderTwo = this.getASlider.SliderTwo
+        this.Slider.SliderThree = this.getASlider.SliderThree
+        this.Slider.sliderName = this.getASlider.sliderName
+
+        console.log(this.imagePreviewone)
+      })
     },
-    methods: {
-        ...mapActions({
-          addSlideAction: "addSlide",
-          updateSliderAction: "updateSlide",
-          getAllSlideAction: "getAllSlide",
-          getOneSlide: "getSlide",
-          deleteSliderAction: "deleteSlide",
-          addİmage:"addSlideimage",
+    addSlide() {
+      this.addSlideAction(this.Slider).then(() => {
+        this.addİmage(this.Slider.formData)
+        this.Slider.SliderOne = ""
+        this.Slider.SliderTwo = ""
+        this.Slider.SliderThree = ""
+        this.editone = false
+        this.edittwo = false
+        this.editthree = false
 
-        }),
-        getImage(path) {
-          return path ? require(`@/assets/upload/${path}`):''},
-        changeSlide(slide) {
-          console.log(slide.target.value)
-          let value = slide.target.value
-          let index = value.search('id:')
-          let id;
-          id = value.slice(index+3,value.lenght)
-          console.log(id)
-          this.selectId = id
-          this.getOneSlide(id).then(() => {
-            this.show = true
-           this.imagePreviewone = this.getASlider.SliderOne.imageurlOne
-            this.imagePreviewtwo = this.getASlider.SliderTwo.imageurlTwo
-            this.imagePreviewthree = this.getASlider.SliderThree.imageurlThree
-            this.Slider.SliderOne = this.getASlider.SliderOne
-            this.Slider.SliderTwo = this.getASlider.SliderTwo
-            this.Slider.SliderThree = this.getASlider.SliderThree
-            this.Slider.sliderName = this.getASlider.sliderName 
-         
-            console.log(this.imagePreviewone)
-          })
-        },
-        addSlide() {
-          this.addSlideAction(this.Slider).then(() => {
-            this.addİmage(this.Slider.formData)
-            this.Slider.SliderOne = ""
-            this.Slider.SliderTwo = ""
-            this.Slider.SliderThree = ""
-            this.editone =false
-            this.edittwo = false
-            this.editthree = false
-          
-           
-          }).then(() => {
-            this.getAllSlideAction()
-            this.imagePreviewone = "via.png"
-            this.imagePreviewtwo = "via.png"
-            this.imagePreviewthree = "via.png"
-          })
-        },
-        updateSlider() {
-          console.log(this.Slider)
-          this.updateSliderAction({
-            'id': this.selectId,
-            'slideset': this.Slider
-          }).then(() => {
-            this.Slider.SliderOne = ""
-            this.Slider.SliderTwo = ""
-            this.Slider.SliderThree = ""
-            this.imagePreviewone = "via.png"
-            this.imagePreviewtwo = "via.png"
-            this.imagePreviewthree = "via.png"
-            this.Slider.sliderName = ''
-            this.getAllSlideAction()
-          })
-        },
-        deleteSlide() {
-          this.deleteSliderAction(this.selectId).then(() => {
-            this.Slider.SliderOne = ""
-            this.Slider.SliderTwo = ""
-            this.Slider.SliderThree = ""
-            this.getAllSlideAction()
-          })
-        },
-        selectedFile(slide) {
-          this.imageError = '';
-          const MAX_SIZE = 1000000000;
-          // const MAX_WIDTH = 1000;
-          // const MAX_HEIGHT = 3000;
-          var file = ''
+
+      }).then(() => {
+        this.getAllSlideAction()
+        this.imagePreviewone = "via.png"
+        this.imagePreviewtwo = "via.png"
+        this.imagePreviewthree = "via.png"
+      })
+    },
+    updateSlider() {
+      console.log(this.Slider)
+      this.updateSliderAction({
+        'id': this.selectId,
+        'slideset': this.Slider
+      }).then(() => {
+        this.Slider.SliderOne = ""
+        this.Slider.SliderTwo = ""
+        this.Slider.SliderThree = ""
+        this.imagePreviewone = "via.png"
+        this.imagePreviewtwo = "via.png"
+        this.imagePreviewthree = "via.png"
+        this.Slider.sliderName = ''
+        this.getAllSlideAction()
+      })
+    },
+    deleteSlide() {
+      this.deleteSliderAction(this.selectId).then(() => {
+        this.Slider.SliderOne = ""
+        this.Slider.SliderTwo = ""
+        this.Slider.SliderThree = ""
+        this.getAllSlideAction()
+      })
+    },
+    selectedFile(slide) {
+      this.imageError = '';
+      const MAX_SIZE = 1000000000;
+      // const MAX_WIDTH = 1000;
+      // const MAX_HEIGHT = 3000;
+      var file = ''
+      if (slide == 'slideOne') {
+        file = this.$refs.slideOne.files[0]
+        this.editone = true
+
+        this.Slider.formData.append('file', file);
+      }
+      if (slide == 'slideTwo') {
+        file = this.$refs.slideTwo.files[0]
+        this.Slider.formData.append('file', file);
+        this.edittwo = true
+      }
+      if (slide == 'slideThree') {
+        file = this.$refs.slideThree.files[0]
+        this.Slider.formData.append('file', file);
+        this.editthree = true
+      }
+
+      if (!file || file.type.indexOf('image/') !== 0) return;
+      this.image.size = file.size;
+      if (this.image.size > MAX_SIZE) {
+        this.imageError = `The image size (${this.image.size}) is too much (max is ${MAX_SIZE}).`;
+        alert(this.imageError)
+        return;
+      }
+
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = evt => {
+        let img = new Image();
+        img.onload = () => {
+          this.image.width = img.width;
+          this.image.height = img.height;
+          this.avarage = this.image.width / this.image.height
+          if (this.avarage < 1.4 || this.avarage > 1.6) {
+            this.imageError = `Fotoğrafın en boy oranı ortalama 1.5 olmalıdır Örneğin 90*60 gibi.Şu anki oran = ${(this.avarage.toFixed(2))}`;
+            alert(this.imageError)
+            return '';
+          }
+        }
+
+        if (this.avarage < 1.4 || this.avarage > 1.6) {
+          img.src = evt.target.result;
           if (slide == 'slideOne') {
-            file = this.$refs.slideOne.files[0]
-             this.editone=true
-
-            this.Slider.formData.append('file', file);
+            this.imagePreviewone = event.target.result
+            this.Slider.SliderOne.imageurlOne = file.name
           }
           if (slide == 'slideTwo') {
-            file = this.$refs.slideTwo.files[0]
-              this.Slider.formData.append('file', file);
-              this.edittwo=true
+            this.imagePreviewtwo = event.target.result
+            this.Slider.SliderTwo.imageurlTwo = file.name
           }
           if (slide == 'slideThree') {
-            file = this.$refs.slideThree.files[0]
-              this.Slider.formData.append('file', file);
-              this.editthree=true
-          }
-
-          if (!file || file.type.indexOf('image/') !== 0) return;
-          this.image.size = file.size;
-          if (this.image.size > MAX_SIZE) {
-            this.imageError = `The image size (${this.image.size}) is too much (max is ${MAX_SIZE}).`;
-            alert(this.imageError)
-            return;
-          }
-
-          let reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = evt => {
-            let img = new Image();
-            img.onload = () => {
-              this.image.width = img.width;
-              this.image.height = img.height;
-              this.avarage = this.image.width / this.image.height
-              if (this.avarage < 1.4 || this.avarage > 1.6) {
-                this.imageError = `Fotoğrafın en boy oranı ortalama 1.5 olmalıdır Örneğin 90*60 gibi.Şu anki oran = ${(this.avarage.toFixed(2))}`;
-                alert(this.imageError)
-                return '';
-              }
-            }
-            
-            if (this.avarage < 1.4 || this.avarage > 1.6) {
-                img.src = evt.target.result;
-              if (slide == 'slideOne') {
-                this.imagePreviewone = event.target.result
-                this.Slider.SliderOne.imageurlOne = file.name
-              }
-              if (slide == 'slideTwo') {
-                this.imagePreviewtwo = event.target.result
-                this.Slider.SliderTwo.imageurlTwo = file.name
-              }
-              if (slide == 'slideThree') {
-                this.imagePreviewthree = event.target.result
-                this.Slider.SliderThree.imageurlThree = file.name
-              }
-            }
-            this.avarage = 0
-            console.log(this.Slider)
-          }
-          reader.onerror = evt => {
-            console.error(evt);
+            this.imagePreviewthree = event.target.result
+            this.Slider.SliderThree.imageurlThree = file.name
           }
         }
-    },
-    computed:{
-      ...mapGetters({
-        slideAll:"getAllSlide",
-        getASlide:"getASlide"
-      }),
-      getASlider:{
-        get(){
-          return this.getASlide
-        },
-        set(value){
-          return this.$store.commit("setslide",value)
-        }
-      }      
-    },
-    mounted(){
-      this.getAllSlideAction()
+        this.avarage = 0
+        console.log(this.Slider)
+      }
+      reader.onerror = evt => {
+        console.error(evt);
+      }
     }
+  },
+  computed: {
+    ...mapGetters({
+      slideAll: "getAllSlide",
+      getASlide: "getASlide"
+    }),
+    getASlider: {
+      get() {
+        return this.getASlide
+      },
+      set(value) {
+        return this.$store.commit("setslide", value)
+      }
+    }
+  },
+  mounted() {
+    this.getAllSlideAction()
   }
+}
 </script>
 <style lang="less" scoped>
   @nbfcolor: #303030;

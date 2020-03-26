@@ -10,7 +10,9 @@
   </div>
       <div  class="card">
         <div class="image-file m-1">
-          <img  :src="imagePreviewone" class="rounded mx-auto d-block" >
+          
+          <img v-if="show && !editone" :src="getImage(imagePreviewone)" class="rounded mx-auto d-block" >
+          <img  v-if="!show||editone" :src="imagePreviewone" class="rounded mx-auto d-block" >
        <div class="custom-file ">
          <input  type="file" ref="slideOne" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" @change="selectedFile('slideOne')" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
@@ -23,7 +25,9 @@
       </div>
       <div  class="card">
         <div class=" m-1">
-         <img  :src="imagePreviewtwo" class="rounded mx-auto d-block" >
+        
+         <img  v-if="show && !edittwo" :src="getImage(imagePreviewtwo)" class="rounded mx-auto d-block" >
+         <img  v-if="!show|| edittwo" :src="imagePreviewtwo" class="rounded mx-auto d-block" >
        <div class="custom-file ">
           <input type="file" class="custom-file-input" ref="slideTwo" accept="image/*" id="file"
             v-on:change="selectedFile('slideTwo')" />
@@ -37,7 +41,8 @@
       </div>
       <div  class="card">
         <div class=" m-1">
-       <img  :src="imagePreviewthree" class="rounded mx-auto d-block" >
+          <img  v-if="show  && !editthree" :src="getImage(imagePreviewthree)" class="rounded mx-auto d-block" >
+          <img  v-if="!show||editthree" :src="imagePreviewthree" class="rounded mx-auto d-block" >
        <div class="custom-file ">
           <input type="file" class="custom-file-input" ref="slideThree" accept="image/*" id="file"
             v-on:change="selectedFile('slideThree')" />
@@ -62,11 +67,14 @@ import { mapActions, mapGetters } from 'vuex';
     data() {
       return {
         show:false,
+        editone:false,
+        edittwo:false,
+        editthree:false,
         imagePreviewone:'http://via.placeholder.com/1300x800',
         imagePreviewtwo:'http://via.placeholder.com/1300x800',
         imagePreviewthree:'http://via.placeholder.com/1300x800',
         selectId:'',
-        imgpath:'../../assets/upload/',
+
         avarage:'',
         image: {
           size: '',
@@ -110,6 +118,8 @@ import { mapActions, mapGetters } from 'vuex';
           addİmage:"addSlideimage",
 
         }),
+        getImage(path) {
+          return path ? require(`@/assets/upload/${path}`):''},
         changeSlide(slide) {
           console.log(slide.target.value)
           let value = slide.target.value
@@ -120,9 +130,9 @@ import { mapActions, mapGetters } from 'vuex';
           this.selectId = id
           this.getOneSlide(id).then(() => {
             this.show = true
-            this.imagePreviewone = this.imgpath+this.getASlider.SliderOne.imageurlOne
-            this.imagePreviewtwo = this.imgpath+this.getASlider.SliderTwo.imageurlTwo
-            this.imagePreviewthree = this.imgpath+this.getASlider.SliderThree.imageurlThree
+           this.imagePreviewone = this.getASlider.SliderOne.imageurlOne
+            this.imagePreviewtwo = this.getASlider.SliderTwo.imageurlTwo
+            this.imagePreviewthree = this.getASlider.SliderThree.imageurlThree
             this.Slider.SliderOne = this.getASlider.SliderOne
             this.Slider.SliderTwo = this.getASlider.SliderTwo
             this.Slider.SliderThree = this.getASlider.SliderThree
@@ -137,11 +147,16 @@ import { mapActions, mapGetters } from 'vuex';
             this.Slider.SliderOne = ""
             this.Slider.SliderTwo = ""
             this.Slider.SliderThree = ""
-            this.imagePreviewone = "http://via.placeholder.com/1300x800"
-            this.imagePreviewtwo = "http://via.placeholder.com/1300x800"
-            this.imagePreviewthree = "http://via.placeholder.com/1300x800"
+            this.editone =false
+            this.edittwo = false
+            this.editthree = false
+          
+           
           }).then(() => {
             this.getAllSlideAction()
+            this.imagePreviewone = "via.png"
+            this.imagePreviewtwo = "via.png"
+            this.imagePreviewthree = "via.png"
           })
         },
         updateSlider() {
@@ -153,6 +168,10 @@ import { mapActions, mapGetters } from 'vuex';
             this.Slider.SliderOne = ""
             this.Slider.SliderTwo = ""
             this.Slider.SliderThree = ""
+            this.imagePreviewone = "via.png"
+            this.imagePreviewtwo = "via.png"
+            this.imagePreviewthree = "via.png"
+            this.Slider.sliderName = ''
             this.getAllSlideAction()
           })
         },
@@ -172,17 +191,19 @@ import { mapActions, mapGetters } from 'vuex';
           var file = ''
           if (slide == 'slideOne') {
             file = this.$refs.slideOne.files[0]
-            
+             this.editone=true
 
             this.Slider.formData.append('file', file);
           }
           if (slide == 'slideTwo') {
             file = this.$refs.slideTwo.files[0]
               this.Slider.formData.append('file', file);
+              this.edittwo=true
           }
           if (slide == 'slideThree') {
             file = this.$refs.slideThree.files[0]
               this.Slider.formData.append('file', file);
+              this.editthree=true
           }
 
           if (!file || file.type.indexOf('image/') !== 0) return;

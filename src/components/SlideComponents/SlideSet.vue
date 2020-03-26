@@ -3,7 +3,7 @@
      <div class="sliderset">
         <div class="sliderDropdown">
      <label for="exampleFormControlSelect1">Slayt Seti Seçiniz</label>
-    <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)" >
+    <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)" v-model="selectId">
         <option  v-for="(item,index) in slideAll" :key="index">{{index+1 +' Burası birazcık açıklama istiyor '+ 'ID NO '+item._id}}</option>
     </select>
   </div>
@@ -101,16 +101,15 @@ import { mapActions, mapGetters } from 'vuex';
         
       }),
       changeSlide(slide){
-        console.log(slide)
-        let id = slide.target.value
-        this.selectId = id
-        this.getOneSlide(id).then(()=>{
-            this.show=true
-            this.Slider.SliderOne =this.getASlider.SliderOne
-            this.Slider.SliderTwo =this.getASlider.SliderTwo
-            this.Slider.SliderThree =this.getASlider.SliderThree   
-           console.log(this.Slider.SliderTwo)
-        })
+        // let id = slide.target.value
+        console.log(this.selectId,slide)
+        // this.getOneSlide(id).then(()=>{
+        //     this.show=true
+        //     this.Slider.SliderOne =this.getASlider.SliderOne
+        //     this.Slider.SliderTwo =this.getASlider.SliderTwo
+        //     this.Slider.SliderThree =this.getASlider.SliderThree   
+        //    console.log(this.Slider.SliderTwo)
+        // })
         },
       addSlide(){
         this.addSlideAction(this.Slider).then(()=>{

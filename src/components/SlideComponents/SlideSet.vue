@@ -6,8 +6,13 @@
     <select class="form-control" id="exampleFormControlSelect1" @click="changeSlide($event)" >
         <option  v-for="(item,index) in slideAll" :key="index">{{item.sliderName +' '+ 'id:'+item._id}}</option>
     </select>
-    <input type="text" class="form-control mt-2" v-model="Slider.sliderName">
   </div>
+  <div class="card-container">
+      <div class="set-label">
+        <label for="slaytsetname">Slayt seti için isim ekleyiniz.</label>
+        <input type="text" class="form-control" id="slaytsetname" placeholder="Set ismi giriniz." v-model="Slider.sliderName">
+      </div>
+  
       <div  class="card">
         <div class="image-file m-1">
           <img  :src="imagePreviewone" class="rounded mx-auto d-block" >
@@ -49,10 +54,12 @@
           <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği" v-model="Slider.SliderThree.descriptionThree"></textarea>
         </div>
       </div>
+  </div>
       <button class="btn btn-sm btn-primary col-md-2" @click="addSlide">Ekle</button>
       <button v-if="show" class="btn btn-sm btn-danger col-md-2" @click="deleteSlide">Sil</button>
       <button v-if="show" class="btn btn-sm btn-info col-md-2" @click="updateSlider">Düzenle</button>
     </div>
+
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
@@ -111,12 +118,10 @@ import { mapActions, mapGetters } from 'vuex';
 
         }),
         changeSlide(slide) {
-          console.log(slide.target.value)
           let value = slide.target.value
           let index = value.search('id:')
           let id;
           id = value.slice(index+3,value.lenght)
-          console.log(id)
           this.selectId = id
           this.getOneSlide(id).then(() => {
             this.show = true
@@ -127,8 +132,7 @@ import { mapActions, mapGetters } from 'vuex';
             this.Slider.SliderTwo = this.getASlider.SliderTwo
             this.Slider.SliderThree = this.getASlider.SliderThree
             this.Slider.sliderName = this.getASlider.sliderName 
-         
-            console.log(this.imagePreviewone)
+          
           })
         },
         addSlide() {
@@ -145,7 +149,7 @@ import { mapActions, mapGetters } from 'vuex';
           })
         },
         updateSlider() {
-          console.log(this.Slider)
+          alert(this.Slider)
           this.updateSliderAction({
             'id': this.selectId,
             'slideset': this.Slider
@@ -224,7 +228,7 @@ import { mapActions, mapGetters } from 'vuex';
               }
             }
             this.avarage = 0
-            console.log(this.Slider)
+            alert(this.Slider)
           }
           reader.onerror = evt => {
             console.error(evt);
@@ -264,9 +268,16 @@ import { mapActions, mapGetters } from 'vuex';
     text-align: center;
   
   }
+  .card-container{
+    text-align: center;
+    width: 100%;
+    .set-label{
+      padding: 1rem;
+    }
+  }
   .card{
     text-align: center;
-    width: 32%;
+    width: 32.7%;
     margin:0 0.3%;
     float: left;
     padding: 1rem;
@@ -284,4 +295,5 @@ import { mapActions, mapGetters } from 'vuex';
     margin-bottom: 1rem;
     width: 97%;
   }
+
 </style>

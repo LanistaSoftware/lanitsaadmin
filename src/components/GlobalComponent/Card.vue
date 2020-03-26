@@ -56,12 +56,10 @@
           let firstIndex = null
           let lastIndex = null
           firstIndex = item.search('<h')
-          console.log(firstIndex)
           item = item.slice(firstIndex)
           firstIndex=0
           lastIndex = item.search('</'+item.slice(firstIndex+1,3)+'>')+5      
           headerTag = item.slice(firstIndex, lastIndex)
-          console.log(item,firstIndex,lastIndex,headerTag)
           if(headerTag.search('<img')!=-1){            
             alert(index+1+ ' Nolu Makale içindeki fotoğraf başlık etiketleri (<h1> vb..) ile etiketlenmiştir. Lütfen düzeltin...!!')
             return headerTag = '<h2>Bu makalede başlık bulunamadı.</h2>'

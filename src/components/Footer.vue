@@ -5,7 +5,7 @@
 
     </div>
     <div class="footer-img">
-      <img src="../assets/lg.png" alt="Footer ICON">
+      <img src="lg.png" alt="Footer ICON">
     </div>
   </footer>
 </template>

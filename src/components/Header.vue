@@ -3,7 +3,7 @@
     <div class="logo">
     
      <router-link to='/blogs' tag='li' class="nav-item">
-             <a class="navbar-brand m-4" href="#"><img src="../assets/siyah.png" width="200" alt="Lanista Software"></a>
+             <a class="navbar-brand m-4" href="#"><img src="siyah.png" width="200" alt="Lanista Software"></a>
         </router-link>
 </div>
   <div class="header">

@@ -3,13 +3,14 @@
      <div class="sliderset">
         <div class="sliderDropdown">
      <label for="exampleFormControlSelect1">Slayt Seti Seçiniz</label>
-    <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)" >
-        <option  v-for="(item,index) in slideAll" :key="index">{{index+1 +' Burası birazcık açıklama istiyor '+ 'ID NO '+item._id}}</option>
+    <select class="form-control" id="exampleFormControlSelect1" @click="changeSlide($event)" >
+        <option  v-for="(item,index) in slideAll" :key="index">{{item.sliderName +' '+ 'id:'+item._id}}</option>
     </select>
+    <input type="text" class="form-control mt-2" v-model="Slider.sliderName">
   </div>
       <div  class="card">
         <div class="image-file m-1">
-          <img  :src="Slider.SliderOne.imageurlOne" class="rounded mx-auto d-block" >
+          <img  :src="imagePreviewone" class="rounded mx-auto d-block" >
        <div class="custom-file ">
          <input  type="file" ref="slideOne" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" @change="selectedFile('slideOne')" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
@@ -22,7 +23,7 @@
       </div>
       <div  class="card">
         <div class=" m-1">
-         <img  :src="Slider.SliderTwo.imageurlTwo" class="rounded mx-auto d-block" >
+         <img  :src="imagePreviewtwo" class="rounded mx-auto d-block" >
        <div class="custom-file ">
           <input type="file" class="custom-file-input" ref="slideTwo" accept="image/*" id="file"
             v-on:change="selectedFile('slideTwo')" />
@@ -36,7 +37,7 @@
       </div>
       <div  class="card">
         <div class=" m-1">
-       <img  :src="Slider.SliderThree.imageurlThree" class="rounded mx-auto d-block" >
+       <img  :src="imagePreviewthree" class="rounded mx-auto d-block" >
        <div class="custom-file ">
           <input type="file" class="custom-file-input" ref="slideThree" accept="image/*" id="file"
             v-on:change="selectedFile('slideThree')" />
@@ -55,12 +56,18 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
+
   export default {
 
     data() {
       return {
         show:false,
+        imagePreviewone:'http://via.placeholder.com/1300x800',
+        imagePreviewtwo:'http://via.placeholder.com/1300x800',
+        imagePreviewthree:'http://via.placeholder.com/1300x800',
         selectId:'',
+        imgpath:'../../assets/upload/',
+        avarage:'',
         image: {
           size: '',
           height: '',
@@ -73,6 +80,8 @@ import { mapActions, mapGetters } from 'vuex';
         imageLoaded: false,
    
         Slider: {
+          formData :new FormData(),
+          sliderName:'',
           SliderOne: {
             titleOne: '',
             imageurlOne: '',
@@ -92,116 +101,135 @@ import { mapActions, mapGetters } from 'vuex';
       }
     },
     methods: {
-      ...mapActions({
-        addSlideAction:"addSlide",
-        updateSliderAction:"updateSlide",
-        getAllSlideAction:"getAllSlide",
-        getOneSlide:"getSlide",
-        deleteSliderAction:"deleteSlide"
-        
-      }),
-      changeSlide(slide){
-        console.log(slide)
-        let id = slide.target.value
-        this.selectId = id
-        this.getOneSlide(id).then(()=>{
-            this.show=true
-            this.Slider.SliderOne =this.getASlider.SliderOne
-            this.Slider.SliderTwo =this.getASlider.SliderTwo
-            this.Slider.SliderThree =this.getASlider.SliderThree   
-           console.log(this.Slider.SliderTwo)
-        })
+        ...mapActions({
+          addSlideAction: "addSlide",
+          updateSliderAction: "updateSlide",
+          getAllSlideAction: "getAllSlide",
+          getOneSlide: "getSlide",
+          deleteSliderAction: "deleteSlide",
+          addİmage:"addSlideimage",
+
+        }),
+        changeSlide(slide) {
+          console.log(slide.target.value)
+          let value = slide.target.value
+          let index = value.search('id:')
+          let id;
+          id = value.slice(index+3,value.lenght)
+          console.log(id)
+          this.selectId = id
+          this.getOneSlide(id).then(() => {
+            this.show = true
+            this.imagePreviewone = this.imgpath+this.getASlider.SliderOne.imageurlOne
+            this.imagePreviewtwo = this.imgpath+this.getASlider.SliderTwo.imageurlTwo
+            this.imagePreviewthree = this.imgpath+this.getASlider.SliderThree.imageurlThree
+            this.Slider.SliderOne = this.getASlider.SliderOne
+            this.Slider.SliderTwo = this.getASlider.SliderTwo
+            this.Slider.SliderThree = this.getASlider.SliderThree
+            this.Slider.sliderName = this.getASlider.sliderName 
+         
+            console.log(this.imagePreviewone)
+          })
         },
-      addSlide(){
-        this.addSlideAction(this.Slider).then(()=>{
-          this.Slider.SliderOne=""
-          this.Slider.SliderTwo=""
-          this.Slider.SliderThree=""
-          this.imagePreviewone="http://via.placeholder.com/1300x800"
-          this.imagePreviewtwo="http://via.placeholder.com/1300x800"
-          this.imagePreviewthree="http://via.placeholder.com/1300x800"
-        }).then(()=>{
-          this.getAllSlideAction()
-        })
-      },
-      updateSlider(){
-        console.log(this.Slider)
-      this.updateSliderAction({'id':this.selectId,'slideset':this.Slider}).then(()=>{
-          this.Slider.SliderOne=""
-          this.Slider.SliderTwo=""
-          this.Slider.SliderThree=""
-           this.getAllSlideAction()
-      })
-      },
-      deleteSlide(){
-        this.deleteSliderAction(this.selectId).then(()=>{
-            this.Slider.SliderOne=""
-          this.Slider.SliderTwo=""
-          this.Slider.SliderThree=""
-          this.getAllSlideAction()
-        })
-      },
-      selectedFile(slide) {
-        this.imageError = '';
-        const MAX_SIZE = 10000000;
-        // const MAX_WIDTH = 1000;
-        // const MAX_HEIGHT = 3000;
-        var file=''
-        if (slide=='slideOne') { file = this.$refs.slideOne.files[0]}
-        if (slide=='slideTwo') { file = this.$refs.slideTwo.files[0]}
-        if (slide=='slideThree') {file = this.$refs.slideThree.files[0]}
+        addSlide() {
+          this.addSlideAction(this.Slider).then(() => {
+            this.addİmage(this.Slider.formData)
+            this.Slider.SliderOne = ""
+            this.Slider.SliderTwo = ""
+            this.Slider.SliderThree = ""
+            this.imagePreviewone = "http://via.placeholder.com/1300x800"
+            this.imagePreviewtwo = "http://via.placeholder.com/1300x800"
+            this.imagePreviewthree = "http://via.placeholder.com/1300x800"
+          }).then(() => {
+            this.getAllSlideAction()
+          })
+        },
+        updateSlider() {
+          console.log(this.Slider)
+          this.updateSliderAction({
+            'id': this.selectId,
+            'slideset': this.Slider
+          }).then(() => {
+            this.Slider.SliderOne = ""
+            this.Slider.SliderTwo = ""
+            this.Slider.SliderThree = ""
+            this.getAllSlideAction()
+          })
+        },
+        deleteSlide() {
+          this.deleteSliderAction(this.selectId).then(() => {
+            this.Slider.SliderOne = ""
+            this.Slider.SliderTwo = ""
+            this.Slider.SliderThree = ""
+            this.getAllSlideAction()
+          })
+        },
+        selectedFile(slide) {
+          this.imageError = '';
+          const MAX_SIZE = 1000000000;
+          // const MAX_WIDTH = 1000;
+          // const MAX_HEIGHT = 3000;
+          var file = ''
+          if (slide == 'slideOne') {
+            file = this.$refs.slideOne.files[0]
+            
 
-        if (!file || file.type.indexOf('image/') !== 0) return;
-        this.image.size = file.size;
-        if (this.image.size > MAX_SIZE) {
-          this.imageError = `The image size (${this.image.size}) is too much (max is ${MAX_SIZE}).`;
-          alert(this.imageError)
-          return;
-        }
+            this.Slider.formData.append('file', file);
+          }
+          if (slide == 'slideTwo') {
+            file = this.$refs.slideTwo.files[0]
+              this.Slider.formData.append('file', file);
+          }
+          if (slide == 'slideThree') {
+            file = this.$refs.slideThree.files[0]
+              this.Slider.formData.append('file', file);
+          }
 
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = evt => {
-          let img = new Image();
-          img.onload = () => {
-            this.image.width = img.width;
-            this.image.height = img.height;
-            let avarage = this.image.width/this.image.height
-           if(avarage<1.4 || avarage > 1.6){
-             this.imageError = `Fotoğrafın en boy oranı ortalama 1.5 olmalıdır Örneğin 90*60 gibi.Şu anki oran = ${(avarage.toFixed(2))}`;
-             alert(this.imageError)
-             return;
-           }
-            // if (this.image.width > MAX_WIDTH) {
-            //   this.imageError = `The image width (${this.image.width}) is too much (max is ${MAX_WIDTH}).`;
-            //   alert(this.imageError)
-            //   return;
-            // }
-            // if (this.image.height > MAX_HEIGHT) {
-            //   this.imageError = `The image height (${this.image.height}) is too much (max is ${MAX_HEIGHT}).`;
-            //   alert(this.imageError)
-            //   return;
-            // }
+          if (!file || file.type.indexOf('image/') !== 0) return;
+          this.image.size = file.size;
+          if (this.image.size > MAX_SIZE) {
+            this.imageError = `The image size (${this.image.size}) is too much (max is ${MAX_SIZE}).`;
+            alert(this.imageError)
+            return;
           }
-          img.src = evt.target.result;
-        if (slide=='slideOne') {
-          this.imagePreviewone = event.target.result
-          this.Slider.SliderOne.imageurlOne = this.imagePreviewone
+
+          let reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = evt => {
+            let img = new Image();
+            img.onload = () => {
+              this.image.width = img.width;
+              this.image.height = img.height;
+              this.avarage = this.image.width / this.image.height
+              if (this.avarage < 1.4 || this.avarage > 1.6) {
+                this.imageError = `Fotoğrafın en boy oranı ortalama 1.5 olmalıdır Örneğin 90*60 gibi.Şu anki oran = ${(this.avarage.toFixed(2))}`;
+                alert(this.imageError)
+                return '';
+              }
+            }
+            
+            if (this.avarage < 1.4 || this.avarage > 1.6) {
+                img.src = evt.target.result;
+              if (slide == 'slideOne') {
+                this.imagePreviewone = event.target.result
+                this.Slider.SliderOne.imageurlOne = file.name
+              }
+              if (slide == 'slideTwo') {
+                this.imagePreviewtwo = event.target.result
+                this.Slider.SliderTwo.imageurlTwo = file.name
+              }
+              if (slide == 'slideThree') {
+                this.imagePreviewthree = event.target.result
+                this.Slider.SliderThree.imageurlThree = file.name
+              }
+            }
+            this.avarage = 0
+            console.log(this.Slider)
           }
-        if (slide=='slideTwo') { 
-          this.imagePreviewtwo = event.target.result
-           this.Slider.SliderTwo.imageurlTwo = this.imagePreviewtwo
+          reader.onerror = evt => {
+            console.error(evt);
           }
-        if (slide=='slideThree') { 
-          this.imagePreviewthree = event.target.result
-           this.Slider.SliderThree.imageurlThree = this.imagePreviewthree
         }
-        console.log(this.Slider)
-        }
-        reader.onerror = evt => {
-          console.error(evt);
-        }
-      }
     },
     computed:{
       ...mapGetters({

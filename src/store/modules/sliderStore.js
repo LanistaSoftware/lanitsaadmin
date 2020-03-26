@@ -25,7 +25,22 @@ const mutations = {
 //Actions
 const actions = {
     addSlide({},slideset) {
-        return api().post('slide', slideset).then((res) => {
+        return api().post('slide', slideset,{ headers: {
+            'Content-Type': 'application/json'
+        }}).then((res) => {
+            
+            alert(res.statusText)
+        }).catch(err => {
+            alert(err)
+        })
+    },
+    addSlideimage({},form) {
+        console.log(form)
+        return api().post('slide/image', form,{ headers: {
+            'Content-Type': 'multipart/form-data',
+            'Access-Control-Allow-Headers':'Content-Type'
+        }}).then((res) => {
+            console.log(form)
             alert(res.statusText)
         }).catch(err => {
             alert(err)

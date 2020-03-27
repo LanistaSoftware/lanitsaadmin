@@ -69,7 +69,7 @@ import { mapActions, mapGetters } from 'vuex';
     data() {
       return {
         show:false,
-        imagePreviewone:'http://via.placeholder.com/1300x800',
+        imagePreviewone:require('../../assets/upload/bg1.jpg'),
         imagePreviewtwo:'http://via.placeholder.com/1300x800',
         imagePreviewthree:'http://via.placeholder.com/1300x800',
         selectId:'',
@@ -125,7 +125,9 @@ import { mapActions, mapGetters } from 'vuex';
           this.selectId = id
           this.getOneSlide(id).then(() => {
             this.show = true
-            this.imagePreviewone = this.imgpath+this.getASlider.SliderOne.imageurlOne
+            //let pathtwo = 'bg1.jpg'
+            this.imagePreviewone = require(this.imgpath+this.getASlider.SliderOne.imageurlOne),
+            //this.imagePreviewone = this.imgpath+this.getASlider.SliderOne.imageurlOne
             this.imagePreviewtwo = this.imgpath+this.getASlider.SliderTwo.imageurlTwo
             this.imagePreviewthree = this.imgpath+this.getASlider.SliderThree.imageurlThree
             this.Slider.SliderOne = this.getASlider.SliderOne

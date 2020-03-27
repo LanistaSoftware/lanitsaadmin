@@ -1,6 +1,7 @@
 const exprees = require('express');
 const router = exprees.Router();
 const slider = require('../models/slidersSchema');
+const active = require('../models/sliderActive');
 const multer =require('../middleware/multer')
 
 router.get('/', async (req, res) => {
@@ -40,6 +41,19 @@ router.delete('/:id', async (req, res) => {
         res.json({
             message: error.message
         })
+    }
+})
+router.post('/active/:id',async(req,res)=>{
+    const size = (await active.find({})).length
+    console.log(size)
+    const activeslide = await new active({
+        sliderId:req.params.id
+    })
+    try{
+      const add= activeslide.save() 
+      res.status(201).json({add})
+    }catch(err){
+        res.json({err})
     }
 })
 router.post('/', multer.saveToUploads,async (req, res) => {

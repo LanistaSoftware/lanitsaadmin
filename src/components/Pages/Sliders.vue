@@ -6,7 +6,7 @@
     </select>
     </div>
   <div v-show="active" class="btn-group">
-      <button class="btn btn-sm btn-success">Aktif yap</button>
+      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)">Aktif yap</button>
     </div>
 
 <carousel class="slideset" :autoplay="true" :autoplayTimeout="2000" :perPage="1" :navigationEnabled="true" :paginationEnabled="true" :loop="true">
@@ -102,6 +102,7 @@
         addtab: "addTabs",
         getAllSlideAction: "getAllSlide",
         getOneSlide: "getSlide",
+        activeSlide:"activeSlide"
       }),
        changeSlide(slide) {
       let value = slide.target.value

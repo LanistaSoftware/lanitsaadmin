@@ -119,7 +119,7 @@ import { mapActions, mapGetters } from 'vuex';
 
         }),
         getImage(path) {
-          return path ? require(`@/assets/upload/${path}`):''},
+          return path ? require(`@/assets/upload/${path}`) : '' },
         changeSlide(slide) {
           console.log(slide.target.value)
           let value = slide.target.value

@@ -1,30 +1,34 @@
 <template>
 <div>
-    <div class="drop">
-        <select class="form-control" id="exampleFormControlSelect1" @click="changeSlide($event)" >
-        <option  v-for="(item,index) in slideAll" :key="index">{{item.sliderName +' '+ 'id:'+item._id}}</option>
+  <div class="input-container">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="">Kayıtlı Setler</span>
+    </div>
+    <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)" v-model="selectId">
+      <option selected>Slayt seti seçiniz.</option>
+      <option v-for="(item,index) in slideAll" :key="index" :value="item._id">{{item.sliderName}}</option>
     </select>
+    <div class="input-group-prepend">
+      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)"><i class="fas fa-plug"></i></button>
     </div>
-  <div v-show="active" class="btn-group">
-      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)">Aktif yap</button>
-    </div>
-
-<carousel class="slideset" :autoplay="true" :autoplayTimeout="2000" :perPage="1" :navigationEnabled="true" :paginationEnabled="true" :loop="true">
-  <slide v-for="(slide ,index) in slideSets" :key="index.id">
-     <div class="carousel-content" v-bind:style="{ backgroundImage: 'url(' + getImage(slide.imageUrl) + ')' }">
-       <div class="carousel-items">
-              <h4><strong> 0{{ index+1 }} </strong><span class="slash">/</span> <sup> 0{{ slideSets.length }} </sup></h4>
-              <h2>{{ slide.header | firstWord }} </h2>
-              <h2>{{ slide.header | otherWord }} </h2>
-              <p class="content">
-                {{ slide.content }}
-              </p>
-            </div>
-    </div>
-      
-  </slide>
-  
-</carousel>
+  </div>
+  </div>
+  <carousel class="slideset" :autoplay="true" :autoplayTimeout="2000" :perPage="1" :navigationEnabled="true"
+    :paginationEnabled="true" :loop="true" :paginationActiveColor="activeColor" :paginationColor="deActiveColor">
+    <slide v-for="(slide ,index) in slideSets" :key="index.id">
+      <div class="carousel-content" v-bind:style="{ backgroundImage: 'url(' + getImage(slide.imageUrl) + ')' }">
+        <div class="carousel-items">
+          <h4><strong> 0{{ index+1 }} </strong><span class="slash">/</span> <sup> 0{{ slideSets.length }} </sup></h4>
+          <h2>{{ slide.header | firstWord }} </h2>
+          <h2>{{ slide.header | otherWord }} </h2>
+          <p class="content">
+            {{ slide.content }}
+          </p>
+        </div>
+      </div>
+    </slide>
+  </carousel>
 </div>
 </template>
 <script>
@@ -36,8 +40,6 @@
     Slide
   } from 'vue-carousel';
   export default {
- 
-
     components: {
       Carousel,
       Slide
@@ -59,7 +61,8 @@
     data() {
       return {
          selectId:'',
-         active:false,
+         activeColor:'#EE3333',
+         deActiveColor:'#303030',
         tab: [{
             link: '/sliders',
             label: 'Slaytlar '
@@ -104,13 +107,10 @@
         getOneSlide: "getSlide",
         activeSlide:"activeSlide"
       }),
-       changeSlide(slide) {
-      let value = slide.target.value
-      let index = value.search('id:')
-      let id;
-      this.active=true
-      id = value.slice(index + 3, value.lenght)
-      this.selectId = id
+       changeSlide() {
+            console.log(this.selectId)
+      if(this.selectId !== "Slayt seti seçiniz."){
+      let id= this.selectId
       this.getOneSlide(id).then(() => {
       this.slideSets[0].header=  this.getASlider.SliderOne.titleOne
       this.slideSets[1].header=  this.getASlider.SliderTwo.titleTwo
@@ -121,7 +121,7 @@
       this.slideSets[0].imageUrl=  this.getASlider.SliderOne.imageurlOne
       this.slideSets[1].imageUrl=  this.getASlider.SliderTwo.imageurlTwo
       this.slideSets[2].imageUrl=  this.getASlider.SliderThree.imageurlThree
-      })
+      })}
     },
     },
     computed:{
@@ -137,12 +137,7 @@
 .header{
   width: 100%;
 }
-.drop{
-  margin: 1rem;
-  width: 50%;
-  margin-left: 20rem;
 
-}
 .btn-group{
   position: relative;
   text-align: center;
@@ -196,4 +191,25 @@
     color: #fff;
     text-align: left;
 }
+.input-group-prepend{
+  .btn{
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+
+  }
+}
+  .input-container{
+    padding: 0 1rem;
+  }
+  .input-group{
+    margin-bottom: 1rem;
+    width: 100%;
+    margin-left: 0;
+    .input-group-text{
+      width: 8rem;
+    }
+
+  }
 </style>

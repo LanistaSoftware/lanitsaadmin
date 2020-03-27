@@ -1,70 +1,83 @@
 /* eslint-disable no-undef */
 <template>
      <div class="sliderset">
-        <div class="sliderDropdown">
-     <label for="exampleFormControlSelect1">Slayt Seti Seçiniz</label>
-    <select class="form-control" id="exampleFormControlSelect1" @click="changeSlide($event)" >
-        <option  v-for="(item,index) in slideAll" :key="index">{{item.sliderName +' '+ 'id:'+item._id}}</option>
-    </select>
-  </div>
-  <div class="card-container">
-      <div class="set-label">
-        <label for="slaytsetname">Slayt seti için isim ekleyiniz.</label>
-        <input type="text" class="form-control" id="slaytsetname" placeholder="Set ismi giriniz." v-model="Slider.sliderName">
-      </div>
-  
-      <div  class="card">
-        <div class="image-file m-1">
-          
-          <img v-if="show && !editone" :src="getImage(imagePreviewone)" class="rounded mx-auto d-block" >
-          <img  v-if="!show||editone" :src="imagePreviewone" class="rounded mx-auto d-block" >
-       <div class="custom-file ">
-         <input  type="file" ref="slideOne" accept="image/*"  class="custom-file-input" id="file" aria-describedby="inputGroupFileAddon01" @change="selectedFile('slideOne')" />
-          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-        </div>
-        </div>
-        <div class="content-title mt-3">
-          <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı" v-model="Slider.SliderOne.titleOne">
-          <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği" v-model="Slider.SliderOne.descriptionOne"></textarea>
-        </div>
-      </div>
-      <div  class="card">
-        <div class=" m-1">
-        
-         <img  v-if="show && !edittwo" :src="getImage(imagePreviewtwo)" class="rounded mx-auto d-block" >
-         <img  v-if="!show|| edittwo" :src="imagePreviewtwo" class="rounded mx-auto d-block" >
-       <div class="custom-file ">
-          <input type="file" class="custom-file-input" ref="slideTwo" accept="image/*" id="file"
-            v-on:change="selectedFile('slideTwo')" />
-          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-        </div>
-        </div>
-        <div class="content-title mt-3">
-          <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı" v-model="Slider.SliderTwo.titleTwo">
-          <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği" v-model="Slider.SliderTwo.descriptionTwo"></textarea>
-        </div>
-      </div>
-      <div  class="card">
-        <div class=" m-1">
-          <img  v-if="show  && !editthree" :src="getImage(imagePreviewthree)" class="rounded mx-auto d-block" >
-          <img  v-if="!show||editthree" :src="imagePreviewthree" class="rounded mx-auto d-block" >
-       <div class="custom-file ">
-          <input type="file" class="custom-file-input" ref="slideThree" accept="image/*" id="file"
-            v-on:change="selectedFile('slideThree')" />
-          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-        </div>
-        </div>
-        <div class="content-title mt-3">
-          <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı" v-model="Slider.SliderThree.titleThree">
-          <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği" v-model="Slider.SliderThree.descriptionThree"></textarea>
-        </div>
-      </div>
-      <button v-if="!show" class="btn btn-sm btn-primary col-md-2" @click="addSlide">Ekle</button>
-      <button v-if="show" class="btn btn-sm btn-danger col-md-2" @click="deleteSlide">Sil</button>
-      <button v-if="show" class="btn btn-sm btn-info col-md-2" @click="updateSlider">Kaydet</button>
-        <button v-if="show" class="btn btn-sm btn-warning col-md-2" @click="resetSlide">Cancel</button>
-    </div>
-
+       <div class="card-container">
+         <div class="input-container">
+           <div class="input-group">
+             <div class="input-group-prepend">
+               <span class="input-group-text" id="">Kayıtlı Setler</span>
+             </div>
+             <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)"
+               v-model="selectId">
+               <option selected>Slayt seti seçiniz.</option>
+               <option v-for="(item,index) in slideAll" :key="index" :value="item._id">{{item.sliderName}}</option>
+             </select>
+           </div>
+           <div class="input-group">
+             <div class="input-group-prepend">
+               <span class="input-group-text" id="">Set İsmi</span>
+             </div>
+             <input type="text" class="form-control" id="slaytsetname" placeholder="Set ismi giriniz."
+               v-model="Slider.sliderName">
+           </div>
+         </div>
+         <div class="card">
+           <div class="image-file m-1">
+             <img v-if="show && !editone" :src="getImage(imagePreviewone)" class="rounded mx-auto d-block">
+             <img v-if="!show||editone" :src="imagePreviewone" class="rounded mx-auto d-block">
+             <div class="custom-file ">
+               <input type="file" ref="slideOne" accept="image/*" class="custom-file-input" id="file"
+                 aria-describedby="inputGroupFileAddon01" @change="selectedFile('slideOne')" />
+               <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+             </div>
+           </div>
+           <div class="content-title mt-3">
+             <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı"
+               v-model="Slider.SliderOne.titleOne">
+             <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği"
+               v-model="Slider.SliderOne.descriptionOne"></textarea>
+           </div>
+         </div>
+         <div class="card">
+           <div class=" m-1">
+             <img v-if="show && !edittwo" :src="getImage(imagePreviewtwo)" class="rounded mx-auto d-block">
+             <img v-if="!show|| edittwo" :src="imagePreviewtwo" class="rounded mx-auto d-block">
+             <div class="custom-file ">
+               <input type="file" class="custom-file-input" ref="slideTwo" accept="image/*" id="file"
+                 v-on:change="selectedFile('slideTwo')" />
+               <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+             </div>
+           </div>
+           <div class="content-title mt-3">
+             <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı"
+               v-model="Slider.SliderTwo.titleTwo">
+             <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği"
+               v-model="Slider.SliderTwo.descriptionTwo"></textarea>
+           </div>
+         </div>
+         <div class="card">
+           <div class=" m-1">
+             <img v-if="show  && !editthree" :src="getImage(imagePreviewthree)" class="rounded mx-auto d-block">
+             <img v-if="!show||editthree" :src="imagePreviewthree" class="rounded mx-auto d-block">
+             <div class="custom-file ">
+               <input type="file" class="custom-file-input" ref="slideThree" accept="image/*" id="file"
+                 v-on:change="selectedFile('slideThree')" />
+               <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+             </div>
+           </div>
+           <div class="content-title mt-3">
+             <input type="text" class="form-control mb-3" placeholder="Slayt Başlığı"
+               v-model="Slider.SliderThree.titleThree">
+             <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği"
+               v-model="Slider.SliderThree.descriptionThree"></textarea>
+           </div>
+         </div>
+         <button v-if="!show" class="btn btn-sm btn-primary col-md-2" @click="addSlide">Ekle</button>
+         <button v-if="show" class="btn btn-sm btn-danger col-md-2" @click="deleteSlide">Sil</button>
+         <button v-if="show" class="btn btn-sm btn-info col-md-2" @click="updateSlider">Kaydet</button>
+         <button v-if="show" class="btn btn-sm btn-warning col-md-2" @click="resetSlide">Cancel</button>
+       </div>
+     </div>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
@@ -127,15 +140,10 @@ export default {
     getImage(path) {
       return path ? require(`@/assets/upload/${path}`) : ''
     },
-    changeSlide(slide) {
-      console.log(slide.target.value)
-      let value = slide.target.value
-      let index = value.search('id:')
-      let id;
-      id = value.slice(index + 3, value.lenght)
-      console.log(id)
-      this.selectId = id
-      this.getOneSlide(id).then(() => {
+    changeSlide() {
+      if(this.selectId !== "Slayt seti seçiniz."){
+      let id= this.selectId
+        this.getOneSlide(id).then(() => {
         this.show = true
         this.imagePreviewone = this.getASlider.SliderOne.imageurlOne
         this.imagePreviewtwo = this.getASlider.SliderTwo.imageurlTwo
@@ -144,9 +152,11 @@ export default {
         this.Slider.SliderTwo = this.getASlider.SliderTwo
         this.Slider.SliderThree = this.getASlider.SliderThree
         this.Slider.sliderName = this.getASlider.sliderName
-
-        console.log(this.imagePreviewone)
       })
+      } else {
+        this.resetSlide()
+      }
+
     },
     resetSlide(){
         this.Slider.SliderOne = ""
@@ -294,11 +304,10 @@ export default {
   .card-container{
     text-align: center;
     width: 100%;
-    .set-label{
-      padding: 1rem;
-    }
+    padding: 1rem;
   }
   .card{
+    background-color: #fafafa;
     text-align: center;
     width: 32.7%;
     margin:0 0.3%;
@@ -314,9 +323,17 @@ export default {
     height: 10rem;
     margin-bottom: 2rem;
   }
-  .sliderDropdown{
+  .input-container{
+    padding: 0 1rem;
+  }
+  .input-group{
     margin-bottom: 1rem;
-    width: 97%;
+    width: 100%;
+    margin-left: 0;
+    .input-group-text{
+      width: 8rem;
+    }
+
   }
 
 </style>

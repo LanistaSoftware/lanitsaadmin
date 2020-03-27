@@ -81,21 +81,6 @@ export default {
       imagePreviewthree: 'http://via.placeholder.com/1300x800',
       selectId: '',
 
-<<<<<<< HEAD
-    data() {
-      return {
-        show:false,
-        imagePreviewone:require('../../assets/upload/bg1.jpg'),
-        imagePreviewtwo:'http://via.placeholder.com/1300x800',
-        imagePreviewthree:'http://via.placeholder.com/1300x800',
-        selectId:'',
-        imgpath:'../../assets/upload/',
-        avarage:'',
-        image: {
-          size: '',
-          height: '',
-          width: ''
-=======
       avarage: '',
       image: {
         size: '',
@@ -115,7 +100,6 @@ export default {
           titleOne: '',
           imageurlOne: '',
           descriptionOne: '',
->>>>>>> 3ca321797ebc558db5afff27d7ccf481ead61884
         },
         SliderTwo: {
           titleTwo: '',
@@ -174,72 +158,6 @@ export default {
         this.edittwo = false
         this.editthree = false
 
-<<<<<<< HEAD
-        }),
-        changeSlide(slide) {
-          let value = slide.target.value
-          let index = value.search('id:')
-          let id;
-          id = value.slice(index+3,value.lenght)
-          this.selectId = id
-          this.getOneSlide(id).then(() => {
-            this.show = true
-            //let pathtwo = 'bg1.jpg'
-            this.imagePreviewone = require(this.imgpath+this.getASlider.SliderOne.imageurlOne),
-            //this.imagePreviewone = this.imgpath+this.getASlider.SliderOne.imageurlOne
-            this.imagePreviewtwo = this.imgpath+this.getASlider.SliderTwo.imageurlTwo
-            this.imagePreviewthree = this.imgpath+this.getASlider.SliderThree.imageurlThree
-            this.Slider.SliderOne = this.getASlider.SliderOne
-            this.Slider.SliderTwo = this.getASlider.SliderTwo
-            this.Slider.SliderThree = this.getASlider.SliderThree
-            this.Slider.sliderName = this.getASlider.sliderName 
-          
-          })
-        },
-        addSlide() {
-          this.addSlideAction(this.Slider).then(() => {
-            this.addİmage(this.Slider.formData)
-            this.Slider.SliderOne = ""
-            this.Slider.SliderTwo = ""
-            this.Slider.SliderThree = ""
-            this.imagePreviewone = "http://via.placeholder.com/1300x800"
-            this.imagePreviewtwo = "http://via.placeholder.com/1300x800"
-            this.imagePreviewthree = "http://via.placeholder.com/1300x800"
-          }).then(() => {
-            this.getAllSlideAction()
-          })
-        },
-        updateSlider() {
-          alert(this.Slider)
-          this.updateSliderAction({
-            'id': this.selectId,
-            'slideset': this.Slider
-          }).then(() => {
-            this.Slider.SliderOne = ""
-            this.Slider.SliderTwo = ""
-            this.Slider.SliderThree = ""
-            this.getAllSlideAction()
-          })
-        },
-        deleteSlide() {
-          this.deleteSliderAction(this.selectId).then(() => {
-            this.Slider.SliderOne = ""
-            this.Slider.SliderTwo = ""
-            this.Slider.SliderThree = ""
-            this.getAllSlideAction()
-          })
-        },
-        selectedFile(slide) {
-          this.imageError = '';
-          const MAX_SIZE = 1000000000;
-          // const MAX_WIDTH = 1000;
-          // const MAX_HEIGHT = 3000;
-          var file = ''
-          if (slide == 'slideOne') {
-            file = this.$refs.slideOne.files[0]
-            
-=======
->>>>>>> 3ca321797ebc558db5afff27d7ccf481ead61884
 
       }).then(() => {
         this.getAllSlideAction()
@@ -317,47 +235,11 @@ export default {
             return '';
           }
         }
-
-<<<<<<< HEAD
-          let reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = evt => {
-            let img = new Image();
-            img.onload = () => {
-              this.image.width = img.width;
-              this.image.height = img.height;
-              this.avarage = this.image.width / this.image.height
-              if (this.avarage < 1.4 || this.avarage > 1.6) {
-                this.imageError = `Fotoğrafın en boy oranı ortalama 1.5 olmalıdır Örneğin 90*60 gibi.Şu anki oran = ${(this.avarage.toFixed(2))}`;
-                alert(this.imageError)
-                return '';
-              }
-            }
-            
-            if (this.avarage < 1.4 || this.avarage > 1.6) {
-                img.src = evt.target.result;
-              if (slide == 'slideOne') {
-                this.imagePreviewone = event.target.result
-                this.Slider.SliderOne.imageurlOne = file.name
-              }
-              if (slide == 'slideTwo') {
-                this.imagePreviewtwo = event.target.result
-                this.Slider.SliderTwo.imageurlTwo = file.name
-              }
-              if (slide == 'slideThree') {
-                this.imagePreviewthree = event.target.result
-                this.Slider.SliderThree.imageurlThree = file.name
-              }
-            }
-            this.avarage = 0
-            alert(this.Slider)
-=======
         if (this.avarage < 1.4 || this.avarage > 1.6) {
           img.src = evt.target.result;
           if (slide == 'slideOne') {
             this.imagePreviewone = event.target.result
             this.Slider.SliderOne.imageurlOne = file.name
->>>>>>> 3ca321797ebc558db5afff27d7ccf481ead61884
           }
           if (slide == 'slideTwo') {
             this.imagePreviewtwo = event.target.result

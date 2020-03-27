@@ -46,7 +46,7 @@ app.use('/api/user',userrouter);
 app.use('/api/blog',blogcontroller);
 app.use('/api/slide',slidecontroller)
 const port = process.env.PORT || 3000;
-mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true }); 
+mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false }); 
 const db = mongoose.connection;
 db.on("error", error => console.log(error));
 db.once("open", () => console.log("connection to db established"));

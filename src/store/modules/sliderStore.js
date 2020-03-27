@@ -3,6 +3,7 @@ import api from '../api'
 const state = {
     slide:'',
     sliders:'',
+    activeSlide:''
 }
 //Getters
 const getters = {
@@ -11,7 +12,10 @@ const getters = {
    },
    getAllSlide(state){
     return state.sliders
-}
+},
+    getActiveSlide(state){
+        return state.activeSlide
+    }
 }
 //Mutations
 const mutations = {
@@ -20,6 +24,9 @@ const mutations = {
   },
   setAllslide(state,sliders){
     return state.sliders = sliders 
+  },
+  setActiveSlide(state,slide){
+      return state.activeSlide=slide
   }
 }
 //Actions
@@ -81,6 +88,12 @@ const actions = {
             alert(res.statusText)
         }).catch(err=>{
             alert(err)
+        })
+    },
+    getActiveSlide({commit}){
+        return api().get('slide/active').then((res)=>{
+            const slide = res.data.sliders
+            commit("setActiveSlide",slide)
         })
     }
 }

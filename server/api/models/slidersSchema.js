@@ -21,6 +21,11 @@ const sliderschema = mongoose.Schema({
     type: Date,
     default: new Date().toLocaleString()
   },
+  active:{
+    type:Boolean,
+    required:false,
+    default:false,
+  }
 });
 const User = mongoose.model('Slider', sliderschema);
 

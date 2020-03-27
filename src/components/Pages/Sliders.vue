@@ -90,10 +90,12 @@
         ]
       }
     },
-    created() {
+    mounted() {
       this.addtab(this.tab)
       this.getAllSlideAction()
+      this.getActiveSlide()
     },
+    created(){},
     methods: {
       getImage(path) {
       return path ? require(`@/assets/upload/${path}`) : ''
@@ -102,7 +104,8 @@
         addtab: "addTabs",
         getAllSlideAction: "getAllSlide",
         getOneSlide: "getSlide",
-        activeSlide:"activeSlide"
+        activeSlide:"activeSlide",
+        getActiveSlide:"getActiveSlide"
       }),
        changeSlide(slide) {
       let value = slide.target.value

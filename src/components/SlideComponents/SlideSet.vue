@@ -59,10 +59,10 @@
           <textarea name="" class="form-control" id="" cols="20" rows="10" placeholder="Slayt İçeriği" v-model="Slider.SliderThree.descriptionThree"></textarea>
         </div>
       </div>
-  </div>
-      <button class="btn btn-sm btn-primary col-md-2" @click="addSlide">Ekle</button>
+      <button v-if="!show" class="btn btn-sm btn-primary col-md-2" @click="addSlide">Ekle</button>
       <button v-if="show" class="btn btn-sm btn-danger col-md-2" @click="deleteSlide">Sil</button>
-      <button v-if="show" class="btn btn-sm btn-info col-md-2" @click="updateSlider">Düzenle</button>
+      <button v-if="show" class="btn btn-sm btn-info col-md-2" @click="updateSlider">Kaydet</button>
+        <button v-if="show" class="btn btn-sm btn-warning col-md-2" @click="resetSlide">Cancel</button>
     </div>
 
 </template>
@@ -124,9 +124,9 @@ export default {
       addİmage: "addSlideimage",
 
     }),
-    // getImage(path) {
-    //   return path ? require(`@/assets/upload/${path}`) : ''
-    // },
+    getImage(path) {
+      return path ? require(`@/assets/upload/${path}`) : ''
+    },
     changeSlide(slide) {
       console.log(slide.target.value)
       let value = slide.target.value
@@ -148,22 +148,27 @@ export default {
         console.log(this.imagePreviewone)
       })
     },
-    addSlide() {
-      this.addSlideAction(this.Slider).then(() => {
-        this.addİmage(this.Slider.formData)
+    resetSlide(){
         this.Slider.SliderOne = ""
         this.Slider.SliderTwo = ""
+        this.Slider.sliderName=""
         this.Slider.SliderThree = ""
+        this.imagePreviewone = "http://via.placeholder.com/1300x800"
+        this.imagePreviewtwo = "http://via.placeholder.com/1300x800"
+        this.imagePreviewthree = "http://via.placeholder.com/1300x800"
+        this.show=false
         this.editone = false
         this.edittwo = false
         this.editthree = false
-
+    },
+    addSlide() {
+      this.addSlideAction(this.Slider).then(() => {
+        this.addİmage(this.Slider.formData)
+        this.resetSlide()
 
       }).then(() => {
         this.getAllSlideAction()
-        this.imagePreviewone = "via.png"
-        this.imagePreviewtwo = "via.png"
-        this.imagePreviewthree = "via.png"
+     
       })
     },
     updateSlider() {
@@ -172,13 +177,7 @@ export default {
         'id': this.selectId,
         'slideset': this.Slider
       }).then(() => {
-        this.Slider.SliderOne = ""
-        this.Slider.SliderTwo = ""
-        this.Slider.SliderThree = ""
-        this.imagePreviewone = "via.png"
-        this.imagePreviewtwo = "via.png"
-        this.imagePreviewthree = "via.png"
-        this.Slider.sliderName = ''
+        this.resetSlide()
         this.getAllSlideAction()
       })
     },
@@ -274,6 +273,7 @@ export default {
   },
   mounted() {
     this.getAllSlideAction()
+    
   }
 }
 </script>

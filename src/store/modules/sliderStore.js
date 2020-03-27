@@ -76,6 +76,13 @@ const actions = {
             alert(err)
         })
     },
+    activeSlide({},id){
+        return api().post('slide/active/' +id).then(res=>{
+            alert(res.statusText)
+        }).catch(err=>{
+            alert(err)
+        })
+    }
 }
 export default {
     state,

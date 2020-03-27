@@ -1,8 +1,17 @@
 <template>
 <div>
+    <div class="drop">
+        <select class="form-control" id="exampleFormControlSelect1" @click="changeSlide($event)" >
+        <option  v-for="(item,index) in slideAll" :key="index">{{item.sliderName +' '+ 'id:'+item._id}}</option>
+    </select>
+    </div>
+  <div v-show="active" class="btn-group">
+      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)">Aktif yap</button>
+    </div>
+
 <carousel class="slideset" :autoplay="true" :autoplayTimeout="2000" :perPage="1" :navigationEnabled="true" :paginationEnabled="true" :loop="true">
   <slide v-for="(slide ,index) in slideSets" :key="index.id">
-     <div class="carousel-content" v-bind:style="{ backgroundImage: 'url(' + slide.imageUrl + ')' }">
+     <div class="carousel-content" v-bind:style="{ backgroundImage: 'url(' + getImage(slide.imageUrl) + ')' }">
        <div class="carousel-items">
               <h4><strong> 0{{ index+1 }} </strong><span class="slash">/</span> <sup> 0{{ slideSets.length }} </sup></h4>
               <h2>{{ slide.header | firstWord }} </h2>
@@ -12,19 +21,23 @@
               </p>
             </div>
     </div>
+      
   </slide>
+  
 </carousel>
 </div>
 </template>
 <script>
   import {
-    mapActions
+    mapActions,mapGetters
   } from 'vuex'
   import {
     Carousel,
     Slide
   } from 'vue-carousel';
   export default {
+ 
+
     components: {
       Carousel,
       Slide
@@ -45,6 +58,8 @@
   },
     data() {
       return {
+         selectId:'',
+         active:false,
         tab: [{
             link: '/sliders',
             label: 'Slaytlar '
@@ -56,19 +71,19 @@
         ],
         slideSets: [{
             index: 1,
-            imageUrl: require('../../../public/img/bg1.jpg'),
+            imageUrl: 'bg1.jpg',
             header: 'Doğa Dostu Üretim',
             content: ' Sürdürülebilir bir gelecek için daha yaşanabilir bir dünya hedefi doğrultusunda hareket eden Zorluteks, doğa dostu akıllı üretim teknolojileri, etkin enerji yönetimi ve geri dönüşüm uygulamalarının yanı sıra 11 ton siyah boya geri kazanımı ve dünya ortalamalarının çok üzerinde su tasarrufu ile doğayı korumaya katkı sağlıyor. Şirket ayrıca, katı atıklarının yüzde 90’nını da geri dönüşüm ile yeniden değerlendiriyor..'
           },
           {
             index: 2,
-            imageUrl: require('../../../public/img/bg2.jpg'),
+            imageUrl: 'bg2.jpg',
             header: 'Uzman Üretim kadrosu.',
             content: ' Corona virüsü nedeniyle 1 haftalık tatil yapan öğrenciler yarından itibaren uzaktan eğitime geçiyor. Milli Eğitim Bakanlığı konuyla ilgili detaylı bir açıklama yaparak TRT EBA TV (ilkokul-ortaöğretim-lise) uydu frekans bilgilerini paylaştı. MEB aynı zamanda TRT EBA TV kurulumu nasıl yapılır? sorusuna da cevap verdi..'
           },
           {
             index: 3,
-            imageUrl: require('../../../public/img/bg3.jpg'),
+            imageUrl: 'bg2.jpg',
             header: 'Silikonda Çözüm ortağınız',
             content: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris... Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore magnam quas maxime. Optio, expedita quidem. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id, neque corrupti ut atque pariatur odit? Minus exercitationem adipisci nobis quam.'
           }
@@ -77,13 +92,44 @@
     },
     created() {
       this.addtab(this.tab)
+      this.getAllSlideAction()
     },
     methods: {
+      getImage(path) {
+      return path ? require(`@/assets/upload/${path}`) : ''
+    },
       ...mapActions({
         addtab: "addTabs",
+        getAllSlideAction: "getAllSlide",
+        getOneSlide: "getSlide",
+        activeSlide:"activeSlide"
+      }),
+       changeSlide(slide) {
+      let value = slide.target.value
+      let index = value.search('id:')
+      let id;
+      this.active=true
+      id = value.slice(index + 3, value.lenght)
+      this.selectId = id
+      this.getOneSlide(id).then(() => {
+      this.slideSets[0].header=  this.getASlider.SliderOne.titleOne
+      this.slideSets[1].header=  this.getASlider.SliderTwo.titleTwo
+      this.slideSets[2].header=  this.getASlider.SliderThree.titleThree
+      this.slideSets[0].content=  this.getASlider.SliderOne.descriptionOne
+      this.slideSets[1].content=  this.getASlider.SliderTwo.descriptionTwo
+      this.slideSets[2].content=  this.getASlider.SliderThree.descriptioThree
+      this.slideSets[0].imageUrl=  this.getASlider.SliderOne.imageurlOne
+      this.slideSets[1].imageUrl=  this.getASlider.SliderTwo.imageurlTwo
+      this.slideSets[2].imageUrl=  this.getASlider.SliderThree.imageurlThree
       })
+    },
+    },
+    computed:{
+       ...mapGetters({
+      slideAll: "getAllSlide",
+      getASlider: "getASlide"
+    }),
     }
-
   }
 </script>
 <style lang="less" scoped>
@@ -91,7 +137,17 @@
 .header{
   width: 100%;
 }
+.drop{
+  margin: 1rem;
+  width: 50%;
+  margin-left: 20rem;
 
+}
+.btn-group{
+  position: relative;
+  text-align: center;
+ 
+}
  .carousel-content{
   background-repeat: no-repeat;
   background-size: cover;

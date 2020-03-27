@@ -1,74 +1,198 @@
 <template>
 <div>
-  <div class="bd-example " v-for="(item,index) in 10" :key="item.id">
-  <div :id="sabit+' '+index" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li :data-target="sabit+' '+index" data-slide-to="0" class="active"></li>
-      <li :data-target="sabit+' '+index" data-slide-to="1" class=""></li>
-      <li :data-target="sabit+' '+index" data-slide-to="2" class=""></li>
-    </ol>
-    <div class="carousel-inner">
-      <div class="carousel-item">
-        <img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=777&amp;fg=555&amp;text=First slide" alt="First slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_170d34f619f%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_170d34f619f%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22217.7328125%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </div>
-      </div>
-      <div class="carousel-item active">
-        <img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=666&amp;fg=444&amp;text=Second slide" alt="Second slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_170d34f61a0%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_170d34f61a0%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22217.7328125%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Third slide" alt="Third slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_170d34f61a1%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_170d34f61a1%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277%22%20y%3D%22217.7328125%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-        </div>
-      </div>
+    <div class="drop">
+        <select class="form-control" id="exampleFormControlSelect1" @click="changeSlide($event)" >
+        <option  v-for="(item,index) in slideAll" :key="index">{{item.sliderName +' '+ 'id:'+item._id}}</option>
+    </select>
     </div>
-    <a class="carousel-control-prev" :href="sabit+' '+index" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" :href="sabit+' '+index " role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</div>
-</div>
+  <div v-show="active" class="btn-group">
+      <button class="btn btn-sm btn-success">Aktif yap</button>
+    </div>
 
+<carousel class="slideset" :autoplay="true" :autoplayTimeout="2000" :perPage="1" :navigationEnabled="true" :paginationEnabled="true" :loop="true">
+  <slide v-for="(slide ,index) in slideSets" :key="index.id">
+     <div class="carousel-content" v-bind:style="{ backgroundImage: 'url(' + getImage(slide.imageUrl) + ')' }">
+       <div class="carousel-items">
+              <h4><strong> 0{{ index+1 }} </strong><span class="slash">/</span> <sup> 0{{ slideSets.length }} </sup></h4>
+              <h2>{{ slide.header | firstWord }} </h2>
+              <h2>{{ slide.header | otherWord }} </h2>
+              <p class="content">
+                {{ slide.content }}
+              </p>
+            </div>
+    </div>
+      
+  </slide>
+  
+</carousel>
+</div>
 </template>
 <script>
-  import {mapActions} from 'vuex'
-export default {
-  data() {
+  import {
+    mapActions,mapGetters
+  } from 'vuex'
+  import {
+    Carousel,
+    Slide
+  } from 'vue-carousel';
+  export default {
+ 
+
+    components: {
+      Carousel,
+      Slide
+    },
+    filters: {
+    firstWord (header) {
+      return header.split(' ', 1).join()
+    },
+    otherWord (header) {
+      const arr = []
+      header.split(' ').forEach((element, index) => {
+        if (index !== 0) {
+          arr.push(element)
+        }
+      })
+      return arr.join(' ')
+    }
+  },
+    data() {
       return {
-        sabit:'#carouselExampleCaptions',
-           tab:[ 
-          {link:'/sliders',label:'Slaytlar ' },
-          {link:'/addslider',label:'Slayt Ekle/Sil/Düzenle' }],
+         selectId:'',
+         active:false,
+        tab: [{
+            link: '/sliders',
+            label: 'Slaytlar '
+          },
+          {
+            link: '/addslider',
+            label: 'Slayt Ekle/Sil/Düzenle'
+          }
+        ],
+        slideSets: [{
+            index: 1,
+            imageUrl: 'bg1.jpg',
+            header: 'Doğa Dostu Üretim',
+            content: ' Sürdürülebilir bir gelecek için daha yaşanabilir bir dünya hedefi doğrultusunda hareket eden Zorluteks, doğa dostu akıllı üretim teknolojileri, etkin enerji yönetimi ve geri dönüşüm uygulamalarının yanı sıra 11 ton siyah boya geri kazanımı ve dünya ortalamalarının çok üzerinde su tasarrufu ile doğayı korumaya katkı sağlıyor. Şirket ayrıca, katı atıklarının yüzde 90’nını da geri dönüşüm ile yeniden değerlendiriyor..'
+          },
+          {
+            index: 2,
+            imageUrl: 'bg2.jpg',
+            header: 'Uzman Üretim kadrosu.',
+            content: ' Corona virüsü nedeniyle 1 haftalık tatil yapan öğrenciler yarından itibaren uzaktan eğitime geçiyor. Milli Eğitim Bakanlığı konuyla ilgili detaylı bir açıklama yaparak TRT EBA TV (ilkokul-ortaöğretim-lise) uydu frekans bilgilerini paylaştı. MEB aynı zamanda TRT EBA TV kurulumu nasıl yapılır? sorusuna da cevap verdi..'
+          },
+          {
+            index: 3,
+            imageUrl: 'bg2.jpg',
+            header: 'Silikonda Çözüm ortağınız',
+            content: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris... Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore magnam quas maxime. Optio, expedita quidem. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id, neque corrupti ut atque pariatur odit? Minus exercitationem adipisci nobis quam.'
+          }
+        ]
       }
     },
-     created(){
+    created() {
       this.addtab(this.tab)
+      this.getAllSlideAction()
     },
-        methods:{
-         ...mapActions({
-           addtab:"addTabs",
-         })
-        }
-  
-}
+    methods: {
+      getImage(path) {
+      return path ? require(`@/assets/upload/${path}`) : ''
+    },
+      ...mapActions({
+        addtab: "addTabs",
+        getAllSlideAction: "getAllSlide",
+        getOneSlide: "getSlide",
+      }),
+       changeSlide(slide) {
+      let value = slide.target.value
+      let index = value.search('id:')
+      let id;
+      this.active=true
+      id = value.slice(index + 3, value.lenght)
+      this.selectId = id
+      this.getOneSlide(id).then(() => {
+      this.slideSets[0].header=  this.getASlider.SliderOne.titleOne
+      this.slideSets[1].header=  this.getASlider.SliderTwo.titleTwo
+      this.slideSets[2].header=  this.getASlider.SliderThree.titleThree
+      this.slideSets[0].content=  this.getASlider.SliderOne.descriptionOne
+      this.slideSets[1].content=  this.getASlider.SliderTwo.descriptionTwo
+      this.slideSets[2].content=  this.getASlider.SliderThree.descriptioThree
+      this.slideSets[0].imageUrl=  this.getASlider.SliderOne.imageurlOne
+      this.slideSets[1].imageUrl=  this.getASlider.SliderTwo.imageurlTwo
+      this.slideSets[2].imageUrl=  this.getASlider.SliderThree.imageurlThree
+      })
+    },
+    },
+    computed:{
+       ...mapGetters({
+      slideAll: "getAllSlide",
+      getASlider: "getASlide"
+    }),
+    }
+  }
 </script>
 <style lang="less" scoped>
-.bd-example{
-  width: 45%;
-  float: left;
-  margin: 0 2rem 2rem 2rem ;
+
+.header{
+  width: 100%;
+}
+.drop{
+  margin: 1rem;
+  width: 50%;
+  margin-left: 20rem;
+
+}
+.btn-group{
+  position: relative;
+  text-align: center;
+ 
+}
+ .carousel-content{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+   width: 90%;
+   height: 50vh;
+   margin-left: auto;
+   margin-right: auto;
+  }
+  .carousel-items{
+    padding: 3vh;
+    color: #fff;
+    text-align: left;
+    
+    vertical-align: middle;
+    display: table-cell;
+  }
+  .carousel-content h4{
+    font-weight: bold;
+    padding-bottom: 1.2vh;
+    font-family: utopia-std-headline, serif;
+  }
+  .carousel-content span{
+    font-size: 3rem;
+  }
+  .carousel-content sup{
+    font-size: 1.3rem;
+  }
+  .carousel-content strong{
+    font-size: 2.2rem;
+  }
+  .carousel-content h2{
+    font-family: Arial, serif;
+    font-size: 4.5rem;
+    font-weight: 800;
+    padding-bottom: 1vh;
+  }
+  .carousel-content p{
+    font-family: Helvetica , sans-serif;
+    font-weight:200;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    // letter-spacing: 0.1rem;
+  }
+  .carousel-items {
+    color: #fff;
+    text-align: left;
 }
 </style>

@@ -10,16 +10,17 @@
                 <button class="btn btn-sm btn-info input-group-text"  @click="show=!show"><i class="fas fa-exchange-alt"></i></button>
                 <input type="text" class="form-control" id="videoId" placeholder="Username"
                     aria-describedby="inputGroupPrepend3" v-model="videoId" :disabled="!show">
-                <button v-show="show" class="btn btn-sm btn-success ">Save</button>
+                <button v-show="show" class="btn btn-sm btn-success " @click="updateVideo(videoId),show=!show">Save</button>
             </div>
 
         </div>
 </template>
 <script>
+  import {mapActions, mapGetters} from 'vuex'
     export default {
         data() {
             return {
-                videoId: "vsl3gBVO2k4",
+                videoId: "",
                 show: false,
                 
             }
@@ -28,6 +29,11 @@
             ready(event) {
                 this.player = event.target
             },
+        
+            ...mapActions({
+                updateVideo:"updateVideo",
+                getVideo:"getVideo",
+            }),
             playing() {
                 // The player is playing a video.
             },
@@ -44,6 +50,17 @@
             pause() {
                 this.player.pauseVideo()
             }
+        },
+        computed:{
+            ...mapGetters({
+                getterVideoId:"getterVideoId"
+            })
+        },
+        mounted(){
+            this.getVideo().then(()=>{
+                this.videoId=this.getterVideoId
+              
+            })
         }
     }
 </script>

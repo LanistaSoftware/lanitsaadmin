@@ -3,19 +3,27 @@ const mongoose = require('mongoose');
 const sliderschema = mongoose.Schema({
   sliderName:{
     type:String,
-    required:false
+    required:true,
+    max:120,
+    min:2,
   },
   SliderOne: {
    type:Object,
-   required:true
+   required:true,
+   max:120,
+   min:2,
   },
   SliderTwo: {
    type:Object,
-   required:true
+   required:true,
+   max:120,
+   min:2,
   },
   SliderThree: {
    type:Object,
-   required:true
+   required:true,
+   max:120,
+   min:2,
   },
   creationdate: {
     type: Date,

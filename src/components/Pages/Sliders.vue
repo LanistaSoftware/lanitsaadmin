@@ -10,7 +10,7 @@
       <option v-for="(item,index) in slideAll" :key="index" :value="item._id">{{item.sliderName}}</option>
     </select>
     <div class="input-group-prepend">
-      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)"><i class="fas fa-plug"></i></button>
+      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)" :disabled="selectId==activeId || selectId ==''"><i class="fas fa-plug"></i></button>
     </div>
   </div>
   </div>
@@ -61,6 +61,7 @@
     data() {
       return {
          selectId:'',
+         activeId:'',
          activeColor:'#EE3333',
          deActiveColor:'#303030',
         tab: [{
@@ -93,13 +94,7 @@
         ]
       }
     },
-    mounted() {
-      this.addtab(this.tab)
-      this.getAllSlideAction()
-      this.getActiveSlide()
-    },
-    created(){},
-    methods: {
+     methods: {
       getImage(path) {
       return path ? require(`@/assets/upload/${path}`) : ''
     },
@@ -108,10 +103,10 @@
         getAllSlideAction: "getAllSlide",
         getOneSlide: "getSlide",
         activeSlide:"activeSlide",
-        getActiveSlide:"getActiveSlide"
+        getActiveSlider:"getActiveSlide"
       }),
        changeSlide() {
-            console.log(this.selectId)
+        
       if(this.selectId !== "Slayt seti seçiniz."){
       let id= this.selectId
       this.getOneSlide(id).then(() => {
@@ -120,17 +115,41 @@
       this.slideSets[2].header=  this.getASlider.SliderThree.titleThree
       this.slideSets[0].content=  this.getASlider.SliderOne.descriptionOne
       this.slideSets[1].content=  this.getASlider.SliderTwo.descriptionTwo
-      this.slideSets[2].content=  this.getASlider.SliderThree.descriptioThree
+      this.slideSets[2].content=  this.getASlider.SliderThree.descriptionThree
       this.slideSets[0].imageUrl=  this.getASlider.SliderOne.imageurlOne
       this.slideSets[1].imageUrl=  this.getASlider.SliderTwo.imageurlTwo
       this.slideSets[2].imageUrl=  this.getASlider.SliderThree.imageurlThree
       })}
     },
     },
+    mounted() {
+      this.addtab(this.tab)
+      this.getAllSlideAction()
+      this.getActiveSlider().then(()=>{
+       if (this.getAcitveOne!=='') {
+      this.activeId= this.getAcitveOne._id
+      this.slideSets[0].header=  this.getAcitveOne.SliderOne.titleOne
+      this.slideSets[1].header=  this.getAcitveOne.SliderTwo.titleTwo
+      this.slideSets[2].header=  this.getAcitveOne.SliderThree.titleThree
+      this.slideSets[0].content=  this.getAcitveOne.SliderOne.descriptionOne
+      this.slideSets[1].content=  this.getAcitveOne.SliderTwo.descriptionTwo
+      this.slideSets[2].content=  this.getAcitveOne.SliderThree.descriptionThree
+      this.slideSets[0].imageUrl=  this.getAcitveOne.SliderOne.imageurlOne
+      this.slideSets[1].imageUrl=  this.getAcitveOne.SliderTwo.imageurlTwo
+      this.slideSets[2].imageUrl=  this.getAcitveOne.SliderThree.imageurlThree
+       }
+      
+      })
+    
+      
+    },
+    
+   
     computed:{
        ...mapGetters({
       slideAll: "getAllSlide",
-      getASlider: "getASlide"
+      getASlider: "getASlide",
+      getAcitveOne:"getterActiveSlide"
     }),
     }
   }

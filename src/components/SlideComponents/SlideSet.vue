@@ -93,7 +93,6 @@ export default {
       imagePreviewtwo: 'http://via.placeholder.com/1300x800',
       imagePreviewthree: 'http://via.placeholder.com/1300x800',
       selectId: '',
-
       avarage: '',
       image: {
         size: '',
@@ -156,7 +155,6 @@ export default {
       } else {
         this.resetSlide()
       }
-
     },
     resetSlide(){
         this.Slider.SliderOne ={

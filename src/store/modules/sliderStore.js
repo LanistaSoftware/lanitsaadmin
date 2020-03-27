@@ -3,7 +3,8 @@ import api from '../api'
 const state = {
     slide:'',
     sliders:'',
-    activeSlide:''
+    activeOne:'',
+    videoId:'',
 }
 //Getters
 const getters = {
@@ -13,8 +14,11 @@ const getters = {
    getAllSlide(state){
     return state.sliders
 },
-    getActiveSlide(state){
-        return state.activeSlide
+    getterActiveSlide(state){
+        return state.activeOne
+    },
+    getterVideoId(state){
+        return state.videoId
     }
 }
 //Mutations
@@ -25,8 +29,11 @@ const mutations = {
   setAllslide(state,sliders){
     return state.sliders = sliders 
   },
-  setActiveSlide(state,slide){
-      return state.activeSlide=slide
+  setActiveSlide(state,slideone){
+      return state.activeOne = slideone
+  },
+  setVideoId(state,Id){
+      return state.videoId = Id
   }
 }
 //Actions
@@ -90,10 +97,32 @@ const actions = {
             alert(err)
         })
     },
-    getActiveSlide({commit}){
-        return api().get('slide/active').then((res)=>{
-            const slide = res.data.sliders
-            commit("setActiveSlide",slide)
+    getActiveSlide({commit},slide){
+        return api().get('slide/active/slide',{ headers: {
+            'Content-Type': 'application/json'
+        }}).then(res=>{
+             slide = res.data.slide
+       
+           
+            commit("setActiveSlide",slide[0])
+        }).catch(err=>{
+            console.log(err)
+        })
+    },
+    updateVideo({},videopath){
+        return api().post('video',{videopath}).then((res)=>{
+            alert(res.statusText)
+        }).catch((err)=>{
+            alert(err)
+        })
+    },
+    getVideo({commit},Id){
+        return api().get('video').then((res)=>{
+            console.log(res.data.sliders[0].videopath)
+            Id=res.data.sliders[0].videopath
+            commit("setVideoId",Id)
+        }).catch((err)=>{
+            alert(err)
         })
     }
 }
@@ -102,5 +131,4 @@ export default {
     getters,
     mutations,
     actions
-
 }

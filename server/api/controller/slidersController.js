@@ -66,17 +66,14 @@ router.post('/active/:id', async (req, res) => {
         console.log(error)
     }
 })
-router.get('/active', async (req, res) => {
+router.get('/active/slide', async (req,res) => {
     try {
-        const slide = await slider.findOne({
-            active:true
-        })
-        res.status(200).json({
-            slide
-        })
+        const slide = await slider.find({active:true})
+        res.status(200).json({slide})    
     } catch (error) {
         console.log(error)
     }
+
 })
 router.post('/', multer.saveToUploads, async (req, res) => {
     const sliders = await new slider({

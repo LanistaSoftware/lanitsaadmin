@@ -5,13 +5,13 @@ const diskStorageToUploads = multer.diskStorage({
         cb(null,path.join(__dirname, '../../../src/assets/upload'))
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname)
-        console.log(file)
+        cb(null, file.originalname+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg')
     }
 });
 
 const saveToUploads = multer({storage: diskStorageToUploads});
 
 module.exports = {
-    saveToUploads: saveToUploads.array('file')
+    saveToUploads: saveToUploads.array('file'),
+    saveToUploadsReference:saveToUploads.single('file'),
 }

@@ -2,19 +2,22 @@
     
       <div class="card row">
         <div class="card-image-top">
-           <img v-bind:src="imagePreview" v-show="showPreview"/>
+           <img v-bind:src="imagePreview" class="rounded mx-auto d-block mt-1"/>
         </div>
         <div class="card-body">
-          <div class="input-group">
-            <input  v-model="title" type="text" class="form-control" placeholder="TİTLE" >
-           <input  v-model="title" type="text" class="form-control ml-1" placeholder="URL" >
+          <div class="input-item">
+            <div class="item">
+               <input  v-model="references.referenceName" type="text" class="form-control" placeholder="Reference Name " >
+            </div>
+            <div class="item">
+               <input  v-model="references.referenceUrl" type="text" class="form-control" placeholder="Reference URL" >
+            </div>
           </div>
           <div class="custom-file mt-2 ">
           <input type="file" class="custom-file-input" ref="file" accept="image/*" id="file"
             v-on:change="handleFileUpload()" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
-         
           <div class="card-body">
             <button class="btn btn-sm btn-warning" @click="reset"><i class="fas fa-trash-restore" ></i> Reset</button>
            <button class="btn btn-sm btn-success"><i class="fas fa-save"></i> Save</button>
@@ -26,10 +29,14 @@
 export default {
     data(){
   return {
-    title:'',
+     image: new FormData(),
+    references: {
+      referenceUrl: '',
+      referenceImage: '',
+      referenceName: '',
+    },
     file: '',
-    showPreview: false,
-    imagePreview: '',
+    imagePreview: 'http://via.placeholder.com/1300x800',
       tab:[ 
           {link:'/reference',label:'Referanslar' },
           {link:'/addreference',label:'Referans Ekle' }]
@@ -48,15 +55,15 @@ methods: {
     /*
       Initialize a File Reader object
     */
+    this.image.append('file',this.file)
     let reader  = new FileReader();
-
+    this.references.referenceImage = new Date().toLocaleString()+this.file.name
     /*
       Add an event listener to the reader that when the file
       has been loaded, we flag the show preview as true and set the
       image to be what was read from the reader.
     */
     reader.addEventListener("load", function () {
-      this.showPreview = true;
       this.imagePreview = reader.result;
     }.bind(this), false);
 
@@ -78,8 +85,10 @@ methods: {
     }
   },
   reset(){
-    this.title=null
-    this.imagePreview=null
+    
+    this.referenceName=null
+    this.referenceUrl=null
+    this.imagePreview='http://via.placeholder.com/1300x800'
     this.file=null
   }
 },
@@ -90,9 +99,22 @@ methods: {
 </script>
 <style lang="less" scoped>
  .card{
- 
      text-align: center;
- 
  }
-
+ img{
+   width: 20rem;
+   height: 10rem;
+ }
+.input-item{
+  text-align: center;
+  width: 100%;
+}
+.item{
+  width: 47%;
+  margin: 1rem;
+  float: left;
+}
+.btn{
+  margin: 0.5rem;
+}
 </style>

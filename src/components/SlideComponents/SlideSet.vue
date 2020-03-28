@@ -259,7 +259,7 @@ export default {
                 console.log('err')
             }else{
             this.imagePreviewone = evt.target.result
-            this.Slider.SliderOne.imageurlOne = file.name
+            this.Slider.SliderOne.imageurlOne = file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
             }
           }
           if (slide == 'slideTwo') {
@@ -267,7 +267,7 @@ export default {
                console.log('er')
              }else{
                this.imagePreviewtwo = evt.target.result
-               this.Slider.SliderTwo.imageurlTwo = file.name
+               this.Slider.SliderTwo.imageurlTwo = file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
              }
         
           }
@@ -276,7 +276,7 @@ export default {
                console('err')
             }else{
               this.imagePreviewthree = evt.target.result
-            this.Slider.SliderThree.imageurlThree = file.name
+            this.Slider.SliderThree.imageurlThree =  file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
             }
           }
           }
@@ -304,6 +304,7 @@ export default {
   },
   mounted() {
     this.getAllSlideAction()
+    console.log(new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours())
     
   }
 }

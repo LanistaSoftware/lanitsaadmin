@@ -10,7 +10,7 @@
                 <button class="btn btn-sm btn-info input-group-text"  @click="show=!show"><i class="fas fa-exchange-alt"></i></button>
                 <input type="text" class="form-control" id="videoId" placeholder="Username"
                     aria-describedby="inputGroupPrepend3" v-model="videoId" :disabled="!show">
-                <button v-show="show" class="btn btn-sm btn-success " @click="updateVideo(videoId),show=!show">Save</button>
+                <button v-show="show" class="btn btn-sm btn-success " @click="updateVideo(videoId),show=!show" :disabled="getterVideoId==videoId">Save</button>
             </div>
 
         </div>

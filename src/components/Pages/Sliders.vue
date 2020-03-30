@@ -10,7 +10,7 @@
       <option v-for="(item,index) in slideAll" :key="index" :value="item._id">{{item.sliderName}}</option>
     </select>
     <div class="input-group-prepend">
-      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)" :disabled="isActive"><i class="fas fa-plug"></i></button>
+      <button class="btn btn-sm btn-success" @click="activeSlide(selectId),isActive=!isActive" :disabled="isActive"><i class="fas fa-plug"></i></button>
     </div>
   </div>
   </div>
@@ -76,19 +76,19 @@
         ],
         slideSets: [{
             index: 1,
-            imageUrl: 'bg1.jpg',
+            imageUrl: '1300x800.png',
             header: 'Doğa Dostu Üretim',
             content: ' Sürdürülebilir bir gelecek için daha yaşanabilir bir dünya hedefi doğrultusunda hareket eden Zorluteks, doğa dostu akıllı üretim teknolojileri, etkin enerji yönetimi ve geri dönüşüm uygulamalarının yanı sıra 11 ton siyah boya geri kazanımı ve dünya ortalamalarının çok üzerinde su tasarrufu ile doğayı korumaya katkı sağlıyor. Şirket ayrıca, katı atıklarının yüzde 90’nını da geri dönüşüm ile yeniden değerlendiriyor..'
           },
           {
             index: 2,
-            imageUrl: 'bg2.jpg',
+            imageUrl: '1300x800.png',
             header: 'Uzman Üretim kadrosu.',
             content: ' Corona virüsü nedeniyle 1 haftalık tatil yapan öğrenciler yarından itibaren uzaktan eğitime geçiyor. Milli Eğitim Bakanlığı konuyla ilgili detaylı bir açıklama yaparak TRT EBA TV (ilkokul-ortaöğretim-lise) uydu frekans bilgilerini paylaştı. MEB aynı zamanda TRT EBA TV kurulumu nasıl yapılır? sorusuna da cevap verdi..'
           },
           {
             index: 3,
-            imageUrl: 'bg2.jpg',
+            imageUrl: '1300x800.png',
             header: 'Silikonda Çözüm ortağınız',
             content: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris... Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore magnam quas maxime. Optio, expedita quidem. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id, neque corrupti ut atque pariatur odit? Minus exercitationem adipisci nobis quam.'
           }
@@ -110,7 +110,7 @@
       if(this.selectId !== "Slayt seti seçiniz."){
       let id= this.selectId
       this.getOneSlide(id).then(() => {
-      this.isActive=!this.getASlider.active;
+      this.isActive=this.getASlider.active;
       this.slideSets[0].header=  this.getASlider.SliderOne.titleOne
       this.slideSets[1].header=  this.getASlider.SliderTwo.titleTwo
       this.slideSets[2].header=  this.getASlider.SliderThree.titleThree

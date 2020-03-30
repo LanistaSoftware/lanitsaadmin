@@ -138,7 +138,6 @@
       this.slideSets[1].imageUrl=  this.getAcitveOne.SliderTwo.imageurlTwo
       this.slideSets[2].imageUrl=  this.getAcitveOne.SliderThree.imageurlThree
        }
-      
       })
     
       

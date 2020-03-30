@@ -59,7 +59,7 @@ import {mapActions, mapGetters} from 'vuex'
                 selectedFile() {
                   this.imageError = '';
                   console.log(this.$refs.myfile)
-                  this.file = this.$refs.myfile.files[1]
+                  this.file = this.$refs.myfile.files[0]
                   let reader = new FileReader();
                   reader.readAsDataURL(this.file);
                   reader.onload = evt => {

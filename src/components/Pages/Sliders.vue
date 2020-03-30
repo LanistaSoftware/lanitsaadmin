@@ -10,7 +10,7 @@
       <option v-for="(item,index) in slideAll" :key="index" :value="item._id">{{item.sliderName}}</option>
     </select>
     <div class="input-group-prepend">
-      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)" :disabled="isActive"><i class="fas fa-plug"></i></button>
+      <button class="btn btn-sm btn-success" @click="activeSlide(selectId), isActive = !isActive" :disabled="isActive"><i class="fas fa-plug"></i></button>
     </div>
   </div>
   </div>
@@ -110,7 +110,7 @@
       if(this.selectId !== "Slayt seti seçiniz."){
       let id= this.selectId
       this.getOneSlide(id).then(() => {
-      this.isActive=!this.getASlider.active;
+      this.isActive=this.getASlider.active;
       this.slideSets[0].header=  this.getASlider.SliderOne.titleOne
       this.slideSets[1].header=  this.getASlider.SliderTwo.titleTwo
       this.slideSets[2].header=  this.getASlider.SliderThree.titleThree
@@ -139,14 +139,9 @@
       this.slideSets[0].imageUrl=  this.getAcitveOne.SliderOne.imageurlOne
       this.slideSets[1].imageUrl=  this.getAcitveOne.SliderTwo.imageurlTwo
       this.slideSets[2].imageUrl=  this.getAcitveOne.SliderThree.imageurlThree
-       }
-      
+       } 
       })
-    
-      
-    },
-    
-   
+    },   
     computed:{
        ...mapGetters({
       slideAll: "getAllSlide",

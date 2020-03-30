@@ -1,10 +1,10 @@
 <template>
     <div class="reference justify-content">
     <div class="card"  v-for="reference in references" :key="reference._id">
-    <img v-if="selectId==reference._id ? edit=false : edit=true" class="card-img-top" :src="getImage(reference.imageUrl)" alt="Card image cap">
-    <img v-if="selectId==reference._id ? edit=true : edit=false"  class="card-img-top" :src="imagePrew" >
-    <div v-if="selectId==reference._id ? edit=true : edit=false" class="custom-file mt-2 ">
-        <input type="file" class="custom-file-input" ref="myfile" accept="image/*"  @change="selectedFile()" />
+    <img  class="card-img-top" :src="getImage(reference.imageUrl)" alt="Card image cap">
+    <img  class="card-img-top" :src="imagePrew" >
+    <div class="custom-file mt-2 ">
+        <input type="file" class="custom-file-input" ref="myfile" accept="image/*"  @change="selectedFile()" id="denbeme" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
     <div class="card-body">
@@ -14,7 +14,7 @@
     <a :href="reference.referenceUrl" blank="_target" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
     <button class="btn btn-sm btn-primary" @click="selectId=reference._id,edit=true"><i class="fas fa-edit"></i></button>
     <button class="btn btn-sm btn-danger" @click="deleteReference(reference._id)"><i class="fas fa-trash-alt"></i></button>
-    <button  v-if="edit==false " class="btn btn-sm btn-warning" @click="selectId='',edit=false"><i class="fas fa-trash-alt"></i>Cancel</button>
+    <button v-if="edit==false" class="btn btn-sm btn-warning" @click="selectId='',edit=false"><i class="fas fa-trash-alt"></i>Cancel</button>
   </div>
 </div>
 </div>
@@ -24,73 +24,72 @@
 <script>
 import {mapActions, mapGetters} from 'vuex'
   export default {
-      data() {
-          return {
-            image: 'http://via.placeholder.com/1300x800',
-              imagePrew: 'http://via.placeholder.com/1300x800',
-              selectId: '',
-              edit: false,
-              file: '',
-              tab: [{
-                  link: '/reference',
-                  label: 'Referanslar'
-                },
-                {
-                  link: '/addreference',
-                  label: 'Referans Ekle'
-                }
-              ],
-              references: {},
-            }
-            },
-            computed: {
-                ...mapGetters({
-                  getterReferences: "getterReferences"
-                })
-              },
-              created() {
-                this.addtab(this.tab)
-                this.getReference().then(() => {
-                  this.references = this.getterReferences
-                })
-              },
-
-              methods: {
-                selectedFile() {
-                  this.imageError = '';
-                  console.log(this.$refs.myfile)
-                  this.file = this.$refs.myfile.files[1]
-                  let reader = new FileReader();
-                  reader.readAsDataURL(this.file);
-                  reader.onload = evt => {
-                    let img = new Image();
-                    img.onload = () => {
-                    }
-                    img.src = evt.target.result;
-                    this.imagePrew = evt.target.result
-                  }
-                  reader.onerror = evt => {
-                    console.error(evt);
-                  }
-                },
-                ...mapActions({
-                  addtab: "addTabs",
-                  getReference: "getReference",
-                  deleteReferenceAction: "deleteReference"
-                }),
-                getImage(path) {
-                  return path ? require(`@/assets/upload/${path}`) : ''
-                },
-                deleteReference(id) {
-                  this.deleteReferenceAction(id).then(() => {
-                    this.getReference().then(() => {
-                      this.references = this.getterReferences
-                    })
-                  })
-                }
-              }
+    data() {
+      return {
+        image: 'http://via.placeholder.com/1300x800',
+        imagePrew: 'http://via.placeholder.com/1300x800',
+        selectId: '',
+        edit: false,
+        file: '',
+        tab: [{
+            link: '/reference',
+            label: 'Referanslar'
+          },
+          {
+            link: '/addreference',
+            label: 'Referans Ekle'
           }
+        ],
+        references: {},
+      }
+    },
+    computed: {
+      ...mapGetters({
+        getterReferences: "getterReferences"
+      })
+    },
+    created() {
+      this.addtab(this.tab)
+      this.getReference().then(() => {
+        this.references = this.getterReferences
+      })
+    },
 
+    methods: {
+      selectedFile() {
+        this.imageError = '';
+        console.log(this.$refs.myfile)
+        this.file = this.$refs.myfile[0].files[0]
+        let reader = new FileReader();
+        reader.readAsDataURL(this.file);
+        reader.onload = evt => {
+          let img = new Image();
+          img.onload = () => {}
+          img.src = evt.target.result;
+          this.imagePrew = evt.target.result
+        }
+        reader.onerror = evt => {
+          console.error(evt);
+        }
+
+      },
+      ...mapActions({
+        addtab: "addTabs",
+        getReference: "getReference",
+        deleteReferenceAction: "deleteReference"
+      }),
+      getImage(path) {
+        return path ? require(`@/assets/upload/${path}`) : ''
+      },
+      deleteReference(id) {
+        this.deleteReferenceAction(id).then(() => {
+          this.getReference().then(() => {
+            this.references = this.getterReferences
+          })
+        })
+      }
+    }
+  }
 </script>
 <style lang="less" scoped>
 .card {

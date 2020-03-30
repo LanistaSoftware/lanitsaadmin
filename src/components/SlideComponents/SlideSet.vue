@@ -93,7 +93,6 @@ export default {
       imagePreviewtwo: 'http://via.placeholder.com/1300x800',
       imagePreviewthree: 'http://via.placeholder.com/1300x800',
       selectId: '',
-
       avarage: '',
       image: {
         size: '',
@@ -156,13 +155,24 @@ export default {
       } else {
         this.resetSlide()
       }
-
     },
     resetSlide(){
-        this.Slider.SliderOne = ""
-        this.Slider.SliderTwo = ""
+        this.Slider.SliderOne ={
+          titleOne: '',
+          imageurlOne: '',
+          descriptionOne: '',
+        }
+        this.Slider.SliderTwo =  {
+          titleTwo: '',
+          imageurlTwo: '',
+          descriptionTwo: '',
+        }
         this.Slider.sliderName=""
-        this.Slider.SliderThree = ""
+        this.Slider.SliderThree =  {
+          titleThree: '',
+          imageurlThree: '',
+          descriptioThree: '',
+        }
         this.imagePreviewone = "http://via.placeholder.com/1300x800"
         this.imagePreviewtwo = "http://via.placeholder.com/1300x800"
         this.imagePreviewthree = "http://via.placeholder.com/1300x800"
@@ -197,6 +207,7 @@ export default {
         this.Slider.SliderTwo = ""
         this.Slider.SliderThree = ""
         this.getAllSlideAction()
+        this.resetSlide()
       })
     },
     selectedFile(slide) {
@@ -204,7 +215,8 @@ export default {
       const MAX_SIZE = 1000000000;
       // const MAX_WIDTH = 1000;
       // const MAX_HEIGHT = 3000;
-      var file = ''
+      var file = '' 
+   
       if (slide == 'slideOne') {
         file = this.$refs.slideOne.files[0]
         this.editone = true
@@ -234,32 +246,41 @@ export default {
       reader.onload = evt => {
         let img = new Image();
         img.onload = () => {
-          this.image.width = img.width;
-          this.image.height = img.height;
-          this.avarage = this.image.width / this.image.height
+          this.avarage =  img.width/img.height
+          console.log(this.avarage)
           if (this.avarage < 1.4 || this.avarage > 1.6) {
             this.imageError = `Fotoğrafın en boy oranı ortalama 1.5 olmalıdır Örneğin 90*60 gibi.Şu anki oran = ${(this.avarage.toFixed(2))}`;
             alert(this.imageError)
             return '';
-          }
-        }
-        if (this.avarage < 1.4 || this.avarage > 1.6) {
-          img.src = evt.target.result;
-          if (slide == 'slideOne') {
-            this.imagePreviewone = event.target.result
-            this.Slider.SliderOne.imageurlOne = file.name
+          }else{
+             if (slide == 'slideOne') {
+              if (this.avarage < 1.4 || this.avarage > 1.6) {
+                console.log('err')
+            }else{
+            this.imagePreviewone = evt.target.result
+            this.Slider.SliderOne.imageurlOne = file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
+            }
           }
           if (slide == 'slideTwo') {
-            this.imagePreviewtwo = event.target.result
-            this.Slider.SliderTwo.imageurlTwo = file.name
+             if (this.avarage < 1.4 || this.avarage > 1.6) {
+               console.log('er')
+             }else{
+               this.imagePreviewtwo = evt.target.result
+               this.Slider.SliderTwo.imageurlTwo = file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
+             }
+        
           }
           if (slide == 'slideThree') {
-            this.imagePreviewthree = event.target.result
-            this.Slider.SliderThree.imageurlThree = file.name
+             if (this.avarage < 1.4 || this.avarage > 1.6) {
+               console('err')
+            }else{
+              this.imagePreviewthree = evt.target.result
+            this.Slider.SliderThree.imageurlThree =  file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
+            }
+          }
           }
         }
-        this.avarage = 0
-        console.log(this.Slider)
+          img.src = evt.target.result;
       }
       reader.onerror = evt => {
         console.error(evt);

@@ -108,7 +108,6 @@
         activeSlide:"activeSlide"
       }),
        changeSlide() {
-            console.log(this.selectId)
       if(this.selectId !== "Slayt seti seçiniz."){
       let id= this.selectId
       this.getOneSlide(id).then(() => {

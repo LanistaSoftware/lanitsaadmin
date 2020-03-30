@@ -229,7 +229,6 @@ export default {
         alert(this.imageError)
         return;
       }
-
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = evt => {
@@ -282,8 +281,7 @@ export default {
     }
   },
   mounted() {
-    this.getAllSlideAction()
-    
+    this.getAllSlideAction()    
   }
 }
 </script>
@@ -333,7 +331,5 @@ export default {
     .input-group-text{
       width: 8rem;
     }
-
   }
-
 </style>

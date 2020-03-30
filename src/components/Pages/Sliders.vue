@@ -77,20 +77,20 @@
         slideSets: [{
             index: 1,
             imageUrl: '1300x800.png',
-            header: 'Doğa Dostu Üretim',
-            content: ' Sürdürülebilir bir gelecek için daha yaşanabilir bir dünya hedefi doğrultusunda hareket eden Zorluteks, doğa dostu akıllı üretim teknolojileri, etkin enerji yönetimi ve geri dönüşüm uygulamalarının yanı sıra 11 ton siyah boya geri kazanımı ve dünya ortalamalarının çok üzerinde su tasarrufu ile doğayı korumaya katkı sağlıyor. Şirket ayrıca, katı atıklarının yüzde 90’nını da geri dönüşüm ile yeniden değerlendiriyor..'
+            header: 'Lorem, ipsum dolor',
+            content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reiciendis error et rerum laboriosam quod molestias non eius provident libero quasi deserunt accusantium, earum officia dolore? Explicabo praesentium dolorem error!'
           },
           {
             index: 2,
             imageUrl: '1300x800.png',
-            header: 'Uzman Üretim kadrosu.',
-            content: ' Corona virüsü nedeniyle 1 haftalık tatil yapan öğrenciler yarından itibaren uzaktan eğitime geçiyor. Milli Eğitim Bakanlığı konuyla ilgili detaylı bir açıklama yaparak TRT EBA TV (ilkokul-ortaöğretim-lise) uydu frekans bilgilerini paylaştı. MEB aynı zamanda TRT EBA TV kurulumu nasıl yapılır? sorusuna da cevap verdi..'
+            header: 'Lorem, ipsum dolor',
+            content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reiciendis error et rerum laboriosam quod molestias non eius provident libero quasi deserunt accusantium, earum officia dolore? Explicabo praesentium dolorem error!'
           },
           {
             index: 3,
             imageUrl: '1300x800.png',
-            header: 'Silikonda Çözüm ortağınız',
-            content: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris... Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore magnam quas maxime. Optio, expedita quidem. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id, neque corrupti ut atque pariatur odit? Minus exercitationem adipisci nobis quam.'
+            header: 'Lorem, ipsum dolor',
+            content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reiciendis error et rerum laboriosam quod molestias non eius provident libero quasi deserunt accusantium, earum officia dolore? Explicabo praesentium dolorem error!'
           }
         ]
       }

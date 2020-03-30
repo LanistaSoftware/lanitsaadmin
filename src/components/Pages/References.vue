@@ -11,7 +11,7 @@
     <input v-if="selectId==reference._id ? edit=true : edit=false" type="text" v-model="reference.referenceName" class="form-control">
     <input v-if="selectId==reference._id " type="text" v-model="reference.referenceUrl" class="form-control">
     <h5 v-if="edit==false"  class="card-title">{{reference.referenceName}}</h5> 
-    <a v-if="edit==false " :href="reference.referenceUrl" blank="_target" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
+    <a v-if="edit==false " :href="reference.referenceUrl" target="_blank" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
     <button  v-if="edit==true " class="btn btn-sm btn-success" @click="updateReference(reference)"><i class="fas fa-save"></i>Save</button>
     <button v-if="edit==false " class="btn btn-sm btn-primary" @click="selectId=reference._id,edit=true"><i class="fas fa-edit"></i></button>
     <button class="btn btn-sm btn-danger" @click="deleteReference(reference._id)"><i class="fas fa-trash-alt"></i></button>

@@ -31,6 +31,11 @@ const actions= {
         commit("setReferences",res.data.references)
        })
    },
+   updateReference({},{id,item,dltimg}){
+    return api().put('reference/'+id+'/'+dltimg,item).then((res)=>{
+        alert(res.statusText)
+    }).catch(err=>{alert(err)})
+   },
    deleteReference({},id){
        return api().delete('reference/'+id).then(res=>{
            alert(res.statusText)

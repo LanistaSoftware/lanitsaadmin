@@ -10,7 +10,7 @@
       <option v-for="(item,index) in slideAll" :key="index" :value="item._id">{{item.sliderName}}</option>
     </select>
     <div class="input-group-prepend">
-      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)" :disabled="selectId==activeId || selectId ==''"><i class="fas fa-plug"></i></button>
+      <button class="btn btn-sm btn-success" @click="activeSlide(selectId)" :disabled="isActive"><i class="fas fa-plug"></i></button>
     </div>
   </div>
   </div>
@@ -60,6 +60,7 @@
   },
     data() {
       return {
+        isActive:true,
          selectId:'',
          activeId:'',
          activeColor:'#EE3333',
@@ -109,6 +110,7 @@
       if(this.selectId !== "Slayt seti seçiniz."){
       let id= this.selectId
       this.getOneSlide(id).then(() => {
+      this.isActive=!this.getASlider.active;
       this.slideSets[0].header=  this.getASlider.SliderOne.titleOne
       this.slideSets[1].header=  this.getASlider.SliderTwo.titleTwo
       this.slideSets[2].header=  this.getASlider.SliderThree.titleThree
@@ -119,6 +121,7 @@
       this.slideSets[1].imageUrl=  this.getASlider.SliderTwo.imageurlTwo
       this.slideSets[2].imageUrl=  this.getASlider.SliderThree.imageurlThree
       })}
+      
     },
     },
     mounted() {

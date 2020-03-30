@@ -26,6 +26,6 @@ const referenceschema = mongoose.Schema({
   },
 
 });
-const Blog = mongoose.model('Blog', referenceschema);
+const Blog = mongoose.model('Reference', referenceschema);
 
 module.exports = Blog

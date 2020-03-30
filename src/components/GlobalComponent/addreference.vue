@@ -3,6 +3,7 @@
       <div class="card row">
         <div class="card-image-top">
            <img v-bind:src="imagePreview" class="rounded mx-auto d-block mt-1"/>
+           
         </div>
         <div class="card-body">
           <div class="input-item">
@@ -20,17 +21,19 @@
         </div>
           <div class="card-body">
             <button class="btn btn-sm btn-warning" @click="reset"><i class="fas fa-trash-restore" ></i> Reset</button>
-           <button class="btn btn-sm btn-success"><i class="fas fa-save"></i> Save</button>
+           <button class="btn btn-sm btn-success" @click="addReference()"><i class="fas fa-save"></i> Save</button>
           </div>  
       </div>
     </div>
 </template>
 <script>
+import {mapActions} from 'vuex'
 export default {
     data(){
   return {
-     image: new FormData(),
+          image: new FormData(),
     references: {
+ 
       referenceUrl: '',
       referenceImage: '',
       referenceName: '',
@@ -43,6 +46,19 @@ export default {
   }
 },
 methods: {
+  ...mapActions({
+    addReferenceActions:'addReference',
+    addImage:'addImage'
+  }),
+  addReference(){
+    this.addReferenceActions(this.references).then(()=>{
+      this.addImage(this.image).then(()=>{
+        this.reset()
+      })
+    }).catch(err=>{
+      alert(err)
+    })
+  },
   /*
     Handles a change on the file upload
   */
@@ -57,7 +73,7 @@ methods: {
     */
     this.image.append('file',this.file)
     let reader  = new FileReader();
-    this.references.referenceImage = new Date().toLocaleString()+this.file.name
+    this.references.referenceImage = this.file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
     /*
       Add an event listener to the reader that when the file
       has been loaded, we flag the show preview as true and set the
@@ -86,8 +102,8 @@ methods: {
   },
   reset(){
     
-    this.referenceName=null
-    this.referenceUrl=null
+    this.references.referenceName=null
+    this.references.referenceUrl=null
     this.imagePreview='http://via.placeholder.com/1300x800'
     this.file=null
   }

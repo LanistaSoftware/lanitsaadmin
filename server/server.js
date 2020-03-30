@@ -12,6 +12,7 @@ const userrouter = require('./api/controller/usercontroller')
 const blogcontroller = require('./api/controller/blogcontroller')
 const slidecontroller = require('./api/controller/slidersController')
 const videoController = require('./api/controller/videoController')
+const referenceController = require('./api/controller/referenceController')
 const morgan = require('morgan')
 
 app.use(morgan('dev'))
@@ -47,6 +48,7 @@ app.use('/api/user',userrouter);
 app.use('/api/blog',blogcontroller);
 app.use('/api/slide',slidecontroller)
 app.use('/api/video',videoController)
+app.use('/api/reference',referenceController)
 const port = process.env.PORT || 3000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false }); 
 const db = mongoose.connection;

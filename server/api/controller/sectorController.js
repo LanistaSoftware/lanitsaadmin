@@ -1,7 +1,9 @@
 const exprees = require('express');
 const router = exprees.Router();
+const multer = require('../middleware/multer')
+const fs = require('fs')
 const sector = require('../models/sectorSchema');
-
+const sectorGalery = require('../models/sectorGalery')
 router.get('/', async (req, res) => {
     try {
         const sectors= await sector.find({})
@@ -54,4 +56,46 @@ router.delete('/:id', async (req, res) => {
     }
   
 })
+router.post('/galery',async (req,res)=>{
+   const newgalery = await new sectorGalery({
+    imgUrl:req.body.imgUrl
+   })
+    try {
+        const add=  await newgalery.save()
+        res.status(201).json({add})
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+router.get('/galery',async (req,res)=>{
+    try {
+        const sectorImages= await sectorGalery.find({})
+        res.status(200).json({sectorImages})
+    } catch (error) {
+        console.log(error)
+    }
+})
+router.delete('/galery/:id/:img',async (req,res)=>{
+    try {
+        fs.unlink('src/assets/upload/'+req.params.img, function (err) {
+            if (err) throw err;
+            // if no error, file has been deleted successfully
+            console.log('File deleted!');
+        }); 
+       const deleteimage= await sectorGalery.deleteOne({_id:req.params.id})
+        res.status(200).json({deleteimage})
+    } catch (error) {
+        console.log(error)
+    }
+})
+router.post('/galery/image',multer.saveToUploadsReference,async (req,res)=>{
+   
+     try {
+        
+        res.status(201).json('OK')
+     } catch (error) {
+         console.log(error)
+     }
+ })
 module.exports = router

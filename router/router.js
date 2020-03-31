@@ -14,6 +14,7 @@ import employe from '../src/components/Pages/Employees.vue'
 import addemploye from '../src/components/GlobalComponent/addemploye.vue'
 import options from '../src/components/Pages/Settings.vue'
 import Welcome from '../src/components/Pages/Welcome.vue'
+import SectorImage from '../src/components/Pages/sectorImage.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -75,6 +76,10 @@ export const router = new VueRouter({
       {
         path:'/options',
         component:options
+      },
+      {
+        path:'/sectorImage',
+        component:SectorImage
       },
       {
         path:'/',

@@ -114,6 +114,7 @@ export default {
         'item': item,
         'dltimg': dltimg
       }).then(() => {
+       this.cancel()
         this.addImage(this.imageForm)
         this.getReference().then(() => {
           this.references = this.getterReferences

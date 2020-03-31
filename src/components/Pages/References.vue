@@ -21,98 +21,104 @@
 </div>
 </template>
 <script>
-import {mapActions, mapGetters} from 'vuex'
-  export default {
-      data() {
-          return {
-            image: 'http://via.placeholder.com/1300x800',
-              imagePrew: 'http://via.placeholder.com/1300x800',
-              imageForm: new FormData(),
-              selectId: '',
-              updateImage:'',
-              edit: false,
-              file: '',
-              tab: [{
-                  link: '/reference',
-                  label: 'Referanslar'
-                },
-                {
-                  link: '/addreference',
-                  label: 'Referans Ekle'
-                }
-              ],
-              references: {},
-            }
-            },
-            computed: {
-                ...mapGetters({
-                  getterReferences: "getterReferences"
-                })
-              },
-              created() {
-                this.addtab(this.tab)
-                this.getReference().then(() => {
-                  this.references = this.getterReferences
-                })
-              },
-              methods: {
-                selectedFile() {
-                  this.imageError = '';
-                  console.log(this.$refs.myfile)
-                  this.file = this.$refs.myfile[0].files[0]
-                  this.imageForm.append('file',this.file)
-               
-                  let reader = new FileReader();
-                  reader.readAsDataURL(this.file);
-                  reader.onload = evt => {
-                    let img = new Image();
-                    img.onload = () => {
-                    }
-                    img.src = evt.target.result;
-                    this.imagePrew = evt.target.result
-                  }
-                  reader.onerror = evt => {
-                    console.error(evt);
-                  }
-                },
-                ...mapActions({
-                  addtab: "addTabs",
-                  getReference: "getReference",
-                  deleteReferenceAction: "deleteReference",
-                  updateReferenceAction:"updateReference",
-                  addImage:"addImage"
-                }),
-                getImage(path) {
-                  return path ? require(`@/assets/upload/${path}`) : ''
-                },
-                cancel(){
-                  this.selectId=''
-                  this.edit=false
-                   this.getReference().then(() => {
-                      this.references = this.getterReferences
-                    })
-                },
-                deleteReference(id) {
-                  this.deleteReferenceAction(id).then(() => {
-                    this.getReference().then(() => {
-                      this.references = this.getterReferences
-                    })
-                  })
-                },
-                updateReference(item){
-                 let dltimg = item.imageUrl
-                  item.imageUrl=this.file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
-                  
-                  this.updateReferenceAction({'id':this.selectId,'item':item, 'dltimg':dltimg}).then(()=>{
-                  this.addImage(this.imageForm)
-                  this.getReference().then(() => {
-                  this.references = this.getterReferences
-                })
-                  })
-                }
-              }
-          }
+import {
+  mapActions,
+  mapGetters
+} from 'vuex'
+export default {
+  data() {
+    return {
+      image: 'http://via.placeholder.com/1300x800',
+      imagePrew: 'http://via.placeholder.com/1300x800',
+      imageForm: new FormData(),
+      selectId: '',
+      updateImage: '',
+      edit: false,
+      file: '',
+      tab: [{
+          link: '/reference',
+          label: 'Referanslar'
+        },
+        {
+          link: '/addreference',
+          label: 'Referans Ekle'
+        }
+      ],
+      references: {},
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getterReferences: "getterReferences"
+    })
+  },
+  created() {
+    this.addtab(this.tab)
+    this.getReference().then(() => {
+      this.references = this.getterReferences
+    })
+  },
+  methods: {
+    selectedFile() {
+      this.imageError = '';
+      console.log(this.$refs.myfile)
+      this.file = this.$refs.myfile[0].files[0]
+      this.imageForm.append('file', this.file)
 
+      let reader = new FileReader();
+      reader.readAsDataURL(this.file);
+      reader.onload = evt => {
+        let img = new Image();
+        img.onload = () => {}
+        img.src = evt.target.result;
+        this.imagePrew = evt.target.result
+      }
+      reader.onerror = evt => {
+        console.error(evt);
+      }
+    },
+    ...mapActions({
+      addtab: "addTabs",
+      getReference: "getReference",
+      deleteReferenceAction: "deleteReference",
+      updateReferenceAction: "updateReference",
+      addImage: "addImage"
+    }),
+    getImage(path) {
+      return path ? require(`@/assets/upload/${path}`) : ''
+    },
+    cancel() {
+      this.selectId = ''
+      this.edit = false
+      this.getReference().then(() => {
+        this.references = this.getterReferences
+      })
+    },
+    deleteReference(id) {
+      this.deleteReferenceAction(id).then(() => {
+        this.getReference().then(() => {
+          this.references = this.getterReferences
+        })
+      })
+    },
+    updateReference(item) {
+      let dltimg = item.imageUrl
+      item.imageUrl = this.file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-' + new Date().getHours() + '.jpg'
+
+      this.updateReferenceAction({
+        'id': this.selectId,
+        'item': item,
+        'dltimg': dltimg
+      }).then(() => {
+        this.addImage(this.imageForm)
+        this.getReference().then(() => {
+          this.references = this.getterReferences
+        })
+      })
+    }
+  }
+
+}
 </script>
 <style lang="less" scoped>
 .card {

@@ -157,6 +157,7 @@ export default {
       }
     },
     resetSlide(){
+      this.selectId = 'Slayt seti seçiniz.'
         this.Slider.SliderOne ={
           titleOne: '',
           imageurlOne: '',

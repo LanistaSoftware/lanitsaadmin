@@ -1,6 +1,6 @@
 <template>
    <div class="addBlog">
-        <CardPreview v-show="close"  @close="deger($event)" :content="content"></CardPreview>
+        <CardPreview v-show="close"  ></CardPreview>
         <vueeditor @con="addcontent($event)" class=" editor"></vueeditor>
          <button @click="close=true" class="btn btn-sm btn-info ml-1"><i class="fas fa-eye"></i></button>
          <button @click="addBlog" class="btn btn-sm btn-success float-right mr-1"><i class="fas fa-save"></i> Save</button> 

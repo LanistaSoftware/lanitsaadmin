@@ -14,6 +14,7 @@ const slidecontroller = require('./api/controller/slidersController')
 const videoController = require('./api/controller/videoController')
 const referenceController = require('./api/controller/referenceController')
 const sectorController = require('./api/controller/sectorController')
+const aboutUsController=require('./api/controller/aboutUsController')
 const morgan = require('morgan')
 
 app.use(morgan('dev'))
@@ -51,6 +52,7 @@ app.use('/api/slide',slidecontroller);
 app.use('/api/video',videoController);
 app.use('/api/reference',referenceController);
 app.use('/api/sector',sectorController)
+app.use('/api/aboutUs',aboutUsController)
 const port = process.env.PORT || 3000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false }); 
 const db = mongoose.connection;

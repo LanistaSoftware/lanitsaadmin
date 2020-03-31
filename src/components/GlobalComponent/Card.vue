@@ -29,7 +29,8 @@
         }),
         ...mapMutations({
           setData: "setData",
-          setClose: "setClose"
+          setClose: "setClose",
+          setShowEdit:"setShowEdit"
         }),
         deletBlog(id) {
           this.deleteBlogAction(id).then(() => {
@@ -81,13 +82,14 @@
 
       mounted() {
         this.getBlogaction()
-
+        this.setShowEdit(true)
       },
       computed: {
         ...mapGetters([
           'getBlogs',
           'data',
-          'close'
+          'close',
+          'showedit'
         ]),
       },
     }

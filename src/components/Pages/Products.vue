@@ -66,7 +66,8 @@ import {mapActions} from 'vuex'
     data() {
       return {
          tab:[ 
-          {link:'/products',label:'Ürünler' }
+          {link:'/products',label:'Ürünler' },
+          {link:'/pigments',label:'Pigmentler' },
          ],
         selectedItem: null,
         isEdit:false,

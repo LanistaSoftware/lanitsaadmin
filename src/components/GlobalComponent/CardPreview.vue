@@ -3,7 +3,7 @@
     <div class="cardhead clearfix  ">
       <p class="headcard-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       <button @click="setClose(false)" class="btn btn-danger btn-sm"><i class="fas fa-window-close"></i></button>
-      <button @click="setData(true),setClose(false)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+      <button v-if="showedit" @click="setData(true),setClose(false)" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
     </div>
     <div v-if="set" class="card-body prew-html" v-html="set">
     </div>
@@ -35,7 +35,8 @@
       computed:{
         ...mapGetters({
           set:"getContent",
-          getAddBlogContent:"getAddBlogContent"
+          getAddBlogContent:"getAddBlogContent",
+          showedit:"showedit"
         }),
       
       },

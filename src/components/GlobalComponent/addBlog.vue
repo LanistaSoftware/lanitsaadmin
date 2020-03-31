@@ -1,8 +1,8 @@
 <template>
    <div class="addBlog">
-        <CardPreview v-show="close"  ></CardPreview>
-        <vueeditor @con="addcontent($event)" class=" editor"></vueeditor>
-         <button @click="close=true" class="btn btn-sm btn-info ml-1"><i class="fas fa-eye"></i></button>
+        <CardPreview v-show="closed"></CardPreview>
+        <vueeditor class=" editor"></vueeditor>
+         <button @click="setClose(true)" class="btn btn-sm btn-info ml-1"><i class="fas fa-eye"></i></button>
          <button @click="addBlog" class="btn btn-sm btn-success float-right mr-1"><i class="fas fa-save"></i> Save</button> 
     </div>
 </template>
@@ -10,7 +10,7 @@
  import vueeditor from './vueeditor'
  import CardPreview from './CardPreview'
 import Axios from 'axios'
- import {mapActions,mapGetters} from 'vuex'
+ import {mapActions,mapGetters, mapMutations} from 'vuex'
   
   export default {
     name: 'Slider',
@@ -20,7 +20,7 @@ import Axios from 'axios'
         },
         data() { 
             return {
-                close:false,
+             
                 content: [],
                 html:[],
                 tab: [{
@@ -36,21 +36,24 @@ import Axios from 'axios'
             }
         },
         computed:{
-            ...mapGetters([
-                "getAddBlogContent"
-            ])
+            ...mapGetters({
+               getAddBlogContent: "getAddBlogContent",
+                closed:"close"
+            })
         },
         methods: {
             ...mapActions({
                 addBlogAction:"addBlog",
                  getContentAction:"getContentAction"
             }),
+            ...mapMutations({
+                setClose:"setClose",
+                setShowEdit:"setShowEdit"
+            }),
             addcontent(e) {
                 this.content = e
             },
-             deger(e) {
-                this.close = e;
-            },
+          
             addBlog(){
                 this.addBlogAction([this.getAddBlogContent]).then(()=>{
                   this.$store.commit('setAddBlogContent', '')
@@ -69,6 +72,7 @@ import Axios from 'axios'
         created(){
       this.$emit('tab',this.tab)
       this.getContentAction('')
+      this.setShowEdit(false)
     },
 }
 </script>

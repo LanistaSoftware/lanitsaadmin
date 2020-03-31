@@ -1,7 +1,7 @@
 <template>
   <div class="blogs">
     <Card ></Card>
-    <editblog v-show="data" ></editblog>
+    <editblog v-show="data"></editblog>
     <CardPreview v-show="close"></CardPreview>
     
   </div>

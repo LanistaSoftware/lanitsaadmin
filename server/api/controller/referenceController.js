@@ -59,6 +59,25 @@ router.put('/:id/:dltimg',async (req, res) => {
         })
     }
 }),
+router.put('/:id',async (req, res) => {
+    
+    console.log(req.body)
+    try {
+        await reference.updateOne({_id:req.params.id},{
+            $set:{
+                referenceName:req.body.referenceName,
+                referenceUrl:req.body.referenceUrl,
+                imageUrl:req.body.imageUrl
+            }
+        })
+ 
+        res.status(200).json({});
+    } catch (error) {
+        res.json({
+            message: error.message
+        })
+    }
+}),
 router.delete('/:id',async (req,res)=>{
     try{
         const item = await reference.findOne({_id:req.params.id})

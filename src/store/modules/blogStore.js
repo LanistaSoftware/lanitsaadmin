@@ -8,6 +8,7 @@ const state = {
     addBlogContent:'',
     close:false,
     edit:false,
+    showedit:true,
 }
 //Getters
 const getters = {
@@ -31,6 +32,9 @@ const getters = {
     },
     data(state){
         return state.edit
+    },
+    showedit(state){
+        return state.showedit
     }
 }
 //Mutations
@@ -55,6 +59,9 @@ const mutations = {
     },
     setData(state,value){
         return state.edit=value
+    },
+    setShowEdit(state,value){
+        return state.showedit=value
     }
 }
 //Actions

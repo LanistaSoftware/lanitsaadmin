@@ -102,14 +102,19 @@ export default {
       })
     },
     updateReference(item) {
-      let dltimg = item.imageUrl
+      if (this.file.name) {
+      var dltimg = item.imageUrl
       item.imageUrl = this.file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-' + new Date().getHours() + '.jpg'
-
+      }else{
+        dltimg=''
+      }
+  
       this.updateReferenceAction({
         'id': this.selectId,
         'item': item,
         'dltimg': dltimg
       }).then(() => {
+       this.cancel()
         this.addImage(this.imageForm)
         this.getReference().then(() => {
           this.references = this.getterReferences

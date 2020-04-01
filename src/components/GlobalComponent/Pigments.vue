@@ -16,42 +16,43 @@
           <tbody>
               <tr v-if="isAdd">
                   <td scope="col">#</td>
-                  <td scope="col"><input type="text"></td>
-                  <td scope="col"><input type="text"></td>
-                  <td scope="col"><input type="text"></td>
-                  <td scope="col"><input type="text"></td>
-                  <td scope="col"><button class="btn btn-sm btn-success">Save</button>
+                  <td scope="col"><input type="text" class="form-control" v-model="pigment.prdoudctName"></td>
+                  <td scope="col"><input type="text" class="form-control" v-model="pigment.color"></td>
+                  <td scope="col"><input type="text" class="form-control" v-model="pigment.migrationFastness"></td>
+                  <td scope="col"><input type="text" class="form-control" v-model="pigment.heatFastness"></td>
+                  <td scope="col"><input type="text" class="form-control" v-model="pigment.lightFastness"></td>
+                  <td scope="col"><button class="btn btn-sm btn-success" @click="addPigment">Save</button>
                       <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel </button>
                   </td>
               </tr>
-              <tr v-for="(item,index) in Users" :key="item.id">
-                  <th scope="row">1</th>
-                  <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.pigmentName}}</td>
-                  <td :style="{color:item.pigmentColor}" v-if="selectedItem==item.id ? isEdit=false : isEdit=true">
-                      {{item.pigmentColor}}</td>
-                  <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.pigmentMigrations}}</td>
-                  <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.pigmentHeat}}</td>
-                  <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.pigmentLight}}</td>
-                  <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text"
-                          v-model="item.pigmentName"></td>
-                  <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text"
-                          v-model="item.pigmentColor"></td>
-                  <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text"
-                          v-model="item.pigmentMigrations"></td>
-                  <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text"
-                          v-model="item.pigmentHeat"></td>
-                  <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text"
-                          v-model="item.pigmentLight"></td>
+              <tr v-for="(item,index) in getterPigment" :key="item.id">
+                  <th scope="row">{{index+1}}</th>
+                  <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.prdoudctName}}</td>
+                  <td :style="{color:item.color}" v-if="selectedItem==item._id ? isEdit=false : isEdit=true">
+                      {{item.color}}</td>
+                  <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.migrationFastness}}</td>
+                  <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.heatFastness}}</td>
+                  <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.lightFastness}}</td>
+                  <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text"
+                          v-model="item.prdoudctName" class="form-control"></td>
+                  <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text"
+                          v-model="item.color" class="form-control"></td>
+                  <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text"
+                          v-model="item.migrationFastness" class="form-control"></td>
+                  <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text"
+                          v-model="item.heatFastness" class="form-control"></td>
+                  <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text"
+                          v-model="item.lightFastness" class="form-control"></td>
 
                   <td>
-                      <button v-if="selectedItem==item.id ? isEdit=false : isEdit=true" @click="selectedItem=item.id"
+                      <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="selectedItem=item._id"
                           class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
-                      <button v-if="selectedItem==item.id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success">
+                      <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success" @click="updatePigment(item)">
                           Save
                       </button>
-                      <button @click="deleteUser(index)" class="btn btn-sm btn-danger"> Delete <i
+                      <button @click="deletePigment(item._id)" class="btn btn-sm btn-danger"> Delete <i
                               class="fas fa-user-minus"></i></button>
-                      <button v-if="selectedItem==item.id ? isEdit=true : isEdit=false" @click="selectedItem=null"
+                      <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" @click="selectedItem=null"
                           class="btn btn-sm btn-warning"> Cancel </button>
                   </td>
               </tr>
@@ -61,7 +62,7 @@
 </template>
 <script>
 import {
-    mapActions
+    mapActions, mapGetters
 } from 'vuex'
 export default {
     data() {
@@ -78,49 +79,57 @@ export default {
             selectedItem: null,
             isEdit: false,
             isDelete: false,
+            pigment:{
+                prdoudctName:'',
+                color:'',
+                migrationFastness:'',
+                heatFastness:'',
+                lightFastness:''
+            },
             isAdd: false,
-            Users: [
-                {
-                    id: 0,
-                    pigmentName: "G Line Yellow L 1000 CP",
-                    pigmentColor: '#EEAA10',
-                    pigmentMigrations: "5",
-                    pigmentHeat: "200",
-                    pigmentLight: "7",
-
-                },
-                {
-                    id: 1,
-                    pigmentName: "G Line Yellow L 1000 CP",
-                    pigmentColor: "#128585",
-                    pigmentMigrations: "5",
-                    pigmentHeat: "200",
-                    pigmentLight: "7",
-
-                },
-                {
-                    id: 2,
-                    pigmentName: "G Line Yellow L 1000 CP",
-                    pigmentColor: "#20EE20",
-                    pigmentMigrations: "5",
-                    pigmentHeat: "200",
-                    pigmentLight: "7",
-
-                },
-            ]
         }
     },
     methods: {
-        deleteUser(index) {
-            this.Users.splice(index, 1);
+        deletePigment(id) {
+            this.deletePigmentAction(id).then(()=>{
+                this.getPigment()
+            })    
+        },
+        updatePigment(item){
+            this.updatePigmentAction({'item':item,'id':item._id}).then(()=>{
+                this.isEdit=false
+                this.selectedItem=false
+                this.getPigment()
+            })
+        },
+        addPigment(){
+            this.addPigmentAction(this.pigment).then(()=>{
+                this.isAdd=false
+                this.pigment.prdoudctName=''
+                this.pigment.color=''
+                this.pigment.migrationFastness=''
+                this.pigment.heatFastness=''
+                this.pigment.lightFastness=''
+                this.getPigment()
+            })
         },
         ...mapActions({
             addtab: "addTabs",
+            addPigmentAction:"addPigment",
+            getPigment:"getPigment",
+            updatePigmentAction:"updatePigment",
+            deletePigmentAction:"deletePigment",
         })
     },
     created() {
         this.addtab(this.tab)
+        this.getPigment()
     },
+    computed:{
+        ...mapGetters({
+            getterPigment:"getterPigment"
+        })
+    }
 }
 </script>
 <style lang="less" scoped>

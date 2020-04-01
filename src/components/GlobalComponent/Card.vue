@@ -101,36 +101,39 @@
     margin: 0 2rem 2rem 2rem;
     float: left;
     background-color: #FAFAFA;
-      .imgcontainer {
-   width: 100%;
-    height: 100%;
-    padding: 1rem;
 
-    img {
-     width: 100%;
-     height: auto;
-     cursor: pointer;
+    .imgcontainer {
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
 
+      img {
+        width: 100%;
+        height: auto;
+        cursor: pointer;
+
+      }
+    }
+
+    .btn-container {
+      width: 100%;
+
+      .btn {
+        margin: 0.5rem;
+        width: 2rem;
+      }
     }
   }
-    .btn-container{
-    width: 100%;
-      .btn {
 
-    margin:0.5rem;
-    width: 2rem;
-  }
-  }
-  }
-
-  .preview-card-header{
-    h1,h2,h3,h4,h5,h6{
+  .preview-card-header {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-size: 2rem;
       font-style: normal;
     }
   }
-
-
-
-
 </style>

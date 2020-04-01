@@ -1,8 +1,8 @@
 <template>
     <div class="reference justify-content">
     <div class="card"  v-for="reference in references" :key="reference._id">
-    <img v-if="edit==false " class="card-img-top" :src="getImage(reference.imageUrl)" alt="Card image cap">
-    <img v-if="edit==true " class="card-img-top" :src="imagePrew" >
+    <img v-if="edit" class="card-img-top" :src="getImage(reference.imageUrl)" alt="Card image cap">
+    <img v-if="edit" class="card-img-top" :src="imagePrew" >
     <div v-if="selectId==reference._id" class="custom-file mt-2 ">
         <input type="file" class="custom-file-input" ref="myfile" accept="image/*"  @change="selectedFile()" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
@@ -10,12 +10,12 @@
     <div class="card-body">
     <input v-if="selectId==reference._id ? edit=true : edit=false" type="text" v-model="reference.referenceName" class="form-control">
     <input v-if="selectId==reference._id " type="text" v-model="reference.referenceUrl" class="form-control">
-    <h5 v-if="edit==false"  class="card-title">{{reference.referenceName}}</h5> 
-    <a v-if="edit==false " :href="reference.referenceUrl" target="_blank" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
-    <button  v-if="edit==true " class="btn btn-sm btn-success" @click="updateReference(reference)"><i class="fas fa-save"></i>Save</button>
-    <button v-if="edit==false " class="btn btn-sm btn-primary" @click="selectId=reference._id,edit=true"><i class="fas fa-edit"></i></button>
+    <h5 v-if="edit"  class="card-title">{{reference.referenceName}}</h5> 
+    <a v-if="edit " :href="reference.referenceUrl" target="_blank" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
+    <button  v-if="edit" class="btn btn-sm btn-success" @click="updateReference(reference)"><i class="fas fa-save"></i>Save</button>
+    <button v-if="edit" class="btn btn-sm btn-primary" @click="selectId=reference._id,edit=true"><i class="fas fa-edit"></i></button>
     <button class="btn btn-sm btn-danger" @click="deleteReference(reference._id)"><i class="fas fa-trash-alt"></i></button>
-    <button  v-if="edit==true " class="btn btn-sm btn-warning" @click="cancel"><i class="fas fa-arrow-left"></i>Cancel</button>
+    <button  v-if="edit" class="btn btn-sm btn-warning" @click="cancel"><i class="fas fa-arrow-left"></i>Cancel</button>
   </div>
 </div>
 </div>

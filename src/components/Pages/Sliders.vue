@@ -216,6 +216,7 @@
     padding: 0 1rem;
     border-top-right-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
+    margin: 0;
 
   }
 }

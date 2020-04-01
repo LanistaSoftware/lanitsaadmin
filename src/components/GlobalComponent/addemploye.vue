@@ -14,7 +14,8 @@
                <input   type="text" class="form-control" placeholder="Görev" v-model="employe.task">
             </div>
             <div class="item">
-             <select class="form-control" id="exampleFormControlSelect1" v-model="employe.order">
+             <select class="form-control" id="exampleFormControlSelect1" placeholder="Yetki seçiniz." v-model="employe.order">
+                          <option value="" disabled selected>Yetki Seçiniz</option>
                           <option>0</option>
                           <option>1</option>
              </select>

@@ -1,15 +1,16 @@
 <template>
-    <div id="about">
-        <div class="about clearfix">
+<div>
+    <div class="about">
+        <div class="about-content">
             <vue-editor v-if="showEdit" v-model="content.aboutcontent"></vue-editor>
             <div v-if="!showEdit">
                 <div v-html="content.aboutcontent"></div>
             </div>
             <button v-if="showEdit" class="btn btn-sm btn-success float-right" @click="addAboutUs"><i class="fas fa-save"></i> Save</button>
-             <button  v-if="!showEdit" class="btn btn-sm btn-primary float-right" @click="Edit"><i class="fas fa-edit"></i> Edit</button>
-              <button  v-if="showEdit" class="btn btn-sm btn-danger float-left" @click="showEdit=false"><i class="fas fa-arrow-left"></i> Cancel</button>
+             <button  v-if="!showEdit" class="btn btn-sm btn-primary float-right" @click="Edit">Edit <i class="fas fa-edit"></i></button>
+              <button  v-if="showEdit" class="btn btn-sm btn-warning float-left" @click="showEdit=false"><i class="fas fa-arrow-left"></i> Cancel</button>
         </div>
-        <div class="about-image">
+        <div class="about-image clearfix">
             <img v-if="!showPreview" :src="getImage(content.imgUrl)" class="rounded mx-auto d-block" alt="About us image.">
             <img v-if="showPreview" :src="imagePreview" class="rounded mx-auto d-block" alt="About us image.">
             <div  v-if="showEdit">
@@ -23,6 +24,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </template>
 <script>
@@ -156,12 +158,11 @@ export default {
     margin-top: 0.5rem;
 }
 .about{
-    width: 70%;
-    float: left;
-}
-#about{
     width: 100%;
-}
+    .about-content{
+        width: 70%;
+        float: left;
+    }
 .about-image{
     float: left;
     width: 29%;
@@ -171,5 +172,8 @@ export default {
        height: auto;
    }
 }
+}
+
+
 
 </style>

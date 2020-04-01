@@ -13,7 +13,7 @@
       <div  class="justify-content clearfix"></div>
       </div>
       <vueeditor></vueeditor>
-      <button class="btn btn-sm btn-primary " @click="updateBlog()">Save</button>
+      <button class="btn btn-sm btn-success " @click="updateBlog()">Save <i class="fas fa-save"></i></button>
     </div>
   </div>
 </template>

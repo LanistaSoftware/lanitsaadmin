@@ -1,16 +1,15 @@
 <template>
         <div class="video ">
-            <youtube :video-id="videoId" :player-width="1200" :player-height="600" @ready="ready" @playing="playing"></youtube>
-            <!-- <iframe :width="560" height="315" src="https://www.youtube.com/embed/o0bSRbBk8hk" frameborder="0" 
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" class="p-5" allowfullscreen>
-            </iframe> -->
-           
+            <youtube :video-id="videoId" :player-width="1200" :player-height="600" @ready="ready" @playing="playing">
+            </youtube>
             <div class="input-group">
-                 <label class="label-head" for="videoId">Video ID:</label>
-                <button class="btn btn-sm btn-info input-group-text"  @click="show=!show"><i class="fas fa-exchange-alt"></i></button>
+                <label class="label-head" for="videoId">Video ID:</label>
+                <button class="btn btn-sm btn-info input-group-text" @click="show=!show"><i
+                        class="fas fa-exchange-alt"></i></button>
                 <input type="text" class="form-control" id="videoId" placeholder="Username"
                     aria-describedby="inputGroupPrepend3" v-model="videoId" :disabled="!show">
-                <button v-show="show" class="btn btn-sm btn-success" @click="updateVideo(videoId),show=!show" :disabled="getterVideoId==videoId">Save</button>
+                <button v-show="show" class="btn btn-sm btn-success" @click="updateVideo(videoId),show=!show"
+                    :disabled="getterVideoId==videoId">Save <i class="fas fa-save"></i></button>
             </div>
 
         </div>
@@ -88,6 +87,9 @@
         display: flex;
         text-align: center;
         margin-left: 27rem;
+        .btn{
+            margin: 0;
+        }
         
     }
 </style>

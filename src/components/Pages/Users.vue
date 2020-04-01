@@ -25,8 +25,8 @@
   <option value="1">Admin</option>
   <option value="2">User</option>
 </select></td>
-          <td scope="col"><button  @click="addUser" class="btn btn-sm btn-success">Save</button>
-          <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel </button>
+          <td scope="col"><button  @click="addUser" class="btn btn-sm btn-success">Save <i class="fas fa-save"></i></button>
+          <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel <i class="fas fa-arrow-left"></i></button>
           </td>
         </tr>
         <tr v-for="(item,index) in getUser" :key="item._id">

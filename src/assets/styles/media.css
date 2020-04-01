@@ -8,6 +8,9 @@ body {
   font-family: 'Exo', sans-serif !important;
   color: #303030;
 }
+.btn {
+  margin: 0.5rem;
+}
 @media (max-width: 575.98px) {
   html {
     font-size: 8px;

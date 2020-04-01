@@ -6,6 +6,7 @@ import slider from '../store/modules/sliderStore'
 import reference from '../store/modules/referenceStore'
 import sector from '../store/modules/sectorStore'
 import aboutUs from '../store/modules/aboutUs'
+import product from '../store/modules/productStore'
 Vue.use(Vuex)
 // {link:'/blogs',label:'Makaleler' },
 // {link:'/addblog',label:'Makale Ekle' }
@@ -23,6 +24,7 @@ export const store = new Vuex.Store({
         slider,
         reference,
         sector,
-        aboutUs
+        aboutUs,
+        product
     }
 })

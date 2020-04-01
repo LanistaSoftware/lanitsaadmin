@@ -15,44 +15,43 @@
           <tbody>
               <tr v-if="isAdd">
                   <td scope="col">#</td>
-                  <td scope="col"><input type="text"></td>
-                  <td scope="col"><input type="text"></td>
-                  <td scope="col"><input type="text"></td>
-                  <td scope="col"><input type="text"></td>
-                  <td scope="col"><button class="btn btn-sm btn-success">Save</button>
+                  <td scope="col"><input type="text" class="form-control" v-model="product.prdoudctName"></td>
+                  <td scope="col"><select class="form-control" id="exampleFormControlSelect1" v-model="product.prdoudctGroup">
+                          <option v-for="sector in getterSector" :key="sector._id">{{sector.sectorname}}</option>
+                         
+                      </select></td>
+                  <td scope="col"><input type="text" class="form-control" v-model="product.productDesc"></td>
+                  <td scope="col"><textarea type="text" class="form-control" v-model="product.productMoreDesc"></textarea></td>
+                  <td scope="col"><button class="btn btn-sm btn-success" @click="addProduct">Save</button>
                       <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel </button>
                   </td>
               </tr>
-              <tr v-for="(item,index) in Users" :key="item.id">
-                  <th scope="row">1</th>
-                  <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.productname}}</td>
-                  <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.productgroup}}</td>
-                  <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.productdesc}}</td>
-                  <td v-if="selectedItem==item.id ? isEdit=false : isEdit=true">{{item.productmore}}</td>
-                  <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text"
-                          v-model="item.productname"></td>
-                  <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false">
-                      <select class="form-control" id="exampleFormControlSelect1">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+              <tr v-for="(item,index) in products" :key="item.id">
+                  <th scope="row">{{index+1}}</th>
+                  <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.prdoudctName}}</td>
+                  <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.prdoudctGroup}}</td>
+                  <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.productDesc}}</td>
+                  <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.productMoreDesc}}</td>
+                  <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text"
+                          v-model="item.prdoudctName"></td>
+                  <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false">
+                      <select class="form-control" id="exampleFormControlSelect1" v-model="item.prdoudctGroup">
+                         <option v-for="sector in getterSector" :key="sector._id">{{sector.sectorname}}</option>
                       </select>
                   </td>
-                  <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><input type="text"
-                          v-model="item.productdesc"></td>
-                  <td v-if="selectedItem==item.id ? isEdit=true : isEdit=false"><textarea type="text"
-                          class="form-control" v-model="item.productmore"></textarea></td>
+                  <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text"
+                          v-model="item.productDesc"></td>
+                  <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><textarea type="text"
+                          class="form-control" v-model="item.productMoreDesc"></textarea></td>
                   <td>
-                      <button v-if="selectedItem==item.id ? isEdit=false : isEdit=true" @click="selectedItem=item.id"
+                      <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="selectedItem=item._id"
                           class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
-                      <button v-if="selectedItem==item.id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success">
+                      <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success" @click="updateProduct(item)">
                           Save
                       </button>
-                      <button @click="deleteUser(index)" class="btn btn-sm btn-danger"> Delete <i
+                      <button @click="deleteProduct(item._id)" class="btn btn-sm btn-danger"> Delete <i
                               class="fas fa-user-minus"></i></button>
-                      <button v-if="selectedItem==item.id ? isEdit=true : isEdit=false" @click="selectedItem=null"
+                      <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" @click="cancel"
                           class="btn btn-sm btn-warning"> Cancel </button>
                   </td>
               </tr>
@@ -61,10 +60,16 @@
   </div>
 </template>
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
   export default {
     data() {
       return {
+        product:{
+          prdoudctName:'',
+          prdoudctGroup:'',
+          productDesc:'',
+          productMoreDesc:'',
+        },
          tab:[ 
           {link:'/products',label:'Ürünler' },
           {link:'/pigments',label:'Pigmentler' },
@@ -73,44 +78,54 @@ import {mapActions} from 'vuex'
         isEdit:false,
         isDelete:false,
         isAdd:false,
-        Users: [{
-            id: 0,
-            productname: "A-8",
-            productgroup: "Tekstil",
-            productdesc: "SİLİKON",
-            productmore: "SİLİKON2",
-      
-          },
-      {
-            id: 1,
-            productname: "A-8",
-            productgroup: "Tekstil",
-            productdesc: "SİLİKON",
-            productmore: "SİLİKON2",
-      
-          },
-          {
-            id: 2,
-            productname: "A-8",
-            productgroup: "Tekstil",
-            productdesc: "SİLİKON",
-            productmore: "SİLİKON2",
-      
-          },
-        ]
       }
     },
     methods:{
-      deleteUser(index){
-          this.Users.splice(index,1);
+      deleteProduct(id){
+        this.deleteProductAction(id).then(()=>{
+          this.getProduct()
+        })
       },
-       ...mapActions({
-           addtab:"addTabs",
-         })
-    },
-     created(){
-        this.addtab(this.tab)
-    },   
+        addProduct() {
+          this.addProductAction(this.product).then(() => {
+            this.isAdd = !this.isAdd
+            this.product.prdoudctName = ''
+            this.product.prdoudctGroup = ''
+            this.product.productDesc = ''
+            this.product.productMoreDesc = ''
+            this.getProduct()
+          })
+        },
+        updateProduct(item){
+          this.updateProductAction({'item':item,'id':item._id}).then(()=>{
+            this.selectedItem=null
+            this.getProduct()
+          })
+        },
+        cancel(){
+          this.selectedItem=null
+          this.getProduct()
+        },
+        ...mapActions({
+          addtab: "addTabs",
+          addProductAction: "addProduct",
+          getProduct: "getProduct",
+          updateProductAction: "updateProduct",
+          deleteProductAction:"deleteProduct",
+          getSectors:"getSectors",
+        })
+      },
+      created() {
+          this.addtab(this.tab)
+          this.getProduct()
+          this.getSectors()
+        },
+        computed: {
+          ...mapGetters({
+            products: "getterProduct",
+            getterSector:"getterSector",
+          })
+    }
   }
 </script>
 <style lang="less" scoped>

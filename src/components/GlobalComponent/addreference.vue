@@ -64,6 +64,7 @@ methods: {
   */
 
   handleFileUpload(){
+    this.image.delete('file')
     /*
       Set the local file variable to what the user has selected.
     */

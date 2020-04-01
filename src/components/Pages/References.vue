@@ -60,11 +60,11 @@ export default {
   },
   methods: {
     selectedFile() {
+      this.imageForm.delete('file',this.file)
       this.imageError = '';
       console.log(this.$refs.myfile)
       this.file = this.$refs.myfile[0].files[0]
       this.imageForm.append('file', this.file)
-
       let reader = new FileReader();
       reader.readAsDataURL(this.file);
       reader.onload = evt => {
@@ -122,7 +122,6 @@ export default {
       })
     }
   }
-
 }
 </script>
 <style lang="less" scoped>
@@ -136,10 +135,8 @@ export default {
       padding: 1rem;
     }
   }
-
-
   .btn {
     margin: 0.5rem;
   }
-
 </style>
+

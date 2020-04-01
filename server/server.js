@@ -15,11 +15,12 @@ const videoController = require('./api/controller/videoController')
 const referenceController = require('./api/controller/referenceController')
 const sectorController = require('./api/controller/sectorController')
 const aboutUsController=require('./api/controller/aboutUsController')
+const productController = require('./api/controller/productController')
 const morgan = require('morgan')
 
 app.use(morgan('dev'))
 var corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: 'http://localhost:8081',
   optionsSuccessStatus: 200,
   }
 app.use(bodyParser.urlencoded({
@@ -53,6 +54,7 @@ app.use('/api/video',videoController);
 app.use('/api/reference',referenceController);
 app.use('/api/sector',sectorController)
 app.use('/api/aboutUs',aboutUsController)
+app.use('/api/product',productController)
 const port = process.env.PORT || 4000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false }); 
 const db = mongoose.connection;

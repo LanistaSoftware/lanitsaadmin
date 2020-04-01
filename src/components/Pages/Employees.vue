@@ -20,7 +20,7 @@
         <select  v-if="selectedItem==item._id" class="form-control mt-2" id="exampleFormControlSelect1" v-model="item.order">
                           <option>0</option>
                           <option>1</option>
-             </select>
+        </select>
       </div>
       <div class="button-group mt-1">
       <button  v-if="selectedItem=='' || selectedItem!=item._id" @click="isEdit=true,selectedItem=item._id" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>

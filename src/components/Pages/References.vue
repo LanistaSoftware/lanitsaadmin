@@ -1,21 +1,21 @@
 <template>
     <div class="reference justify-content">
     <div class="card"  v-for="reference in references" :key="reference._id">
-    <img v-if="edit==false " class="card-img-top" :src="getImage(reference.imageUrl)" alt="Card image cap">
-    <img v-if="edit==true " class="card-img-top" :src="imagePrew" >
-    <div v-if="selectId==reference._id" class="custom-file mt-2 ">
+    <img v-if="selectedItem=='' || selectedItem!=reference._id " class="card-img-top" :src="getImage(reference.imageUrl)" alt="Card image cap">
+    <img v-if="selectedItem==reference._id  " class="card-img-top" :src="imagePrew" >
+    <div v-if="selectedItem==reference._id" class="custom-file mt-2 ">
         <input type="file" class="custom-file-input" ref="myfile" accept="image/*"  @change="selectedFile()" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
     <div class="card-body">
-    <input v-if="selectId==reference._id ? edit=true : edit=false" type="text" v-model="reference.referenceName" class="form-control">
-    <input v-if="selectId==reference._id " type="text" v-model="reference.referenceUrl" class="form-control">
-    <h5 v-if="edit==false"  class="card-title">{{reference.referenceName}}</h5> 
-    <a v-if="edit==false " :href="reference.referenceUrl" target="_blank" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
-    <button  v-if="edit==true " class="btn btn-sm btn-success" @click="updateReference(reference)"><i class="fas fa-save"></i>Save</button>
-    <button v-if="edit==false " class="btn btn-sm btn-primary" @click="selectId=reference._id,edit=true"><i class="fas fa-edit"></i></button>
+    <input v-if="selectedItem==reference._id " type="text" v-model="reference.referenceName" class="form-control">
+    <input v-if="selectedItem==reference._id " type="text" v-model="reference.referenceUrl" class="form-control">
+    <h5 v-if="selectedItem=='' || selectedItem!=reference._id" class="card-title">{{reference.referenceName}}</h5> 
+    <a v-if="selectedItem=='' || selectedItem!=reference._id" :href="reference.referenceUrl" target="_blank" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
+    <button  v-if="selectedItem==reference._id" class="btn btn-sm btn-success" @click="updateReference(reference)"><i class="fas fa-save"></i>Save</button>
+    <button  v-if="selectedItem=='' || selectedItem!=reference._id" class="btn btn-sm btn-primary" @click="selectedItem=reference._id,edit=true"><i class="fas fa-edit"></i></button>
     <button class="btn btn-sm btn-danger" @click="deleteReference(reference._id)"><i class="fas fa-trash-alt"></i></button>
-    <button  v-if="edit==true " class="btn btn-sm btn-warning" @click="cancel"><i class="fas fa-arrow-left"></i>Cancel</button>
+    <button   v-if="selectedItem==reference._id " class="btn btn-sm btn-warning" @click="cancel"><i class="fas fa-arrow-left"></i>Cancel</button>
   </div>
 </div>
 </div>
@@ -31,7 +31,7 @@ export default {
       image: 'http://via.placeholder.com/1300x800',
       imagePrew: 'http://via.placeholder.com/1300x800',
       imageForm: new FormData(),
-      selectId: '',
+      selectedItem: '',
       updateImage: '',
       edit: false,
       file: '',
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     selectedFile() {
-      this.imageForm.delete('file',this.file)
+      
       this.imageError = '';
       console.log(this.$refs.myfile)
       this.file = this.$refs.myfile[0].files[0]
@@ -88,7 +88,7 @@ export default {
       return path ? require(`@/assets/upload/${path}`) : ''
     },
     cancel() {
-      this.selectId = ''
+      this.selectedItem = ''
       this.edit = false
       this.getReference().then(() => {
         this.references = this.getterReferences
@@ -108,9 +108,8 @@ export default {
       }else{
         dltimg=''
       }
-  
       this.updateReferenceAction({
-        'id': this.selectId,
+        'id': item._id,
         'item': item,
         'dltimg': dltimg
       }).then(() => {

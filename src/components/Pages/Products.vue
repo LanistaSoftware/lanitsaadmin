@@ -18,7 +18,6 @@
                   <td scope="col"><input type="text" class="form-control" v-model="product.prdoudctName"></td>
                   <td scope="col"><select class="form-control" id="exampleFormControlSelect1" v-model="product.prdoudctGroup">
                           <option v-for="sector in getterSector" :key="sector._id">{{sector.sectorname}}</option>
-                         
                       </select></td>
                   <td scope="col"><input type="text" class="form-control" v-model="product.productDesc"></td>
                   <td scope="col"><textarea type="text" class="form-control" v-model="product.productMoreDesc"></textarea></td>

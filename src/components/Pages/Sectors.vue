@@ -1,6 +1,6 @@
 <template>
 
-  <div class="products">
+  <div class="sectors">
     <button v-if="!isAdd" @click="isAdd=true" class="btn btn-sm btn-info"> Ekle <i class="fas fa-user-plus"></i></button>
     <div v-if="isAdd" class="card m-3">
       <div class="row no-gutters">
@@ -138,7 +138,7 @@ export default {
 
 </script>
 <style lang="less" scoped>
-.products{
+.sectors{
   text-align: center;
 }
 .card{

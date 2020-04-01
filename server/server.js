@@ -17,6 +17,7 @@ const sectorController = require('./api/controller/sectorController')
 const aboutUsController=require('./api/controller/aboutUsController')
 const productController = require('./api/controller/productController')
 const pigmentController=require('./api/controller/pigmentController')
+const employeController = require('./api/controller/employeController')
 const morgan = require('morgan')
 
 app.use(morgan('dev'))
@@ -57,6 +58,7 @@ app.use('/api/sector',sectorController)
 app.use('/api/aboutUs',aboutUsController)
 app.use('/api/product',productController)
 app.use('/api/pigment',pigmentController)
+app.use('/api/employe',employeController)
 const port = process.env.PORT || 4000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false }); 
 const db = mongoose.connection;

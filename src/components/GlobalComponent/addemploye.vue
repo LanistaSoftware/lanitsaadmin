@@ -2,31 +2,52 @@
     
       <div class="card row">
         <div class="card-image-top">
-           <img v-bind:src="imagePreview" v-show="showPreview"/>
+           <img v-bind:src="imagePreview" class="rounded mx-auto d-block mt-1"/>
+           
         </div>
         <div class="card-body">
-          
-          <input  v-model="title" type="text" class="form-control" placeholder="TİTLE" >
-           <div class="custom-file mt-2 ">
+          <div class="input-item">
+            <div class="item">
+               <input  type="text" class="form-control" placeholder="Ad Soyad " v-model="employe.name">
+            </div>
+            <div class="item">
+               <input   type="text" class="form-control" placeholder="Görev" v-model="employe.task">
+            </div>
+            <div class="item">
+             <select class="form-control" id="exampleFormControlSelect1" v-model="employe.order">
+                          <option>0</option>
+                          <option>1</option>
+             </select>
+            </div>
+          </div>
+          <div class="custom-file mt-2 ">
           <input type="file" class="custom-file-input" ref="file" accept="image/*" id="file"
             v-on:change="handleFileUpload()" />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
           <div class="card-body">
             <button class="btn btn-sm btn-warning" @click="reset"><i class="fas fa-trash-restore" ></i> Reset</button>
-           <button class="btn btn-sm btn-success"><i class="fas fa-save"></i> Save</button>
+           <button class="btn btn-sm btn-success" @click="addEmploye()"><i class="fas fa-save"></i> Save</button>
           </div>  
       </div>
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
     data(){
   return {
     title:'',
     file: '',
     showPreview: false,
-    imagePreview: '',
+    imagePreview: 'http://via.placeholder.com/1300x800',
+    image:new FormData(),
+    employe:{
+      name:'',
+      task:'',
+      order:'',
+      imgUrl:''
+    },
     tab: [{
                     link: '/employe',
                     label: 'Ekibimiz'
@@ -39,20 +60,28 @@ export default {
       }
 },
 methods: {
-  /*
-    Handles a change on the file upload
-  */
-
+  ...mapActions({
+    addEmployeAction:"addEmploye",
+    addImageEmploye:"addImageEmploye"
+  }),
+  addEmploye(){
+    this.addEmployeAction(this.employe).then(()=>{
+      this.reset()
+    })
+    this.addImageEmploye(this.image)
+  },
   handleFileUpload(){
+    this.image.delete('file')
     /*
       Set the local file variable to what the user has selected.
     */
     this.file = this.$refs.file.files[0];
+    this.image.append('file',this.file)
     /*
       Initialize a File Reader object
     */
     let reader  = new FileReader();
-
+    this.employe.imgUrl = this.file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
     /*
       Add an event listener to the reader that when the file
       has been loaded, we flag the show preview as true and set the
@@ -82,8 +111,12 @@ methods: {
   },
   reset(){
     this.title=null
-    this.imagePreview=null
+    this.imagePreview='http://via.placeholder.com/1300x800'
     this.file=null
+    this.employe.imgUrl=''
+    this.employe.name=''
+    this.employe.task=''
+    this.employe.order=''
   }
 },
   created(){
@@ -93,9 +126,23 @@ methods: {
 </script>
 <style lang="less" scoped>
  .card{
-   
      text-align: center;
-
  }
+ img{
+   width: 20rem;
+   height: 10rem;
+ }
+.input-item{
+  text-align: center;
+  width: 100%;
+}
+.item{
+  width: 30%;
+  margin: 1rem;
+  float: left;
+}
+.btn{
+  margin: 0.5rem;
+}
 
 </style>

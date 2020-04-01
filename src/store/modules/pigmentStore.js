@@ -24,7 +24,6 @@ const actions={
     getPigment({commit}){
         return api().get('pigment').then(res=>{
             commit("setPigment",res.data.pigments)
-            console.log(res.data)
         }).catch(err=>{console.log(err)})
     },
     updatePigment({},{id,item}){

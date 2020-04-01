@@ -8,6 +8,7 @@ import sector from '../store/modules/sectorStore'
 import aboutUs from '../store/modules/aboutUs'
 import product from '../store/modules/productStore'
 import pigment from '../store/modules/pigmentStore'
+import employe from '../store/modules/employeStore'
 Vue.use(Vuex)
 // {link:'/blogs',label:'Makaleler' },
 // {link:'/addblog',label:'Makale Ekle' }
@@ -27,6 +28,7 @@ export const store = new Vuex.Store({
         sector,
         aboutUs,
         product,
-        pigment
+        pigment,
+        employe
     }
 })

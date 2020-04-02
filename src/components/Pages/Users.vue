@@ -1,7 +1,7 @@
 <template>
   <div class="users">
     <div v-if="passFormView" class="password-form">
-        <PassForm />
+        <PassForm :edit="isEdit"/>
     </div>
     <table class="table table-hover ">
       <thead>
@@ -129,7 +129,9 @@
               })
             },
             updateUser(id, edit) {
-              if (this.getPassword!=='') {
+              
+              console.log(this.getPassword)
+              if (this.getPassword!=null) {
                 edit.Password = this.getPassword
               }
              this.updateUserAction({'id':id,'edit':edit}).then(() => {

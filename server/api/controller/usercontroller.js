@@ -52,8 +52,8 @@ router.post('/', async (req, res) => {
     }
 })
 router.put('/:id', async (req, res) => {
-    console.log(req.body)
     try {
+        console.log(req.body)
         const c = await User.findOne({_id:req.params.id})
        const pass = c.Password
        if (req.body.oldpass!=null) {

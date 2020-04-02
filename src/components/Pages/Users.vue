@@ -111,10 +111,12 @@
               updateUserAction:"updateUser"
             }),
             addUser() {
+               this.passClass="btn-secondary"
               this.addUserAction(this.user).then(() => {
                 this.user={}
                 this.getUsersaction().then(() => {
                   this.isAdd = false
+                 
                 }).catch(err => {
                   alert(err)
                 })
@@ -130,7 +132,7 @@
               })
             },
             updateUser(id, edit) {
-             
+              this.passClass="btn-secondary"
               console.log(this.getPassword)
               if (this.getPassword!=null) {
                 edit.Password = this.getPassword
@@ -140,7 +142,7 @@
              this.updateUserAction({'id':id,'edit':edit,'oldpass':this.oldpass}).then(() => {
                 this.selectedItem = null
                 this.$store.commit('setPassword',null) 
-               this.$store.commit('setOldPass',null)
+                 this.$store.commit('setOldPass',null)
                 this.getUsersaction()
               }).catch(err => {
                 alert(err)

@@ -48,6 +48,7 @@
           </td>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.email"></td>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.Phone"></td>
+            <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false" scope="col"><button @click="passFormView = !passFormView" class="btn btn-sm" :class="passClass">Password <i class="fas fa-key ml-2"></i></button>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><select class="custom-select"
               v-model="item.isAdmin">
               <option selected></option>
@@ -128,7 +129,9 @@
               })
             },
             updateUser(id, edit) {
-     
+              if (this.getPassword!=='') {
+                edit.Password = this.getPassword
+              }
              this.updateUserAction({'id':id,'edit':edit}).then(() => {
                 this.selectedItem = null
                 this.getUsersaction()
@@ -177,6 +180,7 @@
           watch:{
             getPassword(){
             this.passClass='btn-success'
+            this.user.password = this.getPassword
             setTimeout(() => {
               this.passFormView=false;
             }, 700);

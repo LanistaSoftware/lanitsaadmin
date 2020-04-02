@@ -13,9 +13,10 @@ import sectors from '../src/components/Pages/Sectors.vue'
 import about from '../src/components/Pages/AboutUs.vue'
 import employe from '../src/components/Pages/Employees.vue'
 import addemploye from '../src/components/GlobalComponent/addemploye.vue'
-import options from '../src/components/Pages/Settings.vue'
+import contact from '../src/components/Pages/Contact.vue'
 import Welcome from '../src/components/Pages/Welcome.vue'
 import SectorImage from '../src/components/Pages/sectorImage.vue'
+import logo from '../src/components/GlobalComponent/CompanyLogo.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -79,12 +80,16 @@ export const router = new VueRouter({
         component:addemploye
       },
       {
-        path:'/options',
-        component:options
+        path:'/contact',
+        component:contact
       },
       {
         path:'/sectorImage',
         component:SectorImage
+      },
+      {
+        path:'/companylogo',
+        component:logo
       },
       {
         path:'/',

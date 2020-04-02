@@ -32,7 +32,7 @@
        <!-- <li class="nav-item">
         <span><i class="fas fa-server float-left"></i></span> <a class="nav-link" href="#">Hizmetlerimiz </a>
       </li> -->
-      <router-link to='/options' tag='li' class="nav-item" active-class="act">
+      <router-link to='/contact' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-cogs float-left"></i></span><a class="nav-link" href="#">Ayarlar <br></a>
      </router-link> 
 

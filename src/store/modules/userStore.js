@@ -3,6 +3,7 @@ import api from '../api'
 const state = {
     Users: [],
     tabs: [],
+    password:null
 }
 const getters = {
     getTabs(state) {
@@ -10,6 +11,9 @@ const getters = {
     },
     getUser(state) {
         return state.Users;
+    },
+    getPassword(state){
+        return state.password
     }
 }
 const mutations = {
@@ -18,6 +22,9 @@ const mutations = {
     },
     setUser(state, users) {
         return state.Users = users
+    },
+    setPassword(state, password){
+        return state.password = password
     }
 }
 

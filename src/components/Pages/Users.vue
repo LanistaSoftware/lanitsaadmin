@@ -1,5 +1,8 @@
 <template>
   <div class="users">
+    <div v-if="passFormView" class="password-form">
+        <PassForm />
+    </div>
     <table class="table table-hover ">
       <thead>
         <tr>
@@ -9,8 +12,8 @@
           <th scope="col">Email</th>
           <th scope="col">Telefon</th>
           <th scope="col">Admin</th>
-          <th scope="col" v-if="!isAdd"><button @click="isAdd=true" class="btn btn-sm btn-info"> Add <i class="fas fa-user-plus"></i></button></th>
-
+          <th scope="col" v-if="!isAdd"><button @click="isAdd=true" class="btn btn-sm btn-info"> Add <i
+                class="fas fa-user-plus"></i></button></th>
         </tr>
       </thead>
       <tbody>
@@ -20,38 +23,46 @@
           <td scope="col"><input type="text" v-model="user.surname"></td>
           <td scope="col"><input type="email" v-model="user.email"></td>
           <td scope="col"><input type="phone" v-model="user.phone"></td>
+          <td scope="col"><button @click="passFormView = !passFormView" class="btn btn-secondary btn-sm">Password <i class="fas fa-key ml-2"></i></button>
+          </td>
           <td scope="col"><select class="custom-select" v-model="user.isAdmin">
-  <option value="0">Web Master</option>
-  <option value="1">Admin</option>
-  <option value="2">User</option>
-</select></td>
-          <td scope="col"><button  @click="addUser" class="btn btn-sm btn-success">Save <i class="fas fa-save"></i></button>
-          <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel <i class="fas fa-arrow-left"></i></button>
+              <option value="0">Web Master</option>
+              <option value="1">Admin</option>
+              <option value="2">User</option>
+            </select></td>
+          <td scope="col"><button @click="addUser" class="btn btn-sm btn-success">Save <i
+                class="fas fa-save"></i></button>
+            <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel <i
+                class="fas fa-arrow-left"></i></button>
           </td>
         </tr>
         <tr v-for="(item,index) in getUser" :key="item._id">
           <th scope="row">{{index+1}}</th>
-          <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true" >{{item.Name}}</td>
+          <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.Name}}</td>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.LastName}}</td>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.email}}</td>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.Phone}}</td>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{adminSelect(item.isAdmin)}}</td>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.Name"></td>
-          <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.LastName"></td>
+          <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.LastName">
+          </td>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.email"></td>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.Phone"></td>
-          <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><select class="custom-select" v-model="item.isAdmin">
-           <option selected></option>
-           <option value="0">Web Master</option>
-           <option value="1">Admin</option>
-           <option value="2">User</option>
-  </select></td>
+          <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><select class="custom-select"
+              v-model="item.isAdmin">
+              <option selected></option>
+              <option value="0">Web Master</option>
+              <option value="1">Admin</option>
+              <option value="2">User</option>
+            </select></td>
           <td>
             <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="selectedItem=item._id"
               class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
-            <button @click="updateUser(item._id,item)" v-if="selectedItem==item._id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success"> Save
+            <button @click="updateUser(item._id,item)" v-if="selectedItem==item._id ? isEdit=true : isEdit=false"
+              class="btn btn-sm btn-success"> Save
             </button>
-            <button @click="deleteUser(index,item._id)" class="btn btn-sm btn-danger"> Delete <i class="fas fa-user-minus"></i></button>
+            <button @click="deleteUser(index,item._id)" class="btn btn-sm btn-danger"> Delete <i
+                class="fas fa-user-minus"></i></button>
             <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" @click="selectedItem=null"
               class="btn btn-sm btn-warning"> Cancel </button>
           </td>
@@ -61,11 +72,12 @@
   </div>
 </template>
 <script>
-  //import axios from 'axios'
   import {mapActions,mapGetters} from 'vuex'
-  //import router from 'vue-router'
+  import PassForm from '../GlobalComponent/PasswordForm'
   export default {
-
+    components:{
+      PassForm
+    },
     data() {
       return {
         tab: [{
@@ -81,9 +93,10 @@
             surname: '',
             email: '',
             phone: '',
+            password:'',
             isAdmin: null,
           },
-          // Users : []
+          passFormView:false
         }
         },
         methods: {
@@ -180,7 +193,15 @@
     width: 100%;
     background-color:  #fafafa ;
      border:1px solid #dee2e6 ;
+    td{
+      vertical-align: middle;
+    }
   }
 
+.password-form{
+  width: 100%;
+  padding: 1rem 0;
+  text-align: center;
 
+}
   </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="users">
     <div v-if="passFormView" class="password-form">
-        <PassForm />
+        <PassForm :edit="isEdit"/>
     </div>
     <table class="table table-hover ">
       <thead>
@@ -48,6 +48,7 @@
           </td>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.email"></td>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.Phone"></td>
+            <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false" scope="col"><button @click="passFormView = !passFormView" class="btn btn-sm" :class="passClass">Password <i class="fas fa-key ml-2"></i></button>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><select class="custom-select"
               v-model="item.isAdmin">
               <option selected></option>
@@ -86,6 +87,7 @@
         }, ],
         selectedItem: null,
           isEdit: false,
+          oldpass:'',
           isDelete: false,
           isAdd: false,
           user: {
@@ -109,10 +111,12 @@
               updateUserAction:"updateUser"
             }),
             addUser() {
+               this.passClass="btn-secondary"
               this.addUserAction(this.user).then(() => {
                 this.user={}
                 this.getUsersaction().then(() => {
                   this.isAdd = false
+                 
                 }).catch(err => {
                   alert(err)
                 })
@@ -128,14 +132,24 @@
               })
             },
             updateUser(id, edit) {
-     
-             this.updateUserAction({'id':id,'edit':edit}).then(() => {
+              this.passClass="btn-secondary"
+              console.log(this.getPassword)
+              if (this.getPassword!=null) {
+                edit.Password = this.getPassword
+              }
+              this.edit+=this.oldpass
+                this.oldpass = this.getOldPass
+             this.updateUserAction({'id':id,'edit':edit,'oldpass':this.oldpass}).then(() => {
                 this.selectedItem = null
+                this.$store.commit('setPassword',null) 
+                 this.$store.commit('setOldPass',null)
                 this.getUsersaction()
               }).catch(err => {
                 alert(err)
               })
-            },
+            
+              },
+          
             adminSelect(auth) {
               if (auth == 0) {
                 return 'Web Master'
@@ -171,12 +185,14 @@
           computed: {
             ...mapGetters([
               'getPassword',
-              'getUser'
+              'getUser',
+              'getOldPass'
             ])
           },
           watch:{
             getPassword(){
             this.passClass='btn-success'
+            this.user.password = this.getPassword
             setTimeout(() => {
               this.passFormView=false;
             }, 700);

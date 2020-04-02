@@ -1,7 +1,5 @@
 /* eslint-disable no-empty-pattern */
 import api from '../api'
-
-
 const state={
     contact:{},
 }

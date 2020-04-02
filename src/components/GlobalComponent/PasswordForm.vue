@@ -3,6 +3,7 @@
        <h2> Şifre Oluştur</h2>
        <div class="input_container form-container">
            <ul>
+                <li v-bind:class="{ is_valid: contains_twenty_characters }">En fazla 20 karakter olmalı.</li>
                <li v-bind:class="{ is_valid: contains_eight_characters }">En az 8 karakter olmalı.</li>
                <li v-bind:class="{ is_valid: contains_number }">Rakam içermeli.</li>
                <li v-bind:class="{ is_valid: contains_uppercase }">Büyük harf içermeli.</li>
@@ -15,7 +16,7 @@
                </svg>
            </div>
               
-
+           <input v-if="edit==true" type="password" @input="checkPassword" v-model="oldpass" autocomplete="off" placeholder="Eski Şifre" />
            <input type="password" @input="checkPassword" v-model="password" autocomplete="off" placeholder="Password" />
            <input type="password" @input="checkPassword" v-model="password_two" autocomplete="off" placeholder="Password 2" />
             <button @click="sendPassword" class="btn btn-sm btn-succes">Kaydet <i class="fas fa-key"></i></button>
@@ -24,11 +25,14 @@
 </template>
 <script>
 export default {
+    props:['edit'],
     data() {
         return {
             password: null,
+            oldpass:'',
             password_length: 0,
             contains_eight_characters: false,
+            contains_twenty_characters:true,
             contains_number: false,
             contains_uppercase: false,
             contains_special_character: false,
@@ -39,6 +43,7 @@ export default {
     },
     methods: {
         checkPassword() {
+           
             this.password_length = this.password.length;
             // eslint-disable-next-line no-useless-escape
             const format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
@@ -47,6 +52,11 @@ export default {
                 this.contains_eight_characters = true;
             } else {
                 this.contains_eight_characters = false;
+            }
+               if (this.password_length > 20) {
+                this.contains_twenty_characters = false;
+            } else {
+                this.contains_twenty_characters = true;
             }
 
             this.contains_number = /\d/.test(this.password);
@@ -59,6 +69,7 @@ export default {
             }
 
             if (this.contains_eight_characters === true &&
+                this.contains_twenty_characters === true &&
                 this.contains_special_character === true &&
                 this.contains_uppercase === true &&
                 this.contains_number === true && this.password_control ===true) {
@@ -71,6 +82,7 @@ export default {
         sendPassword(){
             if(this.valid_password ===true){
                this.$store.commit('setPassword',this.password) 
+               this.$store.commit('setOldPass',this.oldpass)
             } else {
                 alert('Şifre işlemleri hatalı.')
             }

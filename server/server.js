@@ -19,11 +19,12 @@ const productController = require('./api/controller/productController')
 const pigmentController=require('./api/controller/pigmentController')
 const employeController = require('./api/controller/employeController')
 const contactController = require('./api/controller/contactController')
+const loginController = require('./api/controller/loginController')
 const morgan = require('morgan')
 
 app.use(morgan('dev'))
 var corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: 'http://localhost:8081',
   optionsSuccessStatus: 200,
   }
 app.use(bodyParser.urlencoded({
@@ -61,6 +62,7 @@ app.use('/api/product',productController)
 app.use('/api/pigment',pigmentController)
 app.use('/api/employe',employeController)
 app.use('/api/contact',contactController)
+app.use('/api/login',loginController)
 const port = process.env.PORT || 4000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false }); 
 const db = mongoose.connection;

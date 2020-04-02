@@ -23,7 +23,7 @@
           <td scope="col"><input type="text" v-model="user.surname"></td>
           <td scope="col"><input type="email" v-model="user.email"></td>
           <td scope="col"><input type="phone" v-model="user.phone"></td>
-          <td scope="col"><button @click="passFormView = !passFormView" class="btn btn-secondary btn-sm">Password <i class="fas fa-key ml-2"></i></button>
+          <td scope="col"><button @click="passFormView = !passFormView" class="btn btn-sm" :class="passClass">Password <i class="fas fa-key ml-2"></i></button>
           </td>
           <td scope="col"><select class="custom-select" v-model="user.isAdmin">
               <option value="0">Web Master</option>
@@ -96,7 +96,8 @@
             password:'',
             isAdmin: null,
           },
-          passFormView:false
+          passFormView:false,
+          passClass:'btn-secondary'
         }
         },
         methods: {
@@ -169,8 +170,17 @@
           },
           computed: {
             ...mapGetters([
+              'getPassword',
               'getUser'
             ])
+          },
+          watch:{
+            getPassword(){
+            this.passClass='btn-success'
+            setTimeout(() => {
+              this.passFormView=false;
+            }, 700);
+            }
           },
 
           mounted() {

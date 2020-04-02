@@ -1,7 +1,7 @@
 const exprees = require('express');
 const router = exprees.Router();
 const User = require('../models/usermodel');
-
+const bcrypt= require('bcrypt')
 router.get('/', async (req, res) => {
     try {
         const users = await User.find({});
@@ -29,7 +29,8 @@ router.delete('/:id', async (req, res) => {
     }
 })
 router.post('/', async (req, res) => {
-   
+
+
     try {
         const user = await new User({
             Name: req.body.name,
@@ -51,23 +52,50 @@ router.post('/', async (req, res) => {
     }
 })
 router.put('/:id', async (req, res) => {
+    console.log(req.body)
     try {
-       
+        const c = await User.findOne({_id:req.params.id})
+       const pass = c.Password
+       if (req.body.oldpass!=null) {
+        bcrypt.compare(req.body.oldpass, pass, async function(err, result) {
+            if (result) {
+                const user = await User.updateOne({
+                    _id: req.params.id
+                }, {
+                    $set: {
+                        Name: req.body.edit.Name,
+                        LastName: req.body.edit.LastName,
+                        email: req.body.edit.email,
+                        Phone: req.body.edit.Phone,
+                        Password: req.body.edit.Password,
+                        isAdmin: req.body.edit.isAdmin
+                    }
+                })
+                res.json({
+                    user
+                });
+            }else{
+                res.status(400).json({err})
+            }
+        });
+       }else{
         const user = await User.updateOne({
             _id: req.params.id
         }, {
             $set: {
-                Name: req.body.Name,
-                LastName: req.body.LastName,
-                email: req.body.email,
-                Phone: req.body.Phone,
-                Password: req.body.Password,
-                isAdmin: req.body.isAdmin
+                Name: req.body.edit.Name,
+                LastName: req.body.edit.LastName,
+                email: req.body.edit.email,
+                Phone: req.body.edit.Phone,
+                Password: req.body.edit.Password,
+                isAdmin: req.body.edit.isAdmin
             }
         })
         res.json({
             user
         });
+       }
+      
     } catch (error) {
         res.json({
             message: error.message

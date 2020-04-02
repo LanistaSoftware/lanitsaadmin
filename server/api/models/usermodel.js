@@ -63,16 +63,15 @@ userschema.pre('save', function(next) {
 userschema.pre('updateOne', function(next) {
   var user = this._update.$set;
 
-
-
+console.log(user)
       // hash the password using our new salt
       if (user.Password.length<20) {
+       
         bcrypt.hash(user.Password, 10, function(err, hash) {
           // override the cleartext password with the hashed one
           user.Password = hash;
           
           next();
-      
   });
       }else{
         next();

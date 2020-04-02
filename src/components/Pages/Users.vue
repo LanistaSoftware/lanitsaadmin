@@ -87,6 +87,7 @@
         }, ],
         selectedItem: null,
           isEdit: false,
+          oldpass:'',
           isDelete: false,
           isAdd: false,
           user: {
@@ -129,18 +130,22 @@
               })
             },
             updateUser(id, edit) {
-              
+             
               console.log(this.getPassword)
               if (this.getPassword!=null) {
                 edit.Password = this.getPassword
               }
-             this.updateUserAction({'id':id,'edit':edit}).then(() => {
+              this.edit+=this.oldpass
+                this.oldpass = this.getOldPass
+             this.updateUserAction({'id':id,'edit':edit,'oldpass':this.oldpass}).then(() => {
                 this.selectedItem = null
                 this.getUsersaction()
               }).catch(err => {
                 alert(err)
               })
-            },
+            
+              },
+          
             adminSelect(auth) {
               if (auth == 0) {
                 return 'Web Master'
@@ -176,7 +181,8 @@
           computed: {
             ...mapGetters([
               'getPassword',
-              'getUser'
+              'getUser',
+              'getOldPass'
             ])
           },
           watch:{

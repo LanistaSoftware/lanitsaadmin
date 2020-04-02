@@ -16,7 +16,7 @@
                </svg>
            </div>
               
-           <input v-if="edit" type="password" @input="checkPassword" v-model="oldpass" autocomplete="off" placeholder="Eski Şifre" />
+           <input v-if="edit==true" type="password" @input="checkPassword" v-model="oldpass" autocomplete="off" placeholder="Eski Şifre" />
            <input type="password" @input="checkPassword" v-model="password" autocomplete="off" placeholder="Password" />
            <input type="password" @input="checkPassword" v-model="password_two" autocomplete="off" placeholder="Password 2" />
             <button @click="sendPassword" class="btn btn-sm btn-succes">Kaydet <i class="fas fa-key"></i></button>
@@ -69,7 +69,7 @@ export default {
             }
 
             if (this.contains_eight_characters === true &&
-                this.contains_twenty_characters === false &&
+                this.contains_twenty_characters === true &&
                 this.contains_special_character === true &&
                 this.contains_uppercase === true &&
                 this.contains_number === true && this.password_control ===true) {
@@ -82,7 +82,7 @@ export default {
         sendPassword(){
             if(this.valid_password ===true){
                this.$store.commit('setPassword',this.password) 
-               this.$$store.commit('setOldPass',this.oldpass)
+               this.$store.commit('setOldPass',this.oldpass)
             } else {
                 alert('Şifre işlemleri hatalı.')
             }

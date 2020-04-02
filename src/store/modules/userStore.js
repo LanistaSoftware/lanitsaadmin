@@ -56,14 +56,14 @@ const actions = {
     addUser({},item) {
         return api().post('/user', item).then((res) => {
             alert(res.statusText)
-    
+
         }).catch(err => {
             alert(err.message)
             alert(err.message)
         })
     },
-    updateUser({},{id,edit}) {
-        return api().put('/user/' + id, edit).then((res) => {
+    updateUser({},{id,edit,oldpass}) {
+        return api().put('/user/' + id,{ edit,oldpass}).then((res) => {
             alert(res.statusText)
         }).catch(err => {
             alert(err.message)    

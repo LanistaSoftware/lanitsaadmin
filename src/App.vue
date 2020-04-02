@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <Login class="login" v-if="!isLoginned" ></Login>
-    <div v-if="isLoginned" class="row">
+    <Login class="login" v-if="!getLogin" ></Login>
+    <div v-if="getLogin" class="row">
       <Header></Header>
     </div>
-    <div v-if="isLoginned" class="row">
-
+    <div v-if="getLogin" class="row">
+      
       <AppNavigation class="appnavigation"></AppNavigation>
       <section class="navborder sidecontent">
         <Navigation></Navigation>
       </section>
      <Content></Content>
     </div>
-    <div v-if="isLoginned" class="row">
+    <div v-if="getLogin" class="row">
       <Footer></Footer>
     </div>
   </div>
@@ -25,6 +25,7 @@
   import AppNavigation from './components/AppNavigation';
   import Content from './components/Content'
   import Login from './components/Login'
+import { mapGetters } from 'vuex';
 
   export default {
     name: 'app',
@@ -38,8 +39,13 @@
     },
     data(){
       return{
-        isLoginned:true
+        
       }
+    },
+    computed:{
+      ...mapGetters({
+        getLogin:"getLogin"
+      })
     }
   }
 </script>

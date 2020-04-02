@@ -5,17 +5,17 @@
                 <img src="../../public/siyah.png" alt="Logo" title="Logo"
                     width="138">
             </div>
-            <form role="form">
+            
                 <div id="form-login-username" class="form-group">
                     <input id="username" class="form-control" name="username" type="text" size="18" alt="login"
-                        required />
+                        required v-model="item.email" />
                     <span class="form-highlight"></span>
                     <span class="form-bar"></span>
-                    <label for="username" class="float-label">login</label>
+                    <label for="username" class="float-label" >login</label>
                 </div>
                 <div id="form-login-password" class="form-group">
                     <input id="passwd" class="form-control" name="password" type="password" size="18" alt="password"
-                        required>
+                        required v-model="item.Password">
                     <span class="form-highlight"></span>
                     <span class="form-bar"></span>
                     <label for="password" class="float-label">password</label>
@@ -27,18 +27,30 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in">Sign
-                        in</button>
+                    <button @click="loginPost(item)" class="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in" >Sign in</button>
                 </div>
 
-            </form>
+           
         </div>
 
     </div>
 </template>
 <script>
+import {mapActions} from 'vuex'
 export default {
-  
+  data(){
+    return{
+      item:{
+        email:'',
+        Password:'',
+      }
+    }
+  },
+  methods:{
+    ...mapActions({
+      loginPost:"loginPost"
+    })
+  }
 }
 </script>
 <style lang="less" scoped>

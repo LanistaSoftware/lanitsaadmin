@@ -139,6 +139,8 @@
                 this.oldpass = this.getOldPass
              this.updateUserAction({'id':id,'edit':edit,'oldpass':this.oldpass}).then(() => {
                 this.selectedItem = null
+                this.$store.commit('setPassword',null) 
+               this.$store.commit('setOldPass',null)
                 this.getUsersaction()
               }).catch(err => {
                 alert(err)

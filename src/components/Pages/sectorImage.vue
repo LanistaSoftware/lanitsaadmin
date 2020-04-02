@@ -37,20 +37,21 @@
 
                 </div>
             </div>
-
         </div>
     </div>
-    </template>
-
+</template>
 <script>
-import {mapActions, mapGetters} from 'vuex'
-export default {
-    data(){
-        return{
-            isAdd:false,
-            prewImage:'',
-            show:false,
-            tab: [{
+      import {
+        mapActions,
+        mapGetters
+    } from 'vuex'
+    export default {
+        data() {
+            return {
+                isAdd: false,
+                prewImage: '',
+                show: false,
+                tab: [{
                         link: '/sectors',
                         label: 'Sektörler'
                     },
@@ -60,75 +61,79 @@ export default {
                     }
                 ],
                 galery: {
-                image:new FormData(),
-                imgUrl:''
+                    image: new FormData(),
+                    imgUrl: ''
 
+                }
             }
+        },
+        methods: {
+            getImage(path) {
+                return path ? require(`@/assets/upload/${path}`) : ''
+            },
+            ...mapActions({
+                addGaleryAction: "addGalery",
+                addGaleryImage: "addGaleryImage",
+                getGalery: "getGalery",
+                addtab: "addTabs",
+                deleteGaleryAction: "deleteGalery"
+            }),
+            deleteGalery(item) {
+                this.deleteGaleryAction({
+                    'id': item._id,
+                    'img': item.imgUrl
+                }).then(() => {
+                    this.getGalery()
+                })
+            },
+            addGalery() {
+                this.addGaleryAction(this.galery).then(() => {
+                    this.addGaleryImage(this.galery.image)
+                    this.getGalery()
+                    this.isAdd = false
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            selectedFile() {
+                this.imageError = '';
+
+                // const MAX_WIDTH = 1000;
+                // const MAX_HEIGHT = 3000;
+                var file = ''
+                console.log(this.$refs.file.files)
+                file = this.$refs.file.files[0]
+                this.galery.image.append('file', file)
+                this.galery.imgUrl = file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-' + new Date().getHours() + '.jpg'
+                if (!file || file.type.indexOf('image/') !== 0) return;
+
+
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = evt => {
+                    let img = new Image();
+                    img.onload = () => {}
+                    this.show = true
+                    this.prewImage = evt.target.result
+                    img.src = evt.target.result;
+                }
+                reader.onerror = evt => {
+                    console.error(evt);
+                }
+            }
+        },
+        mounted() {
+            this.addtab(this.tab)
+            this.getGalery().then(() => {
+                console.log(this.getterGalery)
+            })
+        },
+        computed: {
+            ...mapGetters({
+                getterGalery: "getterGalery"
+            })
         }
-    },
-     methods: {
-      getImage(path) {
-      return path ? require(`@/assets/upload/${path}`) : ''
-    },
-    ...mapActions({
-        addGaleryAction:"addGalery",
-        addGaleryImage:"addGaleryImage",
-        getGalery:"getGalery",
-        addtab:"addTabs",
-        deleteGaleryAction:"deleteGalery"
-    }),
-    deleteGalery(item){
-        this.deleteGaleryAction({'id':item._id,'img':item.imgUrl}).then(()=>{
-            this.getGalery()
-        })
-    },
-    addGalery(){
-        this.addGaleryAction(this.galery).then(()=>{
-            this.addGaleryImage(this.galery.image)
-            this.getGalery()
-            this.isAdd=false
-        }).catch(err=>{console.log(err)})
-    },
-      selectedFile() {
-      this.imageError = '';
-      
-      // const MAX_WIDTH = 1000;
-      // const MAX_HEIGHT = 3000;
-      var file = '' 
-     console.log(this.$refs.file.files)
-      file = this.$refs.file.files[0]
-      this.galery.image.append('file',file)
-      this.galery.imgUrl = file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
-      if (!file || file.type.indexOf('image/') !== 0) return;
- 
-      
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = evt => {
-        let img = new Image();
-        img.onload = () => {          
-        }
-          this.show=true
-          this.prewImage=evt.target.result
-          img.src = evt.target.result;
-      }
-      reader.onerror = evt => {
-        console.error(evt);
-      }
     }
-    },
-    mounted(){
-         this.addtab(this.tab)
-        this.getGalery().then(()=>{
-            console.log(this.getterGalery)
-        })
-    },
-    computed:{
-        ...mapGetters({
-            getterGalery:"getterGalery"
-        })
-    }
-}
 </script>
 
 <style lang="less" scoped>
@@ -175,16 +180,11 @@ export default {
 }
 
 .input-container {
-        position: relative;
-        bottom: 1rem;
-        width: 100%;
-        text-align: center;
-        padding: 1rem;
+    position: relative;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
 
 }
-
-
-
-  
-
 </style>

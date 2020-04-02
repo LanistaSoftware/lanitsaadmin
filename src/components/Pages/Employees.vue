@@ -1,35 +1,46 @@
 <template>
-    <div class="employe">   
-    <div v-for="item in getterEmployes " :key="item._id" class="card">
-    <img v-if="selectedItem=='' || selectedItem!=item._id" :src="getImage(item.imgUrl)" class="card-img-top" alt="...">
-     <img v-if="selectedItem==item._id  "  :src="employeimg" class="card-img-top" alt="...">
-     <div v-if="selectedItem==item._id" class="custom-file mt-2 ">
-        <input type="file" class="custom-file-input" ref="myfile" accept="image/*"  @change="selectedFile()" />
-          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+    <div class="employe">
+        <div v-for="item in getterEmployes " :key="item._id" class="card">
+            <div class="album-image">
+                <img v-if="selectedItem=='' || selectedItem!=item._id" :src="getImage(item.imgUrl)" class="card-img-top"
+                    alt="...">
+                <img v-if="selectedItem==item._id  " :src="employeimg" class="card-img-top" alt="...">
+            </div>
+            <div class="input-container">
+                <div v-if="selectedItem==item._id" class="custom-file ">
+                    <input type="file" class="custom-file-input" ref="myfile" accept="image/*"
+                        @change="selectedFile()" />
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>
+            <div class="input-container">
+                <h5 v-if="selectedItem=='' || selectedItem!=item._id">{{item.name}}</h5>
+                <input v-if="selectedItem==item._id" v-model="item.name" class="card-text form-control">
+            </div>
+            <div class="input-container">
+                <p v-if="selectedItem=='' || selectedItem!=item._id" class="card-text">{{item.task}}</p>
+                <input class="card-text form-control" v-if="selectedItem==item._id" v-model="item.task">
+            </div>
+            <div class="input-container">
+                <p v-if="selectedItem=='' || selectedItem!=item._id" class="card-text"><small
+                        class="text-muted">Görüntülenme Sırası: <b>{{item.order}}</b></small></p>
+                <select v-if="selectedItem==item._id" class="form-control" id="exampleFormControlSelect1"
+                    v-model="item.order">
+                    <option>0</option>
+                    <option>1</option>
+                </select>
+            </div>
+            <div class="btn-container">
+                <button v-if="selectedItem=='' || selectedItem!=item._id" @click="isEdit=true,selectedItem=item._id"
+                    class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                <button v-if="selectedItem==item._id" @click="updateEmploye(item)" class="btn btn-sm btn-success"><i
+                        class="fas fa-save"></i></button>
+                <button v-if="selectedItem==item._id " @click="selectedItem=''" class="btn btn-sm btn-warning"><i
+                        class="fas fa-arrow-left"></i></button>
+                <button class="btn btn-sm btn-danger" @click="deleteEmploye(item._id)"><i
+                        class="fas fa-trash-alt"></i></button>
+            </div>
         </div>
-    <div class="card-body">
-      <div class="card-title">  
-      <h5  v-if="selectedItem=='' || selectedItem!=item._id" >{{item.name}}</h5>
-      <input  v-if="selectedItem==item._id" v-model="item.name" class="card-text form-control"  >
-      </div>
-      <div class="card-text">
-      <p v-if="selectedItem=='' || selectedItem!=item._id" class="card-text">{{item.task}}</p>
-      <input class="card-text form-control"   v-if="selectedItem==item._id" v-model="item.task">
-      <p v-if="selectedItem=='' || selectedItem!=item._id" class="card-text"><small class="text-muted">Görüntülenme Sırası: <b>{{item.order}}</b></small></p>
-     
-        <select  v-if="selectedItem==item._id" class="form-control mt-2" id="exampleFormControlSelect1" v-model="item.order">
-                          <option>0</option>
-                          <option>1</option>
-        </select>
-      </div>
-      <div class="button-group mt-1">
-      <button  v-if="selectedItem=='' || selectedItem!=item._id" @click="isEdit=true,selectedItem=item._id" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
-      <button v-if="selectedItem==item._id" @click="updateEmploye(item)" class="btn btn-sm btn-success"><i class="fas fa-save"></i></button>
-      <button v-if="selectedItem==item._id " @click="selectedItem=''" class="btn btn-sm btn-warning"><i class="fas fa-arrow-left"></i></button>        
-      <button class="btn btn-sm btn-danger" @click="deleteEmploye(item._id)"><i class="fas fa-trash-alt"></i></button>
-      </div>
-    </div>
-    </div>
     </div>
 </template>
 
@@ -141,17 +152,38 @@ export default {
 
 <style lang="less" scoped>
 .card{
-    width: 30%;
-    display: inline-block;
-    margin: 1rem;
-    text-align: center;
-    img{
-        display: inline-block;
-        width:290px ;
-        margin-top: 0.5rem;
+    width: 21%;
+    height: 35rem;
+    margin: 0 2rem 2rem 2rem;
+    float: left;
+    background-color: #FAFAFA;
+}
+    .album-image {
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+
+        img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+
+        }
     }
-}
-.button-group{
+    .btn-container {
+        width: 100%;
+        text-align: center;
+
+        .btn {
+            margin: 0.5rem;
+            padding: 0.3 0.5rem;
+        }
+    }
+.input-container {
+    width: 100%;
     text-align: center;
+    padding: 1rem;
+
 }
+
 </style>

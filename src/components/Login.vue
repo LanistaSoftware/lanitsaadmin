@@ -2,11 +2,9 @@
     <div class="container">
         <div id="login" class="signin-card">
             <div class="logo-image">
-                <img src="http://www.officialpsds.com/images/thumbs/Spiderman-Logo-psd59240.png" alt="Logo" title="Logo"
+                <img src="../../public/siyah.png" alt="Logo" title="Logo"
                     width="138">
             </div>
-            <h1 class="display1">Title</h1>
-            <p class="subhead">Description</p>
             <form role="form">
                 <div id="form-login-username" class="form-group">
                     <input id="username" class="form-control" name="username" type="text" size="18" alt="login"
@@ -38,6 +36,11 @@
 
     </div>
 </template>
+<script>
+export default {
+  
+}
+</script>
 <style lang="less" scoped>
 
 body {

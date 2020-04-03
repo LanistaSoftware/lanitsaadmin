@@ -22,7 +22,15 @@ const contactController = require('./api/controller/contactController')
 const loginController = require('./api/controller/loginController')
 const logoController = require('./api/controller/logoController')
 const morgan = require('morgan')
+const history = require('connect-history-api-fallback');
 
+const staticFileMiddleware = express.static(path.join(__dirname + '/dist'));
+
+app.use(staticFileMiddleware);
+app.use(history({
+  disableDotRule: true,
+  verbose: true
+}));
 app.use(morgan('dev'))
 var corsOptions = {
   origin: 'http://localhost:8081',

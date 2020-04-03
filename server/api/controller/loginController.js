@@ -2,7 +2,7 @@ const exprees = require('express');
 const router = exprees.Router();
 const User = require('../models/usermodel');
 const bcrypt= require('bcrypt')
-
+const jwt = require('jsonwebtoken')
 
 router.post('/', async (req, res) => {
     try {
@@ -15,7 +15,17 @@ router.post('/', async (req, res) => {
        
               bcrypt.compare(req.body.Password, pass,  function(err, result) {
                  if (result) {
-                  res.status(200).json('Giriş Başarılı');
+                    const token = jwt.sign({
+                        muuid: pass,
+                        memail: user.email,
+                        cid: user.cid
+                    }, 
+                    'secret_key',
+                    {
+                        expiresIn :"2h"
+                    }
+                    )
+                  res.status(200).json({message:'Giriş Başarılı','token':token});
                  }else if (!result){
                   res.status(200).json('Şifre Yanlış');
                  }else{

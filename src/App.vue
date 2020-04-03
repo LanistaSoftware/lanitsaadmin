@@ -46,6 +46,9 @@ import { mapGetters } from 'vuex';
       ...mapGetters({
         getLogin:"getLogin"
       })
+    },
+    created(){
+      this.$store.dispatch("initAuth")
     }
   }
 </script>

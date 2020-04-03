@@ -135,7 +135,6 @@
             },
             updateUser(id, edit) {
               this.passClass="btn-secondary"
-              console.log(this.getPassword)
               if (this.getPassword!=null) {
                 edit.Password = this.getPassword
               }

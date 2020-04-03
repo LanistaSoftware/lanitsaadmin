@@ -39,11 +39,6 @@
           showedit:"showedit"
         }),
       
-      },
-      watch:{
-        set(){
-          console.log(this.set)
-        }
       }
   }
 </script>

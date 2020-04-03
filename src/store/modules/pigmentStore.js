@@ -19,17 +19,17 @@ const actions={
     addPigment({},product){
         return api().post('pigment',product).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     getPigment({commit}){
         return api().get('pigment').then(res=>{
             commit("setPigment",res.data.pigments)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     updatePigment({},{id,item}){
         return api().put('pigment/'+id,item).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     deletePigment({},id){
         return api().delete('pigment/'+id).then((res)=>{

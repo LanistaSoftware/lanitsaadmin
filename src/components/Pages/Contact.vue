@@ -39,25 +39,25 @@
   <div class="form-group row" >
   <label for="colFormLabel" class="col-sm-2 col-form-label">Şirket Adı</label>
     <div class="col-sm-10">
-     <input type="text" class="form-control" id="colFormLabel" placeholder="Şirket Adı" v-model="contact.name">
+     <input type="text" class="form-control" id="colFormLabel1" placeholder="Şirket Adı" v-model="contact.name">
     </div>
   </div>
   <div class="form-group row">
     <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="colFormLabel" placeholder="Email" v-model="contact.email">
+      <input type="email" class="form-control" id="colFormLabel2" placeholder="Email" v-model="contact.email">
     </div>
   </div>
    <div class="form-group row">
       <label for="colFormLabel" class="col-sm-2 col-form-label">Telefon</label>
     <div class="col-sm-10">
-       <input type="text" class="form-control" id="colFormLabel" placeholder="Telefon" v-model="contact.telephone">
+       <input type="text" class="form-control" id="colFormLabel3" placeholder="Telefon" v-model="contact.telephone">
     </div>
   </div>
   <div class="form-group row">
       <label for="colFormLabel" class="col-sm-2 col-form-label">Fax</label>
     <div class="col-sm-10">
-       <input type="text" class="form-control" id="colFormLabel" placeholder="fax" v-model="contact.fax">
+       <input type="text" class="form-control" id="colFormLabel4" placeholder="fax" v-model="contact.fax">
     </div>
   </div>
     <div class="form-group row">

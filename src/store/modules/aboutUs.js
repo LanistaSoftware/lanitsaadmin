@@ -24,12 +24,12 @@ const actions ={
     postAbout({},content){
         return api().post('aboutUs',content).then(res=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     postImage({},image){
         return api().post('aboutUs/image',image,{headers:{'Content-Type': 'multipart/form-data'}}).then(res=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     }
 }
 

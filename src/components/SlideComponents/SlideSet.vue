@@ -203,7 +203,6 @@ export default {
       })
     },
     updateSlider() {
-      console.log(this.Slider)
       this.updateSliderAction({
         'id': this.selectId,
         'slideset': this.Slider
@@ -258,7 +257,6 @@ export default {
         let img = new Image();
         img.onload = () => {
           this.avarage =  img.width/img.height
-          console.log(this.avarage)
           if (this.avarage < 1.4 || this.avarage > 1.6) {
             this.imageError = `Fotoğrafın en boy oranı ortalama 1.5 olmalıdır Örneğin 90*60 gibi.Şu anki oran = ${(this.avarage.toFixed(2))}`;
             alert(this.imageError)
@@ -266,7 +264,7 @@ export default {
           }else{
              if (slide == 'slideOne') {
               if (this.avarage < 1.4 || this.avarage > 1.6) {
-                console.log('err')
+                alert('err')
             }else{
             this.imagePreviewone = evt.target.result
             this.Slider.SliderOne.imageurlOne = file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
@@ -274,7 +272,7 @@ export default {
           }
           if (slide == 'slideTwo') {
              if (this.avarage < 1.4 || this.avarage > 1.6) {
-               console.log('er')
+               alert('err')
              }else{
                this.imagePreviewtwo = evt.target.result
                this.Slider.SliderTwo.imageurlTwo = file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
@@ -283,7 +281,7 @@ export default {
           }
           if (slide == 'slideThree') {
              if (this.avarage < 1.4 || this.avarage > 1.6) {
-               console('err')
+               alert('err')
             }else{
               this.imagePreviewthree = evt.target.result
             this.Slider.SliderThree.imageurlThree =  file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
@@ -294,7 +292,7 @@ export default {
           img.src = evt.target.result;
       }
       reader.onerror = evt => {
-        console.error(evt);
+        alert(evt)
       }
     }
   },

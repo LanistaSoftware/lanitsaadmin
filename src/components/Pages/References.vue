@@ -65,7 +65,6 @@ export default {
     selectedFile() {
       
       this.imageError = '';
-      console.log(this.$refs.myfile)
       this.file = this.$refs.myfile[0].files[0]
       this.imageForm.append('file', this.file)
       let reader = new FileReader();
@@ -77,7 +76,7 @@ export default {
         this.imagePrew = evt.target.result
       }
       reader.onerror = evt => {
-        console.error(evt);
+        alert(evt);
       }
     },
     ...mapActions({

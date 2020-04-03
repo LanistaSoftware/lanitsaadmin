@@ -106,7 +106,7 @@ const actions = {
            
             commit("setActiveSlide",slide[0])
         }).catch(err=>{
-            console.log(err)
+                alert(err)
         })
     },
     updateVideo({},videopath){

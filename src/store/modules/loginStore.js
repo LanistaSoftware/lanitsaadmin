@@ -37,7 +37,6 @@ const actions = {
     },
     loginPost({commit},item) {
         return api().post('login', item).then((res) => {
-            console.log(res)
             if (res.status==200) {
                if (res.data.message =='Giriş Başarılı') {
                 alert(res.data.message)

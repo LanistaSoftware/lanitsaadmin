@@ -40,12 +40,12 @@ const actions={
     updateSector({},{id,sector}){
         return api().put('sector/'+id,sector).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     addGalery({},image){
         return api().post('sector/galery',image).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     addGaleryImage({},image){
         return api().post('sector/galery/image',image,{ headers: {
@@ -53,18 +53,18 @@ const actions={
             'Access-Control-Allow-Headers':'Content-Type'
         }}).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     getGalery({commit}){
         return api().get('sector/galery').then(res=>{
             let galery = res.data.sectorImages
             commit("setGalery",galery)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     deleteGalery({},{id,img}){
         return api().delete('sector/galery/'+id+'/'+img).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     }
 }
 

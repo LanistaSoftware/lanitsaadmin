@@ -18,12 +18,12 @@ const actions= {
     addReference({},reference){
        return api().post('reference',reference).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
    addImage({},image){
        return api().post('reference/image',image,{headers:{'Content-Type': 'multipart/form-data'}}).then(res=>{
            alert(res.statusText)
-       }).catch(err=>{console.log(err)})
+       }).catch(err=>{alert(err)})
    },
    getReference({commit}){
        return api().get('reference').then((res)=>{

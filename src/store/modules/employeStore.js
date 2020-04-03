@@ -18,12 +18,12 @@ const actions= {
     addEmploye({},reference){
        return api().post('employe',reference).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
    addImageEmploye({},image){
        return api().post('employe/image',image,{headers:{'Content-Type': 'multipart/form-data'}}).then(res=>{
            alert(res.statusText)
-       }).catch(err=>{console.log(err)})
+       }).catch(err=>{alert(err)})
    },
    getEmploye({commit}){
        return api().get('employe').then((res)=>{

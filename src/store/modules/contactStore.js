@@ -24,16 +24,16 @@ const actions={
     addContact({},contact){
         return api().post('contact',contact).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     getContact({commit}){
         return api().get('contact').then(res=>{
             commit("setContact",res.data.contacts[0])
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     getLogo({commit}){
         return api().get('logo').then((res)=>{
-            console.log(res.data.CompanyLogo)
+            alert(res.data.CompanyLogo)
             commit("setLogo",res.data.CompanyLogo[0].Logoname)
         })
     },
@@ -42,12 +42,12 @@ const actions={
          return api().post('logo',logo,{headers:{'Content-Type': 'application/json'}}).then((res)=>{
             alert(res.statusText)
             
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     addLogoImage({},image){
         return api().post('logo/image',image,{headers:{'Content-Type': 'multipart/form-data'}}).then(res=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     }
 }
 

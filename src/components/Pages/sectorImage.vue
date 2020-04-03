@@ -92,7 +92,7 @@
                     this.getGalery()
                     this.isAdd = false
                 }).catch(err => {
-                    console.log(err)
+                    alert(err)
                 })
             },
             selectedFile() {
@@ -101,7 +101,6 @@
                 // const MAX_WIDTH = 1000;
                 // const MAX_HEIGHT = 3000;
                 var file = ''
-                console.log(this.$refs.file.files)
                 file = this.$refs.file.files[0]
                 this.galery.image.append('file', file)
                 this.galery.imgUrl = file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-' + new Date().getHours() + '.jpg'
@@ -118,15 +117,13 @@
                     img.src = evt.target.result;
                 }
                 reader.onerror = evt => {
-                    console.error(evt);
+                    alert(evt);
                 }
             }
         },
         mounted() {
             this.addtab(this.tab)
-            this.getGalery().then(() => {
-                console.log(this.getterGalery)
-            })
+            this.getGalery()
         },
         computed: {
             ...mapGetters({

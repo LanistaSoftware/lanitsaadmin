@@ -62,7 +62,7 @@ export default {
             this.imagePrew = evt.target.result
           }
           reader.onerror = evt => {
-            console.error(evt);
+            alert(evt);
           }
         },
         getImage(path) {

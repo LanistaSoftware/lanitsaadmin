@@ -2,7 +2,6 @@ const exprees = require('express');
 const router = exprees.Router();
 const multer = require('../middleware/multer')
 const aboutUs = require('../models/aboutUsSchema')
-const fs = require('fs')
 router.get('/',async (req,res)=>{
     try {
         const aboutUsContent = await aboutUs.find({})
@@ -12,15 +11,7 @@ router.get('/',async (req,res)=>{
     }
 })
 router.post('/',async (req,res)=>{
-    const size = await (await aboutUs.find({}))
-    try {
-        if(size.length>0){
-        let img =  size[0].imgUrl
-          await  fs.unlink('src/assets/upload/'+img, function (err) {
-                if (err) throw err;
-                // if no error, file has been deleted successfully
-                console.log('File deleted!');
-            }); 
+    try { 
             await aboutUs.deleteMany({})
             
             const add =await new aboutUs({
@@ -28,16 +19,7 @@ router.post('/',async (req,res)=>{
                 imgUrl:req.body.imgUrl
             })
             await add.save()
-            res.status(201).json({add})
-        }else{
-            const add =await new aboutUs({
-                content:req.body.aboutcontent,
-                imgUrl:req.body.imgUrl
-            })
-            await add.save()
-            res.status(201).json({add})
-            
-        }
+            res.status(201).json({add})      
     } catch (error) {
         console.log(error)
     }

@@ -95,7 +95,6 @@ export default {
             selectedFile() {
                 this.imageForm.delete('file')
                 this.imageError = '';
-                console.log(this.$refs.myfile)
                 this.file = this.$refs.myfile[0].files[0]
                 this.imageForm.append('file', this.file)
                 let reader = new FileReader();
@@ -108,7 +107,7 @@ export default {
                     this.showimg = true
                 }
                 reader.onerror = evt => {
-                    console.error(evt);
+                    alert(evt);
                 }
             },
             updateEmploye(item){

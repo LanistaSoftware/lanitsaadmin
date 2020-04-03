@@ -19,17 +19,17 @@ const actions={
     addProduct({},product){
         return api().post('product',product).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     getProduct({commit}){
         return api().get('product').then(res=>{
             commit("setProduct",res.data.products)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     updateProduct({},{id,item}){
         return api().put('product/'+id,item).then((res)=>{
             alert(res.statusText)
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{alert(err)})
     },
     deleteProduct({},id){
         return api().delete('product/'+id).then((res)=>{

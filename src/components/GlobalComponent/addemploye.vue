@@ -30,30 +30,6 @@
     </div>
   </div>
 </div>
-  <!-- <div class="card">
-    <div class="card-body">
-      <div class="card-image-top">
-        <img v-bind:src="imagePreview" class="rounded mx-auto d-block mt-1" />
-      </div>
-      <input type="text" class="form-control" placeholder="Ad Soyad " v-model="employe.name">
-      <input type="text" class="form-control" placeholder="Görev" v-model="employe.task">
-      <select class="form-control" id="exampleFormControlSelect1" placeholder="Yetki seçiniz." v-model="employe.order">
-        <option value="" disabled selected>Yetki Seçiniz</option>
-        <option>0</option>
-        <option>1</option>
-      </select>
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" ref="file" accept="image/*" id="file"
-          v-on:change="handleFileUpload()" />
-        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-        <div class="btn-container">
-          <button class="btn btn-sm btn-warning" @click="reset"><i class="fas fa-trash-restore"></i>
-            Reset</button>
-          <button class="btn btn-sm btn-success" @click="addEmploye()"><i class="fas fa-save"></i> Save</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </template>
 <script>
 import {
@@ -88,7 +64,8 @@ export default {
   methods: {
     ...mapActions({
       addEmployeAction: "addEmploye",
-      addImageEmploye: "addImageEmploye"
+      addImageEmploye: "addImageEmploye",
+      addtab:"addTabs",
     }),
     addEmploye() {
       this.addEmployeAction(this.employe).then(() => {
@@ -146,7 +123,7 @@ export default {
     }
   },
   created() {
-    this.$emit('tab', this.tab)
+    this.addtab( this.tab)
   },
 }
 </script>

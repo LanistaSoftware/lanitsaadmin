@@ -48,7 +48,8 @@ export default {
 methods: {
   ...mapActions({
     addReferenceActions:'addReference',
-    addImage:'addImage'
+    addImage:'addImage',
+    addtab:"addTabs"
   }),
   addReference(){
     this.addReferenceActions(this.references).then(()=>{
@@ -110,7 +111,7 @@ methods: {
   }
 },
   created(){
-      this.$emit('tab',this.tab)
+      this.addtab(this.tab)
     },
 }
 </script>

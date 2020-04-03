@@ -49,12 +49,12 @@ const actions = {
         })
     },
     addSlideimage({},form) {
-        console.log(form)
+       
         return api().post('slide/image', form,{ headers: {
             'Content-Type': 'multipart/form-data',
             'Access-Control-Allow-Headers':'Content-Type'
         }}).then((res) => {
-            console.log(form)
+         
             alert(res.statusText)
         }).catch(err => {
             alert(err)
@@ -118,7 +118,6 @@ const actions = {
     },
     getVideo({commit},Id){
         return api().get('video').then((res)=>{
-            console.log(res.data.sliders[0].videopath)
             Id=res.data.sliders[0].videopath
             commit("setVideoId",Id)
         }).catch((err)=>{

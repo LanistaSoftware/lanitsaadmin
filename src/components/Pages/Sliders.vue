@@ -7,7 +7,7 @@
     </div>
     <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)" v-model="selectId">
       <option selected>Slayt seti seçiniz.</option>
-      <option v-for="(item,index) in slideAll" :key="index" :value="item._id">{{item.sliderName}}</option>
+      <option v-for="(item,index) in slideAll" :key="index"  :value="item._id">{{item.sliderName}}</option>
     </select>
     <div class="input-group-prepend">
       <button class="btn btn-sm btn-success" @click="activeSlide(selectId), isActive = !isActive" :disabled="isActive"><i class="fas fa-plug"></i></button>
@@ -128,7 +128,7 @@
       this.addtab(this.tab)
       this.getAllSlideAction()
       this.getActiveSlider().then(()=>{
-       if (this.getAcitveOne!=='') {
+       if (this.getAcitveOne!=undefined) {
       this.activeId= this.getAcitveOne._id
       this.slideSets[0].header=  this.getAcitveOne.SliderOne.titleOne
       this.slideSets[1].header=  this.getAcitveOne.SliderTwo.titleTwo
@@ -141,7 +141,7 @@
       this.slideSets[2].imageUrl=  this.getAcitveOne.SliderThree.imageurlThree
        }
       })
-    },   
+    },
     computed:{
        ...mapGetters({
       slideAll: "getAllSlide",

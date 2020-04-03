@@ -11,7 +11,7 @@
  import CardPreview from './CardPreview'
 import Axios from 'axios'
  import {mapActions,mapGetters, mapMutations} from 'vuex'
-  
+ 
   export default {
     name: 'Slider',
     components: {
@@ -44,7 +44,8 @@ import Axios from 'axios'
         methods: {
             ...mapActions({
                 addBlogAction:"addBlog",
-                 getContentAction:"getContentAction"
+                 getContentAction:"getContentAction",
+                  addtab: "addTabs",
             }),
             ...mapMutations({
                 setClose:"setClose",
@@ -70,7 +71,8 @@ import Axios from 'axios'
             }
         },
         created(){
-      this.$emit('tab',this.tab)
+
+    this.addtab(this.tab)
       this.getContentAction('')
       this.setShowEdit(false)
     },

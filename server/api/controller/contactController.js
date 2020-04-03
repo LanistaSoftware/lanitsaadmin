@@ -46,14 +46,15 @@ router.post('/',async (req, res) => {
     }
 }),
 router.post('/logo',async (req, res) => {
-    const logolenght = await logo.find({})
-    const addlogo = new logo({
-        Logoname:req.body.Logoname,
-        
-    })
+  
     try {
+        const logolenght = await logo.find({})
+        const addlogo = new logo({
+            Logoname:req.body.Logoname,
+            
+        })
         if ( logolenght.length>0) {
-           await logo.deleteMany({}).then(()=>{
+            logo.deleteMany({}).then(()=>{
               addlogo.save()
             res.status(201).json({
                 addlogo
@@ -87,7 +88,6 @@ router.get('/logo', async (req, res) => {
 
 router.post('/logo/image',multer.saveToUploadsReference,async (req, res) => {
     try {
-    
      res.status(201).json(res)
     } catch (error) {
         res.json({

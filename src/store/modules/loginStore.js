@@ -33,10 +33,9 @@ const actions = {
     logout({ commit}){
         commit("clearToken")
         localStorage.removeItem("token")
-        
         this.$router.replace("/")
     },
-    loginPost({commit,dispatch},item) {
+    loginPost({commit},item) {
         return api().post('login', item).then((res) => {
             console.log(res)
             if (res.status==200) {
@@ -45,23 +44,17 @@ const actions = {
                 commit("setLogin",true)
                 commit("setToken",res.data.token)
                 localStorage.setItem("token",res.data.token)
-                dispatch("setTimeoutTimer")
                }else{
                    alert(res.data)
                }
             }else{
-                console.log(res)
+                
                 alert(res.data)
             }
-            console.log(res)
+           
         }).catch(err => {
             alert(err.message)
         })
-    },
-    setTimeoutTimer({dispatch}){
-        setTimeout(() => {
-            dispatch("logout")
-        }, 3600*1000)
     }
 }
 export default {

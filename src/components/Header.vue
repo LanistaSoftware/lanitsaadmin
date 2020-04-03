@@ -5,7 +5,7 @@
      <router-link to='/blogs' tag='li' class="nav-item">
              <a class="navbar-brand m-4" href="http://www.lanista.com.tr"><img src="siyah.png" width="200" alt="Lanista Software"></a>
         </router-link>
-        <button class="btn btn-sm btn-secondary" @click="logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</button>
+
 </div>
   <div class="header">
     <h3>Admin Panel & Site Control Systems</h3>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+
 export default {
   name: 'Header',
   data () {
@@ -22,11 +22,6 @@ export default {
       msg: 'Lanista Gladio Blog Header'
     }
   },
-  methods:{
-    ...mapActions({
-      logout:"logout"
-    })
-  }
 }
 </script>
 

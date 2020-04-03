@@ -21,8 +21,8 @@
                   <td scope="col"><input type="text" class="form-control" v-model="pigment.migrationFastness"></td>
                   <td scope="col"><input type="text" class="form-control" v-model="pigment.heatFastness"></td>
                   <td scope="col"><input type="text" class="form-control" v-model="pigment.lightFastness"></td>
-                  <td scope="col"><button class="btn btn-sm btn-success" @click="addPigment">Save</button>
-                      <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel </button>
+                  <td scope="col"><button class="btn btn-sm btn-success" @click="addPigment">Save <i class="fas fa-save"></i></button>
+                      <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel <i class="fas fa-arrow-left"></i></button>
                   </td>
               </tr>
               <tr v-for="(item,index) in getterPigment" :key="item.id">
@@ -48,12 +48,12 @@
                       <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="selectedItem=item._id"
                           class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
                       <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success" @click="updatePigment(item)">
-                          Save
+                          Save <i class="fas fa-save"></i>
                       </button>
                       <button @click="deletePigment(item._id)" class="btn btn-sm btn-danger"> Delete <i
                               class="fas fa-user-minus"></i></button>
                       <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" @click="selectedItem=null"
-                          class="btn btn-sm btn-warning"> Cancel </button>
+                          class="btn btn-sm btn-warning"> Cancel <i class="fas fa-arrow-left"></i></button>
                   </td>
               </tr>
           </tbody>

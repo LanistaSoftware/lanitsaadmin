@@ -6,7 +6,7 @@
       <span class="input-group-text" id="">Kayıtlı Setler</span>
     </div>
     <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)" v-model="selectId">
-      <option selected>Slayt seti seçiniz.</option>
+      <option disabled selected>Slayt seti seçiniz.</option>
       <option v-for="(item,index) in slideAll" :key="index" :value="item._id">{{item.sliderName}}</option>
     </select>
     <div class="input-group-prepend">

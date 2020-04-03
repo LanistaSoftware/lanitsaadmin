@@ -1,30 +1,34 @@
 <template>
-<div>
-    <div class="about">
-        <div class="about-content">
-            <vue-editor v-if="showEdit" v-model="content.aboutcontent"></vue-editor>
-            <div v-if="!showEdit">
-                <div v-html="content.aboutcontent"></div>
-            </div>
-            <button v-if="showEdit" class="btn btn-sm btn-success float-right" @click="addAboutUs"><i class="fas fa-save"></i> Save</button>
-             <button  v-if="!showEdit" class="btn btn-sm btn-primary float-right" @click="Edit">Edit <i class="fas fa-edit"></i></button>
-              <button  v-if="showEdit" class="btn btn-sm btn-warning float-left" @click="showEdit=false"><i class="fas fa-arrow-left"></i> Cancel</button>
-        </div>
-        <div class="about-image clearfix">
-            <img v-if="!showPreview" :src="getImage(content.imgUrl)" class="rounded mx-auto d-block" alt="About us image.">
-            <img v-if="showPreview" :src="imagePreview" class="rounded mx-auto d-block" alt="About us image.">
-            <div  v-if="showEdit">
-                <div class="prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Kişi Fotoğrafı</span>
+    <div>
+        <div class="about">
+            <div class="about-content">
+                <vue-editor v-if="showEdit" v-model="content.aboutcontent"></vue-editor>
+                <div v-if="!showEdit">
+                    <div v-html="content.aboutcontent"></div>
                 </div>
-                <div class="custom-file" >
-                        <input  type="file" ref="file" accept="image/*"  class="custom-file-input" id="file"
-                            aria-describedby="inputGroupFileAddon01" v-on:change="handleFileUpload()" />
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                <button v-if="showEdit" class="btn btn-sm btn-success float-right" @click="addAboutUs"><i
+                        class="fas fa-save"></i> Save</button>
+                <button v-if="!showEdit" class="btn btn-sm btn-primary float-right" @click="Edit">Edit <i
+                        class="fas fa-edit"></i></button>
+                <button v-if="showEdit" class="btn btn-sm btn-warning float-left" @click="showEdit=false"><i
+                        class="fas fa-arrow-left"></i> Cancel</button>
+            </div>
+            <div class="about-image clearfix">
+                <img v-if="!showPreview" :src="getImage(content.imgUrl)" class="rounded mx-auto d-block"
+                    alt="About us image.">
+                <img v-if="showPreview" :src="imagePreview" class="rounded mx-auto d-block" alt="About us image.">
+                <div v-if="showEdit">
+                    <div class="input-container">
+                        <div class="custom-file">
+                            <input type="file" ref="file" accept="image/*" class="custom-file-input" id="file"
+                                aria-describedby="inputGroupFileAddon01" v-on:change="handleFileUpload()" />
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 <script>
@@ -172,6 +176,10 @@ export default {
        height: auto;
    }
 }
+}
+.input-container{
+    margin-top: 2rem;
+    padding: 1rem;
 }
 
 

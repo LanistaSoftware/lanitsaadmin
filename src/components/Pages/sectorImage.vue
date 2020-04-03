@@ -2,7 +2,7 @@
     <div>
         <div class="add-btn-container">
             <button v-if="!isAdd" @click="isAdd=true" class="btn btn-sm btn-info"> Ekle <i
-                    class="fas fa-user-plus"></i></button>
+                    class="fas fa-plus"></i></button>
         </div>
         <div v-if="isAdd" class="add-image-container">
             <div class="card">

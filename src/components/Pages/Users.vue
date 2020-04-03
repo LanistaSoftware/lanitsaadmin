@@ -11,6 +11,7 @@
           <th scope="col">Soyisim</th>
           <th scope="col">Email</th>
           <th scope="col">Telefon</th>
+          <th scope="col">Password</th>
           <th scope="col">Admin</th>
           <th scope="col" v-if="!isAdd"><button @click="isAdd=true" class="btn btn-sm btn-info"> Add <i
                 class="fas fa-user-plus"></i></button></th>
@@ -42,6 +43,7 @@
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.LastName}}</td>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.email}}</td>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{item.Phone}}</td>
+          <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">xxxxxxx</td>
           <td v-if="selectedItem==item._id ? isEdit=false : isEdit=true">{{adminSelect(item.isAdmin)}}</td>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.Name"></td>
           <td v-if="selectedItem==item._id ? isEdit=true : isEdit=false"><input type="text" v-model="item.LastName">
@@ -60,12 +62,12 @@
             <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="selectedItem=item._id"
               class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
             <button @click="updateUser(item._id,item)" v-if="selectedItem==item._id ? isEdit=true : isEdit=false"
-              class="btn btn-sm btn-success"> Save
+              class="btn btn-sm btn-success"> Save <i class="fas fa-save"></i>
             </button>
             <button @click="deleteUser(index,item._id)" class="btn btn-sm btn-danger"> Delete <i
                 class="fas fa-user-minus"></i></button>
             <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" @click="selectedItem=null"
-              class="btn btn-sm btn-warning"> Cancel </button>
+              class="btn btn-sm btn-warning"> Cancel <i class="fas fa-arrow-left"></i></button>
           </td>
         </tr>
       </tbody>

@@ -1,7 +1,7 @@
 <template>
 
   <div class="sectors">
-    <button v-if="!isAdd" @click="isAdd=true" class="btn btn-sm btn-info"> Ekle <i class="fas fa-user-plus"></i></button>
+    <button v-if="!isAdd" @click="isAdd=true" class="btn btn-sm btn-info"> Ekle <i class="fas fa-plus"></i></button>
     <div v-if="isAdd" class="card m-3">
       <div class="row no-gutters">
         <div class="col-md-12">
@@ -11,13 +11,13 @@
               <input type="text" class="form-control" v-model="sector.sectorname"></div>
             <div class="card-title">
               <label class="label" for="inputGroupFile01">Sektör Açıklaması</label>
-              <textarea  class="form-control" rows="10" v-model="sector.sectordescription"></textarea></div>
+              <textarea  class="form-control" rows="6" v-model="sector.sectordescription"></textarea></div>
           </div>
         </div>
         <div class="group col">
-          <button class="btn btn-sm btn-success" @click="addSector"> Save
+          <button class="btn btn-sm btn-success" @click="addSector"> Save <i class="fas fa-save"></i>
           </button>
-          <button class="btn btn-sm btn-warning " @click="imagePreview='http://via.placeholder.com/700x400',isAdd=false;"> Cancel </button>
+          <button class="btn btn-sm btn-warning " @click="imagePreview='http://via.placeholder.com/700x400',isAdd=false;"> Cancel <i class="fas fa-arrow-left"></i></button>
         </div>
       </div>
     </div>
@@ -41,13 +41,13 @@
       <div class="">
         <div class="group">
           <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="Edit(item._id)"
-            class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
-          <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success" @click="updateSector(item,item._id)"> Save
+            class="btn btn-sm btn-primary"> Edit <i class="fas fa-edit"></i></button>
+          <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" class="btn btn-sm btn-success" @click="updateSector(item,item._id)"> Save <i class="fas fa-save"></i>
           </button>
           <button @click="deleteSector(item._id)" class="btn btn-sm btn-danger"> Delete <i
-              class="fas fa-user-minus"></i></button>
+              class="fas fa-trash-alt"></i></button>
           <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false"
-            @click="cancel" class="btn btn-sm btn-warning"> Cancel
+            @click="cancel" class="btn btn-sm btn-warning"> Cancel <i class="fas fa-arrow-left"></i>
           </button>
         </div>
       </div>

@@ -25,7 +25,7 @@ const morgan = require('morgan')
 const history = require('connect-history-api-fallback');
 
 const staticFileMiddleware = express.static(path.join(__dirname + '/dist'));
-
+   
 app.use(staticFileMiddleware);
 app.use(history({
   disableDotRule: true,
@@ -33,7 +33,7 @@ app.use(history({
 }));
 app.use(morgan('dev'))
 var corsOptions = {
-  origin: 'http://localhost:8081',
+  origin: 'https://test.lanista.com.tr/',
   optionsSuccessStatus: 200,
   }
 app.use(bodyParser.urlencoded({

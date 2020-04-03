@@ -25,7 +25,7 @@ const morgan = require('morgan')
 
 app.use(morgan('dev'))
 var corsOptions = {
-  origin: 'http://test.lanista.com.tr',
+  origin: 'https://test.lanista.com.tr',
   optionsSuccessStatus: 200,
   }
 app.use(bodyParser.urlencoded({

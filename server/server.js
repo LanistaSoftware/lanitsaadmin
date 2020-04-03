@@ -25,7 +25,7 @@ const morgan = require('morgan')
 
 app.use(morgan('dev'))
 var corsOptions = {
-  origin: 'http://localhost:8081',
+  origin: 'http://localhost:4000',
   optionsSuccessStatus: 200,
   }
 app.use(bodyParser.urlencoded({

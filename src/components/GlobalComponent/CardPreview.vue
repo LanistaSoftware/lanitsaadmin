@@ -100,13 +100,10 @@
     background-color:@redcolor;
 }
 
-.ozel-scrollbar {
-    
+.ozel-scrollbar {    
     height: 70vh;
-    width: 60%;
- 
+    width: 60%; 
     overflow-y: scroll;
-
 }
 
 </style>

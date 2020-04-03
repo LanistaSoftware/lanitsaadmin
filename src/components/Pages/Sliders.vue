@@ -33,7 +33,8 @@
 </template>
 <script>
   import {
-    mapActions,mapGetters
+    mapActions,
+    mapGetters
   } from 'vuex'
   import {
     Carousel,
@@ -45,26 +46,26 @@
       Slide
     },
     filters: {
-    firstWord (header) {
-      return header.split(' ', 1).join()
+      firstWord(header) {
+        return header.split(' ', 1).join()
+      },
+      otherWord(header) {
+        const arr = []
+        header.split(' ').forEach((element, index) => {
+          if (index !== 0) {
+            arr.push(element)
+          }
+        })
+        return arr.join(' ')
+      }
     },
-    otherWord (header) {
-      const arr = []
-      header.split(' ').forEach((element, index) => {
-        if (index !== 0) {
-          arr.push(element)
-        }
-      })
-      return arr.join(' ')
-    }
-  },
     data() {
       return {
-        isActive:true,
-         selectId:'',
-         activeId:'',
-         activeColor:'#EE3333',
-         deActiveColor:'#303030',
+        isActive: true,
+        selectId: '',
+        activeId: '',
+        activeColor: '#EE3333',
+        deActiveColor: '#303030',
         tab: [{
             link: '/sliders',
             label: 'Slaytlar '
@@ -95,59 +96,65 @@
         ]
       }
     },
-     methods: {
+    methods: {
       getImage(path) {
-      return path ? require(`@/assets/upload/${path}`) : ''
-    },
+        if (path === '1300x800.png') {
+          return 'http://via.placeholder.com/1300x800';
+        } else {
+          return path ? require(`@/assets/upload/${path}`) : ''
+        }
+
+      },
       ...mapActions({
         addtab: "addTabs",
         getAllSlideAction: "getAllSlide",
         getOneSlide: "getSlide",
-        activeSlide:"activeSlide",
-        getActiveSlider:"getActiveSlide"
+        activeSlide: "activeSlide",
+        getActiveSlider: "getActiveSlide"
       }),
-       changeSlide() {       
-      if(this.selectId !== "Slayt seti seçiniz."){
-      let id= this.selectId
-      this.getOneSlide(id).then(() => {
-      this.isActive=this.getASlider.active;
-      this.slideSets[0].header=  this.getASlider.SliderOne.titleOne
-      this.slideSets[1].header=  this.getASlider.SliderTwo.titleTwo
-      this.slideSets[2].header=  this.getASlider.SliderThree.titleThree
-      this.slideSets[0].content=  this.getASlider.SliderOne.descriptionOne
-      this.slideSets[1].content=  this.getASlider.SliderTwo.descriptionTwo
-      this.slideSets[2].content=  this.getASlider.SliderThree.descriptionThree
-      this.slideSets[0].imageUrl=  this.getASlider.SliderOne.imageurlOne
-      this.slideSets[1].imageUrl=  this.getASlider.SliderTwo.imageurlTwo
-      this.slideSets[2].imageUrl=  this.getASlider.SliderThree.imageurlThree
-      })}
-      
-    },
+      changeSlide() {
+        if (this.selectId !== "Slayt seti seçiniz.") {
+          let id = this.selectId
+          this.getOneSlide(id).then(() => {
+            this.isActive = this.getASlider.active;
+            this.slideSets[0].header = this.getASlider.SliderOne.titleOne
+            this.slideSets[1].header = this.getASlider.SliderTwo.titleTwo
+            this.slideSets[2].header = this.getASlider.SliderThree.titleThree
+            this.slideSets[0].content = this.getASlider.SliderOne.descriptionOne
+            this.slideSets[1].content = this.getASlider.SliderTwo.descriptionTwo
+            this.slideSets[2].content = this.getASlider.SliderThree.descriptionThree
+            this.slideSets[0].imageUrl = this.getASlider.SliderOne.imageurlOne
+            this.slideSets[1].imageUrl = this.getASlider.SliderTwo.imageurlTwo
+            this.slideSets[2].imageUrl = this.getASlider.SliderThree.imageurlThree
+          })
+        }
+
+      },
     },
     mounted() {
       this.addtab(this.tab)
       this.getAllSlideAction()
-      this.getActiveSlider().then(()=>{
-       if (this.getAcitveOne!=undefined) {
-      this.activeId= this.getAcitveOne._id
-      this.slideSets[0].header=  this.getAcitveOne.SliderOne.titleOne
-      this.slideSets[1].header=  this.getAcitveOne.SliderTwo.titleTwo
-      this.slideSets[2].header=  this.getAcitveOne.SliderThree.titleThree
-      this.slideSets[0].content=  this.getAcitveOne.SliderOne.descriptionOne
-      this.slideSets[1].content=  this.getAcitveOne.SliderTwo.descriptionTwo
-      this.slideSets[2].content=  this.getAcitveOne.SliderThree.descriptionThree
-      this.slideSets[0].imageUrl=  this.getAcitveOne.SliderOne.imageurlOne
-      this.slideSets[1].imageUrl=  this.getAcitveOne.SliderTwo.imageurlTwo
-      this.slideSets[2].imageUrl=  this.getAcitveOne.SliderThree.imageurlThree
-       }
+      this.getActiveSlider().then(() => {
+        if (this.getAcitveOne != undefined) {
+          this.activeId = this.getAcitveOne._id
+          this.slideSets[0].header = this.getAcitveOne.SliderOne.titleOne
+          this.slideSets[1].header = this.getAcitveOne.SliderTwo.titleTwo
+          this.slideSets[2].header = this.getAcitveOne.SliderThree.titleThree
+          this.slideSets[0].content = this.getAcitveOne.SliderOne.descriptionOne
+          this.slideSets[1].content = this.getAcitveOne.SliderTwo.descriptionTwo
+          this.slideSets[2].content = this.getAcitveOne.SliderThree.descriptionThree
+          this.slideSets[0].imageUrl = this.getAcitveOne.SliderOne.imageurlOne
+          this.slideSets[1].imageUrl = this.getAcitveOne.SliderTwo.imageurlTwo
+          this.slideSets[2].imageUrl = this.getAcitveOne.SliderThree.imageurlThree
+        }
       })
     },
-    computed:{
-       ...mapGetters({
-      slideAll: "getAllSlide",
-      getASlider: "getASlide",
-      getAcitveOne:"getterActiveSlide"
-    }),
+    computed: {
+      ...mapGetters({
+        slideAll: "getAllSlide",
+        getASlider: "getASlide",
+        getAcitveOne: "getterActiveSlide"
+      }),
     }
   }
 </script>

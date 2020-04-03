@@ -20,6 +20,7 @@ const pigmentController=require('./api/controller/pigmentController')
 const employeController = require('./api/controller/employeController')
 const contactController = require('./api/controller/contactController')
 const loginController = require('./api/controller/loginController')
+const logoController = require('./api/controller/logoController')
 const morgan = require('morgan')
 
 app.use(morgan('dev'))
@@ -63,6 +64,7 @@ app.use('/api/pigment',pigmentController)
 app.use('/api/employe',employeController)
 app.use('/api/contact',contactController)
 app.use('/api/login',loginController)
+app.use('/api/logo',logoController)
 const port = process.env.PORT || 4000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false }); 
 const db = mongoose.connection;

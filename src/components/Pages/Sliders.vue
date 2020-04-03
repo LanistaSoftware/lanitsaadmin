@@ -6,8 +6,13 @@
       <span class="input-group-text" id="">Kayıtlı Setler</span>
     </div>
     <select class="form-control" id="exampleFormControlSelect1" @change="changeSlide($event)" v-model="selectId">
+<<<<<<< HEAD
       <option disabled selected>Slayt seti seçiniz.</option>
       <option v-for="(item,index) in slideAll" :key="index" :value="item._id">{{item.sliderName}}</option>
+=======
+      <option selected>Slayt seti seçiniz.</option>
+      <option v-for="(item,index) in slideAll" :key="index"  :value="item._id">{{item.sliderName}}</option>
+>>>>>>> e3fac5fdc7c1d00806ca27640be596c6460ffa6c
     </select>
     <div class="input-group-prepend">
       <button class="btn btn-sm btn-success" @click="activeSlide(selectId), isActive = !isActive" :disabled="isActive"><i class="fas fa-plug"></i></button>
@@ -128,7 +133,7 @@
       this.addtab(this.tab)
       this.getAllSlideAction()
       this.getActiveSlider().then(()=>{
-       if (this.getAcitveOne!=='') {
+       if (this.getAcitveOne!=undefined) {
       this.activeId= this.getAcitveOne._id
       this.slideSets[0].header=  this.getAcitveOne.SliderOne.titleOne
       this.slideSets[1].header=  this.getAcitveOne.SliderTwo.titleTwo
@@ -141,7 +146,7 @@
       this.slideSets[2].imageUrl=  this.getAcitveOne.SliderThree.imageurlThree
        }
       })
-    },   
+    },
     computed:{
        ...mapGetters({
       slideAll: "getAllSlide",

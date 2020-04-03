@@ -58,7 +58,6 @@ const actions={
     getGalery({commit}){
         return api().get('sector/galery').then(res=>{
             let galery = res.data.sectorImages
-            console.log(res.data.sectorImages)
             commit("setGalery",galery)
         }).catch(err=>{console.log(err)})
     },

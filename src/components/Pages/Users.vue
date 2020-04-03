@@ -59,7 +59,7 @@
               <option value="2">User</option>
             </select></td>
           <td>
-            <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="selectedItem=item._id"
+            <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="selectedItem=item._id,isEdit=true"
               class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
             <button @click="updateUser(item._id,item)" v-if="selectedItem==item._id ? isEdit=true : isEdit=false"
               class="btn btn-sm btn-success"> Save <i class="fas fa-save"></i>

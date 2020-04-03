@@ -11,11 +11,14 @@
     <input v-if="selectedItem==reference._id " type="text" v-model="reference.referenceName" class="form-control">
     <input v-if="selectedItem==reference._id " type="text" v-model="reference.referenceUrl" class="form-control">
     <h5 v-if="selectedItem=='' || selectedItem!=reference._id" class="card-title">{{reference.referenceName}}</h5> 
-    <a v-if="selectedItem=='' || selectedItem!=reference._id" :href="'http://'+reference.referenceUrl" target="_blank" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
-    <button  v-if="selectedItem==reference._id" class="btn btn-sm btn-success" @click="updateReference(reference)"><i class="fas fa-save"></i>Save</button>
+    
+   <div class="btn-container">
+     <a v-if="selectedItem=='' || selectedItem!=reference._id" :href="'http://'+reference.referenceUrl" target="_blank" class="btn  btn-sm btn-info"><i class="fas fa-search-location"></i></a>
+      <button  v-if="selectedItem==reference._id" class="btn btn-sm btn-success" @click="updateReference(reference)"><i class="fas fa-save"></i>Save</button>
     <button  v-if="selectedItem=='' || selectedItem!=reference._id" class="btn btn-sm btn-primary" @click="selectedItem=reference._id,edit=true"><i class="fas fa-edit"></i></button>
     <button class="btn btn-sm btn-danger" @click="deleteReference(reference._id)"><i class="fas fa-trash-alt"></i></button>
     <button   v-if="selectedItem==reference._id " class="btn btn-sm btn-warning" @click="cancel"><i class="fas fa-arrow-left"></i>Cancel</button>
+   </div>
   </div>
 </div>
 </div>
@@ -125,19 +128,31 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.card{
-    width: 30%;
-    display: inline-block;
-    margin: 1rem;
+
+.card {
+    width: 29%;
+    height: 33rem;
+    margin: 0 2rem 2rem 2rem;
+    float: left;
     text-align: center;
-    img{
-        display: inline-block;
-        width:290px ;
-        margin-top: 0.5rem;
+    background-color: #FAFAFA;
+        img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+
+        }
     }
-}
-  .btn {
-    margin: 0.5rem;
-  }
+  .btn-container {
+        position: absolute  ;
+        bottom: 1rem;
+        width: 100%;
+        text-align: center;
+
+        .btn {
+            margin: 0.5rem;
+            padding: 0.3 0.5rem;
+        }
+    } 
 </style>
 

@@ -99,6 +99,15 @@ export default {
         height: '',
         width: ''
       },
+        tab: [{
+            link: '/sliders',
+            label: 'Slaytlar '
+          },
+          {
+            link: '/addslider',
+            label: 'Slayt Ekle/Sil/Düzenle'
+          }
+        ],
       imageError: '',
       title: '',
       file: '',
@@ -134,6 +143,7 @@ export default {
       getOneSlide: "getSlide",
       deleteSliderAction: "deleteSlide",
       addİmage: "addSlideimage",
+       addtab: "addTabs",
 
     }),
     getImage(path) {
@@ -301,6 +311,9 @@ export default {
         return this.$store.commit("setslide", value)
       }
     }
+  },
+  created(){
+   this.addtab(this.tab)
   },
   mounted() {
     this.getAllSlideAction()    

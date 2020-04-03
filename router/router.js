@@ -22,7 +22,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 export const router = new VueRouter({
-    routes:[
+    mode:'history',
+  routes:[
         {
       path:'/users',
       component:Users,
@@ -96,5 +97,5 @@ export const router = new VueRouter({
         component:Welcome
       }
 ],
-    mode:"history"
+    
 })

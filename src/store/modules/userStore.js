@@ -5,6 +5,7 @@ const state = {
     tabs: [],
     password:null,
     oldpass:null,
+    editpass:false,
 }
 const getters = {
     getTabs(state) {
@@ -18,7 +19,10 @@ const getters = {
     },
     getOldPass(state){
         return state.oldpass
-    }
+    },
+    editPass(state){
+        return state.editpass
+    },
 }
 const mutations = {
     setTabs(state, tab) {
@@ -32,6 +36,9 @@ const mutations = {
     },
     setOldPass(state, password){
         return state.oldpass = password
+    },
+    setEditpass(state,edit){
+        return state.editpass=edit
     }
 }
 

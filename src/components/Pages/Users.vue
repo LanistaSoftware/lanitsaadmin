@@ -1,7 +1,7 @@
 <template>
   <div class="users">
     <div v-if="passFormView" class="password-form">
-        <PassForm :edit="isEdit"/>
+        <PassForm />
     </div>
     <table class="table table-hover ">
       <thead>
@@ -33,7 +33,7 @@
             </select></td>
           <td scope="col"><button @click="addUser" class="btn btn-sm btn-success">Save <i
                 class="fas fa-save"></i></button>
-            <button @click="isAdd=!isAdd" class="btn btn-sm btn-warning"> Cancel <i
+            <button @click="cancel" class="btn btn-sm btn-warning"> Cancel <i
                 class="fas fa-arrow-left"></i></button>
           </td>
         </tr>
@@ -59,14 +59,14 @@
               <option value="2">User</option>
             </select></td>
           <td>
-            <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="selectedItem=item._id,isEdit=true"
+            <button v-if="selectedItem==item._id ? isEdit=false : isEdit=true" @click="editItem(item._id)"
               class="btn btn-sm btn-primary"> Edit <i class="fas fa-user-edit"></i></button>
             <button @click="updateUser(item._id,item)" v-if="selectedItem==item._id ? isEdit=true : isEdit=false"
               class="btn btn-sm btn-success"> Save <i class="fas fa-save"></i>
             </button>
             <button @click="deleteUser(index,item._id)" class="btn btn-sm btn-danger"> Delete <i
                 class="fas fa-user-minus"></i></button>
-            <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" @click="selectedItem=null"
+            <button v-if="selectedItem==item._id ? isEdit=true : isEdit=false" @click="cancel"
               class="btn btn-sm btn-warning"> Cancel <i class="fas fa-arrow-left"></i></button>
           </td>
         </tr>
@@ -105,6 +105,11 @@
         }
         },
         methods: {
+          editItem(id){
+            this.selectedItem=id
+            this.isEdit=true
+            this.$store.commit("setEditpass",true)
+          },
             ...mapActions({
               addtab: "addTabs",
               getUsersaction: "getUser",
@@ -112,6 +117,11 @@
               addUserAction: "addUser",
               updateUserAction:"updateUser"
             }),
+            cancel(){
+              this.selectedItem=null,
+              this.isAdd=!this.isAdd
+              this.$store.commit("setEditpass",false)
+            },
             addUser() {
                this.passClass="btn-secondary"
               this.addUserAction(this.user).then(() => {
@@ -134,6 +144,7 @@
               })
             },
             updateUser(id, edit) {
+              this.$store.commit("setEditpass",false)
               this.passClass="btn-secondary"
               if (this.getPassword!=null) {
                 edit.Password = this.getPassword

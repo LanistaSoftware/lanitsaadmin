@@ -16,7 +16,7 @@
                </svg>
            </div>
               
-           <input v-if="edit==true" type="password" @input="checkPassword" v-model="oldpass" autocomplete="off" placeholder="Eski Şifre" />
+           <input v-if="editPass" type="password" @input="checkPassword" v-model="oldpass" autocomplete="off" placeholder="Eski Şifre" />
            <input type="password" @input="checkPassword" v-model="password" autocomplete="off" placeholder="Password" />
            <input type="password" @input="checkPassword" v-model="password_two" autocomplete="off" placeholder="Password 2" />
             <button @click="sendPassword" class="btn btn-sm btn-succes">Kaydet <i class="fas fa-key"></i></button>
@@ -24,8 +24,8 @@
    </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
-    props:['edit'],
     data() {
         return {
             password: null,
@@ -87,6 +87,11 @@ export default {
                 alert('Şifre işlemleri hatalı.')
             }
         }
+    },
+    computed:{
+        ...mapGetters({
+            editPass:"editPass"
+        })
     }
 }
 </script>

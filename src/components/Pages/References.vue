@@ -87,7 +87,7 @@ export default {
       addImage: "addImage"
     }),
     getImage(path) {
-      return path ? require(`@/assets/upload/${path}`) : ''
+      return path ? require(`../../../public/img/${path}`) : ''
     },
     cancel() {
       this.selectedItem = ''

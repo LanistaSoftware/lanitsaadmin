@@ -195,8 +195,10 @@ export default {
     },
     addSlide() {
       this.addSlideAction(this.Slider).then(() => {
-        this.addİmage(this.Slider.formData)
-        this.resetSlide()
+        this.addİmage(this.Slider.formData).then(()=>{
+           this.resetSlide()
+        })
+       
 
       }).then(() => {
         this.getAllSlideAction()

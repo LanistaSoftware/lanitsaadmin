@@ -47,7 +47,7 @@ router.put('/:id/:dltimg',async (req, res) => {
             }
         })
  
-        fs.unlink('src/assets/upload/'+req.params.dltimg, function (err) {
+        fs.unlink('public/img/'+req.params.dltimg, function (err) {
             if (err) throw err;
             // if no error, file has been deleted successfully
             console.log('File deleted!');

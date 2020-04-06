@@ -87,7 +87,8 @@ export default {
       addImage: "addImage"
     }),
     getImage(path) {
-      return path ? require(`../../../public/img/${path}`) : ''
+        let pathimg = './img'
+        return path ? `${pathimg}/${path}` : 'http://via.placeholder.com/1300x800'
     },
     cancel() {
       this.selectedItem = ''

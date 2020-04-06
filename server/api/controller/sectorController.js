@@ -78,7 +78,7 @@ router.get('/galery',async (req,res)=>{
 })
 router.delete('/galery/:id/:img',async (req,res)=>{
     try {
-        fs.unlink('src/assets/upload/'+req.params.img, function (err) {
+        fs.unlink('public/img/'+req.params.img, function (err) {
             if (err) throw err;
             // if no error, file has been deleted successfully
             console.log('File deleted!');

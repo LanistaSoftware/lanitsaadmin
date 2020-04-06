@@ -101,7 +101,8 @@
         if (path === '1300x800.png') {
           return 'http://via.placeholder.com/1300x800';
         } else {
-          return path ? require(`@/assets/upload/${path}`) : ''
+           let pathimg = './img'
+            return path ? `${pathimg}/${path}` : 'http://via.placeholder.com/1300x800'
         }
 
       },

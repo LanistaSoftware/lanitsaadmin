@@ -84,7 +84,7 @@ export default {
         Initialize a File Reader object
       */
       let reader = new FileReader();
-      this.employe.imgUrl = this.file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-' + new Date().getHours() + '.jpg'
+      this.employe.imgUrl = this.file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-'+'.jpg'
       /*
         Add an event listener to the reader that when the file
         has been loaded, we flag the show preview as true and set the

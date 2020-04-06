@@ -104,7 +104,7 @@
                 var file = ''
                 file = this.$refs.file.files[0]
                 this.galery.image.append('file', file)
-                this.galery.imgUrl = file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-' + new Date().getHours() + '.jpg'
+                this.galery.imgUrl = file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-'+'.jpg'
                 if (!file || file.type.indexOf('image/') !== 0) return;
 
 

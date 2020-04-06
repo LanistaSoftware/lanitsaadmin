@@ -268,7 +268,7 @@ export default {
                 alert('err')
             }else{
             this.imagePreviewone = evt.target.result
-            this.Slider.SliderOne.imageurlOne = file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
+            this.Slider.SliderOne.imageurlOne = file.name+ '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-'+'.jpg'
             }
           }
           if (slide == 'slideTwo') {
@@ -276,7 +276,7 @@ export default {
                alert('err')
              }else{
                this.imagePreviewtwo = evt.target.result
-               this.Slider.SliderTwo.imageurlTwo = file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
+               this.Slider.SliderTwo.imageurlTwo = file.name+ '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-'+'.jpg'
              }
         
           }
@@ -285,7 +285,7 @@ export default {
                alert('err')
             }else{
               this.imagePreviewthree = evt.target.result
-            this.Slider.SliderThree.imageurlThree =  file.name+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
+            this.Slider.SliderThree.imageurlThree =  file.name+ '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-'+'.jpg'
             }
           }
           }

@@ -110,7 +110,7 @@ export default {
             /*
               Initialize a File Reader object
             */
-           this.content.imgUrl=this.file.name+'-'+new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg'
+           this.content.imgUrl=this.file.name+ '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-'+'.jpg'
            this.image.append('file',this.file)
             let reader = new FileReader();
 

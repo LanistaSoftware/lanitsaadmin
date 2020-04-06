@@ -113,7 +113,7 @@ export default {
             updateEmploye(item){
                     if (this.file.name) {
                     var dltimg = item.imgUrl
-                    item.imgUrl = this.file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-' + new Date().getHours() + '.jpg'
+                    item.imgUrl = this.file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-'+'.jpg'
                     } else {
                         dltimg = ''
                     }

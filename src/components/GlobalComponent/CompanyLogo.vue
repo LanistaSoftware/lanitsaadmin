@@ -53,7 +53,7 @@ export default {
           this.file = this.$refs.myfile.files[0]
           this.imageForm.append('file', this.file)
           let reader = new FileReader();
-          this.logo.Logoname = this.file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-' + new Date().getHours() + '.jpg'
+          this.logo.Logoname = this.file.name + '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-'+'.jpg'
           reader.readAsDataURL(this.file);
           reader.onload = evt => {
             let img = new Image();

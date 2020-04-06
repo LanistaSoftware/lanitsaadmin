@@ -6,7 +6,7 @@ const diskStorageToUploads = multer.diskStorage({
         cb(null,path.join(__dirname, "../../../public/img"))
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname+ '-' +new Date().getUTCMonth()+'-'+new Date().getUTCDay()+'-'+new Date().getHours()+'.jpg')
+        cb(null, file.originalname+ '-' + new Date().getUTCMonth() + '-' + new Date().getUTCDay() + '-'+'.jpg')
     }
 });
 

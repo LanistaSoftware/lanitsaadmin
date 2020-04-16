@@ -21,6 +21,7 @@ const employeController = require('./api/controller/employeController')
 const contactController = require('./api/controller/contactController')
 const loginController = require('./api/controller/loginController')
 const logoController = require('./api/controller/logoController')
+const searchController = require('./api/controller/searchController')
 const morgan = require('morgan')
 const history = require('connect-history-api-fallback');
 
@@ -33,7 +34,7 @@ app.use(history({
 }));
 app.use(morgan('dev'))
 var corsOptions = {
-  origin: 'https://test.lanista.com.tr',
+  origin: 'http://localhost:3000',
   optionsSuccessStatus: 200,
   }
 app.use(bodyParser.urlencoded({
@@ -73,6 +74,7 @@ app.use('/api/employe',employeController)
 app.use('/api/contact',contactController)
 app.use('/api/login',loginController)
 app.use('/api/logo',logoController)
+app.use('/api/search',searchController)
 const port = process.env.PORT || 4000;
 mongoose.connect(connectstr, { useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false }); 
 const db = mongoose.connection;

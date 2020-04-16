@@ -14,6 +14,11 @@ router.get('/', async (req, res) => {
         })
     }
 })
+router.post('/search', async (req,res)=>{
+	console.log(req.body)
+    const detail = await pigment.find({ prdoudctName: { $regex:req.body.searchitem, $options: "i" } })
+	res.status(200).json(detail); 
+})
 router.post('/',async (req, res) => {
     const addpigment = new pigment({
         prdoudctName:req.body.prdoudctName,

@@ -13,6 +13,14 @@ router.get('/', async (req, res) => {
     }
   
 })
+router.get('/:id', async (req, res) => {
+    try {
+        const sectorone= await sector.findOne({_id:req.params.id})
+        res.status(200).json({sectorone})
+    } catch (error) {
+        console.log(error)
+    }
+})
 router.post('/', async (req, res) => {
     const newsector = new sector({
         sectorname:req.body.sectorname,

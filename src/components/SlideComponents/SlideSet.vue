@@ -147,8 +147,8 @@ export default {
 
     }),
     getImage(path) {
-       let pathimg = './img'
-        return path ? `${pathimg}/${path}` : 'http://via.placeholder.com/1300x800'
+       let pathimg = 'https://api.lanista.com.tr/assest/images'
+        return path ? `${pathimg}/${path}` : 'https://via.placeholder.com/1300x800'
     },
     changeSlide() {
       if(this.selectId !== "Slayt seti seçiniz."){
@@ -185,9 +185,9 @@ export default {
           imageurlThree: '',
           descriptioThree: '',
         }
-        this.imagePreviewone = "http://via.placeholder.com/1300x800"
-        this.imagePreviewtwo = "http://via.placeholder.com/1300x800"
-        this.imagePreviewthree = "http://via.placeholder.com/1300x800"
+        this.imagePreviewone = "https://via.placeholder.com/1300x800"
+        this.imagePreviewtwo = "https://via.placeholder.com/1300x800"
+        this.imagePreviewthree = "https://via.placeholder.com/1300x800"
         this.show=false
         this.editone = false
         this.edittwo = false

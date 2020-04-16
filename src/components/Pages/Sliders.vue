@@ -99,10 +99,10 @@
     methods: {
       getImage(path) {
         if (path === '1300x800.png') {
-          return 'http://via.placeholder.com/1300x800';
+          return 'https://via.placeholder.com/1300x800';
         } else {
-           let pathimg = './img'
-            return path ? `${pathimg}/${path}` : 'http://via.placeholder.com/1300x800'
+           let pathimg = 'https://api.lanista.com.tr/assest/images'
+            return path ? `${pathimg}/${path}` : 'https://via.placeholder.com/1300x800'
         }
 
       },

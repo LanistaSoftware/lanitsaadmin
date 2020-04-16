@@ -69,7 +69,7 @@
         },
         methods: {
             getImage(path) {
-                let pathimg = './img'
+                let pathimg = 'https://api.lanista.com.tr/assest/images'
                 return path ? `${pathimg}/${path}` : 'http://via.placeholder.com/1300x800'
             },
             ...mapActions({

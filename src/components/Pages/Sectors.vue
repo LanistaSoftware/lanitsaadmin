@@ -71,7 +71,7 @@ export default {
         sectordescription:'',
         sectorname:'',
       },
-      imagePreview: "http://via.placeholder.com/700x400",
+      imagePreview: "https://via.placeholder.com/700x400",
       tab: [{
         link: '/sectors',
         label: 'Sektörler'

@@ -42,7 +42,7 @@ export default {
       title: '',
       file: '',
       showPreview: false,
-      imagePreview: 'http://via.placeholder.com/150x200',
+      imagePreview: 'https://via.placeholder.com/150x200',
       image: new FormData(),
       employe: {
         name: '',
@@ -114,7 +114,7 @@ export default {
     },
     reset() {
       this.title = null
-      this.imagePreview = 'http://via.placeholder.com/150x200'
+      this.imagePreview = 'https://via.placeholder.com/150x200'
       this.file = null
       this.employe.imgUrl = ''
       this.employe.name = ''

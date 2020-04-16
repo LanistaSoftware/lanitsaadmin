@@ -9,7 +9,6 @@
 <script>
  import vueeditor from './vueeditor'
  import CardPreview from './CardPreview'
-import Axios from 'axios'
  import {mapActions,mapGetters, mapMutations} from 'vuex'
  
   export default {
@@ -59,15 +58,6 @@ import Axios from 'axios'
                 this.addBlogAction([this.getAddBlogContent]).then(()=>{
                   this.$store.commit('setAddBlogContent', '')
                 })  
-            },
-            getBlog(){
-                Axios.get('http://localhost:3000/api/blog').then(res=>{
-                   
-                    this.html = res.data.blogs.content
-                   
-                }).catch(err=>{
-                    alert(err)
-                })
             }
         },
         created(){

@@ -17,6 +17,8 @@ import contact from '../src/components/Pages/Contact.vue'
 import Welcome from '../src/components/Pages/Welcome.vue'
 import SectorImage from '../src/components/Pages/sectorImage.vue'
 import logo from '../src/components/GlobalComponent/CompanyLogo.vue'
+import documents from '../src/components/Pages/Documents.vue'
+import adddocument from '../src/components/GlobalComponent/addDocument.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -90,6 +92,14 @@ export const router = new VueRouter({
       {
         path:'/companylogo',
         component:logo
+      },
+      {
+        path:'/documents',
+        component:documents
+      },
+      {
+        path:'/adddocument',
+        component:adddocument
       },
       {
         path:'/',

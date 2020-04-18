@@ -23,6 +23,9 @@
        <router-link to='/sectors' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-bezier-curve float-left"></i></span> <a class="nav-link" href="#">Sektörler </a>
        </router-link>
+         <router-link to='/documents' tag='li' class="nav-item" active-class="act">
+        <span><i class="fas fa-file-pdf float-left"></i></span> <a class="nav-link" href="#">Belgeler </a>
+       </router-link>
      <router-link to='/aboutus' tag='li' class="nav-item" active-class="act">
         <span><i class="fas fa-address-card float-left"></i></span> <a class="nav-link" href="#">Hakkımızda </a>
     </router-link>

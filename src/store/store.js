@@ -11,6 +11,7 @@ import pigment from '../store/modules/pigmentStore'
 import employe from '../store/modules/employeStore'
 import contact from '../store/modules/contactStore'
 import login from '../store/modules/loginStore'
+import document from '../store/modules/documentStore'
 Vue.use(Vuex)
 // {link:'/blogs',label:'Makaleler' },
 // {link:'/addblog',label:'Makale Ekle' }
@@ -33,6 +34,7 @@ export const store = new Vuex.Store({
         pigment,
         employe,
         contact,
-        login
+        login,
+        document
     }
 })

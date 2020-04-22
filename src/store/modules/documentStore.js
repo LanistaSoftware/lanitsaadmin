@@ -30,6 +30,11 @@ const actions= {
            alert(res.statusText)
        }).catch(err=>{alert(err)})
    },
+   addImage({},file){
+       return api().post('document/image',file,{headers:{'Content-Type': 'multipart/form-data'}}).then(res=>{
+           alert(res.statusText)
+       }).catch(err=>{alert(err)})
+   },
    deleteFile({},id){
        return api().delete('document/'+id).then(res=>{
            alert(res.statusText)

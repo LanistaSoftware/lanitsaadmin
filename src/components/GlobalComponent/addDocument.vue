@@ -111,6 +111,7 @@ export default {
           this.document.path = ''
         this.addFile(this.document.file)
         this.addImage(this.image)
+        this.imagePreview='https://via.placeholder.com/150x200'
       })
 
     },

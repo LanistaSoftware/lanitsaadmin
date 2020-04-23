@@ -124,9 +124,7 @@
         },
         created() {
             this.addtab(this.tab)
-            this.getGalery().then(() => {
-                console.log(this.getterGalery)
-            })
+            this.getGalery()
         },
         computed: {
             ...mapGetters({

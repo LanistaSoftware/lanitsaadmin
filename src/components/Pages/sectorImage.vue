@@ -7,7 +7,7 @@
         <div v-if="isAdd" class="add-image-container">
             <div class="card">
                 <div class="album-image">
-                    <img v-if="!show" :src="getImage('1300x800.png')" alt="..." class="album-image">
+                    <img v-if="!show" src="https://via.placeholder.com/1300x800" alt="..." class="album-image">
                     <img v-if="show" :src="prewImage" class="album-image">
                 </div>
                 <div class="input-container">
@@ -70,7 +70,7 @@
         methods: {
             getImage(path) {
                 let pathimg = 'https://api.lanista.com.tr/assest/images'
-                return path ? `${pathimg}/${path}` : 'http://via.placeholder.com/1300x800'
+                return path ? `${pathimg}/${path}` : 'https://via.placeholder.com/1300x800'
             },
             ...mapActions({
                 addGaleryAction: "addGalery",
@@ -122,9 +122,11 @@
                 }
             }
         },
-        mounted() {
+        created() {
             this.addtab(this.tab)
-            this.getGalery()
+            this.getGalery().then(() => {
+                console.log(this.getterGalery)
+            })
         },
         computed: {
             ...mapGetters({

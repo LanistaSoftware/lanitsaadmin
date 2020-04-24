@@ -1,5 +1,6 @@
 /* eslint-disable no-empty-pattern */
 import api from '../api'
+import Axios from 'axios'
 const state = {
     slide:'',
     sliders:'',
@@ -51,6 +52,17 @@ const actions = {
     addSlideimage({},form) {
        
         return api().post('slide/image', form,{ headers: {
+            'Content-Type': 'multipart/form-data',
+            'Access-Control-Allow-Headers':'Content-Type'
+        }}).then((res) => {
+         
+            alert(res.statusText)
+        }).catch(err => {
+            alert(err)
+        })
+    },
+    addSlideimageClient({},form) {
+        return Axios.post('https://gochem.lanista.com.tr/image', form,{ headers: {
             'Content-Type': 'multipart/form-data',
             'Access-Control-Allow-Headers':'Content-Type'
         }}).then((res) => {

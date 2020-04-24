@@ -143,7 +143,8 @@ export default {
       getOneSlide: "getSlide",
       deleteSliderAction: "deleteSlide",
       addİmage: "addSlideimage",
-       addtab: "addTabs",
+      addtab: "addTabs",
+      addSlideimageClient: 'addSlideimageClient'
 
     }),
     getImage(path) {
@@ -195,6 +196,7 @@ export default {
     },
     addSlide() {
       this.addSlideAction(this.Slider).then(() => {
+        this.addSlideimageClient(this.Slider.formData)
         this.addİmage(this.Slider.formData).then(()=>{
            this.resetSlide()
         })

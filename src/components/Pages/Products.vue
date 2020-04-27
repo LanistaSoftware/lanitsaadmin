@@ -5,8 +5,8 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Ürün Adı</th>
-          <th scope="col">Ürün Grub</th>
-          <th scope="col">Ürün Açıklaması</th>
+          <th scope="col">Ürün Sektör</th>
+          <th scope="col">Ürün Grubu</th>
           <th scope="col">Ürün Geniş Açıklama</th>
           <th scope="col" v-if="!isAdd"><button @click="isAdd=true" class="btn btn-sm btn-info"> Add <i
                 class="fas fa-plus"></i></button></th>

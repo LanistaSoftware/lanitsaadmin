@@ -101,7 +101,7 @@
         if (path === '1300x800.png') {
           return 'https://via.placeholder.com/1300x800';
         } else {
-           let pathimg = 'https://api.lanista.com.tr/build/images'
+           let pathimg = 'https://api.lanista.com.tr/assest/images'
             return path ? `${pathimg}/${path}` : 'https://via.placeholder.com/1300x800'
         }
 
